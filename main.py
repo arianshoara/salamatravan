@@ -7,13 +7,13 @@ from telegram.ext import (
 )
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test
-from tests.depression_test import start_depression_test
+from tests.depression_test import start_depression_test, depression_conversation_handler  # اضافه کردن این خط
 from tests.addiction_test import start_addiction_test
 from tests.relationship_readiness_test import start_relationship_test
 
 # تنظیمات لاگ‌ها
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # اصلاح این خط
     level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ async def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
-    app.add_handler(depression_conversation_handler)
+    app.add_handler(depression_conversation_handler)  # اضافه کردن handler افسردگی
 
     print("ربات شروع به کار کرد...")
     await app.run_polling()
