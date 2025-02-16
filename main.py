@@ -18,7 +18,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 TOKEN = "7882625954:AAGiDHMhSV_guKOuhJ9r3mf97seAFqQF0mk"
 
 # توابع اصلی بات
@@ -58,4 +57,7 @@ async def main():
 
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(main())
+
+    loop = asyncio.get_event_loop()
+    loop.create_task(main())  # اجرای `main()` به عنوان یک تسک
+    loop.run_forever()  # جلوگیری از متوقف شدن برنامه
