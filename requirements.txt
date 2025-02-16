@@ -3,3 +3,4 @@ requests
 Flask
 python-telegram-bot
 psycopg2
+nest_asyncio
