@@ -51,6 +51,7 @@ async def main():
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
+    app.add_handler(depression_conversation_handler)
 
     print("ربات شروع به کار کرد...")
     await app.run_polling()
