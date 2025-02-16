@@ -30,7 +30,6 @@ async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TY
         await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
     elif update.callback_query:  # اگر callback_query است
         await update.callback_query.answer(text="سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
-
     context.user_data.clear()
     return NAME
 
