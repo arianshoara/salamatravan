@@ -57,7 +57,5 @@ async def main():
 
 if __name__ == "__main__":
     import asyncio
-
-    loop = asyncio.get_event_loop()
-    loop.create_task(main())  # اجرای `main()` به عنوان یک تسک
-    loop.run_forever()  # جلوگیری از متوقف شدن برنامه
+    # مستقیماً تابع main را فراخوانی می‌کنیم
+    asyncio.run(main())  # اجرای برنامه بدون استفاده از حلقه اضافی
