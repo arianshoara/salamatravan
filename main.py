@@ -34,7 +34,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
-
+    
     if query.data == "anxiety":
         await start_anxiety_test(update, context)
     elif query.data == "depression":
@@ -57,5 +57,11 @@ async def main():
 
 if __name__ == "__main__":
     import asyncio
-    # مستقیماً تابع main را فراخوانی می‌کنیم
-    asyncio.run(main())  # اجرای برنامه بدون استفاده از حلقه اضافی
+    import nest_asyncio
+
+    nest_asyncio.apply()
+    loop = asyncio.get_event_loop()
+    # جلوگیری از بستن حلقه رویداد (patch کردن متد close به یک تابع بی‌عمل)
+    loop.close = lambda: None
+    loop.create_task(main())
+    loop.run_forever()
