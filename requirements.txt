@@ -1,2 +1,5 @@
+aiogram
+requests
+Flask
 python-telegram-bot
 psycopg2
