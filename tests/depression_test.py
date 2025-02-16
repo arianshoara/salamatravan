@@ -11,20 +11,40 @@ from telegram.ext import (
 )
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO  # اصلاح این خط
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
 # تعریف مراحل مکالمه
 NAME, AGE, QUESTION = range(3)
 
-# ساختار پرسش‌ها (نمونه 10 سوال)
+# سوالات تست افسردگی
 questions = [
-    # سوالات مشابه کد قبلی
+    {
+        "text": "آیا احساس غم و اندوه می‌کنید؟",
+        "options": {
+            "1": "بله",
+            "2": "نه"
+        },
+        "scores": {
+            "1": 2,
+            "2": 0
+        }
+    },
+    {
+        "text": "آیا احساس بی‌ارادگی می‌کنید؟",
+        "options": {
+            "1": "بله",
+            "2": "نه"
+        },
+        "scores": {
+            "1": 2,
+            "2": 0
+        }
+    }
 ]
 
 # --- توابع شروع و دریافت اطلاعات کاربر ---
-
 async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if update.message:  # اگر message موجود است
         await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
@@ -47,7 +67,6 @@ async def get_age(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return QUESTION
 
 # --- ارسال سوال به همراه دکمه‌های تعاملی ---
-
 async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
     q_index = context.user_data["current_question"]
     if q_index < len(questions):
@@ -65,7 +84,6 @@ async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_final_result(update, context)
 
 # --- دریافت پاسخ سوال (از طریق callback query) ---
-
 async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     query = update.callback_query
     await query.answer()
@@ -83,7 +101,6 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     return QUESTION
 
 # --- ارسال نتیجه نهایی به همراه تحلیل جامع ---
-
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
     if total_score <= 10:
@@ -100,13 +117,11 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.callback_query.message.reply_text(analysis, parse_mode="Markdown")
 
 # --- تابع لغو مکالمه ---
-
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')
     return ConversationHandler.END
 
 # --- ایجاد ConversationHandler ---
-
 depression_conversation_handler = ConversationHandler(
     entry_points=[CommandHandler('start_depression', start_depression_test)],
     states={
