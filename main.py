@@ -35,6 +35,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     
+    if query.data == "depression":
+        await start_depression_test(update, context)
+    
     if query.data == "anxiety":
         await start_anxiety_test(update, context)
     elif query.data == "depression":
