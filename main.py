@@ -2,8 +2,8 @@ import logging
 import os
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (
-    Updater, CommandHandler, CallbackQueryHandler, ConversationHandler,
-    MessageHandler, filters, CallbackContext
+    Application, CommandHandler, CallbackQueryHandler,
+    MessageHandler, filters, ContextTypes
 )
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test
@@ -13,14 +13,15 @@ from tests.relationship_readiness_test import start_relationship_test
 
 # تنظیمات لاگ‌ها
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # دریافت توکن از متغیر محیطی
 
 # توابع اصلی بات
-def start(update: Update, context: CallbackContext):
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("تست اضطراب", callback_data="anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="depression")],
@@ -28,31 +29,32 @@ def start(update: Update, context: CallbackContext):
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text("👋 سلام! لطفاً یک تست را انتخاب کنید:", reply_markup=reply_markup)
+    await update.message.reply_text("👋 سلام! لطفاً یک تست را انتخاب کنید:", reply_markup=reply_markup)
 
-def button_handler(update: Update, context: CallbackContext):
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    query.answer()
-    
+    await query.answer()
+
     if query.data == "anxiety":
-        start_anxiety_test(update, context)
+        await start_anxiety_test(update, context)
     elif query.data == "depression":
-        start_depression_test(update, context)
+        await start_depression_test(update, context)
     elif query.data == "addiction":
-        start_addiction_test(update, context)
+        await start_addiction_test(update, context)
     elif query.data == "relationship":
-        start_relationship_test(update, context)
+        await start_relationship_test(update, context)
 
-def main():
+async def main():
     init_db()  # مقداردهی اولیه دیتابیس
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CallbackQueryHandler(button_handler))
+    app = Application.builder().token(TOKEN).build()
 
-    updater.start_polling()
-    updater.idle()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CallbackQueryHandler(button_handler))
 
-if __name__ == '__main__':
-    main()
+    print("ربات شروع به کار کرد...")
+    await app.run_polling()
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
