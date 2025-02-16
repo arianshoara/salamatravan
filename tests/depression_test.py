@@ -26,7 +26,11 @@ questions = [
 # --- توابع شروع و دریافت اطلاعات کاربر ---
 
 async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
+    if update.message:  # اگر message موجود است
+        await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
+    elif update.callback_query:  # اگر callback_query است
+        await update.callback_query.answer(text="سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
+
     context.user_data.clear()
     return NAME
 
@@ -113,3 +117,6 @@ depression_conversation_handler = ConversationHandler(
     },
     fallbacks=[CommandHandler('cancel', cancel)]
 )
+
+async def error_handler(update, context):
+    print(f"An error occurred: {context.error}")
