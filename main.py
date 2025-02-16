@@ -18,7 +18,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")  # دریافت توکن از متغیر محیطی
+TOKEN = os.getenv("7882625954:AAGiDHMhSV_guKOuhJ9r3mf97seAFqQF0mk")  # دریافت توکن از متغیر محیطی
 
 # توابع اصلی بات
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
