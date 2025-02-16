@@ -1,25 +1,31 @@
-import os
-import psycopg2
+import sqlite3
 
-DATABASE_URL = os.getenv("DATABASE_URL")
-
+# ایجاد و اتصال به دیتابیس
 def init_db():
-    conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+    conn = sqlite3.connect("bot_data.db")
     cursor = conn.cursor()
+    
+    # ایجاد جدول برای ذخیره نتایج تست کاربران
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS test_results (
-            id SERIAL PRIMARY KEY,
-            user_id BIGINT NOT NULL,
-            test_name TEXT NOT NULL,
-            score INT NOT NULL
-        )
+    CREATE TABLE IF NOT EXISTS test_results (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        test_type TEXT,
+        result TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
     """)
+    
     conn.commit()
     conn.close()
 
-def save_test_result(user_id, test_name, score):
-    conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+# ذخیره نتیجه تست در دیتابیس
+def save_test_result(user_id, test_type, result):
+    conn = sqlite3.connect("bot_data.db")
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO test_results (user_id, test_name, score) VALUES (%s, %s, %s)", (user_id, test_name, score))
+    
+    cursor.execute("INSERT INTO test_results (user_id, test_type, result) VALUES (?, ?, ?)", 
+                   (user_id, test_type, result))
+    
     conn.commit()
     conn.close()
