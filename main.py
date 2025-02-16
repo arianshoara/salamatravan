@@ -3,7 +3,7 @@ import os
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (
     Updater, CommandHandler, CallbackQueryHandler, ConversationHandler,
-    MessageHandler, Filters, CallbackContext
+    MessageHandler, filters, CallbackContext
 )
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test
