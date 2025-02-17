@@ -6,7 +6,7 @@ from telegram.ext import (
     MessageHandler, filters, ContextTypes
 )
 from database import init_db, save_test_result
-from tests.anxiety_test import start_anxiety_test
+from tests.anxiety_test import start_anxiety_test, anxiety_conversation_handler
 from tests.depression_test import start_depression_test, depression_conversation_handler  # اضافه کردن این خط
 from tests.addiction_test import start_addiction_test
 from tests.relationship_readiness_test import start_relationship_test
