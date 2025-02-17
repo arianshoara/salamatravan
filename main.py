@@ -52,8 +52,8 @@ async def main():
     app = Application.builder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(depression_conversation_handler)  # این handler را اول اضافه کنید
     app.add_handler(CallbackQueryHandler(button_handler))
-    app.add_handler(depression_conversation_handler)  # اضافه کردن handler افسردگی
 
     print("ربات شروع به کار کرد...")
     await app.run_polling()
