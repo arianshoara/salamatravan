@@ -55,7 +55,7 @@ async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TY
 
 async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data["Name"] = update.message.text
-    await update.message.reply_text("سن شما چیست؟")
+    await update.message.reply_text("چند سال دارید؟)
     return AGE
 
 async def get_age(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -98,7 +98,21 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     }
     context.user_data["current_question"] += 1
     await send_question(update, context)
-    return QUESTION
+    return QUESTION # state همچنان QUESTION باقی می‌ماند
+
+# --- ارسال سوال به همراه دکمه‌های تعاملی ---
+async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    q_index = context.user_data["current_question"]
+    if q_index < len(questions):
+        question = questions[q_index]
+        text = question["text"]
+        keyboard = []
+        for key, option in question["options"].items():
+            keyboard.append([InlineKeyboardButton(f"{key}) {option}", callback_data=key)])
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        await update.callback_query.message.reply_text(text, reply_markup=reply_markup) # استفاده از update.callback_query.message
+    else:
+        await send_final_result(update, context)
 
 # --- ارسال نتیجه نهایی به همراه تحلیل جامع ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
