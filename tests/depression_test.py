@@ -45,11 +45,23 @@ questions = [
 ]
 
 # --- توابع شروع و دریافت اطلاعات کاربر ---
+import logging
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    CallbackQueryHandler,
+    MessageHandler,
+    filters,
+    ContextTypes,
+    ConversationHandler,
+)
+
+# ... (بقیه کدها)
+
+# --- توابع شروع و دریافت اطلاعات کاربر ---
 async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    if update.message:  # اگر message موجود است
-        await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
-    elif update.callback_query:  # اگر callback_query است
-        await update.callback_query.answer(text="سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:")
+    await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:") # همیشه از update.message استفاده کنید چون این تابع فقط از طریق /start صدا زده میشود
     context.user_data.clear()
     return NAME
 
@@ -76,9 +88,9 @@ async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for key, option in question["options"].items():
             keyboard.append([InlineKeyboardButton(f"{key}) {option}", callback_data=key)])
         reply_markup = InlineKeyboardMarkup(keyboard)
-        if update.message:
+        if update.message: # برای شروع تست
             await update.message.reply_text(text, reply_markup=reply_markup)
-        else:
+        elif update.callback_query: # برای ادامه تست
             await update.callback_query.message.reply_text(text, reply_markup=reply_markup)
     else:
         await send_final_result(update, context)
@@ -97,8 +109,13 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         "option_text": question["options"][selected_option]
     }
     context.user_data["current_question"] += 1
-    await send_question(update, context)
-    return QUESTION # state همچنان QUESTION باقی می‌ماند
+    if context.user_data["current_question"] < len(questions): # سوال بعدی وجود دارد
+        await send_question(update, context)
+        return QUESTION
+    else: # سوال بعدی وجود ندارد
+        await send_final_result(update, context)
+        return ConversationHandler.END # پایان تست
+
 
 # --- ارسال سوال به همراه دکمه‌های تعاملی ---
 async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
