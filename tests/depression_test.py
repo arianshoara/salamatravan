@@ -116,21 +116,6 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         await send_final_result(update, context)
         return ConversationHandler.END # پایان تست
 
-
-# --- ارسال سوال به همراه دکمه‌های تعاملی ---
-async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    q_index = context.user_data["current_question"]
-    if q_index < len(questions):
-        question = questions[q_index]
-        text = question["text"]
-        keyboard = []
-        for key, option in question["options"].items():
-            keyboard.append([InlineKeyboardButton(f"{key}) {option}", callback_data=key)])
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.callback_query.message.reply_text(text, reply_markup=reply_markup) # استفاده از update.callback_query.message
-    else:
-        await send_final_result(update, context)
-
 # --- ارسال نتیجه نهایی به همراه تحلیل جامع ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
