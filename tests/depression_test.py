@@ -45,21 +45,6 @@ questions = [
 ]
 
 # --- توابع شروع و دریافت اطلاعات کاربر ---
-import logging
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    CallbackQueryHandler,
-    MessageHandler,
-    filters,
-    ContextTypes,
-    ConversationHandler,
-)
-
-# ... (بقیه کدها)
-
-# --- توابع شروع و دریافت اطلاعات کاربر ---
 async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text("سلام! خوش آمدید.\nلطفاً نام خود را وارد کنید:") # همیشه از update.message استفاده کنید چون این تابع فقط از طریق /start صدا زده میشود
     context.user_data.clear()
@@ -120,11 +105,11 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
     if total_score <= 10:
-        result_text = "شما **علائم افسردگی خفیف** دارید. 😊"
+        result_text = "شما **علائم افسردگی خفیف** دارید. "
     elif 11 <= total_score <= 20:
-        result_text = "شما **علائم افسردگی متوسط** دارید. 😐"
+        result_text = "شما **علائم افسردگی متوسط** دارید. "
     else:
-        result_text = "شما **علائم افسردگی شدید** دارید. 😟"
+        result_text = "شما **علائم افسردگی شدید** دارید. "
 
     analysis = f"امتیاز شما: {total_score}\n\n{result_text}\n\nتحلیل پاسخ‌های شما:\n"
     for idx, resp in context.user_data["responses"].items():
