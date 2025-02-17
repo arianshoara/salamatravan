@@ -29,6 +29,9 @@ def setup_handlers(app: Application):
     # هندلر مربوط به گفتگو برای تست افسردگی
     app.add_handler(depression_conversation_handler)
     
+    # هندلر مربوط به گفتگو برای تست اضطراب
+    app.add_handler(anxiety_conversation_handler)
+    
     # هندلر مربوط به دکمه‌های inline
     app.add_handler(CallbackQueryHandler(button_handler))
     
@@ -36,18 +39,18 @@ def setup_handlers(app: Application):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
-        [InlineKeyboardButton("تست اضطراب", callback_data="anxiety")],
+        [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("👋 سلام! لطفاً یک تست را انتخاب کنید:", reply_markup=reply_markup)
+    await update.message.reply_text("سلام! لطفاً یک تست را انتخاب کنید:✌️", reply_markup=reply_markup)
 
 # تابع راهنما
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
-        [InlineKeyboardButton("تست اضطراب", callback_data="anxiety")],
+        [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
@@ -63,7 +66,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text(help_text, disable_web_page_preview=False)
     elif query.data == "start_depression": # بررسی callback_data جدید
         await update.callback_query.message.reply_text("برای شروع تست افسردگی /start_depression را بزنید") # راهنمایی کاربر برای شروع تست
-    elif query.data == "anxiety":
+    elif query.data == "start_anxiety":
         await start_anxiety_test(update, context)
     elif query.data == "addiction":
         await start_addiction_test(update, context)
