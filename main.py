@@ -24,7 +24,7 @@ TOKEN = "7882625954:AAGiDHMhSV_guKOuhJ9r3mf97seAFqQF0mk"
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("تست اضطراب", callback_data="anxiety")],
-        [InlineKeyboardButton("تست افسردگی", callback_data="depression")],
+        [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
@@ -35,13 +35,12 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     
-    if query.data == "depression":
-        await start_depression_test(update, context)
+    if query.data == "start_depression": # بررسی callback_data جدید
+        await update.callback_query.message.reply_text("برای شروع تست افسردگی /start_depression را بزنید") # راهنمایی کاربر برای شروع تست
+
     
     if query.data == "anxiety":
         await start_anxiety_test(update, context)
-    elif query.data == "depression":
-        await start_depression_test(update, context)
     elif query.data == "addiction":
         await start_addiction_test(update, context)
     elif query.data == "relationship":
