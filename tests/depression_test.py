@@ -55,7 +55,7 @@ async def start_depression_test(update: Update, context: ContextTypes.DEFAULT_TY
 
 async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data["Name"] = update.message.text
-    await update.message.reply_text("چند سال دارید؟)
+    await update.message.reply_text("چند سال دارید؟")
     return AGE
 
 async def get_age(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
