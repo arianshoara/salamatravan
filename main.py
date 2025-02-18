@@ -8,10 +8,11 @@ from telegram.ext import (
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test, anxiety_conversation_handler
 from tests.depression_test import start_depression_test, depression_conversation_handler  # اضافه کردن این خط
-from tests.addiction_test import start_addiction_test
+from tests.addiction_test import start_addiction_test, addiction_conversation_handler
 from tests.relationship_readiness_test import start_relationship_test
 from help_message import help_text  # ایمپورت متن راهنما
 from tests.ocd_test import start_ocd_test, ocd_conversation_handler
+from tests.mdq_test import start_mdq_test, mdq_conversation_handler
 # تنظیمات لاگ‌ها
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # اصلاح این خط
@@ -35,6 +36,12 @@ def setup_handlers(app: Application):
     #هندلر مربوط به گفتگو برای تست اختلال وسواسی-اجباری
     app.add_handler(ocd_conversation_handler)
     
+    # هندلر مربوط به گفتگو برای تست اختلال دوقطبی - MDQ
+    app.add_handler(mdq_conversation_handler)
+    
+    # هندلر مربوط به گفتگو برای تست اعتیاد
+    app.add_handler(addiction_conversation_handler)
+    
     # هندلر مربوط به دکمه‌های inline
     app.add_handler(CallbackQueryHandler(button_handler))
     
@@ -44,8 +51,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
-        [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],  
-        [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
+        [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],
+        [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],  
+        [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -57,7 +65,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
         [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")], 
-        [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
+        [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
+        [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -74,9 +83,11 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "start_anxiety":
         await update.callback_query.message.reply_text("برای شروع تست اضطراب /start_anxiety را بزنید")
     elif query.data == "start_ocd":
-        await update.callback_query.message.reply_text("برای شروع تست وسواس فکری-عملی /start_ocd را بزنید")   
-    elif query.data == "addiction":
-        await start_addiction_test(update, context)
+        await update.callback_query.message.reply_text("برای شروع تست وسواس فکری-عملی /start_ocd را بزنید")
+    elif query.data == "start_mdq":
+        await update.callback_query.message.reply_text("برای شروع تست اختلال دوقطبی - MDQ /start_mdq را بزنید")       
+    elif query.data == "start_addiction":
+        await update.callback_query.message.reply_text("برای شروع تست اعتیاد /start_addiction را بزنید")
     elif query.data == "relationship":
         await start_relationship_test(update, context)
 
