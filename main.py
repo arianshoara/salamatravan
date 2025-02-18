@@ -11,7 +11,7 @@ from tests.depression_test import start_depression_test, depression_conversation
 from tests.addiction_test import start_addiction_test
 from tests.relationship_readiness_test import start_relationship_test
 from help_message import help_text  # ایمپورت متن راهنما
-
+from tests.ocd_test import start_ocd_test, ocd_conversation_handler
 # تنظیمات لاگ‌ها
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # اصلاح این خط
@@ -32,6 +32,9 @@ def setup_handlers(app: Application):
     # هندلر مربوط به گفتگو برای تست اضطراب
     app.add_handler(anxiety_conversation_handler)
     
+    #هندلر مربوط به گفتگو برای تست اختلال وسواسی-اجباری
+    app.add_handler(ocd_conversation_handler)
+    
     # هندلر مربوط به دکمه‌های inline
     app.add_handler(CallbackQueryHandler(button_handler))
     
@@ -41,6 +44,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
+        [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],  
         [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
@@ -52,6 +56,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
+        [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")], 
         [InlineKeyboardButton("تست اعتیاد", callback_data="addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="relationship")]
     ]
@@ -68,6 +73,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.callback_query.message.reply_text("برای شروع تست افسردگی /start_depression را بزنید") # راهنمایی کاربر برای شروع تست
     elif query.data == "start_anxiety":
         await update.callback_query.message.reply_text("برای شروع تست اضطراب /start_anxiety را بزنید")
+    elif query.data == "start_ocd":
+        await update.callback_query.message.reply_text("برای شروع تست وسواس فکری-عملی /start_ocd را بزنید")   
     elif query.data == "addiction":
         await start_addiction_test(update, context)
     elif query.data == "relationship":
