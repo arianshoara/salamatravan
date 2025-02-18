@@ -28,7 +28,7 @@ async def start_sedatives_sleeping_pills_addiction_test(update: Update, context:
 
 
 sedatives_sleeping_pills_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_alcohol_addiction', start_alcohol_addiction_test)],
+    entry_points=[CommandHandler('start_sedatives_sleeping_pills_addiction', start_sedatives_sleeping_pills_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

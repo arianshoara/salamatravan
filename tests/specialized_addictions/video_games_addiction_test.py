@@ -28,7 +28,7 @@ async def start_video_games_addiction_test(update: Update, context: ContextTypes
 
 
 video_games_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_alcohol_addiction', start_alcohol_addiction_test)],
+    entry_points=[CommandHandler('start_video_games_addiction', start_video_games_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

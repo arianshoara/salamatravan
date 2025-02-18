@@ -28,7 +28,7 @@ async def start_excessive_exercise_addiction_test(update: Update, context: Conte
 
 
 excessive_exercise_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_alcohol_addiction', start_alcohol_addiction_test)],
+    entry_points=[CommandHandler('start_excessive_exercise_addiction', start_excessive_exercise_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },
