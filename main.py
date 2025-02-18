@@ -3,7 +3,7 @@ import os
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
-    MessageHandler, filters, ContextTypes
+    MessageHandler, filters, ContextTypes, PicklePersistence
 )
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test, anxiety_conversation_handler
@@ -182,7 +182,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def main():
     init_db()  # مقداردهی اولیه دیتابیس
 
-    app = Application.builder().token(TOKEN).build()
+    from telegram.ext import PicklePersistence
+    persistence = PicklePersistence(filepath='conversationbot_data')
+    app = Application.builder().token(TOKEN).persistence(persistence).build()
 
     # ثبت تمامی هندلرها به صورت یک بخش جداگانه
     setup_handlers(app)
@@ -200,3 +202,4 @@ if __name__ == "__main__":
     loop.close = lambda: None
     loop.create_task(main())
     loop.run_forever()
+
