@@ -102,7 +102,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],
         [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],  
         [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
-        [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship")],
+        [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
@@ -116,7 +116,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")], 
         [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
-        [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship")],
+        [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(help_text, reply_markup=reply_markup, disable_web_page_preview=False)
@@ -137,8 +137,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.callback_query.message.reply_text("برای شروع تست اختلال دوقطبی - MDQ /start_mdq را بزنید")       
     elif query.data == "start_addiction":
         await update.callback_query.message.reply_text("برای شروع تست اعتیاد /start_addiction را بزنید")
-    elif query.data == "start_relationship":
-        await update.callback_query.message.reply_text("برای شروع تست آمادگی رابطه عاطفی /start_relationship را بزنید")
+    elif query.data == "start_relationship_readiness":
+        await update.callback_query.message.reply_text("برای شروع تست آمادگی رابطه عاطفی /start_relationship_readiness را بزنید")
     # شرط‌های شروع تست‌های اختصاصی به‌روزرسانی شده:
     elif query.data == "start_alcohol_addiction":
         await start_alcohol_addiction_test(update, context)
