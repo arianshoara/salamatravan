@@ -68,6 +68,28 @@ def setup_handlers(app: Application):
     # هندلر مربوط به دکمه‌های inline
     app.add_handler(CallbackQueryHandler(button_handler))
     
+    #هندلر برای تمام اعتیادهای اختصاصی
+    app.add_handler(CommandHandler("start_alcohol_addiction", start_alcohol_addiction_test))
+    app.add_handler(CommandHandler("start_substance_addiction", start_substance_addiction_test))
+    app.add_handler(CommandHandler("start_nicotine_addiction", start_nicotine_addiction_test))
+    app.add_handler(CommandHandler("start_prescription_drugs_addiction", start_prescription_drugs_addiction_test))
+    app.add_handler(CommandHandler("start_pornography_addiction", start_pornography_addiction_test))
+    app.add_handler(CommandHandler("start_video_games_addiction", start_video_games_addiction_test))
+    app.add_handler(CommandHandler("start_gambling_addiction", start_gambling_addiction_test))
+    app.add_handler(CommandHandler("start_mobile_social_media_addiction", start_mobile_social_media_addiction_test))
+    app.add_handler(CommandHandler("start_shopping_addiction", start_shopping_addiction_test))
+    app.add_handler(CommandHandler("start_overeating_addiction", start_overeating_addiction_test))
+    app.add_handler(CommandHandler("start_work_addiction", start_work_addiction_test))
+    app.add_handler(CommandHandler("start_excessive_exercise_addiction", start_excessive_exercise_addiction_test))
+    app.add_handler(CommandHandler("start_caffeine_addiction", start_caffeine_addiction_test))
+    app.add_handler(CommandHandler("start_diet_pills_supplements_addiction", start_diet_pills_supplements_addiction_test))
+    app.add_handler(CommandHandler("start_internet_addiction", start_internet_addiction_test))
+    app.add_handler(CommandHandler("start_unhealthy_relationships_addiction", start_unhealthy_relationships_addiction_test))
+    app.add_handler(CommandHandler("start_unhealthy_foods_addiction", start_unhealthy_foods_addiction_test))
+    app.add_handler(CommandHandler("start_cosmetics_addiction", start_cosmetics_addiction_test))
+    app.add_handler(CommandHandler("start_sedatives_sleeping_pills_addiction", start_sedatives_sleeping_pills_addiction_test))
+    app.add_handler(CommandHandler("start_excessive_planning_addiction", start_excessive_planning_addiction_test))
+    
 # توابع اصلی بات
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
