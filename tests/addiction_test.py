@@ -568,6 +568,33 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         await send_final_result(update, context)
         return ConversationHandler.END
 
+async def show_specialized_tests_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """نمایش منوی تست‌های اختصاصی اعتیاد."""
+    keyboard = [
+        [InlineKeyboardButton("تست اعتیاد به الکل", callback_data="start_alcohol_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به مواد مخدر", callback_data="start_substance_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به نیکوتین", callback_data="start_nicotine_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به داروهای نسخه‌ای", callback_data="start_prescription_drugs_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به پورن", callback_data="start_pornography_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به بازی‌های رایانه‌ای", callback_data="start_video_games_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به قمار", callback_data="start_gambling_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به تلفن همراه و شبکه‌های اجتماعی", callback_data="start_mobile_social_media_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به خرید", callback_data="start_shopping_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به خوردن بی‌رویه", callback_data="start_overeating_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به کارکردن", callback_data="start_work_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به ورزش بی‌رویه", callback_data="start_excessive_exercise_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به کافئین", callback_data="start_caffeine_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به داروهای لاغری و مکمل‌ها", callback_data="start_diet_pills_supplements_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به اینترنت", callback_data="start_internet_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به روابط ناسالم", callback_data="start_unhealthy_relationships_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به غذاهای ناسالم", callback_data="start_unhealthy_foods_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به محصولات آرایشی", callback_data="start_cosmetics_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به داروهای آرام‌بخش و خواب‌آور", callback_data="start_sedatives_sleeping_pills_addiction")],
+        [InlineKeyboardButton("تست اعتیاد به برنامه‌ریزی افراطی", callback_data="start_excessive_planning_addiction")],
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.callback_query.message.reply_text("لطفاً تست اختصاصی مورد نظر خود را انتخاب کنید:", reply_markup=reply_markup)
+
 # --- ارسال نتیجه نهایی به همراه درصد و تحلیل پاسخ‌ها و لینک به تست‌های خاص ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
@@ -583,6 +610,7 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     specific_addiction_keyboard = [] # لیست دکمه‌ها برای تست‌های خاص
     callback_data_set = set() # مجموعه برای نگهداری callback_data ها
+    high_addiction_types = [] # لیست برای نگهداری انواع اعتیاد با امتیاز بالا (جدید)
 
     for idx, resp in context.user_data["responses"].items():
         analysis += f"\n**سوال {idx + 1}:** {resp['question']}\n"
@@ -590,21 +618,29 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         analysis += f"**تفسیر:** {resp['message']}\n"
         if resp['selected_option'] in ["3", "4"]: # اگر پاسخ "اغلب" یا "تقریباً همیشه" بود
             addiction_type = questions[idx]["text"].split("چقدر به ")[1].split(" وابسته هستید؟")[0] # استخراج نوع اعتیاد از متن سوال
-            callback_data_prefix = "start_" + "_".join(addiction_type.split()) # ساخت callback_data بر اساس نوع اعتیاد
-            callback_data_prefix = callback_data_prefix[:60] # محدود کردن طول callback_data
-            callback_data_prefix = re.sub(r'[^a-zA-Z0-9_]', '', callback_data_prefix) # حذف کاراکترهای غیر ASCII
-            logger.info(f"Generated callback_data_prefix: {callback_data_prefix}, length: {len(callback_data_prefix)}") # لاگ را نگه دارید
-            if len(callback_data_prefix) > 64: # هشدار را نگه دارید
+            high_addiction_types.append(addiction_type) # افزودن نوع اعتیاد به لیست (جدید)
+
+    # ایجاد دکمه‌های اختصاصی (حداکثر 3 تا)
+    if high_addiction_types: # اگر لیست اعتیادهای با امتیاز بالا خالی نباشد
+        analysis += "\n\n**تست‌های اختصاصی پیشنهادی بر اساس پاسخ‌های شما:**\n" # پیام جدید
+        num_specific_tests = min(len(high_addiction_types), 3) # حداکثر 3 تست اختصاصی
+        for i in range(num_specific_tests):
+            addiction_type = high_addiction_types[i]
+            callback_data_prefix = "start_" + "_".join(addiction_type.split())
+            callback_data_prefix = callback_data_prefix[:60]
+            callback_data_prefix = re.sub(r'[^a-zA-Z0-9_]', '', callback_data_prefix)
+            logger.info(f"Generated callback_data_prefix: {callback_data_prefix}, length: {len(callback_data_prefix)}")
+            if len(callback_data_prefix) > 64:
                 logger.warning(f"callback_data_prefix is too long! Length: {len(callback_data_prefix)}")
             button_text = f"تست اختصاصی {addiction_type}"
-
-            if callback_data_prefix not in callback_data_set: # بررسی تکراری نبودن
+            if callback_data_prefix not in callback_data_set:
                 specific_addiction_keyboard.append([InlineKeyboardButton(button_text, callback_data=callback_data_prefix)])
-                callback_data_set.add(callback_data_prefix) # افزودن به مجموعه
+                callback_data_set.add(callback_data_prefix)
             else:
-                logger.warning(f"Duplicate callback_data detected: {callback_data_prefix}") # ثبت هشدار در صورت تکراری بودن
+                logger.warning(f"Duplicate callback_data detected: {callback_data_prefix}")
+            analysis += f"- برای تست **{addiction_type}** روی دکمه زیر بزنید.\n" # پیام جدید
 
-    # تفسیر کلی بر اساس درصد
+    # تفسیر کلی بر اساس درصد (بدون تغییر)
     if percentage < 25:
         interpretation = "میزان اعتیاد شما در سطح پایینی قرار دارد."
     elif percentage < 50:
@@ -614,31 +650,37 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         interpretation = "میزان اعتیاد شما در سطح بالایی قرار دارد. اکیداً توصیه می‌شود فوراً به دنبال کمک تخصصی باشید."
 
-    analysis += f"\n\n**تفسیر نهایی:** {interpretation}"
+    analysis += f"\n\n**تفسیر نهایی:** {interpretation}\n\n"
+    analysis += "**همچنین می‌توانید با زدن دکمه زیر به لیست کامل تست‌های اختصاصی دسترسی پیدا کنید:**" # پیام جدید برای دکمه کلی
 
-    reply_markup_specific_addictions = None
-    if specific_addiction_keyboard: # فقط اگر دکمه‌ای برای تست خاص وجود داشته باشد
-        reply_markup_specific_addictions = InlineKeyboardMarkup(specific_addiction_keyboard)
-        analysis += "\n\n**برای ارزیابی دقیق‌تر، می‌توانید تست‌های اختصاصی زیر را انجام دهید:**"
-        logger.info(f"reply_markup_specific_addictions content: {reply_markup_specific_addictions}") # لاگ از reply_markup
+    # ایجاد دکمه کلی "تست‌های اختصاصی" (بدون تغییر)
+    specific_addiction_keyboard.append([InlineKeyboardButton("نمایش لیست کامل تست‌های اختصاصی اعتیاد", callback_data="show_specialized_tests")]) # دکمه کلی
+    reply_markup_specific_addictions = InlineKeyboardMarkup(specific_addiction_keyboard)
+    logger.info(f"reply_markup_specific_addictions content: {reply_markup_specific_addictions}")
 
     if update.callback_query:
-        await update.callback_query.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions) # ارسال دکمه‌ها در صورت وجود
+        await update.callback_query.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
     else:
-        await update.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions) # ارسال دکمه‌ها در صورت وجود# --- تابع لغو مکالمه ---
+        await update.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
+
+# --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')
     return ConversationHandler.END
 
 # --- ایجاد ConversationHandler ---
-addiction_conversation_handler = ConversationHandler( # تغییر نام handler
-    entry_points=[CommandHandler('start_addiction', start_addiction_test)], # تغییر نام کامند
+addiction_conversation_handler = ConversationHandler(
+    entry_points=[CommandHandler('start_addiction', start_addiction_test)],  # تغییر نام کامند
     states={
         NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
         AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_age)],
         QUESTION: [CallbackQueryHandler(question_callback)],
     },
-    fallbacks=[CommandHandler('cancel', cancel)]
+    fallbacks=[CommandHandler('cancel', cancel)],  # فیکس جایگاه fallbacks
+    allow_reentry=True,  # اجازه ورود مجدد
+    conversation_timeout=300,  # تعیین زمان‌سنج مکالمه
+    name="addiction_conversation",  # نام منحصر‌به‌فرد برای پایداری
+    persistent=True  # فعال‌سازی پایداری مکالمه
 )
 
 async def error_handler(update, context):

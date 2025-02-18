@@ -8,11 +8,34 @@ from telegram.ext import (
 from database import init_db, save_test_result
 from tests.anxiety_test import start_anxiety_test, anxiety_conversation_handler
 from tests.depression_test import start_depression_test, depression_conversation_handler  # اضافه کردن این خط
-from tests.addiction_test import start_addiction_test, addiction_conversation_handler
+from tests.addiction_test import start_addiction_test, addiction_conversation_handler, show_specialized_tests_menu
 from tests.relationship_readiness_test import start_relationship_test
 from help_message import help_text  # ایمپورت متن راهنما
 from tests.ocd_test import start_ocd_test, ocd_conversation_handler
 from tests.mdq_test import start_mdq_test, mdq_conversation_handler
+
+# import های تست های اختصاصی از پوشه specialized_addictions:
+from tests.specialized_addictions.alcohol_addiction_test import start_alcohol_addiction_test, alcohol_addiction_conversation_handler
+from tests.specialized_addictions.substance_addiction_test import start_substance_addiction_test, substance_addiction_conversation_handler
+from tests.specialized_addictions.nicotine_addiction_test import start_nicotine_addiction_test, nicotine_addiction_conversation_handler
+from tests.specialized_addictions.prescription_drugs_addiction_test import start_prescription_drugs_addiction_test, prescription_drugs_addiction_conversation_handler
+from tests.specialized_addictions.pornography_addiction_test import start_pornography_addiction_test, pornography_addiction_conversation_handler
+from tests.specialized_addictions.video_games_addiction_test import start_video_games_addiction_test, video_games_addiction_conversation_handler
+from tests.specialized_addictions.gambling_addiction_test import start_gambling_addiction_test, gambling_addiction_conversation_handler
+from tests.specialized_addictions.mobile_social_media_addiction_test import start_mobile_social_media_addiction_test, mobile_social_media_addiction_conversation_handler
+from tests.specialized_addictions.shopping_addiction_test import start_shopping_addiction_test, shopping_addiction_conversation_handler
+from tests.specialized_addictions.overeating_addiction_test import start_overeating_addiction_test, overeating_addiction_conversation_handler
+from tests.specialized_addictions.work_addiction_test import start_work_addiction_test, work_addiction_conversation_handler
+from tests.specialized_addictions.excessive_exercise_addiction_test import start_excessive_exercise_addiction_test, excessive_exercise_addiction_conversation_handler
+from tests.specialized_addictions.caffeine_addiction_test import start_caffeine_addiction_test, caffeine_addiction_conversation_handler
+from tests.specialized_addictions.diet_pills_supplements_addiction_test import start_diet_pills_supplements_addiction_test, diet_pills_supplements_addiction_conversation_handler
+from tests.specialized_addictions.internet_addiction_test import start_internet_addiction_test, internet_addiction_conversation_handler
+from tests.specialized_addictions.unhealthy_relationships_addiction_test import start_unhealthy_relationships_addiction_test, unhealthy_relationships_addiction_conversation_handler
+from tests.specialized_addictions.unhealthy_foods_addiction_test import start_unhealthy_foods_addiction_test, unhealthy_foods_addiction_conversation_handler
+from tests.specialized_addictions.cosmetics_addiction_test import start_cosmetics_addiction_test, cosmetics_addiction_conversation_handler
+from tests.specialized_addictions.sedatives_sleeping_pills_addiction_test import start_sedatives_sleeping_pills_addiction_test, sedatives_sleeping_pills_addiction_conversation_handler
+from tests.specialized_addictions.excessive_planning_addiction_test import start_excessive_planning_addiction_test, excessive_planning_addiction_conversation_handler
+
 # تنظیمات لاگ‌ها
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",  # اصلاح این خط
@@ -90,6 +113,49 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.callback_query.message.reply_text("برای شروع تست اعتیاد /start_addiction را بزنید")
     elif query.data == "relationship":
         await start_relationship_test(update, context)
+    # شرط‌های شروع تست‌های اختصاصی به‌روزرسانی شده:
+    elif query.data == "start_alcohol_addiction":
+        await start_alcohol_addiction_test(update, context)
+    elif query.data == "start_substance_addiction":
+        await start_substance_addiction_test(update, context)
+    elif query.data == "start_nicotine_addiction":
+        await start_nicotine_addiction_test(update, context)
+    elif query.data == "start_prescription_drugs_addiction":
+        await start_prescription_drugs_addiction_test(update, context)
+    elif query.data == "start_pornography_addiction":
+        await start_pornography_addiction_test(update, context)
+    elif query.data == "start_video_games_addiction":
+        await start_video_games_addiction_test(update, context)
+    elif query.data == "start_gambling_addiction":
+        await start_gambling_addiction_test(update, context)
+    elif query.data == "start_mobile_social_media_addiction":
+        await start_mobile_social_media_addiction_test(update, context)
+    elif query.data == "start_shopping_addiction":
+        await start_shopping_addiction_test(update, context)
+    elif query.data == "start_overeating_addiction":
+        await start_overeating_addiction_test(update, context)
+    elif query.data == "start_work_addiction":
+        await start_work_addiction_test(update, context)
+    elif query.data == "start_excessive_exercise_addiction":
+        await start_excessive_exercise_addiction_test(update, context)
+    elif query.data == "start_caffeine_addiction":
+        await start_caffeine_addiction_test(update, context)
+    elif query.data == "start_diet_pills_supplements_addiction":
+        await start_diet_pills_supplements_addiction_test(update, context)
+    elif query.data == "start_internet_addiction":
+        await start_internet_addiction_test(update, context)
+    elif query.data == "start_unhealthy_relationships_addiction":
+        await start_unhealthy_relationships_addiction_test(update, context)
+    elif query.data == "start_unhealthy_foods_addiction":
+        await start_unhealthy_foods_addiction_test(update, context)
+    elif query.data == "start_cosmetics_addiction":
+        await start_cosmetics_addiction_test(update, context)
+    elif query.data == "start_sedatives_sleeping_pills_addiction":
+        await start_sedatives_sleeping_pills_addiction_test(update, context)
+    elif query.data == "start_excessive_planning_addiction":
+        await start_excessive_planning_addiction_test(update, context)
+    elif query.data == "show_specialized_tests":
+        await show_specialized_tests_menu(update, context)
 
 async def main():
     init_db()  # مقداردهی اولیه دیتابیس
