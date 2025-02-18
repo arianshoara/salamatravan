@@ -589,10 +589,12 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     analysis += f"\n\nتفسیر نهایی: {interpretation}"
 
-    if update.callback_query:
-        await update.callback_query.message.reply_text(analysis, parse_mode="Markdown")
-    else:
-        await update.message.reply_text(analysis, parse_mode="Markdown")
+    chat_id = update.effective_chat.id  # گرفتن شناسه چت به صورت مطمئن تر
+
+    try: # اضافه کردن try-except برای مدیریت خطا
+        await context.bot.send_message(chat_id=chat_id, text=analysis, parse_mode="Markdown")
+    except Exception as e:
+        print(f"Error sending final result message: {e}") # چاپ خطای کامل برای بررسی بیشتر
 
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
