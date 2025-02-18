@@ -589,6 +589,10 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if resp['selected_option'] in ["3", "4"]: # اگر پاسخ "اغلب" یا "تقریباً همیشه" بود
             addiction_type = questions[idx]["text"].split("چقدر به ")[1].split(" وابسته هستید؟")[0] # استخراج نوع اعتیاد از متن سوال
             callback_data_prefix = "start_" + "_".join(addiction_type.split()) # ساخت callback_data بر اساس نوع اعتیاد
+            callback_data_prefix = callback_data_prefix[:60] # محدود کردن طول callback_data
+            logger.info(f"Generated callback_data_prefix: {callback_data_prefix}, length: {len(callback_data_prefix)}") # لاگ را نگه دارید
+            if len(callback_data_prefix) > 64: # هشدار را نگه دارید
+                logger.warning(f"callback_data_prefix is too long! Length: {len(callback_data_prefix)}")
             button_text = f"تست اختصاصی {addiction_type}"
             specific_addiction_keyboard.append([InlineKeyboardButton(button_text, callback_data=callback_data_prefix)])
 
@@ -614,7 +618,6 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.callback_query.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions) # ارسال دکمه‌ها در صورت وجود
     else:
         await update.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions) # ارسال دکمه‌ها در صورت وجود
-
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')
