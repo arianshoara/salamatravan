@@ -28,7 +28,7 @@ async def start_mobile_social_media_addiction_test(update: Update, context: Cont
 
 
 mobile_social_media_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_mobile_social_media_addiction', start_mobile_social_media_addiction_test)],
+    entry_points=[CommandHandler('start_social', start_mobile_social_media_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

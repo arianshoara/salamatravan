@@ -28,7 +28,7 @@ async def start_cosmetics_addiction_test(update: Update, context: ContextTypes.D
 
 
 cosmetics_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_cosmetics_addiction', start_cosmetics_addiction_test)],
+    entry_points=[CommandHandler('start_cosmetics', start_cosmetics_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

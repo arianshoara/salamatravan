@@ -28,7 +28,7 @@ async def start_unhealthy_foods_addiction_test(update: Update, context: ContextT
 
 
 unhealthy_foods_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_unhealthy_foods_addiction', start_unhealthy_foods_addiction_test)],
+    entry_points=[CommandHandler('start_junkfood', start_unhealthy_foods_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

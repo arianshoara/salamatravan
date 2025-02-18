@@ -28,7 +28,7 @@ async def start_internet_addiction_test(update: Update, context: ContextTypes.DE
 
 
 internet_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_internet_addiction', start_internet_addiction_test)],
+    entry_points=[CommandHandler('start_internet', start_internet_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

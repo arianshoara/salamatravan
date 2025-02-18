@@ -28,7 +28,7 @@ async def start_prescription_drugs_addiction_test(update: Update, context: Conte
 
 
 prescription_drugs_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_prescription_drugs_addiction', start_prescription_drugs_addiction_test)],
+    entry_points=[CommandHandler('start_rx_drugs', start_prescription_drugs_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

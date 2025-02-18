@@ -28,7 +28,7 @@ async def start_unhealthy_relationships_addiction_test(update: Update, context: 
 
 
 unhealthy_relationships_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_unhealthy_relationships_addiction', start_unhealthy_relationships_addiction_test)],
+    entry_points=[CommandHandler('start_relationships_ad', start_unhealthy_relationships_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },

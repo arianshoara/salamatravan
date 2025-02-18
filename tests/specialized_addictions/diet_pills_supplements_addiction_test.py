@@ -28,7 +28,7 @@ async def start_diet_pills_supplements_addiction_test(update: Update, context: C
 
 
 diet_pills_supplements_addiction_conversation_handler = ConversationHandler(
-    entry_points=[CommandHandler('start_diet_pills_supplements_addiction', start_diet_pills_supplements_addiction_test)],
+    entry_points=[CommandHandler('start_diet_pills', start_diet_pills_supplements_addiction_test)],
     states={
         QUESTION: [], # ... (تعریف states و handler های تست اعتیاد به الکل)
     },
