@@ -37,5 +37,4 @@ shopping_addiction_conversation_handler = ConversationHandler(
     allow_reentry=True,
     name="alcohol_addiction_conversation",
     persistent=True,
-    callback_data="alcohol_addiction_callback_data"
 )
