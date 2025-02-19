@@ -99,30 +99,30 @@ def setup_handlers(app: Application):
     app.add_handler(CommandHandler("start_planning", start_excessive_planning_addiction_test))
 
 # توابع اصلی بات
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+# تابع کمکی برای ساخت کیبورد تست ها (اصلاح شده برای اضافه کردن دکمه وب‌اپ)
+def build_test_menu_keyboard():
     keyboard = [
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
         [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],
-        [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],  
+        [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
-
-async def send_webapp_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [
         [
-            InlineKeyboardButton(
+            InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
                 text="🚀 باز کردن وب‌اپ",
-                web_app=WebAppInfo(url="https://salamatravan.vercel.app/")
+                web_app=WebAppInfo(url="https://salamatravanarian.vercel.app/") # <-- آدرس سایت شما
             )
         ]
     ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("روی دکمه کلیک کن تا وب‌اپ باز شود:", reply_markup=reply_markup)
+    return InlineKeyboardMarkup(keyboard)
+
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    reply_markup = build_test_menu_keyboard() # استفاده از تابع کمکی برای ساخت کیبورد اصلی
+    await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
+
 # تابع راهنما
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
