@@ -1,28 +1,70 @@
 import { useState } from "react";
 import "./App.css";
-import { FaHome, FaBook, FaCog, FaQuestionCircle } from "react-icons/fa";
+import { FaHome, FaBook, FaCog, FaQuestionCircle, FaBars, FaBrain, FaSadTear, FaSmile, FaBalanceScale, FaHeartbeat, FaUser } from "react-icons/fa";
+
 function App() {
-  // state برای کنترل تب فعال (راهنما، خواندنی‌ها، تست‌ها، بخش چهارم، تنظیمات)
   const [activeTab, setActiveTab] = useState("guide");
-
-  // state برای کنترل حالت تیره یا عادی
   const [darkMode, setDarkMode] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // تابع برای رندر کردن محتوای هر تب
   const renderContent = () => {
     switch (activeTab) {
       case "guide":
-        return <h2>اینجا صفحه راهنماست</h2>;
+        return (
+          <div className="guide-content">
+            <h2>سلام، خوش آمدید!🙋🏻‍♂️🙋🏻</h2>
+            <p>من آرین شعرا هستم.</p>
+            <ul>
+              <li>👨🏻‍🏫 مدرس زبان آلمانی</li>
+              <li>🎓 دانش‌آموخته کارشناسی روانشناسی</li>
+              <li>💻 در حال پیشرفت در زمینه برنامه‌نویسی</li>
+            </ul>
+            <h3>🔗 راه‌های ارتباطی:</h3>
+            <p>
+              <a href="https://arianshoara.github.io/arian/">🌍 سایتم</a>
+            </p>
+            <p>📩 تلگرام: @ariansho</p>
+            <p>📢 کانال تلگرام: @rozgarmanarian</p>
+            <p>
+              📷 اینستاگرام: <a href="https://www.instagram.com/arian__sho2">arian__sho2</a>
+            </p>
+            <p>
+              📺 یوتیوب: <a href="https://www.youtube.com/@unipsydeu">unipsydeu</a>
+            </p>
+          </div>
+        );
       case "reading":
-        return <h2>اینجا صفحه خواندنی‌هاست</h2>;
+        return (
+          <div className="reading-content">
+            <h2>📖 خواندنی‌های روانشناسی و فلسفه</h2>
+            <ul>
+              <li>🧠 تاثیرات اضطراب بر عملکرد روزمره</li>
+              <li>📚 نقش خودآگاهی در رشد فردی</li>
+              <li>🧐 تفاوت بین افسردگی و ناراحتی موقتی</li>
+              <li>💡 مبانی روانشناسی مثبت‌گرا</li>
+              <li>⚖️ چگونه تصمیمات بهتری بگیریم؟</li>
+            </ul>
+          </div>
+        );
       case "tests":
-        return <h2>اینجا صفحه تست‌های روانشناسی هست</h2>;
-      case "fourth":
-        return <h2>اینجا بخش چهارمه (فعلاً ایده‌اش رو بعداً اضافه می‌کنیم)</h2>;
+        return (
+          <div className="tests-content">
+            <h2>📝 تست‌های روانشناسی</h2>
+            <ul>
+              <li><FaBrain /> تست اضطراب</li>
+              <li><FaSadTear /> تست افسردگی</li>
+              <li><FaBalanceScale /> تست وسواس فکری-عملی (OCD)</li>
+              <li><FaSmile /> تست اختلال دو قطبی MDQ</li>
+              <li><FaHeartbeat /> تست اعتیاد</li>
+              <li><FaUser /> تست آمادگی رابطه عاطفی</li>
+              <li>📊 تست شخصیت</li>
+            </ul>
+          </div>
+        );
       case "settings":
         return (
           <div className="settings-container">
-            <h2>تنظیمات</h2>
+            <h2>⚙️ تنظیمات</h2>
             <label className="switch">
               <input
                 type="checkbox"
@@ -41,43 +83,24 @@ function App() {
 
   return (
     <div className={`app-container ${darkMode ? "dark-mode" : ""}`}>
-      {/* محتوای اصلی */}
+      <header className="top-bar">
+        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+          <FaBars />
+        </button>
+      </header>
       <main className="content">{renderContent()}</main>
-
-      {/* نوار منوی پایین */}
       <nav className="bottom-nav">
-        <button
-          className={activeTab === "guide" ? "active" : ""}
-          onClick={() => setActiveTab("guide")}
-        >
+        <button className={activeTab === "guide" ? "active" : ""} onClick={() => setActiveTab("guide")}>
           <FaQuestionCircle />
-            <FaHome />
-            <FaBook />
-            <FaCog />
         </button>
-        <button
-          className={activeTab === "reading" ? "active" : ""}
-          onClick={() => setActiveTab("reading")}
-        >
-          خواندنی‌ها
+        <button className={activeTab === "reading" ? "active" : ""} onClick={() => setActiveTab("reading")}>
+          <FaBook />
         </button>
-        <button
-          className={activeTab === "tests" ? "active" : ""}
-          onClick={() => setActiveTab("tests")}
-        >
-          تست‌های روانشناسی
+        <button className={activeTab === "tests" ? "active" : ""} onClick={() => setActiveTab("tests")}>
+          📊
         </button>
-        <button
-          className={activeTab === "fourth" ? "active" : ""}
-          onClick={() => setActiveTab("fourth")}
-        >
-          بخش چهارم
-        </button>
-        <button
-          className={activeTab === "settings" ? "active" : ""}
-          onClick={() => setActiveTab("settings")}
-        >
-          تنظیمات
+        <button className={activeTab === "settings" ? "active" : ""} onClick={() => setActiveTab("settings")}>
+          <FaCog />
         </button>
       </nav>
     </div>
