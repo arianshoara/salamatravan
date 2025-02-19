@@ -1,6 +1,6 @@
 import logging
 import os
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
     MessageHandler, filters, ContextTypes, PicklePersistence
@@ -48,7 +48,8 @@ TOKEN = "7882625954:AAGiDHMhSV_guKOuhJ9r3mf97seAFqQF0mk"
 def setup_handlers(app: Application):
     # هندلرهای مربوط به دستورات متنی
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("help", start))  # یا یک تابع متفاوت برای راهنما
+    app.add_handler(CommandHandler("help", help_command))
+  # یا یک تابع متفاوت برای راهنما
 
     # هندلر مربوط به گفتگو برای تست افسردگی
     app.add_handler(depression_conversation_handler)
@@ -70,6 +71,10 @@ def setup_handlers(app: Application):
     
     # هندلر مربوط به دکمه‌های inline
     app.add_handler(CallbackQueryHandler(button_handler))
+    
+    # هندلر مربوط به دکمه‌ی وب‌اپ
+    app.add_handler(CommandHandler("webapp", send_webapp_button))
+
     
     #هندلر برای تمام اعتیادهای اختصاصی
     app.add_handler(CommandHandler("start_alcohol", start_alcohol_addiction_test))
@@ -107,7 +112,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
 
-
+async def send_webapp_button(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [
+            InlineKeyboardButton(
+                text="🚀 باز کردن وب‌اپ",
+                web_app=WebAppInfo(url="https://salamatravan.vercel.app/")
+            )
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text("روی دکمه کلیک کن تا وب‌اپ باز شود:", reply_markup=reply_markup)
 # تابع راهنما
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
