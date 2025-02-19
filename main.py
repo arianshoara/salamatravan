@@ -73,7 +73,7 @@ def setup_handlers(app: Application):
     app.add_handler(CallbackQueryHandler(button_handler))
     
     # هندلر مربوط به دکمه‌ی وب‌اپ
-    app.add_handler(CommandHandler("webapp", send_webapp_button))
+   # app.add_handler(CommandHandler("webapp", send_webapp_button))
 
     
     #هندلر برای تمام اعتیادهای اختصاصی
