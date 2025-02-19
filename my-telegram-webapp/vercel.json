@@ -1,7 +1,3 @@
 {
-    "version": 2,
-    "build": {
-      "outputDirectory": "dist"
-    }
+    "version": 2
   }
-  
