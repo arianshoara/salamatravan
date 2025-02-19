@@ -1,27 +1,25 @@
+/* تنظیمات پایه برای تمام صفحه */
 html, body {
   width: 100%;
   height: 100%;
   min-height: 100vh;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+  direction: rtl;            /* تنظیم راست به چپ برای متون فارسی */
+  font-family: 'Tahoma', sans-serif;  /* می‌تونی فونت دلخواهت رو انتخاب کنی */
 }
 
-/* استایل کلی صفحه */
-@media (max-width: 768px) {
-  .app-container {
-      font-size: 0.95rem;
-      min-height: 100vh;
-  }
-}
-
+/* استایل کلی اپلیکیشن (موبایل-اول) */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #f2f2f2;
   color: #333;
-  font-family: sans-serif;
   justify-content: space-between;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 16px;           /* ثابت کردن اندازه فونت برای جلوگیری از تغییرات ناخواسته */
 }
 
 /* حالت تیره */
@@ -30,53 +28,54 @@ html, body {
   color: #f2f2f2;
 }
 
-/* محتوای اصلی */
+/* محتوای اصلی: اندازه ثابت و با اسکرول داخلی در صورت نیاز */
 .content {
   width: 100%;
-  max-width: 800px; /* مقدار دلخواه */
-  margin: 0 auto;
+  height: calc(100vh - 60px); /* ارتفاع محتوا با کسر ارتفاع منوی پایین */
+  overflow-y: auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-/* نوار منوی پایین */
+/* نوار منوی پایین: کاملاً موبایلی */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 60px;              /* ارتفاع ثابت منوی پایین */
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #ccc;
-  padding: 0.5rem 0;
 }
 
+/* دکمه‌های منوی پایین: ابعاد ثابت */
 .bottom-nav button {
   background: none;
   border: none;
-  font-size: 1rem; /* سایز فونت دکمه‌ها در حالت عادی */
-  padding: 0.5rem;
-  cursor: pointer;
-  display: flex;             /* برای وسط قرار دادن آیکون و متن */
-  flex-direction: column;    /* برای قرار دادن آیکون بالا و متن پایین */
-  align-items: center;       /* جهت وسط‌چین کردن افقی */
-  justify-content: center;   /* جهت وسط‌چین کردن عمودی */
   width: 60px;               /* عرض ثابت */
   height: 60px;              /* ارتفاع ثابت */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+/* حالت هاور (در دسکتاپ، در موبایل معمولاً هاور مورد استفاده قرار نمی‌گیره) */
 .bottom-nav button:hover {
   background-color: #ddd;
   border-radius: 4px;
 }
 
-/* استایل آیکون‌های نوار پایین */
+/* آیکون‌های منوی پایین: اندازه ثابت (px به جای rem) */
 .bottom-nav-icon {
-  font-size: 1.5rem; /* مقدار ثابت */
-  width: 24px;
-  height: 24px;
+  font-size: 24px;           /* اندازه ثابت آیکون */
+  line-height: 1;
 }
 
-/* تنظیمات */
+/* تنظیمات مربوط به بخش تنظیمات */
 .settings-container {
   display: flex;
   flex-direction: column;
@@ -107,7 +106,7 @@ html, body {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -119,11 +118,11 @@ html, body {
   left: 4px;
   top: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
-/* وقتی چک‌باکس روشن می‌شود */
+/* حالت چک شده سوئیچ */
 input:checked + .slider {
   background-color: #2196F3;
 }
