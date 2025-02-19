@@ -1,42 +1,101 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* استایل کلی صفحه */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f2f2f2;
+  color: #333;
+  font-family: sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* حالت تیره */
+.app-container.dark-mode {
+  background-color: #1e1e1e;
+  color: #f2f2f2;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* محتوای اصلی */
+.content {
+  flex: 1;
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* نوار منوی پایین */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ccc;
+  padding: 0.5rem 0;
 }
 
-.card {
-  padding: 2em;
+.bottom-nav button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
-.read-the-docs {
-  color: #888;
+.bottom-nav button:hover {
+  background-color: #ddd;
+  border-radius: 4px;
+}
+
+.bottom-nav button.active {
+  background-color: #999;
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* تنظیمات */
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* سوئیچ ساده برای تغییر حالت تیره */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* مخفی کردن چک‌باکس پیش‌فرض */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* ظاهر اسلایدر */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px; width: 26px;
+  left: 4px; top: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* وقتی چک‌باکس روشن می‌شود */
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
