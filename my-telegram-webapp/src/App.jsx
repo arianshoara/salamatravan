@@ -23,8 +23,8 @@ function App() {
             <p>
               <a href="https://arianshoara.github.io/arian/">🌍 سایتم</a>
             </p>
-            <p>📩 تلگرام: @ariansho</p>
-            <p>📢 کانال تلگرام: @rozgarmanarian</p>
+            <p>📩 تلگرام: https://t.me/ariansho</p>
+            <p>📢 کانال تلگرام: https://t.me/rozgarmanarian</p>
             <p>
               📷 اینستاگرام: <a href="https://www.instagram.com/arian__sho2">arian__sho2</a>
             </p>
