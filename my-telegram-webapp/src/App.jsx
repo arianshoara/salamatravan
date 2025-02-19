@@ -14,7 +14,7 @@ function App() {
 
     const renderContent = () => {
         if (isDepressionTestActive) { // اگر تست افسردگی فعال است، کامپوننت تست را نمایش بده
-            return <DepressionTestPage onTestComplete={() => setIsDepressionTestActive(false)} />; //  پاس دادن prop برای غیرفعال کردن تست بعد از اتمام (اختیاری)
+            return <DepressionTestPage onTestComplete={() => setIsDepressionTestActive(false)} />; //پاس دادن prop برای غیرفعال کردن تست بعد از اتمام (اختیاری)
         }
 
         if (isAnxietyTestActive) {
@@ -77,38 +77,38 @@ function App() {
             case "tests":
                 return (
                     <div className="tests-content">
-                      <h2>📝 تست‌های روانشناسی</h2>
-                      <div className="tests-list">
-                        <div className="test-item">
-                          <h3 onClick={() => setIsAnxietyTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
-                            <FaBrain /> تست اضطراب
-                          </h3>
+                        <h2>📝 تست‌های روانشناسی</h2>
+                        <div className="tests-list">
+                            <div className="test-item">
+                                <h3 onClick={() => setIsAnxietyTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
+                                    <FaBrain className="bottom-nav-icon" /> تست اضطراب
+                                </h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 onClick={() => setIsDepressionTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
+                                    <FaSadTear className="bottom-nav-icon" /> تست افسردگی
+                                </h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 className="test-title"><FaBalanceScale className="bottom-nav-icon" /> تست وسواس فکری-عملی (OCD)</h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 className="test-title"><FaSmile className="bottom-nav-icon" /> تست اختلال دو قطبی MDQ</h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 className="test-title"><FaHeartbeat className="bottom-nav-icon" /> تست اعتیاد</h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 className="test-title"><FaUser className="bottom-nav-icon" /> تست آمادگی رابطه عاطفی</h3>
+                            </div>
+                            <div className="test-item">
+                                <h3 className="test-title"><span className="bottom-nav-icon">📊</span> تست شخصیت</h3>
+                            </div>
                         </div>
-                        <div className="test-item">
-                          <h3 onClick={() => setIsDepressionTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
-                            <FaSadTear /> تست افسردگی
-                          </h3>
-                        </div>
-                        <div className="test-item">
-                          <h3 className="test-title"><FaBalanceScale /> تست وسواس فکری-عملی (OCD)</h3>
-                        </div>
-                        <div className="test-item">
-                          <h3 className="test-title"><FaSmile /> تست اختلال دو قطبی MDQ</h3>
-                        </div>
-                        <div className="test-item">
-                          <h3 className="test-title"><FaHeartbeat /> تست اعتیاد</h3>
-                        </div>
-                        <div className="test-item">
-                          <h3 className="test-title"><FaUser /> تست آمادگی رابطه عاطفی</h3>
-                        </div>
-                        <div className="test-item">
-                          <h3 className="test-title">📊 تست شخصیت</h3>
-                        </div>
-                      </div>
                     </div>
-                  );
-                  
-                  
+                );
+
+
             case "settings":
                 return (
                     <div className="settings-container">
@@ -131,28 +131,28 @@ function App() {
 
     return (
         <div className={`app-container ${darkMode ? "dark-mode" : ""}`}>
-            <header className="top-bar">
-                <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
-                    <FaBars />
-                </button>
-            </header>
-            <main className="content">{renderContent()}</main>
-            <nav className="bottom-nav">
-                <button className={activeTab === "guide" ? "active" : ""} onClick={() => setActiveTab("guide")}>
-                    <FaQuestionCircle />
-                </button>
-                <button className={activeTab === "reading" ? "active" : ""} onClick={() => setActiveTab("reading")}>
-                    <FaBook />
-                </button>
-                <button className={activeTab === "tests" ? "active" : ""} onClick={() => setActiveTab("tests")}>
-                    📊
-                </button>
-                <button className={activeTab === "settings" ? "active" : ""} onClick={() => setActiveTab("settings")}>
-                    <FaCog />
-                </button>
-            </nav>
+          <header className="top-bar">
+            <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+              <FaBars />
+            </button>
+          </header>
+          <main className="content">{renderContent()}</main>
+          <nav className="bottom-nav">
+            <button className={activeTab === "guide" ? "active" : ""} onClick={() => setActiveTab("guide")}>
+              <FaQuestionCircle className="bottom-nav-icon" />
+            </button>
+            <button className={activeTab === "reading" ? "active" : ""} onClick={() => setActiveTab("reading")}>
+              <FaBook className="bottom-nav-icon" />
+            </button>
+            <button className={activeTab === "tests" ? "active" : ""} onClick={() => setActiveTab("tests")}>
+              <span className="bottom-nav-icon">📊</span>
+            </button>
+            <button className={activeTab === "settings" ? "active" : ""} onClick={() => setActiveTab("settings")}>
+              <FaCog className="bottom-nav-icon" />
+            </button>
+          </nav>
         </div>
-    );
-}
+      );
+    }
 
 export default App;
