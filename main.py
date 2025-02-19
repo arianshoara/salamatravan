@@ -112,7 +112,7 @@ def build_test_menu_keyboard():
         [
             InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
                 text="🚀 باز کردن وب‌اپ",
-                web_app=WebAppInfo(url="https://salamatravan-fvzlvuuxl-arianshoaras-projects.vercel.app/") # <-- آدرس سایت شما
+                web_app=WebAppInfo(url="https://salamatravan2.vercel.app/") # <-- آدرس سایت شما
             )
         ]
     ]

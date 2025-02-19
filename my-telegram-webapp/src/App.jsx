@@ -2,17 +2,23 @@ import { useState } from "react";
 import "./App.css";
 import {FaBook, FaCog, FaQuestionCircle, FaBars, FaBrain, FaSadTear, FaSmile, FaBalanceScale, FaHeartbeat, FaUser } from "react-icons/fa";
 import DepressionTestPage from "./DepressionTestPage"; // ایمپورت کامپوننت تست افسردگی
+import AnxietyTestPage from "./AnxietyTestPage"; // ایمپورت کامپوننت تست اضطراب
 
 function App() {
     const [activeTab, setActiveTab] = useState("guide");
     const [darkMode, setDarkMode] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isDepressionTestActive, setIsDepressionTestActive] = useState(false); // وضعیت برای نمایش تست افسردگی
+    const [isAnxietyTestActive, setIsAnxietyTestActive] = useState(false); // وضعیت برای تست اضطراب
 
 
     const renderContent = () => {
         if (isDepressionTestActive) { // اگر تست افسردگی فعال است، کامپوننت تست را نمایش بده
             return <DepressionTestPage onTestComplete={() => setIsDepressionTestActive(false)} />; //  پاس دادن prop برای غیرفعال کردن تست بعد از اتمام (اختیاری)
+        }
+
+        if (isAnxietyTestActive) {
+            return <AnxietyTestPage onTestComplete={() => setIsAnxietyTestActive(false)} />;
         }
 
         switch (activeTab) {
@@ -71,41 +77,38 @@ function App() {
             case "tests":
                 return (
                     <div className="tests-content">
-                        <h2>📝 تست‌های روانشناسی</h2>
-                        <div className="tests-list">
-                            <div className="test-item">
-                                <p><a href="./tests/anxietyTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3><FaBrain /> تست اضطراب</h3>
-                                <p><a href="./tests/anxietyTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => setIsDepressionTestActive(true)} style={{cursor: 'pointer'}}><FaSadTear /> تست افسردگی</h3>  {/* کلیک روی نام تست برای باز کردن صفحه تست */}
-                            </div>
-                            <div className="test-item">
-                                <h3><FaBalanceScale /> تست وسواس فکری-عملی (OCD)</h3>
-                                <p><a href="./tests/ocdTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3><FaSmile /> تست اختلال دو قطبی MDQ</h3>
-                                <p><a href="./tests/bipolarTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3><FaHeartbeat /> تست اعتیاد</h3>
-                                <p><a href="./tests/addictionTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3><FaUser /> تست آمادگی رابطه عاطفی</h3>
-                                <p><a href="./tests/relationshipTest.js">شروع تست</a></p>
-                            </div>
-                            <div className="test-item">
-                                <h3>📊 تست شخصیت</h3>
-                                <p><a href="./tests/personalityTest.js">شروع تست</a></p>
-                            </div>
+                      <h2>📝 تست‌های روانشناسی</h2>
+                      <div className="tests-list">
+                        <div className="test-item">
+                          <h3 onClick={() => setIsAnxietyTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
+                            <FaBrain /> تست اضطراب
+                          </h3>
                         </div>
+                        <div className="test-item">
+                          <h3 onClick={() => setIsDepressionTestActive(true)} style={{ cursor: 'pointer' }} className="test-title">
+                            <FaSadTear /> تست افسردگی
+                          </h3>
+                        </div>
+                        <div className="test-item">
+                          <h3 className="test-title"><FaBalanceScale /> تست وسواس فکری-عملی (OCD)</h3>
+                        </div>
+                        <div className="test-item">
+                          <h3 className="test-title"><FaSmile /> تست اختلال دو قطبی MDQ</h3>
+                        </div>
+                        <div className="test-item">
+                          <h3 className="test-title"><FaHeartbeat /> تست اعتیاد</h3>
+                        </div>
+                        <div className="test-item">
+                          <h3 className="test-title"><FaUser /> تست آمادگی رابطه عاطفی</h3>
+                        </div>
+                        <div className="test-item">
+                          <h3 className="test-title">📊 تست شخصیت</h3>
+                        </div>
+                      </div>
                     </div>
-                );
+                  );
+                  
+                  
             case "settings":
                 return (
                     <div className="settings-container">
