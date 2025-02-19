@@ -20,15 +20,19 @@
 
 .option-button {
     padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 2px solid #187ce8; 
     border-radius: 5px;
     cursor: pointer;
     background-color: white;
+    color: rgb(31, 25, 25); /* اضافه کردن رنگ متن */
+    font-size: 16px; /* خواناتر کردن نوشته */
 }
 
 .option-button.selected {
     background-color: #e0e0e0;
+    font-weight: bold; /* برجسته کردن گزینه انتخاب‌شده */
 }
+
 
 .navigation-buttons {
     display: flex;
