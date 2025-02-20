@@ -1,113 +1,80 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./AnxietyTestPage.css"; // می‌توانید استایل جداگانه داشته باشید
+import "./DepressionTestPage.css"; // استفاده از همان استایل تست افسردگی
 
 const AnxietyTestPage = ({ onTestComplete }) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState([]);
-  const [testFinished, setTestFinished] = useState(false);
-  const [result, setResult] = useState(null);
+    const [answers, setAnswers] = useState(Array(7).fill(null));
 
-  const questionsData = [
-    // سوالات و گزینه‌های تست اضطراب مشابه به تست افسردگی
-    {
-      text: "سوال 1: چقدر احساس می‌کنید که اضطراب دارید؟",
-      options: [
-        { text: "اصلاً", value: "1", score: 4 },
-        { text: "کم", value: "2", score: 3 },
-        { text: "متوسط", value: "3", score: 2 },
-        { text: "زیاد", value: "4", score: 1 },
-        { text: "بسیار زیاد", value: "5", score: 0 },
-      ]
-    },
-    // اضافه کردن سوالات بیشتر...
-  ];
+    const questions = [
+        "در این دو هفته، چقدر احساس نگرانی و عصبی بودن داشتید؟",
+        "در این دو هفته، چقدر نتوانستید اضطراب خود را کنترل کنید؟",
+        "در این دو هفته، چقدر نگرانی‌هایتان بیش از حد بود؟",
+        "در این دو هفته، چقدر در آرام ماندن و استراحت مشکل داشتید؟",
+        "در این دو هفته، چقدر بی‌قرار بودید و نمی‌توانستید آرام باشید؟",
+        "در این دو هفته، چقدر زود عصبانی یا تحریک‌پذیر شدید؟",
+        "در این دو هفته، چقدر احساس ترس داشتید که ممکن است اتفاق بدی بیفتد؟",
+    ];
 
-  const handleAnswerSelect = (option) => {
-    const updatedAnswers = [...userAnswers];
-    updatedAnswers[currentQuestionIndex] = option.score;
-    setUserAnswers(updatedAnswers);
-  };
+    const options = ["اصلاً نداشتم", "چند روز در هفته", "بیشتر روزها", "تقریباً هر روز"];
 
-  const goToNextQuestion = () => {
-    if (currentQuestionIndex < questionsData.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      finishTest();
-    }
-  };
+    const handleAnswerChange = (questionIndex, answerIndex) => {
+        const newAnswers = [...answers];
+        newAnswers[questionIndex] = answerIndex;
+        setAnswers(newAnswers);
+    };
 
-  const finishTest = () => {
-    let totalScore = userAnswers.reduce((sum, score) => sum + (score || 0), 0);
-    const maxScore = questionsData.length * 4;
-    const percentage = (totalScore / maxScore) * 100;
+    const calculateResult = () => {
+        const totalScore = answers.reduce((sum, ans) => sum + (ans !== null ? ans : 0), 0);
+        const percentage = ((totalScore / 21) * 100).toFixed(2);
 
-    let interpretation = "";
-    if (percentage < 25) {
-      interpretation = "شما به نظر نمی‌رسد که علائم قابل توجهی از اضطراب داشته باشید.";
-    } else if (percentage < 50) {
-      interpretation = "ممکن است علائم اضطراب در حد خفیف تا متوسط داشته باشید.";
-    } else if (percentage < 75) {
-      interpretation = "نشانه‌های قابل توجهی از اضطراب وجود دارد.";
-    } else {
-      interpretation = "شما علائم شدید اضطراب دارید. پیشنهاد می‌شود هر چه زودتر با یک متخصص مشاوره روانشناسی ملاقات کنید.";
-    }
+        const interpretation =
+            totalScore <= 4 ? "حداقل اضطراب" :
+            totalScore <= 9 ? "اضطراب خفیف" :
+            totalScore <= 14 ? "اضطراب متوسط" :
+            "اضطراب شدید";
 
-    setResult({ totalScore, percentage: percentage.toFixed(2), interpretation });
-    setTestFinished(true);
+        onTestComplete && onTestComplete({ totalScore, percentage, interpretation });
+    };
 
-    if (onTestComplete) {
-      onTestComplete();
-    }
-  };
-
-  if (testFinished) {
     return (
-      <div className="anxiety-test-container">
-        <h2>نتیجه تست اضطراب</h2>
-        <div className="result-container">
-          <p>امتیاز کل: {result.totalScore}</p>
-          <p>درصد اضطراب: {result.percentage}%</p>
-          <p>تفسیر نهایی: {result.interpretation}</p>
+        <div className="test-container">
+            <h2>📋 تست اضطراب GAD-7</h2>
+            <p className="description">لطفاً به سوالات زیر با دقت پاسخ دهید. پاسخ‌ها مربوط به <b>۲ هفته گذشته</b> باشد.</p>
+
+            {questions.map((question, questionIndex) => (
+                <div key={questionIndex} className="question-box">
+                    <p className="question-text">{question}</p>
+                    <div className="options-container">
+                        {options.map((option, optionIndex) => (
+                            <label key={optionIndex} className="option-label">
+                                <input
+                                    type="radio"
+                                    name={`question-${questionIndex}`}
+                                    value={optionIndex}
+                                    checked={answers[questionIndex] === optionIndex}
+                                    onChange={() => handleAnswerChange(questionIndex, optionIndex)}
+                                    className="option-input"
+                                />
+                                {option}
+                            </label>
+                        ))}
+                    </div>
+                </div>
+            ))}
+
+            <button 
+                onClick={calculateResult} 
+                disabled={answers.includes(null)}
+                className="submit-button"
+            >
+                نمایش نتیجه تست
+            </button>
         </div>
-        <button onClick={() => { setTestFinished(false); setCurrentQuestionIndex(0); setUserAnswers([]); setResult(null); }}>
-          انجام مجدد تست
-        </button>
-      </div>
     );
-  }
-
-  const currentQuestion = questionsData[currentQuestionIndex];
-
-  return (
-    <div className="anxiety-test-container">
-      <h2>تست اضطراب</h2>
-      <div className="question-container">
-        <h3>سوال {currentQuestionIndex + 1} از {questionsData.length}</h3>
-        <p>{currentQuestion.text}</p>
-      </div>
-      <div className="options-container">
-        {currentQuestion.options.map((option) => (
-          <button
-            key={option.value}
-            className={`option-button ${userAnswers[currentQuestionIndex] === option.score ? 'selected' : ''}`}
-            onClick={() => handleAnswerSelect(option)}
-          >
-            {option.text}
-          </button>
-        ))}
-      </div>
-      <div className="navigation-buttons">
-        <button onClick={goToNextQuestion} disabled={userAnswers[currentQuestionIndex] === undefined}>
-          بعدی
-        </button>
-      </div>
-    </div>
-  );
 };
 
 AnxietyTestPage.propTypes = {
-  onTestComplete: PropTypes.func,
+    onTestComplete: PropTypes.func.isRequired,
 };
 
 export default AnxietyTestPage;

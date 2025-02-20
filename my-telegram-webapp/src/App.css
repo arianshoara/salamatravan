@@ -250,3 +250,30 @@ input:checked + .slider:before {
 .bottom-nav-button.active {
   color: #18a67d; /* سبز پررنگ‌تر برای حالت فعال */
 }
+
+/* استایل برای آیتم‌های خواندنی (کادربندی) */
+.reading-item {
+  background-color: #fff; /* پس‌زمینه سفید برای کادر */
+  border-radius: 8px;     /* گوشه‌های گرد */
+  border: 1px solid #e0e0e0; /* خط دور کادر - خاکستری روشن و مینیمال */
+  padding: 1rem;          /* فضای داخلی کادر */
+  margin-bottom: 1rem;    /* فاصله پایین هر کادر از کادر بعدی */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* سایه بسیار ملایم برای عمق */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* انیمیشن ملایم برای هاور */
+}
+
+.dark-mode .reading-item {
+  background-color: #333; /* پس‌زمینه تیره در حالت دارک مود */
+  border-color: #555;     /* خط دور تیره تر در دارک مود */
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05); /* سایه روشن‌تر در دارک مود */
+}
+
+.reading-item:hover {
+  background-color: #f9f9f9; /* هاور خیلی ملایم روشن‌تر */
+  border-color: #d0d0d0;     /* خط دور کمی تیره‌تر در هاور */
+}
+
+.dark-mode .reading-item:hover {
+  background-color: #444; /* هاور تیره‌تر در دارک مود */
+  border-color: #777;     /* خط دور روشن‌تر در هاور دارک مود */
+}

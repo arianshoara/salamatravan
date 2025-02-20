@@ -1,14 +1,26 @@
 import { useState, useRef } from "react";
 import "./App.css";
 import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaBalanceScale, FaSmile, FaHeartbeat, FaUser } from "react-icons/fa";
-import DepressionTestPage from "./components/tests/DepressionTestPage";
-import AnxietyTestPage from "./components/tests/AnxietyTestPage";
+import TestContainer from './components/tests/TestContainer'; // ایمپورت TestContainer
+import TestContainerAnxiety from "./components/tests/TestContainerAnxiety";
+import OCDTestContainer from "./components/tests/OCDTestContainer";
 // ایمپورت مقالات از پوشه articles
 import AnxietyImpactArticlePage from "./components/articles/AnxietyImpactArticlePage";
 import SelfAwarenessArticlePage from "./components/articles/SelfAwarenessArticlePage";
 import DepressionVsSadnessArticlePage from "./components/articles/DepressionVsSadnessArticlePage";
 import PositivePsychologyArticlePage from "./components/articles/PositivePsychologyArticlePage";
 import BetterDecisionMakingArticlePage from "./components/articles/BetterDecisionMakingArticlePage";
+// ادامه مقالات 
+import StressAnxietyManagementArticlePage from "./components/articles/StressAnxietyManagementArticlePage";
+import MindfulnessImportanceArticlePage from "./components/articles/MindfulnessImportanceArticlePage";
+import CognitiveBiasesArticlePage from "./components/articles/CognitiveBiasesArticlePage";
+import EmotionalResilienceArticlePage from "./components/articles/EmotionalResilienceArticlePage";
+import PhilosophyOfHappinessArticlePage from "./components/articles/PhilosophyOfHappinessArticlePage";
+import SocialMediaMentalHealthArticlePage from "./components/articles/SocialMediaMentalHealthArticlePage";
+import EthicalDecisionMakingArticlePage from "./components/articles/EthicalDecisionMakingArticlePage";
+import MeaningOfLifeArticlePage from "./components/articles/MeaningOfLifeArticlePage";
+import HealthyCommunicationSkillsArticlePage from "./components/articles/HealthyCommunicationSkillsArticlePage";
+import OvercomingProcrastinationArticlePage from "./components/articles/OvercomingProcrastinationArticlePage";
 
 function App() {
     // state برای مدیریت view فعلی
@@ -69,44 +81,107 @@ function App() {
                         <p>📺 یوتیوب: <a href="https://www.youtube.com/@unipsydeu">unipsydeu</a></p>
                     </div>
                 );
-            case "reading":
-                return (
-                    <div className="reading-content">
-                        <h2>📖 خواندنی‌های روانشناسی و فلسفه</h2>
-                        <div className="reading-list">
-                            <div className="reading-item">
-                                <h3 onClick={() => goToView("anxietyImpactArticle")} style={{ cursor: 'pointer' }} className="reading-title">
-                                    🧠 تاثیرات اضطراب بر عملکرد روزمره
-                                </h3>
-                                <p>چگونه اضطراب می‌تواند بر تصمیم‌گیری و عملکرد کلی ما تأثیر بگذارد؟</p>
-                            </div>
-                            <div className="reading-item">
-                                <h3 onClick={() => goToView("selfAwarenessArticle")} style={{ cursor: 'pointer' }} className="reading-title">
-                                    📚 نقش خودآگاهی در رشد فردی
-                                </h3>
-                                <p>چگونه شناخت بهتر از خود می‌تواند زندگی ما را بهبود بخشد؟</p>
-                            </div>
-                            <div className="reading-item">
-                                <h3 onClick={() => goToView("depressionVsSadnessArticle")} style={{ cursor: 'pointer' }} className="reading-title">
-                                    🧐 تفاوت بین افسردگی و ناراحتی موقتی
-                                </h3>
-                                <p>نشانه‌های افسردگی بالینی در مقایسه با احساس ناراحتی طبیعی چیست؟</p>
-                            </div>
-                            <div className="reading-item">
-                                <h3 onClick={() => goToView("positivePsychologyArticle")} style={{ cursor: 'pointer' }} className="reading-title">
-                                    💡 مبانی روانشناسی مثبت‌گرا
-                                </h3>
-                                <p>رویکردهای مختلف روانشناسی مثبت‌گرا و چگونگی تأثیر آن بر زندگی ما.</p>
-                            </div>
-                            <div className="reading-item">
-                                <h3 onClick={() => goToView("betterDecisionMakingArticle")} style={{ cursor: 'pointer' }} className="reading-title">
-                                    ⚖️ چگونه تصمیمات بهتری بگیریم؟
-                                </h3>
-                                <p>راهکارهای علمی برای بهبود فرآیند تصمیم‌گیری و کاهش اشتباهات شناختی.</p>
+                case "reading":
+                    return (
+                        <div className="reading-content">
+                            <h2>📖 خواندنی‌های روانشناسی و فلسفه</h2>
+                            <div className="reading-list">
+                                {/* مقالات قبلی */}
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("anxietyImpactArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🧠 تاثیرات اضطراب بر عملکرد روزمره
+                                    </h3>
+                                    <p>چگونه اضطراب می‌تواند بر تصمیم‌گیری و عملکرد کلی ما تأثیر بگذارد؟</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("selfAwarenessArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        📚 نقش خودآگاهی در رشد فردی
+                                    </h3>
+                                    <p>چگونه شناخت بهتر از خود می‌تواند زندگی ما را بهبود بخشد؟</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("depressionVsSadnessArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🧐 تفاوت بین افسردگی و ناراحتی موقتی
+                                    </h3>
+                                    <p>نشانه‌های افسردگی بالینی در مقایسه با احساس ناراحتی طبیعی چیست؟</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("positivePsychologyArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        💡 مبانی روانشناسی مثبت‌گرا
+                                    </h3>
+                                    <p>رویکردهای مختلف روانشناسی مثبت‌گرا و چگونگی تأثیر آن بر زندگی ما.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("betterDecisionMakingArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        ⚖️ چگونه تصمیمات بهتری بگیریم؟
+                                    </h3>
+                                    <p>راهکارهای علمی برای بهبود فرآیند تصمیم‌گیری و کاهش اشتباهات شناختی.</p>
+                                </div>
+                
+                                {/* مقالات جدید - اضافه شده */}
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("stressAnxietyManagementArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🧘‍♀️ مدیریت استرس و اضطراب
+                                    </h3>
+                                    <p>تکنیک‌ها و راهکارهای موثر برای مدیریت استرس روزمره و کاهش اضطراب.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("mindfulnessImportanceArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🧘 اهمیت ذهن‌آگاهی (Mindfulness)
+                                    </h3>
+                                    <p>مفهوم ذهن‌آگاهی، فواید آن برای سلامت روان و تمرین‌های کاربردی.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("cognitiveBiasesArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🤔 سوگیری‌های شناختی در زندگی روزمره
+                                    </h3>
+                                    <p>معرفی انواع سوگیری‌های شناختی رایج و تاثیر آن‌ها بر تصمیم‌گیری‌ها و تفکر ما.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("emotionalResilienceArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        💪 تقویت تاب‌آوری هیجانی
+                                    </h3>
+                                    <p>چگونه تاب‌آوری هیجانی را برای مقابله با مشکلات و فشارهای زندگی افزایش دهیم.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("philosophyOfHappinessArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        😊 فلسفه خوشبختی
+                                    </h3>
+                                    <p>دیدگاه‌های مختلف فلسفی درباره خوشبختی و عوامل موثر بر زندگی معنادار.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("socialMediaMentalHealthArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        📱 تاثیر شبکه‌های اجتماعی بر سلامت روان
+                                    </h3>
+                                    <p>بررسی اثرات مثبت و منفی شبکه‌های اجتماعی و راهکارهای استفاده سالم.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("ethicalDecisionMakingArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        ⚖️ تصمیم‌گیری اخلاقی در زندگی
+                                    </h3>
+                                    <p>مبانی و اصول تصمیم‌گیری اخلاقی و چالش‌های رایج در زندگی روزمره.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("meaningOfLifeArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        ❓ معنای زندگی از دیدگاه فلسفی
+                                    </h3>
+                                    <p>پرسش‌های اساسی درباره معنای زندگی و دیدگاه‌های مختلف فلسفی.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("healthyCommunicationSkillsArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        🗣️ مهارت‌های ارتباطی سالم
+                                    </h3>
+                                    <p>اصول ارتباط موثر، گوش دادن فعال و راهکارهای بهبود روابط بین فردی.</p>
+                                </div>
+                                <div className="reading-item">
+                                    <h3 onClick={() => goToView("overcomingProcrastinationArticle")} style={{ cursor: 'pointer' }} className="reading-title">
+                                        ⏱️ غلبه بر اهمال‌کاری (Procrastination)
+                                    </h3>
+                                    <p>علل اهمال‌کاری و تکنیک‌های عملی برای افزایش بهره‌وری و غلبه بر آن.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                );
+                    );
             case "tests":
                 return (
                     <div className="tests-content">
@@ -123,7 +198,9 @@ function App() {
                                 </h3>
                             </div>
                             <div className="test-item">
-                                <h3 className="test-title"><FaBalanceScale className="bottom-nav-icon" /> تست وسواس فکری-عملی (OCD)</h3>
+                                <h3 onClick={() => goToView("OCDTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                    <FaSadTear className="bottom-nav-icon" /> تست وسواس فکری-عملی
+                                </h3>
                             </div>
                             <div className="test-item">
                                 <h3 className="test-title"><FaSmile className="bottom-nav-icon" /> تست اختلال دو قطبی MDQ</h3>
@@ -158,6 +235,8 @@ function App() {
             // موارد زیر برای نمایش مقالات هستند
             case "anxietyImpactArticle":
                 return <AnxietyImpactArticlePage />;
+            case "OCDTestActive":
+                return <OCDTestContainer />;   
             case "selfAwarenessArticle":
                 return <SelfAwarenessArticlePage />;
             case "depressionVsSadnessArticle":
@@ -167,10 +246,31 @@ function App() {
             case "betterDecisionMakingArticle":
                 return <BetterDecisionMakingArticlePage />;
             case "depressionTestActive": // view برای زمانی که تست افسردگی فعال است
-                return <DepressionTestPage onTestComplete={() => goToView("tests")} />;
+                return <TestContainer />;
             case "anxietyTestActive": // view برای زمانی که تست اضطراب فعال است
-                return <AnxietyTestPage onTestComplete={() => goToView("tests")} />;
-            default:
+                return <TestContainerAnxiety />;
+            case "stressAnxietyManagementArticle":
+                return <StressAnxietyManagementArticlePage />;
+            case "mindfulnessImportanceArticle":
+                return <MindfulnessImportanceArticlePage />;
+            case "cognitiveBiasesArticle":
+                return <CognitiveBiasesArticlePage />;
+            case "emotionalResilienceArticle":
+                return <EmotionalResilienceArticlePage />;
+            case "philosophyOfHappinessArticle":
+                return <PhilosophyOfHappinessArticlePage />;
+            case "socialMediaMentalHealthArticle":
+                return <SocialMediaMentalHealthArticlePage />;
+            case "ethicalDecisionMakingArticle":
+                return <EthicalDecisionMakingArticlePage />;
+            case "meaningOfLifeArticle":
+                return <MeaningOfLifeArticlePage />;
+            case "healthyCommunicationSkillsArticle":
+                return <HealthyCommunicationSkillsArticlePage />;
+            case "overcomingProcrastinationArticle":
+                return <OvercomingProcrastinationArticlePage />;
+
+            default:        
                 return <h2>صفحه نامعتبر</h2>; // هندل کردن view های نامعتبر
         }
     };

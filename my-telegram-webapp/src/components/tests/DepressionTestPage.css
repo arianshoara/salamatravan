@@ -1,62 +1,80 @@
-.depression-test-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* استایل کلی صفحه تست */
+.test-container {
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
-    font-family: sans-serif;
-}
-
-.question-container {
-    margin-bottom: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
+/* استایل عنوان و توضیحات */
+h2 {
+    color: #333;
+}
+
+.description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* استایل هر سوال */
+.question-box {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.question-text {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* استایل گزینه‌های پاسخ */
 .options-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    align-items: flex-start;
 }
 
-.option-button {
-    padding: 10px 20px;
-    border: 2px solid #187ce8; 
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: white;
-    color: rgb(31, 25, 25); /* اضافه کردن رنگ متن */
-    font-size: 16px; /* خواناتر کردن نوشته */
-}
-
-.option-button.selected {
-    background-color: #e0e0e0;
-    font-weight: bold; /* برجسته کردن گزینه انتخاب‌شده */
-}
-
-
-.navigation-buttons {
+.option-label {
     display: flex;
+    align-items: center;
     gap: 10px;
+    font-size: 14px;
+    color: #333;
+    padding: 5px 0;
+    cursor: pointer;
 }
 
-.navigation-buttons button {
-    padding: 10px 20px;
+.option-input {
+    transform: scale(1.2);
+}
+
+/* استایل دکمه ارسال */
+.submit-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
-.navigation-buttons button:disabled {
-    background-color: #ccc;
+.submit-button:hover {
+    background: #0056b3;
+}
+
+.submit-button:disabled {
+    background: #ccc;
     cursor: not-allowed;
-}
-
-.result-container {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
 }
