@@ -2,24 +2,37 @@
 html, body {
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
   padding: 0;
-  direction: rtl;            /* تنظیم راست به چپ برای متون فارسی */
-  font-family: 'Tahoma', sans-serif;  /* می‌تونی فونت دلخواهت رو انتخاب کنی */
+  direction: rtl;         /* تنظیم راست به چپ برای متون فارسی */
+  font-family: 'Vazir', 'Tahoma', sans-serif;   /* 👈👈👈  فونت وزیر رو اضافه کردیم  */
+  scroll-behavior: smooth;
 }
+
+/* تعریف فونت وزیر */
+@font-face {
+  font-family: 'Vazir'; /* نامی که برای فونت در CSS استفاده خواهید کرد */
+  src: url('./assets/fonts/Vazirmatn-Regular.woff2') format('woff2'), /* 👈👈👈 مسیر جدید فایل woff2 */
+       url('./assets/fonts/Vazirmatn-Regular.woff') format('woff');   /* 👈👈👈 مسیر جدید فایل woff */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* برای بهینه‌سازی لود فونت */
+}
+
 
 /* استایل کلی اپلیکیشن (موبایل-اول) */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #f8f9fa; /* پس‌زمینه سفید مایل به خاکستری خیلی روشن */
+  color: #333; /* رنگ متن پیش‌فرض - می‌تونه تغییر کنه */
   justify-content: space-between;
   transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 16px;           /* ثابت کردن اندازه فونت برای جلوگیری از تغییرات ناخواسته */
+  font-size: 16px;          /* ثابت کردن اندازه فونت برای جلوگیری از تغییرات ناخواسته */
+  position: relative; /* برای پوزیشن مطلق منو */
 }
 
 /* حالت تیره */
@@ -31,11 +44,57 @@ html, body {
 /* محتوای اصلی: اندازه ثابت و با اسکرول داخلی در صورت نیاز */
 .content {
   width: 100%;
-  height: calc(100vh - 60px); /* ارتفاع محتوا با کسر ارتفاع منوی پایین */
+  /*height: calc(100vh - 60px); /* ارتفاع محتوا با کسر ارتفاع منوی پایین */
   overflow-y: auto;
   padding: 1rem;
+  padding-bottom: 60px;
   box-sizing: border-box;
+  margin-top: 60px; /* فضا برای نوار بالایی */
 }
+
+/* نوار بالایی */
+.top-bar {
+  position: fixed; /* ثابت در بالای صفحه */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* ارتفاع نوار بالایی */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff; /* پس‌زمینه سفید */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* سایه ملایم */
+  padding: 0 1rem;
+  z-index: 100; /* اطمینان از قرارگیری روی محتوا */
+}
+
+/* دکمه‌های نوار بالایی (منو و برگشت) */
+.top-bar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem; /* فضای داخلی دکمه */
+}
+
+.top-bar button:hover {
+  background-color: #f2f3f5; /* هاور خاکستری خیلی روشن */
+  border-radius: 4px;
+}
+
+/* آیکون‌های نوار بالایی */
+.top-bar .menu-btn .bottom-nav-icon, /* استایل برای آیکون منو وقتی منو باز است */
+.top-bar .back-btn .bottom-nav-icon,
+.bottom-nav-icon,
+.top-bar .menu-btn,
+.top-bar .back-btn {
+  color: #20c997; /* آیکون‌ها و دکمه‌ها سبز پاستلی تیره مایل به آبی */
+  font-size: 24px;      /* اندازه ثابت آیکون */
+  line-height: 1;
+}
+
 
 /* نوار منوی پایین: کاملاً موبایلی */
 .bottom-nav {
@@ -43,19 +102,19 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;              /* ارتفاع ثابت منوی پایین */
+  height: 60px;         /* ارتفاع ثابت منوی پایین */
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #ccc;
+  background-color: #e9ecef; /* نوار منوی پایین خاکستری روشن */
 }
 
 /* دکمه‌های منوی پایین: ابعاد ثابت */
 .bottom-nav button {
   background: none;
   border: none;
-  width: 60px;               /* عرض ثابت */
-  height: 60px;              /* ارتفاع ثابت */
+  width: 60px;          /* عرض ثابت */
+  height: 60px;         /* ارتفاع ثابت */
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -65,15 +124,71 @@ html, body {
 
 /* حالت هاور (در دسکتاپ، در موبایل معمولاً هاور مورد استفاده قرار نمی‌گیره) */
 .bottom-nav button:hover {
-  background-color: #ddd;
+  background-color: #f2f3f5; /* هاور خاکستری خیلی روشن */
   border-radius: 4px;
 }
 
-/* آیکون‌های منوی پایین: اندازه ثابت (px به جای rem) */
-.bottom-nav-icon {
-  font-size: 24px;           /* اندازه ثابت آیکون */
-  line-height: 1;
+
+/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید (اختیاری): */
+.top-bar .menu-btn,
+.top-bar .back-btn {
+  background-color: transparent; /* یا میتونید رنگ پس‌زمینه دلخواه بدید مثلا #f8f9fa; */
 }
+
+/* منوی کشویی (سایدبار) */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* پس‌زمینه نیمه‌شفاف */
+  display: flex;
+  justify-content: flex-start; /* منو از راست بیاد */
+  z-index: 101; /* 👆👆👆  تغییر z-index به 101 یا بیشتر  👆👆👆 */
+}
+
+.menu-drawer {
+  width: 250px; /* عرض منو */
+  height: 100%;
+  background-color: #fff; /* پس‌زمینه سفید منو */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* سایه برای جدا کردن منو */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dark-mode .menu-drawer {
+  background-color: #333;
+  color: #f2f2f2;
+}
+
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* فاصله بین آیکون و متن */
+  padding: 0.7rem 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.menu-item:hover {
+  background-color: #f2f3f5;
+  border-radius: 4px;
+}
+
+.dark-mode .menu-item:hover {
+  background-color: #555;
+}
+
+
+.menu-icon {
+  font-size: 1.5rem; /* اندازه آیکون‌های منو */
+  color: #20c997; /* رنگ آیکون منو */
+}
+
 
 /* تنظیمات مربوط به بخش تنظیمات */
 .settings-container {
@@ -129,4 +244,9 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+/* استایل فعال برای دکمه‌های نوار پایین */
+.bottom-nav-button.active {
+  color: #18a67d; /* سبز پررنگ‌تر برای حالت فعال */
 }

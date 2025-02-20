@@ -1,0 +1,79 @@
+/* استایل‌های اختصاصی برای صفحه مقاله تاثیرات اضطراب */
+
+.reading-content .max-w-3xl.mx-auto.p-6 {
+    max-width: 90%; /* کاهش عرض در موبایل */
+    padding: 20px; /* padding کمتر در موبایل */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 768px) { /* تبلت به بالا */
+    .reading-content .max-w-3xl.mx-auto.p-6 {
+        max-width: 768px; /* حداکثر عرض برای دسکتاپ */
+        padding: 24px; /* padding بیشتر در دسکتاپ */
+    }
+}
+
+/* عنوان اصلی مقاله */
+.reading-content .max-w-3xl.mx-auto.p-6 h1.text-3xl.font-bold.mb-4 {
+    font-size: 2.5rem; /* بزرگتر برای عنوان اصلی */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #20c997; /* سبز پاستلی تیره مایل به آبی - هماهنگ با آیکون‌ها */
+    text-align: center; /* وسط چین کردن عنوان */
+}
+
+/* زیر عنوان‌های مقاله */
+.reading-content .max-w-3xl.mx-auto.p-6 h2.text-2xl.font-semibold.mt-6.mb-2 {
+    font-size: 1.8rem; /* اندازه زیرعنوان‌ها */
+    font-weight: 600; /* وزن فونتsemibold */
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #343a40; /* خاکستری تیره تر برای زیر عنوان‌ها */
+}
+
+.app-container.dark-mode .reading-content .max-w-3xl.mx-auto.p-6 h2.text-2xl.font-semibold.mt-6.mb-2 {
+    color: #f8f9fa; /* رنگ روشن برای حالت تیره */
+}
+
+/* پاراگراف‌های متن مقاله */
+.reading-content .max-w-3xl.mx-auto.p-6 p.mb-4 {
+    font-size: 1rem; /* اندازه فونت پاراگراف */
+    line-height: 1.7; /* ارتفاع خط برای خوانایی بهتر */
+    margin-bottom: 1rem;
+    color: #495057; /* خاکستری متوسط برای متن */
+    text-align: justify; /* justify کردن متن برای ظاهر مرتب‌تر */
+}
+
+.app-container.dark-mode .reading-content .max-w-3xl.mx-auto.p-6 p.mb-4 {
+    color: #e0e0e0; /* رنگ روشن برای حالت تیره */
+}
+
+/* لیست راهکارها */
+.reading-content .max-w-3xl.mx-auto.p-6 ul.list-disc.ml-6.mb-4 {
+    margin-left: 1.5rem; /* تورفتگی لیست */
+    margin-bottom: 1rem;
+    color: #495057; /* خاکستری متوسط برای لیست */
+}
+
+.app-container.dark-mode .reading-content .max-w-3xl.mx-auto.p-6 ul.list-disc.ml-6.mb-4 {
+    color: #e0e0e0; /* رنگ روشن برای حالت تیره */
+}
+
+/* موارد لیست */
+.reading-content .max-w-3xl.mx-auto.p-6 ul.list-disc.ml-6.mb-4 li {
+    font-size: 1rem; /* اندازه فونت موارد لیست */
+    line-height: 1.6;
+    margin-bottom: 0.5rem; /* فاصله بین موارد لیست */
+}
+
+
+/* جدا کننده افقی (در صورت نیاز - مثال بین بخش‌ها) */
+.reading-content .article-divider {
+    border-bottom: 1px solid #dee2e6; /* خاکستری خیلی روشن برای جدا کننده */
+    margin: 2rem 0;
+}
+
+.app-container.dark-mode .reading-content .article-divider {
+    border-color: #424242; /* رنگ تیره تر جدا کننده در حالت تیره */
+}
