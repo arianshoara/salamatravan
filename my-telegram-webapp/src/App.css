@@ -336,10 +336,11 @@ input:checked + .slider:before {
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: flex; /* برای چیدمان عکس و متن در کنار هم */
-  align-items: center; /* برای تراز عمودی */
-  gap: 1.5rem; /* فاصله بین عکس و متن */
-  text-align: right; /* متن راست‌چین */
+  display: flex; /* فعال بودن flexbox همچنان لازم است */
+  flex-direction: column; /* ⬅️ تغییر به چیدمان ستونی */
+  /* align-items: center;  حذف شد ⬅️ تراز عمودی در چیدمان سطری بود */
+  /* gap: 1.5rem;  حذف شد ⬅️ فاصله افقی در چیدمان سطری بود */
+  text-align: center; /* ⬅️ تغییر به وسط‌چین (اختیاری - اگر راست‌چین میخواهید حذف نکنید) */
 }
 
 .dark-mode .about-me-section {
@@ -354,7 +355,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  justify-content: flex-end; /* تراز عنوان به راست */
+  justify-content: center; /* ⬅️ تغییر به وسط‌چین کردن عنوان */
 }
 
 .dark-mode .about-me-section h3,
@@ -373,6 +374,7 @@ input:checked + .slider:before {
   line-height: 1.7;
   color: #495057;
   margin-bottom: 1rem;
+  text-align: right; /* ⬅️ بازگشت متن پاراگراف به راست‌چین (اختیاری - حذف کنید اگر وسط‌چین میخواهید) */
 }
 
 .dark-mode .about-me-section p,
@@ -390,6 +392,7 @@ input:checked + .slider:before {
   margin-bottom: 0.5rem;
   padding-right: 1.2em;
   position: relative;
+  text-align: right; /* ⬅️ راست‌چین کردن آیتم‌های لیست */
 }
 
 .about-me-list li::before {
@@ -401,19 +404,22 @@ input:checked + .slider:before {
 }
 
 .profile-image-container {
-  width: 150px; /* عرض دلخواه برای Container عکس پروفایل (مثلا 150px) */
-  height: 150px; /* ارتفاع رو هم دقیقا برابر با عرض قرار بدید تا مربع بشه */
-  border-radius: 50%; /* گرد کردن Container (اختیاری، اگر می‌خواهید Container هم گرد باشه) */
-  overflow: hidden; /* برای اینکه تصویر بیرون از دایره Container نزنه */
-  margin-bottom: 1rem; /* فاصله پایین از متن زیر عکس */
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.5rem; /* ⬅️ اضافه شدن margin-bottom (اختیاری) */
+  margin-left: auto; /* ⬅️ برای وسط‌چین شدن افقی */
+  margin-right: auto; /* ⬅️ برای وسط‌چین شدن افقی */
+  display: block; /* ⬅️ برای اعمال margin auto */
 }
 
 
 .profile-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* پوشاندن کامل دایره با عکس */
-  display: block; /* رفع فاصله اضافی زیر عکس */
+  object-fit: cover;
+  display: block;
   border-radius: 50%;
 }
 
