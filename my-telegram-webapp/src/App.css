@@ -6,19 +6,19 @@ html, body {
   overflow-y: auto;
   margin: 0;
   padding: 0;
-  direction: rtl;         /* تنظیم راست به چپ برای متون فارسی */
-  font-family: 'Vazir', 'Tahoma', sans-serif;   /* 👈👈👈  فونت وزیر رو اضافه کردیم  */
+  direction: rtl;
+  font-family: 'Vazir', 'Tahoma', sans-serif;
   scroll-behavior: smooth;
 }
 
 /* تعریف فونت وزیر */
 @font-face {
-  font-family: 'Vazir'; /* نامی که برای فونت در CSS استفاده خواهید کرد */
-  src: url('./assets/fonts/Vazirmatn-Regular.woff2') format('woff2'), /* 👈👈👈 مسیر جدید فایل woff2 */
-       url('./assets/fonts/Vazirmatn-Regular.woff') format('woff');   /* 👈👈👈 مسیر جدید فایل woff */
+  font-family: 'Vazir';
+  src: url('./assets/fonts/Vazirmatn-Regular.woff2') format('woff2'),
+       url('./assets/fonts/Vazirmatn-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-  font-display: swap; /* برای بهینه‌سازی لود فونت */
+  font-display: swap;
 }
 
 
@@ -27,12 +27,12 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa; /* پس‌زمینه سفید مایل به خاکستری خیلی روشن */
-  color: #333; /* رنگ متن پیش‌فرض - می‌تونه تغییر کنه */
+  background-color: #f8f9fa;
+  color: #333;
   justify-content: space-between;
   transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 16px;          /* ثابت کردن اندازه فونت برای جلوگیری از تغییرات ناخواسته */
-  position: relative; /* برای پوزیشن مطلق منو */
+  font-size: 16px;
+  position: relative;
 }
 
 /* حالت تیره */
@@ -41,34 +41,33 @@ html, body {
   color: #f2f2f2;
 }
 
-/* محتوای اصلی: اندازه ثابت و با اسکرول داخلی در صورت نیاز */
+/* محتوای اصلی */
 .content {
   width: 100%;
-  /*height: calc(100vh - 60px); /* ارتفاع محتوا با کسر ارتفاع منوی پایین */
   overflow-y: auto;
   padding: 1rem;
   padding-bottom: 60px;
   box-sizing: border-box;
-  margin-top: 60px; /* فضا برای نوار بالایی */
+  margin-top: 60px;
 }
 
 /* نوار بالایی */
 .top-bar {
-  position: fixed; /* ثابت در بالای صفحه */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* ارتفاع نوار بالایی */
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff; /* پس‌زمینه سفید */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* سایه ملایم */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0 1rem;
-  z-index: 100; /* اطمینان از قرارگیری روی محتوا */
+  z-index: 100;
 }
 
-/* دکمه‌های نوار بالایی (منو و برگشت) */
+/* دکمه‌های نوار بالایی */
 .top-bar button {
   background: none;
   border: none;
@@ -76,45 +75,45 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem; /* فضای داخلی دکمه */
+  padding: 0.5rem;
 }
 
 .top-bar button:hover {
-  background-color: #f2f3f5; /* هاور خاکستری خیلی روشن */
+  background-color: #f2f3f5;
   border-radius: 4px;
 }
 
-/* آیکون‌های نوار بالایی */
-.top-bar .menu-btn .bottom-nav-icon, /* استایل برای آیکون منو وقتی منو باز است */
+/* آیکون‌های نوار بالایی و پایین */
+.top-bar .menu-btn .bottom-nav-icon,
 .top-bar .back-btn .bottom-nav-icon,
 .bottom-nav-icon,
 .top-bar .menu-btn,
 .top-bar .back-btn {
-  color: #20c997; /* آیکون‌ها و دکمه‌ها سبز پاستلی تیره مایل به آبی */
-  font-size: 24px;      /* اندازه ثابت آیکون */
+  color: #20c997;
+  font-size: 24px;
   line-height: 1;
 }
 
 
-/* نوار منوی پایین: کاملاً موبایلی */
+/* نوار منوی پایین */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;         /* ارتفاع ثابت منوی پایین */
+  height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #e9ecef; /* نوار منوی پایین خاکستری روشن */
+  background-color: #e9ecef;
 }
 
-/* دکمه‌های منوی پایین: ابعاد ثابت */
+/* دکمه‌های منوی پایین */
 .bottom-nav button {
   background: none;
   border: none;
-  width: 60px;          /* عرض ثابت */
-  height: 60px;         /* ارتفاع ثابت */
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -122,17 +121,17 @@ html, body {
   justify-content: center;
 }
 
-/* حالت هاور (در دسکتاپ، در موبایل معمولاً هاور مورد استفاده قرار نمی‌گیره) */
+/* هاور دکمه‌های منوی پایین */
 .bottom-nav button:hover {
-  background-color: #f2f3f5; /* هاور خاکستری خیلی روشن */
+  background-color: #f2f3f5;
   border-radius: 4px;
 }
 
 
-/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید (اختیاری): */
+/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید */
 .top-bar .menu-btn,
 .top-bar .back-btn {
-  background-color: transparent; /* یا میتونید رنگ پس‌زمینه دلخواه بدید مثلا #f8f9fa; */
+  background-color: transparent;
 }
 
 /* منوی کشویی (سایدبار) */
@@ -142,17 +141,17 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* پس‌زمینه نیمه‌شفاف */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: flex-start; /* منو از راست بیاد */
-  z-index: 101; /* 👆👆👆  تغییر z-index به 101 یا بیشتر  👆👆👆 */
+  justify-content: flex-start;
+  z-index: 101;
 }
 
 .menu-drawer {
-  width: 250px; /* عرض منو */
+  width: 250px;
   height: 100%;
-  background-color: #fff; /* پس‌زمینه سفید منو */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* سایه برای جدا کردن منو */
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -168,7 +167,7 @@ html, body {
 .menu-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* فاصله بین آیکون و متن */
+  gap: 0.5rem;
   padding: 0.7rem 0;
   cursor: pointer;
   width: 100%;
@@ -185,8 +184,8 @@ html, body {
 
 
 .menu-icon {
-  font-size: 1.5rem; /* اندازه آیکون‌های منو */
-  color: #20c997; /* رنگ آیکون منو */
+  font-size: 1.5rem;
+  color: #20c997;
 }
 
 
@@ -248,32 +247,300 @@ input:checked + .slider:before {
 
 /* استایل فعال برای دکمه‌های نوار پایین */
 .bottom-nav-button.active {
-  color: #18a67d; /* سبز پررنگ‌تر برای حالت فعال */
+  color: #18a67d;
 }
 
-/* استایل برای آیتم‌های خواندنی (کادربندی) */
+/* استایل برای آیتم‌های خواندنی */
 .reading-item {
-  background-color: #fff; /* پس‌زمینه سفید برای کادر */
-  border-radius: 8px;     /* گوشه‌های گرد */
-  border: 1px solid #e0e0e0; /* خط دور کادر - خاکستری روشن و مینیمال */
-  padding: 1rem;          /* فضای داخلی کادر */
-  margin-bottom: 1rem;    /* فاصله پایین هر کادر از کادر بعدی */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* سایه بسیار ملایم برای عمق */
-  transition: background-color 0.3s ease, border-color 0.3s ease; /* انیمیشن ملایم برای هاور */
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dark-mode .reading-item {
-  background-color: #333; /* پس‌زمینه تیره در حالت دارک مود */
-  border-color: #555;     /* خط دور تیره تر در دارک مود */
-  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05); /* سایه روشن‌تر در دارک مود */
+  background-color: #333;
+  border-color: #555;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
 }
 
 .reading-item:hover {
-  background-color: #f9f9f9; /* هاور خیلی ملایم روشن‌تر */
-  border-color: #d0d0d0;     /* خط دور کمی تیره‌تر در هاور */
+  background-color: #f9f9f9;
+  border-color: #d0d0d0;
 }
 
 .dark-mode .reading-item:hover {
-  background-color: #444; /* هاور تیره‌تر در دارک مود */
-  border-color: #777;     /* خط دور روشن‌تر در هاور دارک مود */
+  background-color: #444;
+  border-color: #777;
+}
+
+
+/* استایل‌های بخش Hero */
+.hero-section {
+  background-image: url('./public/assets/bg.jpg') !important;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f0f8ff; /* آبی خیلی روشن برای پس‌زمینه Hero */
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  /* تصویر پس‌زمینه با CSS - حذف شد (میتونید دوباره اضافه کنید اگر میخواهید) */
+  background-size: cover;
+  background-position: center;
+  color: #343a40;
+}
+
+.hero-section.dark-mode {
+  background-color: #2c2c2c;
+  color: #f8f9fa;
+}
+
+
+.hero-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.hero-text .subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-button {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background-color: #20c997;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #18a67d;
+}
+
+
+/* استایل‌های بخش "درباره من" */
+.about-me-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex; /* برای چیدمان عکس و متن در کنار هم */
+  align-items: center; /* برای تراز عمودی */
+  gap: 1.5rem; /* فاصله بین عکس و متن */
+  text-align: right; /* متن راست‌چین */
+}
+
+.dark-mode .about-me-section {
+  background-color: #333;
+  border-color: #555;
+}
+
+.about-me-section h3 {
+  font-size: 1.8rem;
+  color: #343a40;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end; /* تراز عنوان به راست */
+}
+
+.dark-mode .about-me-section h3,
+.dark-mode .contact-section h3 {
+  color: #f2f2f2;
+}
+
+
+.about-me-section .section-icon {
+  font-size: 1.8rem;
+  color: #20c997;
+}
+
+
+.about-me-section p {
+  line-height: 1.7;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.dark-mode .about-me-section p,
+.dark-mode .contact-section ul li a {
+  color: #d3d3d3;
+}
+
+
+.about-me-list {
+  list-style: none;
+  padding: 0;
+}
+
+.about-me-list li {
+  margin-bottom: 0.5rem;
+  padding-right: 1.2em;
+  position: relative;
+}
+
+.about-me-list li::before {
+  content: "•";
+  position: absolute;
+  right: 0;
+  color: #20c997;
+  margin-right: -0.8em;
+}
+
+.profile-image-container {
+  width: 150px; /* عرض دلخواه برای Container عکس پروفایل (مثلا 150px) */
+  height: 150px; /* ارتفاع رو هم دقیقا برابر با عرض قرار بدید تا مربع بشه */
+  border-radius: 50%; /* گرد کردن Container (اختیاری، اگر می‌خواهید Container هم گرد باشه) */
+  overflow: hidden; /* برای اینکه تصویر بیرون از دایره Container نزنه */
+  margin-bottom: 1rem; /* فاصله پایین از متن زیر عکس */
+}
+
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* پوشاندن کامل دایره با عکس */
+  display: block; /* رفع فاصله اضافی زیر عکس */
+  border-radius: 50%;
+}
+
+
+/* استایل‌های بخش Hero Image Container */
+.hero-image {
+  width: 150px; /* عرض دلخواه برای Container عکس Hero (مثلا 150px) - مربع باشد */
+  height: 150px; /* ارتفاع هم برابر عرض باشد */
+  border-radius: 50%; /* گرد کردن Container (اختیاری) */
+  overflow: hidden; /* برای جلوگیری از بیرون زدن تصویر */
+  margin-top: 1rem; /* فاصله بالا از متن Hero */
+}
+
+
+/* استایل خود تصویر Hero */
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%; /* گرد کردن تصویر Hero */
+}
+
+
+/* استایل‌های بخش "راه‌های ارتباطی" */
+.contact-section {
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  direction: rtl; /* اطمینان از راست به چپ بودن */
+  text-align: right; /* راست‌چین کردن متن */
+}
+
+.dark-mode .contact-section {
+  background-color: #333;
+  border-color: #555;
+  /* در صورت نیاز می‌توانید رنگ متن را نیز برای حالت تاریک تنظیم کنید */
+}
+
+.contact-section h3 {
+  font-size: 1.8rem;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end; /* تراز عنوان به راست */
+}
+
+.contact-section .contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-section .contact-list li {
+  margin-bottom: 0.8rem;
+  direction: rtl; /* راست به چپ برای li */
+  text-align: right; /* راست‌چین برای li */
+}
+
+.contact-section .contact-list li a {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #495057;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  justify-content: flex-end; /* تراز لینک‌ها به راست */
+  direction: rtl; /* راست به چپ برای a */
+  text-align: right; /* راست‌چین برای a */
+}
+
+.contact-section .contact-list li a:hover {
+  color: #20c997;
+}
+
+.contact-section .contact-icon {
+  display: inline-block; /* اطمینان از اینکه transform به درستی اعمال می‌شود */
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* پشتیبانی برای مرورگرهای قدیمی‌تر */
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  margin-left: 0.8rem; /* فاصله مناسب در سمت چپ */
+  margin-right: 0;
+}
+
+
+
+
+
+/* استایل دارک مود برای بخش‌های جدید */
+.dark-mode .hero-section {
+  background-color: #2c2c2c;
+  color: #f8f9fa;
+}
+
+.dark-mode .hero-text h2,
+.dark-mode .hero-text .subtitle {
+  color: #f8f9fa;
+}
+
+
+/*  استایل‌های Responsive */
+@media (min-width: 768px) {
+  .hero-section {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: right;
+      padding: 4rem;
+  }
+
+  .hero-text {
+      text-align: right;
+      max-width: 60%;
+  }
+
+  .about-me-section {
+      flex-direction: row; /* ردیفی شدن درباره من در دسکتاپ */
+      text-align: right; /* راست‌چین کردن متن در دسکتاپ */
+  }
+
+  .about-me-section p, .about-me-section ul {
+      margin-right: 0; /* تنظیم حاشیه راست برای متن و لیست */
+  }
+
+
 }
