@@ -1,0 +1,133 @@
+/* BookDetail.css */
+
+.book-detail-container {
+    display: flex; /* استفاده از فلکس باکس برای چیدمان کنار هم */
+    flex-direction: row; /* چیدمان افقی */
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    background-color: #fff; /* رنگ پس‌زمینه سفید */
+    direction: rtl; /* راست به چپ برای زبان فارسی */
+  }
+  
+  .book-cover {
+    flex: 0 0 200px; /* عرض ثابت برای جلد کتاب */
+    margin-left: 20px; /* فاصله از بخش اطلاعات کتاب */
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.1); /* سایه برای برجسته کردن جلد */
+    border-radius: 6px;
+    overflow: hidden; /* برای جلوگیری از بیرون‌زدن تصویر از گوشه‌های گرد */
+  }
+  
+  .book-cover img {
+    display: block; /* جلوگیری از فضای اضافی زیر تصویر */
+    width: 100%; /* تصویر 100% عرض ظرف خود را بگیرد */
+    height: auto; /* ارتفاع متناسب با عرض باشد */
+    border-radius: 6px; /* گوشه‌های گرد برای تصویر */
+  }
+  
+  .book-info {
+    flex: 1; /* بخش اطلاعات فضای باقی‌مانده را بگیرد */
+    padding-right: 20px; /* فاصله داخلی از راست */
+  }
+  
+  .book-title-fa {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; /* رنگ عنوان فارسی */
+  }
+  
+  .book-title-en {
+    font-size: 18px;
+    font-style: italic;
+    color: #777; /* رنگ عنوان انگلیسی */
+    margin-bottom: 15px;
+  }
+  
+  .book-author {
+    font-size: 16px;
+    color: #555; /* رنگ نام نویسنده */
+    margin-bottom: 10px;
+  }
+  
+  .book-description, .book-full-description > p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444; /* رنگ توضیحات */
+    text-align: justify; /* توجیه متن */
+    margin-bottom: 15px;
+  }
+  
+  .book-full-description h3, .book-article h2, .book-review h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333; /* رنگ عنوان بخش‌های مقاله و نقد */
+  }
+  
+  .book-categories {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    color: #666; /* رنگ دسته‌بندی‌ها */
+  }
+  
+  .category-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 20px;
+    background-color: #e0e0e0; /* رنگ پس‌زمینه تگ دسته‌بندی */
+    color: #555; /* رنگ متن تگ دسته‌بندی */
+    font-size: 14px;
+  }
+  
+  /* استایل برای مقالات و نقد و بررسی (در صورت نیاز به استایل خاص برای تگ‌های HTML داخلی) */
+  .book-article article, .book-review article {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    margin-top: 15px;
+  }
+  
+  .book-article p, .book-review p, .book-review ul {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+  }
+  
+  .book-review ul {
+    list-style-type: square; /* لیست مربعی برای نقاط قوت و ضعف */
+    margin-right: 20px;
+  }
+  
+  /* واکنش‌گرا (Responsive) برای صفحه‌های کوچک‌تر */
+  @media (max-width: 768px) {
+    .book-detail-container {
+      flex-direction: column; /* چیدمان عمودی در صفحه‌های کوچک */
+    }
+    .book-cover {
+      margin-left: 0; /* حذف فاصله سمت چپ در چیدمان عمودی */
+      margin-bottom: 20px; /* فاصله از پایین در چیدمان عمودی */
+      width: 150px; /* کاهش عرض جلد در صفحه‌های کوچک */
+      margin-right: auto; /* وسط‌چین کردن افقی جلد */
+      margin-left: auto;
+    }
+    .book-info {
+      padding-right: 0; /* حذف فاصله داخلی از راست در چیدمان عمودی */
+    }
+    .book-title-fa {
+      font-size: 22px; /* کاهش اندازه عنوان فارسی در صفحه‌های کوچک */
+      text-align: center; /* وسط‌چین کردن عنوان فارسی */
+    }
+    .book-title-en {
+      font-size: 16px; /* کاهش اندازه عنوان انگلیسی در صفحه‌های کوچک */
+      text-align: center; /* وسط‌چین کردن عنوان انگلیسی */
+    }
+    .book-description, .book-full-description > p {
+      text-align: justify; /* توجیه متن در صفحه‌های کوچک */
+    }
+  }

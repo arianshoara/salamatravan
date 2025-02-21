@@ -280,7 +280,7 @@ input:checked + .slider:before {
 
 /* استایل‌های بخش Hero */
 .hero-section {
-  background-image: url('./public/assets/bg.jpg') !important;;
+  background-image: url('./public/images/bg.jpg') !important;;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -549,4 +549,44 @@ input:checked + .slider:before {
   }
 
 
+}
+
+/* استایل‌های بخش "دسته‌بندی‌ها" */
+.categories-content {
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  text-align: right; /* راست‌چین کردن متن */
+}
+
+.dark-mode .categories-content {
+  background-color: #333;
+  border-color: #555;
+}
+
+.categories-content h2 {
+  font-size: 1.8rem;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center; /* وسط‌چین کردن عنوان */
+}
+
+.dark-mode .categories-content h2 {
+  color: #f2f2f2;
+}
+
+
+.categories-content p {
+  line-height: 1.7;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.dark-mode .categories-content p {
+  color: #d3d3d3;
 }

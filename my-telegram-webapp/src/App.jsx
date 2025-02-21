@@ -1,6 +1,8 @@
-import { useState, useRef } from "react"; // ایمپورت useRef از react
+import { useState } from "react";
 import "./App.css";
-import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaUser, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie } from "react-icons/fa";
+import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaUser, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList } from "react-icons/fa";
+import PropTypes from 'prop-types';
+
 import TestContainer from './components/tests/TestContainer';
 import TestContainerAnxiety from "./components/tests/TestContainerAnxiety";
 import OCDTestContainer from "./components/tests/OCDTestContainer";
@@ -26,8 +28,17 @@ import OvercomingProcrastinationArticlePage from "./components/articles/Overcomi
 import profileImage from './assets/profile-image.jpg'; // ایمپورت عکس پروفایل
 import pathHeroImage from './assets/path-to-your-hero-image.jpg'; // ایمپورت hero image (اگر دارید و نامش اینه)
 
+import CategoriesContent from './components/CategoriesContent'; // ⬅️ ایمپورت CategoriesContent از مسیر components
+//import MovieDetailPage from './components/MovieDetailPage'; // ایمپورت MovieDetailPage
+//import BookDetailPage from './components/BookDetailPage';  // ایمپورت BookDetailPage
+//import books from './components/data/books'; // ⬅️ ایمپورت books در App.jsx
+//import movies from './components/data/movies'; // ⬅️ ایمپورت movies در App.jsx
 // کامپوننت GuideContent برای صفحه نخست جدید
-function GuideContent(props) { // darkMode از اینجا حذف شد چون استفاده نمیشد
+/**
+ * @param {object} props - پراپ‌های کامپوننت GuideContent
+ * @param {function} props.goToView - تابعی برای تغییر View برنامه
+ */
+function GuideContent(props) {
     return (
         <div className="guide-content">
             <section className="hero-section">
@@ -36,7 +47,7 @@ function GuideContent(props) { // darkMode از اینجا حذف شد چون ا
                     <p className="subtitle">مطالب و ابزارهای روانشناسی کاربردی برای زندگی روزمره شما.</p>
                     <button className="hero-button" onClick={() => props.goToView('reading')}>شروع یادگیری</button>
                 </div>
-                <div className="hero-image"> {/* {} حذف شد و div از حالت comment  در اومد */}
+                <div className="hero-image"> {/* {} حذف شد و div از حالت comment  اومد */}
                     {/* می‌تونید یک تصویر مرتبط اینجا اضافه کنید */}
                     <img src={pathHeroImage} alt="تصویر بخش قهرمان" /> {/* src به pathHeroImage تغییر کرد */}
                 </div>
@@ -74,6 +85,10 @@ function GuideContent(props) { // darkMode از اینجا حذف شد چون ا
     );
 }
 
+// ✅ اضافه کردن propTypes برای کامپوننت GuideContent در App.jsx
+GuideContent.propTypes = {
+    goToView: PropTypes.func.isRequired,
+};
 
 function App() {
     // state برای مدیریت view فعلی
@@ -82,18 +97,16 @@ function App() {
     const [darkMode, setDarkMode] = useState(false);
     // state برای باز و بسته بودن منو
     const [menuOpen, setMenuOpen] = useState(false);
-    // useRef برای نگهداری تاریخچه view ها
-    const viewHistory = useRef(["guide"]);
-    // useRef برای ایندکس فعلی در تاریخچه view ها
-    const historyIndex = useRef(0);
+    // State جدید برای نگهداری history
+    const [viewHistoryState, setViewHistoryState] = useState(["guide"]);
+
 
     // تابع برای رفتن به یک view مشخص
     const goToView = (viewName) => {
+        console.log("goToView فراخوانی شد با viewName:", viewName);
         if (viewName !== currentView) {
-            // اگر view جدید با view فعلی متفاوت باشد
-            viewHistory.current = viewHistory.current.slice(0, historyIndex.current + 1); // تاریخچه را کوتاه میکنیم
-            viewHistory.current.push(currentView); // view فعلی را به تاریخچه اضافه میکنیم
-            historyIndex.current = viewHistory.current.length; // ایندکس را به انتهای تاریخچه منتقل میکنیم
+            // History رو آپدیت میکنیم - اول view قبلی رو اضافه میکنیم
+            setViewHistoryState(prevHistory => [...prevHistory, currentView]);
             setCurrentView(viewName);
             setMenuOpen(false);
         }
@@ -102,16 +115,24 @@ function App() {
 
     // تابع برای برگشت به view قبلی
     const goBackView = () => {
-        if (historyIndex.current > 1) { // اطمینان حاصل میکنیم که بیشتر از یک آیتم در تاریخچه وجود دارد
-            historyIndex.current -= 1;
-            setCurrentView(viewHistory.current[historyIndex.current-1]); // به view قبلی برمیگردیم
+        if (viewHistoryState.length > 1) {
+            // یک کپی از history state میگیریم
+            const newHistory = [...viewHistoryState];
+            // آخرین view رو از history حذف میکنیم
+            newHistory.pop();
+            // view قبلی رو از history (که الان آخرین آیتم هست) میگیریم و state رو آپدیت میکنیم
+            setCurrentView(newHistory[newHistory.length - 1]);
+            // history state رو با حذف آخرین آیتم آپدیت میکنیم
+            setViewHistoryState(newHistory);
         } else {
             console.log("No history to go back to.");
         }
     };
 
+
     // تابع برای رندر کردن محتوای صفحه بر اساس state فعلی
     const renderContent = () => {
+
         switch (currentView) {
             case "guide":
                 return <GuideContent goToView={goToView} />;
@@ -255,6 +276,12 @@ function App() {
                         </div>
                     </div>
                 );
+            case "categories": // ⬅️ View جدید دسته‌بندی‌ها
+                return (
+                    <div className="categories-content">
+                        <CategoriesContent goToView={goToView} /> {/* ✅ پاس دادن goToView به CategoriesContent */}
+                    </div>
+                );
             case "settings":
                 return (
                     <div className="settings-container">
@@ -271,6 +298,15 @@ function App() {
                     </div>
                 );
             // موارد زیر برای نمایش مقالات هستند
+            // ✅ اصلاح case های movieDetail و bookDetail برای هندل کردن viewName های داینامیک
+           // case currentView.startsWith("movieDetail-"): {
+               // const movieId = currentView.split('-')[1];
+               // return <MovieDetailPage movieId={movieId} movies={movies} />; // ✅ پاس دادن movies به عنوان prop
+           // }
+            //case currentView.startsWith("bookDetail-"): {
+             //   const bookId = currentView.split('-')[1];
+              //  return <BookDetailPage bookId={bookId} books={books} />; // ✅ پاس دادن books به عنوان prop
+          //  }
             case "anxietyImpactArticle":
                 return <AnxietyImpactArticlePage />;
             case "OCDTestActive":
@@ -315,21 +351,23 @@ function App() {
             default:
                 return <h2>صفحه نامعتبر</h2>; // هندل کردن view های نامعتبر
         }
+
     };
 
     return (
-        <div className={`app-container ${darkMode ? "dark-mode" : ""}`}> {/*  Template literals بجای + برای className */}
+        <div className={`app-container ${darkMode ? "dark-mode" : ""}`}> {/* Template literals بجای + برای className */}
             {/* هدر برنامه */}
             <header className="top-bar">
                 <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
                     <FaBars className="bottom-nav-icon" /> {/* آیکون منو */}
                 </button>
-                {/* دکمه بازگشت به عقب - فقط وقتی که در guide یا tests یا reading یا settings نیستیم نمایش داده میشود */}
-                {currentView !== "guide" && currentView !== "tests" && currentView !== "reading" && currentView !== "settings" && (
-                    <button className="back-btn" onClick={goBackView}>
-                        <span className="bottom-nav-icon">بازگشت</span> {/* متن دکمه بازگشت */}
-                    </button>
-                )}
+                {
+                    !["guide", "tests", "reading", "settings", "categories"].includes(currentView) && ( // اضافه شدن categories به لیست исключений
+                        <button className="back-btn" onClick={goBackView}>
+                            <span className="bottom-nav-icon">بازگشت</span>
+                        </button>
+                    )
+                }
             </header>
 
             {/* منوی کشویی (سایدبار) - نمایش فقط وقتی menuOpen === true */}
@@ -345,6 +383,10 @@ function App() {
                         <div className="menu-item" onClick={() => goToView("tests")}>
                             <span className="menu-icon">📊</span> تست‌ها
                         </div>
+                        {/* ⬅️ مورد جدید منو - دسته‌بندی‌ها */}
+                        <div className="menu-item" onClick={() => goToView("categories")}>
+                            <FaThList className="menu-icon" /> دسته‌بندی‌ها
+                        </div>
                         <div className="menu-item" onClick={() => goToView("settings")}>
                             <FaCog className="menu-icon" /> تنظیمات
                         </div>
@@ -357,16 +399,20 @@ function App() {
 
             {/* نویگیشن پایین صفحه */}
             <nav className="bottom-nav">
-                <button className={`bottom-nav-button ${currentView === "guide" ? "active" : ""}`} onClick={() => goToView("guide")}> {/*  Template literals بجای + برای className */}
+                <button className={`bottom-nav-button ${currentView === "guide" ? "active" : ""}`} onClick={() => goToView("guide")}> {/* Template literals بجای + برای className */}
                     <FaQuestionCircle className="bottom-nav-icon" /> {/* آیکون راهنما و دکمه راهنما */}
                 </button>
-                <button className={`bottom-nav-button ${currentView === "reading" ? "active" : ""}`} onClick={() => goToView("reading")}> {/*  Template literals بجای + برای className */}
+                <button className={`bottom-nav-button ${currentView === "reading" ? "active" : ""}`} onClick={() => goToView("reading")}> {/* Template literals بجای + برای className */}
                     <FaBook className="bottom-nav-icon" /> {/* آیکون خواندنی‌ها و دکمه خواندنی‌ها */}
                 </button>
-                <button className={`bottom-nav-button ${currentView === "tests" ? "active" : ""}`} onClick={() => goToView("tests")}> {/*  Template literals بجای + برای className */}
+                <button className={`bottom-nav-button ${currentView === "tests" ? "active" : ""}`} onClick={() => goToView("tests")}> {/* Template literals بجای + برای className */}
                     <span className="bottom-nav-icon">📊</span> {/* آیکون تست‌ها و دکمه تست‌ها */}
                 </button>
-                <button className={`bottom-nav-button ${currentView === "settings" ? "active" : ""}`} onClick={() => goToView("settings")}> {/*  Template literals بجای + برای className */}
+                {/* ⬅️ دکمه جدید نویگیشن - دسته‌بندی‌ها */}
+                <button className={`bottom-nav-button ${currentView === "categories" ? "active" : ""}`} onClick={() => goToView("categories")}>
+                    <FaThList className="bottom-nav-icon" /> {/* آیکون دسته‌بندی‌ها */}
+                </button>
+                <button className={`bottom-nav-button ${currentView === "settings" ? "active" : ""}`} onClick={() => goToView("settings")}> {/* Template literals بجای + برای className */}
                     <FaCog className="bottom-nav-icon" /> {/* آیکون تنظیمات و دکمه تنظیمات */}
                 </button>
             </nav>
