@@ -1,269 +1,277 @@
 /* CategoriesContent.css - استایل‌های بخش دسته‌بندی (فیلم و کتاب) */
 
 /* =========================================================
-   1. استایل کلی ظرف کامپوننت (.categories-container)
-   ========================================================= */
-   .categories-container {
-    padding: 25px; /* افزایش padding برای فضای بیشتر */
-    background-color: #f9f9f9;
-    border-radius: 12px; /* گردی بیشتر گوشه‌ها */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* سایه بیشتر و ملایم‌تر */
-    direction: rtl;
-    font-family: 'Vazirmatn', sans-serif; /* استفاده از فونت خوانا و زیبا */
-}
-
-/* حالت دارک مود برای ظرف کامپوننت */
-.dark-mode .categories-container {
-    background-color: #2a2a2a; /* رنگ پس‌زمینه تیره‌تر */
-    color: #eee;
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08); /* سایه روشن‌تر در دارک مود */
-    border: 1px solid #444; /* بوردر ملایم‌تر در دارک مود */
-}
-
-/* =========================================================
-   2. استایل بخش تب‌ها (.categories-tabs)
-   ========================================================= */
-.categories-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px; /* افزایش margin برای فاصله بیشتر از لیست */
-    border-bottom: 2px solid #ddd; /* خط جداکننده ملایم‌تر */
-}
-
-/* =========================================================
-   3. استایل دکمه‌های تب (.tab-button)
-   ========================================================= */
-.tab-button {
-    padding: 12px 25px; /* پدینگ بیشتر برای دکمه‌های بزرگتر */
-    border: none;
-    background-color: transparent;
-    font-size: 1.1rem; /* فونت بزرگتر برای تب‌ها */
-    cursor: pointer;
-    border-bottom: 3px solid transparent; /* خط پایین تب غیرفعال ضخیم‌تر */
-    transition: border-bottom 0.4s ease, color 0.4s ease; /* ترنزیشن نرم‌تر */
-    font-weight: 500;
-    color: #777; /* رنگ متن غیرفعال ملایم‌تر */
-    margin: 0 10px; /* فاصله بین تب‌ها */
-    border-radius: 6px 6px 0 0; /* گرد کردن گوشه‌های بالایی تب‌ها */
-}
-
-.tab-button:hover {
-    color: #555; /* رنگ متن در حالت هاور کمی تیره‌تر */
-}
-
-.tab-button:focus {
-    outline: none;
-}
-
-/* استایل تب فعال */
-.tab-button.active {
-    border-bottom: 3px solid #007bff; /* خط پایین تب فعال ضخیم‌تر و رنگ اصلی */
-    color: #007bff;
-    font-weight: bold;
-}
-
-/* حالت دارک مود برای دکمه‌های تب */
-.dark-mode .tab-button {
-    color: #aaa;
-}
-
-.dark-mode .tab-button:hover {
-    color: #ccc;
-}
-
-.dark-mode .tab-button.active {
-    color: #00aaff; /* رنگ تب فعال در دارک مود روشن‌تر */
-    border-bottom-color: #00aaff;
-}
-
-
-/* =========================================================
-   4. استایل بخش لیست محتوا (.categories-content-list)
-   ========================================================= */
-.categories-content-list {
-    padding: 15px;
-}
-
-/* =========================================================
-   5. استایل آیتم‌های دسته‌بندی (.category-item)
-   ========================================================= */
-.category-item {
-    background-color: white;
-    border-radius: 10px; /* گردی بیشتر گوشه‌های آیتم‌ها */
-    padding: 20px; /* پدینگ بیشتر داخل آیتم‌ها */
-    margin-bottom: 20px; /* مارجین بیشتر بین آیتم‌ها */
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* سایه ملایم‌تر و ظریف‌تر */
-    border: 1px solid #e8e8e8; /* بوردر بسیار ملایم‌تر */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* ترنزیشن نرم‌تر و کمی کندتر */
-}
-
-.category-item:hover {
-    transform: scale(1.03); /* بزرگنمایی بیشتر در هاور */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18); /* سایه بیشتر در هاور */
-}
-
-.category-item h3 {
-    font-size: 1.3rem; /* فونت بزرگتر برای عنوان آیتم‌ها */
-    margin-bottom: 12px; /* مارجین پایین بیشتر برای عنوان */
-    color: #3a3a3a; /* رنگ عنوان کمی تیره‌تر */
-    font-weight: 600; /* ضخامت فونت بیشتر برای عنوان */
-}
-
-.category-item p {
-    font-size: 1rem; /* فونت بزرگتر برای توضیحات */
-    line-height: 1.8; /* line-height بیشتر برای خوانایی */
-    color: #5a5a5a; /* رنگ توضیحات ملایم‌تر */
-}
-
-/* حالت دارک مود برای آیتم‌های دسته‌بندی */
-.dark-mode .category-item {
-    background-color: #383838; /* رنگ پس‌زمینه تیره‌تر */
-    color: #ddd;
-    box-shadow: 0 3px 8px rgba(255, 255, 255, 0.08); /* سایه روشن‌تر در دارک مود */
-    border-color: #555;
-}
-
-.dark-mode .category-item h3 {
-    color: #eee;
-}
-
-.dark-mode .category-item p {
-    color: #ccc;
-}
-
-.movies-detail-page,
-.books-detail-page {
-    background-color: white;
-    padding: 30px; /* افزایش پدینگ برای فضای بیشتر */
-    border-radius: 0 0 12px 12px;
-    display: flex; /* استفاده از فلکس‌باکس برای چیدمان انعطاف‌پذیر */
-    flex-direction: column; /* چیدمان عمودی عناصر */
-}
-
-.movies-detail-page .detail-header,
-.books-detail-page .detail-header {
-    margin-bottom: 25px;
-    text-align: center; /* عنوان در مرکز */
-}
-
-.movies-detail-page .detail-header h2,
-.books-detail-page .detail-header h2 {
-    font-size: 2.2rem; /* اندازه فونت بزرگتر برای عنوان */
-    margin-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-}
-
-.books-detail-page .detail-header .author {
-    font-size: 1.1rem;
-    color: #777;
-    margin-top: 5px;
-}
-
-
-.movies-detail-page .detail-body,
-.books-detail-page .detail-body {
-    display: flex; /* فلکس باکس برای بخش body */
-    gap: 30px; /* فاصله بین تصویر و متن */
-    margin-bottom: 30px; /* فاصله از بخش اطلاعات تکمیلی */
-}
-
-.movies-detail-page .detail-image,
-.books-detail-page .detail-image {
-    flex: 1; /* تصویر فضا را پر کند (نسبت به متن) */
-    max-width: 40%; /* حداکثر عرض تصویر */
-    border-radius: 12px;
-    overflow: hidden; /* برای گرد کردن گوشه‌های تصویر */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* سایه برای تصویر */
-}
-
-.movies-detail-page .detail-image img,
-.books-detail-page .detail-image img {
-    width: 100%; /* تصویر 100% عرض کانتینر را بگیرد */
-    display: block; /* حذف فضای اضافی زیر تصویر */
-}
-
-
-.movies-detail-page .detail-text,
-.books-detail-page .detail-text {
-    flex: 2; /* متن فضای بیشتری بگیرد */
-}
-
-.movies-detail-page .detail-text .description,
-.books-detail-page .detail-text .description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #444;
-    margin-bottom: 25px;
-    text-align: justify; /* متن justify شده */
-}
-
-
-.movies-detail-page .detail-text .additional-info h3,
-.books-detail-page .detail-text .additional-info h3 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 8px;
-    color: #333;
-}
-
-.movies-detail-page .detail-text .additional-info p,
-.books-detail-page .detail-text .additional-info p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 8px;
-}
-
-
-/* استایل برای بخش‌های مقاله و نقد و بررسی (تغییرات جزئی) */
-.detail-section {
-    margin-top: 35px; /* افزایش فاصله از بخش قبلی */
-    padding: 25px; /* افزایش پدینگ */
-    border-radius: 12px;
-    background-color: #fefefe;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
-}
-
-.detail-section h3 {
-    font-size: 1.5rem; /* اندازه فونت بزرگتر برای عناوین بخش‌ها */
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ddd; /* خط جداکننده کمی تیره‌تر */
-    padding-bottom: 10px;
-    color: #2c3e50;
-}
-
-.article-section p,
-.review-section p,
-.detail-section ul {
-    font-size: 1.05rem; /* اندازه فونت کمی بزرگتر برای متن مقاله و نقد */
-    line-height: 1.8; /* افزایش line-height برای خوانایی بهتر */
-    color: #555;
-}
-
-.detail-section ul {
-    padding-left: 30px; /* افزایش padding-left برای لیست‌ها */
-}
-
-.detail-section ul li {
-    margin-bottom: 10px; /* افزایش margin-bottom برای آیتم‌های لیست */
-}
-
-
-.movies-detail-page button,
-.books-detail-page button {
-    /* استایل دکمه بازگشت (بدون تغییر عمده، می‌توانید به دلخواه تغییر دهید) */
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-bottom: 25px;
-    transition: background-color 0.3s;
-    align-self: flex-start; /* دکمه به ابتدای خط بچسبد */
-}
-
-.movies-detail-page button:hover,
-.books-detail-page button:hover {
-    background-color: #e9ecef;
-}
+    1. استایل کلی ظرف کامپوننت (.categories-container)
+    ========================================================= */
+    .categories-container {
+        padding: 25px; /* افزایش padding برای فضای بیشتر */
+        background-color: #f9f9f9;
+        border-radius: 12px; /* گردی بیشتر گوشه‌ها */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* سایه بیشتر و ملایم‌تر */
+        direction: rtl;
+        font-family: 'Vazirmatn', sans-serif; /* استفاده از فونت خوانا و زیبا */
+    }
+    
+    /* حالت دارک مود برای ظرف کامپوننت */
+    .dark-mode .categories-container {
+        background-color: #2a2a2a; /* رنگ پس‌زمینه تیره‌تر */
+        color: #eee;
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.08); /* سایه روشن‌تر در دارک مود */
+        border: 1px solid #444; /* بوردر ملایم‌تر در دارک مود */
+    }
+    
+    /* =========================================================
+        2. استایل بخش تب‌ها (.categories-tabs)
+        ========================================================= */
+    .categories-tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px; /* افزایش margin برای فاصله بیشتر از لیست */
+        border-bottom: 2px solid #ddd; /* خط جداکننده ملایم‌تر */
+    }
+    
+    /* =========================================================
+        3. استایل دکمه‌های تب (.tab-button)
+        ========================================================= */
+    .tab-button {
+        padding: 12px 25px; /* پدینگ بیشتر برای دکمه‌های بزرگتر */
+        border: none;
+        background-color: transparent;
+        font-size: 1.1rem; /* فونت بزرگتر برای تب‌ها */
+        cursor: pointer;
+        border-bottom: 3px solid transparent; /* خط پایین تب غیرفعال ضخیم‌تر */
+        transition: border-bottom 0.4s ease, color 0.4s ease; /* ترنزیشن نرم‌تر */
+        font-weight: 500;
+        color: #777; /* رنگ متن غیرفعال ملایم‌تر */
+        margin: 0 10px; /* فاصله بین تب‌ها */
+        border-radius: 6px 6px 0 0; /* گرد کردن گوشه‌های بالایی تب‌ها */
+    }
+    
+    .tab-button:hover {
+        color: #555; /* رنگ متن در حالت هاور کمی تیره‌تر */
+    }
+    
+    .tab-button:focus {
+        outline: none;
+    }
+    
+    /* استایل تب فعال */
+    .tab-button.active {
+        border-bottom: 3px solid #007bff; /* خط پایین تب فعال ضخیم‌تر و رنگ اصلی */
+        color: #007bff;
+        font-weight: bold;
+    }
+    
+    /* حالت دارک مود برای دکمه‌های تب */
+    .dark-mode .tab-button {
+        color: #aaa;
+    }
+    
+    .dark-mode .tab-button:hover {
+        color: #ccc;
+    }
+    
+    .dark-mode .tab-button.active {
+        color: #00aaff; /* رنگ تب فعال در دارک مود روشن‌تر */
+        border-bottom-color: #00aaff;
+    }
+    
+    
+    /* =========================================================
+        4. استایل بخش لیست محتوا (.categories-content-list)
+        ========================================================= */
+    .categories-content-list {
+        padding: 15px;
+    }
+    
+    /* =========================================================
+        5. استایل آیتم‌های دسته‌بندی (.category-item)
+        ========================================================= */
+    .category-item {
+        background-color: white;
+        border-radius: 10px; /* گردی بیشتر گوشه‌های آیتم‌ها */
+        padding: 20px; /* پدینگ بیشتر داخل آیتم‌ها */
+        margin-bottom: 20px; /* مارجین بیشتر بین آیتم‌ها */
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* سایه ملایم‌تر و ظریف‌تر */
+        border: 1px solid #e8e8e8; /* بوردر بسیار ملایم‌تر */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* ترنزیشن نرم‌تر و کمی کندتر */
+    }
+    
+    .category-item:hover {
+        transform: scale(1.03); /* بزرگنمایی بیشتر در هاور */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18); /* سایه بیشتر در هاور */
+    }
+    
+    .category-item h3 {
+        font-size: 1.3rem; /* فونت بزرگتر برای عنوان آیتم‌ها */
+        margin-bottom: 12px; /* مارجین پایین بیشتر برای عنوان */
+        color: #3a3a3a; /* رنگ عنوان کمی تیره‌تر */
+        font-weight: 600; /* ضخامت فونت بیشتر برای عنوان */
+    }
+    
+    .category-item p {
+        font-size: 1rem; /* فونت بزرگتر برای توضیحات */
+        line-height: 1.8; /* line-height بیشتر برای خوانایی */
+        color: #5a5a5a; /* رنگ توضیحات ملایم‌تر */
+    }
+    
+    /* حالت دارک مود برای آیتم‌های دسته‌بندی */
+    .dark-mode .category-item {
+        background-color: #383838; /* رنگ پس‌زمینه تیره‌تر */
+        color: #ddd;
+        box-shadow: 0 3px 8px rgba(255, 255, 255, 0.08); /* سایه روشن‌تر در دارک مود */
+        border-color: #555;
+    }
+    
+    .dark-mode .category-item h3 {
+        color: #eee;
+    }
+    
+    .dark-mode .category-item p {
+        color: #ccc;
+    }
+    
+    .movies-detail-page,
+    .books-detail-page {
+        background-color: white;
+        padding: 30px;
+        border-radius: 0 0 12px 12px;
+        display: flex;
+        flex-direction: column; /* چیدمان عمودی عناصر */
+        align-items: center; /* مرکزچین کردن کلی محتوا در صفحه جزئیات */
+    }
+    
+    .movies-detail-page .detail-header,
+    .books-detail-page .detail-header {
+        margin-bottom: 30px; /* افزایش فاصله از تصویر */
+        text-align: center;
+    }
+    
+    .movies-detail-page .detail-header h2,
+    .books-detail-page .detail-header h2 {
+        font-size: 2.5rem; /* اندازه فونت بزرگتر برای عنوان */
+        margin-bottom: 10px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+    }
+    
+    .books-detail-page .detail-header .author {
+        font-size: 1.2rem; /* اندازه فونت بزرگتر برای نویسنده */
+        color: #777;
+        margin-top: 8px;
+    }
+    
+    
+    .movies-detail-page .detail-body,
+    .books-detail-page .detail-body {
+        display: flex;
+        flex-direction: column; /* چیدمان عمودی */
+        align-items: center; /* مرکزچین کردن آیتم‌ها در detail-body */
+        gap: 25px; /* کاهش فاصله بین تصویر و متن */
+        margin-bottom: 35px; /* افزایش فاصله از بخش اطلاعات تکمیلی */
+    }
+    
+    .movies-detail-page .detail-image,
+    .books-detail-page .detail-image {
+        width: 200px; /* اندازه تصویر را تنظیم کنید */
+        height: 200px;
+        border-radius: 50%; /* دایره‌ای کردن تصویر */
+        overflow: hidden; /* برای برش تصویر به شکل دایره */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* سایه بیشتر برای تصویر دایره‌ای */
+        margin-bottom: 20px; /* فاصله بیشتر از متن زیر تصویر */
+        border: 3px solid white; /* حاشیه سفید برای تصویر */
+    }
+    
+    .movies-detail-page .detail-image img,
+    .books-detail-page .detail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* برای پر کردن کامل دایره با تصویر و برش اضافی */
+        display: block;
+    }
+    
+    
+    .movies-detail-page .detail-text,
+    .books-detail-page .detail-text {
+        width: 80%; /* عرض محدودتر برای متن */
+        text-align: center; /* مرکزچین کردن متن */
+    }
+    
+    .movies-detail-page .detail-text .description,
+    .books-detail-page .detail-text .description {
+        font-size: 1.15rem; /* اندازه فونت کمی بزرگتر برای توضیحات */
+        line-height: 1.9; /* line-height بیشتر برای خوانایی */
+        color: #444;
+        margin-bottom: 30px; /* فاصله بیشتر از اطلاعات تکمیلی */
+    }
+    
+    
+    .movies-detail-page .detail-text .additional-info h3,
+    .books-detail-page .detail-text .additional-info h3 {
+        font-size: 1.4rem; /* اندازه فونت بزرگتر برای عنوان اطلاعات تکمیلی */
+        margin-bottom: 18px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+        color: #333;
+    }
+    
+    .movies-detail-page .detail-text .additional-info p,
+    .books-detail-page .detail-text .additional-info p {
+        font-size: 1.05rem; /* اندازه فونت کمی بزرگتر برای متن اطلاعات تکمیلی */
+        color: #666;
+        margin-bottom: 10px;
+    }
+    
+    
+    /* استایل برای بخش‌های مقاله و نقد و بررسی (بدون تغییر عمده) */
+    .detail-section {
+        margin-top: 40px; /* افزایش فاصله از بخش قبلی */
+        padding: 30px; /* افزایش پدینگ */
+        border-radius: 12px;
+        background-color: #fefefe;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06);
+    }
+    
+    .detail-section h3 {
+        font-size: 1.6rem; /* اندازه فونت بزرگتر برای عناوین بخش‌های مقاله/نقد */
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 12px;
+        color: #2c3e50;
+    }
+    
+    .article-section p,
+    .review-section p,
+    .detail-section ul {
+        font-size: 1.1rem; /* اندازه فونت کمی بزرگتر برای متن مقاله/نقد */
+        line-height: 1.9; /* line-height بیشتر برای خوانایی */
+        color: #555;
+    }
+    
+    .detail-section ul {
+        padding-left: 35px; /* افزایش padding-left برای لیست‌ها */
+    }
+    
+    .detail-section ul li {
+        margin-bottom: 12px; /* افزایش margin-bottom برای آیتم‌های لیست */
+    }
+    
+    
+    .movies-detail-page button,
+    .books-detail-page button {
+        /* استایل دکمه بازگشت (بدون تغییر عمده) */
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        padding: 10px 20px; /* پدینگ بیشتر برای دکمه بازگشت */
+        border-radius: 10px; /* گردی بیشتر برای دکمه بازگشت */
+        cursor: pointer;
+        margin-bottom: 30px; /* فاصله بیشتر از بخش بعدی */
+        transition: background-color 0.3s;
+        align-self: flex-start;
+        font-size: 1rem; /* اندازه فونت دکمه بازگشت */
+    }
+    
+    .movies-detail-page button:hover,
+    .books-detail-page button:hover {
+        background-color: #e9ecef;
+    }

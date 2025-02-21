@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: '/assets/one_flew_over_the_cuckoo_s_nest_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: './assets/one_flew_over_the_cuckoo_s_nest_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=OXrcDonY-B8', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0073486/' // لینک صفحه فیلم در IMDB
 };

@@ -5,7 +5,7 @@ const book1 = {
     titleFa: 'انسان در جستجوی معنا',
     titleEn: 'Man\'s Search for Meaning',
     author: 'ویکتور فرانکل',
-    cover: '/images/book-covers/mans-search-for-meaning.jpg', // ✅ این خط کد
+    cover: './images/book-covers/mans-search-for-meaning.jpg', // ✅ این خط کد
     description: 'کتاب انسان در جستجوی معنا، اثر ویکتور فرانکل، به بررسی تجربیات شخصی او در اردوگاه‌های کار اجباری نازی‌ها می‌پردازد و به این پرسش اساسی پاسخ می‌دهد که چگونه می‌توان در رنج و سختی معنایی برای زندگی یافت.',
     fullDescription: 'کتاب انسان در جستجوی معنا، شاهکار ویکتور فرانکل، نه تنها یک شرح حال از تجربیات او در اردوگاه‌های کار اجباری نازی‌ها است، بلکه...',
     article: `

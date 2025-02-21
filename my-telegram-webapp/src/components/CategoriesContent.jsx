@@ -66,14 +66,14 @@ const CategoriesContent = ({ goToView }) => {
                 {type === "books" && <p className="author">نویسنده: {author}</p>}
             </div>
     
-            <div className="detail-body">
-                {/* نمایش تصویر (جلد کتاب یا پوستر فیلم) */}
-                <div className="detail-image">
+            <div className="detail-body" style={{ flexDirection: 'column', alignItems: 'center' }}> {/* تغییر به flexDirection: 'column' و افزودن alignItems: 'center' */}
+                {/* نمایش تصویر (جلد کتاب یا پوستر فیلم) - بخش تصویر قبل از متن */}
+                <div className="detail-image circular-image"> {/* افزودن کلاس circular-image */}
                     {type === "books" && cover && <img src={cover} alt={`جلد کتاب ${titleFa}`} />}
                     {type === "movies" && imageUrl && <img src={imageUrl} alt={`پوستر فیلم ${title}`} />}
                 </div>
     
-                <div className="detail-text">
+                <div className="detail-text" style={{ width: '80%', textAlign: 'center' }}> {/* محدود کردن عرض متن و مرکزچین کردن متن */}
                     <p className="description">{fullDescription || description}</p>
     
                     <div className="additional-info">
@@ -85,8 +85,7 @@ const CategoriesContent = ({ goToView }) => {
                 </div>
             </div>
     
-    
-            {/* نمایش مقاله (article) اگر وجود داشته باشد */}
+            {/* نمایش مقاله و نقد و بررسی (بدون تغییر) */}
             {article && (
                 <div className="detail-section article-section">
                     <h3>مقاله مرتبط</h3>
@@ -94,7 +93,6 @@ const CategoriesContent = ({ goToView }) => {
                 </div>
             )}
     
-            {/* نمایش نقد و بررسی (review) اگر وجود داشته باشد */}
             {review && (
                 <div className="detail-section review-section">
                     <h3>نقد و بررسی</h3>
