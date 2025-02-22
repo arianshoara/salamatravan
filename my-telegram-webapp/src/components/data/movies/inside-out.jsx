@@ -96,7 +96,7 @@ export default {
             </ul>
         </article>
     `, // نقد و بررسی فیلم (به صورت HTML یا JSX)
-    imageUrl: './assets/inside_out_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets وجود داشته باشد)
+    imageUrl: '/assets/inside_out_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets وجود داشته باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=1txnqYcIaQo', // لینک تریلر فیلم در یوتیوب (مثال)
     imdbUrl: 'https://www.imdb.com/title/tt2096673/' // لینک صفحه فیلم در IMDB (مثال)
 };

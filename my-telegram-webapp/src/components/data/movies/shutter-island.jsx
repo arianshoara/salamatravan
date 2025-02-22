@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: './assets/shutter_island_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '/assets/shutter_island_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=5iaYLCiq5RM', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt1130884/' // لینک صفحه فیلم در IMDB
 };

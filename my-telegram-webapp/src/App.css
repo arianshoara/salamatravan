@@ -280,7 +280,7 @@ input:checked + .slider:before {
 
 /* استایل‌های بخش Hero */
 .hero-section {
-  background-image: url('./public/images/bg.jpg') !important;;
+  background-image: url('/images/bg.jpg') !important;;
   display: flex;
   flex-direction: column;
   align-items: center;

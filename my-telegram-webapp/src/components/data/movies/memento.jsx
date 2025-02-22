@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: './assets/memento_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '/assets/memento_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=0vS0E9bBSL0', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0209144/' // لینک صفحه فیلم در IMDB
 };

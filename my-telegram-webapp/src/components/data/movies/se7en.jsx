@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: './assets/se7en_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '/assets/se7en_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=znmZoVkCjpI', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0114369/' // لینک صفحه فیلم در IMDB
 };

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "./CategoriesContent.css";
-//import movies from "./data/movies";
-//import books from "./data/books";
 import PropTypes from "prop-types";
+
 // ایمپورت داده‌های کتاب‌ها
 import book1 from "./data/books/book1";
 import book2 from "./data/books/book2";
@@ -39,64 +38,77 @@ const CategoriesContent = ({ goToView }) => {
         setSelectedItem(null);
     };
 
+    // تغییر: کل آبجکت رو به جای فیلدهای خاص پاس می‌دیم
     const handleItemClick = (item, type) => setSelectedItem({ item, type });
     const handleBackToList = () => setSelectedItem(null);
 
     const renderList = (items, type) => (
         <div className={`${type}-list`}>
-            {items.map(({ id, title, titleFa, author, description }) => (
-                <div key={id} className="category-item">
-                    <h3 onClick={() => handleItemClick({ id, title, titleFa, author, description }, type)}
-                        className="clickable-title" role="button" tabIndex={0} aria-label={`مشاهده جزئیات ${type === "movies" ? title : titleFa}`}>
-                        {type === "movies" ? title : titleFa}
+            {items.map((item) => (
+                <div key={item.id} className="category-item">
+                    <h3
+                        onClick={() => handleItemClick(item, type)} // کل item رو پاس می‌دیم
+                        className="clickable-title"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`مشاهده جزئیات ${type === "movies" ? item.title : item.titleFa}`}
+                    >
+                        {type === "movies" ? item.title : item.titleFa}
                     </h3>
-                    {type === "books" && <p>نویسنده: {author}</p>}
-                    <p>{description}</p>
+                    {type === "books" && <p>نویسنده: {item.author}</p>}
+                    <p>{item.description}</p>
                 </div>
             ))}
         </div>
     );
 
-    
-    const renderDetail = ({ id, title, titleFa, author, description, fullDescription, year, genre, article, review, cover, imageUrl }, type) => (
+    const renderDetail = (item, type) => (
         <div className={`${type}-detail-page`}>
             <button onClick={handleBackToList} aria-label="بازگشت به لیست">⬅ بازگشت</button>
             <div className="detail-header">
-                <h2>{type === "movies" ? title : titleFa}</h2>
-                {type === "books" && <p className="author">نویسنده: {author}</p>}
+                <h2>{type === "movies" ? item.title : item.titleFa}</h2>
+                {type === "books" && <p className="author">نویسنده: {item.author}</p>}
             </div>
-    
-            <div className="detail-body" style={{ flexDirection: 'column', alignItems: 'center' }}> {/* تغییر به flexDirection: 'column' و افزودن alignItems: 'center' */}
-                {/* نمایش تصویر (جلد کتاب یا پوستر فیلم) - بخش تصویر قبل از متن */}
-                <div className="detail-image circular-image"> {/* افزودن کلاس circular-image */}
-                    {type === "books" && cover && <img src={cover} alt={`جلد کتاب ${titleFa}`} />}
-                    {type === "movies" && imageUrl && <img src={imageUrl} alt={`پوستر فیلم ${title}`} />}
+
+            <div className="detail-body" style={{ flexDirection: "column", alignItems: "center" }}>
+                {/* نمایش تصویر */}
+                <div className="detail-image circular-image">
+                    {type === "books" && item.cover ? (
+                        <img src={item.cover} alt={`جلد کتاب ${item.titleFa}`} />
+                    ) : (
+                        type === "books" && <p>عکس کتاب پیدا نشد</p>
+                    )}
+                    {type === "movies" && item.imageUrl ? (
+                        <img src={item.imageUrl} alt={`پوستر فیلم ${item.title}`} />
+                    ) : (
+                        type === "movies" && <p>عکس فیلم پیدا نشد</p>
+                    )}
                 </div>
-    
-                <div className="detail-text" style={{ width: '80%', textAlign: 'center' }}> {/* محدود کردن عرض متن و مرکزچین کردن متن */}
-                    <p className="description">{fullDescription || description}</p>
-    
+
+                <div className="detail-text" style={{ width: "80%", textAlign: "center" }}>
+                    <p className="description">{item.fullDescription || item.description}</p>
+
                     <div className="additional-info">
                         <h3>اطلاعات تکمیلی {type === "movies" ? "فیلم" : "کتاب"}</h3>
-                        <p>شناسه: {id}</p>
-                        {type === "movies" && <p>سال تولید: {year}</p>}
-                        {type === "books" && <p>ژانر: {genre}</p>}
+                        <p>شناسه: {item.id}</p>
+                        {type === "movies" && item.year && <p>سال تولید: {item.year}</p>}
+                        {type === "books" && item.genre && <p>ژانر: {item.genre}</p>}
                     </div>
                 </div>
             </div>
-    
-            {/* نمایش مقاله و نقد و بررسی (بدون تغییر) */}
-            {article && (
+
+            {/* مقاله و نقد و بررسی */}
+            {item.article && (
                 <div className="detail-section article-section">
                     <h3>مقاله مرتبط</h3>
-                    <div dangerouslySetInnerHTML={{ __html: article }} />
+                    <div dangerouslySetInnerHTML={{ __html: item.article }} />
                 </div>
             )}
-    
-            {review && (
+
+            {item.review && (
                 <div className="detail-section review-section">
                     <h3>نقد و بررسی</h3>
-                    <div dangerouslySetInnerHTML={{ __html: review }} />
+                    <div dangerouslySetInnerHTML={{ __html: item.review }} />
                 </div>
             )}
         </div>
@@ -106,18 +118,20 @@ const CategoriesContent = ({ goToView }) => {
         <div className="categories-container">
             <div className="categories-tabs">
                 {["movies", "books"].map((tab) => (
-                    <button key={tab}
+                    <button
+                        key={tab}
                         className={`tab-button ${activeTab === tab ? "active" : ""}`}
                         onClick={() => handleTabChange(tab)}
-                        aria-label={tab === "movies" ? "فیلم‌های روانشناسی" : "کتاب‌های پیشنهادی"}>
+                        aria-label={tab === "movies" ? "فیلم‌های روانشناسی" : "کتاب‌های پیشنهادی"}
+                    >
                         {tab === "movies" ? "🎬 فیلم‌های روانشناسی" : "📚 کتاب‌های پیشنهادی"}
                     </button>
                 ))}
             </div>
             <div className="categories-content-list">
-                {selectedItem ? renderDetail(selectedItem.item, selectedItem.type) :
-                    activeTab === "movies" ? renderList(movies, "movies") :
-                        renderList(books, "books")}
+                {selectedItem ? renderDetail(selectedItem.item, selectedItem.type) : 
+                    activeTab === "movies" ? renderList(movies, "movies") : 
+                    renderList(books, "books")}
             </div>
         </div>
     );

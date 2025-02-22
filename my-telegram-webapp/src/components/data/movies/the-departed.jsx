@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: './assets/the_departed_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '/assets/the_departed_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=auYbpnEwBBg', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0407887/' // لینک صفحه فیلم در IMDB
 };

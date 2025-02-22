@@ -58,7 +58,7 @@ export default {
             </ul>
         </article>
     `, // نقد و بررسی فیلم به صورت HTML یا JSX
-    imageUrl: './assets/a_beautiful_mind_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '/assets/a_beautiful_mind_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=YWwAOutgWBw', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0268978/' // لینک صفحه فیلم در IMDB
 };
