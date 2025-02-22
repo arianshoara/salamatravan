@@ -57,7 +57,7 @@ export default {
             </ul>
         </article>
     `,
-    imageUrl: './assets/the_silence_of_the_lambs_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
+    imageUrl: '.cd/assets/the_silence_of_the_lambs_poster.jpg', // آدرس تصویر پوستر فیلم (تصویر باید در پوشه public/assets موجود باشد)
     trailerUrl: 'https://www.youtube.com/watch?v=W6Mm8Sbe__o', // لینک تریلر فیلم در یوتیوب
     imdbUrl: 'https://www.imdb.com/title/tt0102926/' // لینک صفحه فیلم در IMDB
 };

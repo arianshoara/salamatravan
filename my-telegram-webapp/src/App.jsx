@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaUser, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList } from "react-icons/fa";
+import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList } from "react-icons/fa";
 import PropTypes from 'prop-types';
 
 import TestContainer from './components/tests/TestContainer';
@@ -8,6 +8,8 @@ import TestContainerAnxiety from "./components/tests/TestContainerAnxiety";
 import OCDTestContainer from "./components/tests/OCDTestContainer";
 import TestContainerBipolar from "./components/tests/TestContainerBipolar";
 import TestContainerAddiction from "./components/tests/TestContainerAddiction";
+import RelationshipReadinessTest from "./components/tests/RelationshipReadinessTest";
+import TestPage from "./components/tests/TestPage";
 // ایمپورت مقالات
 import AnxietyImpactArticlePage from "./components/articles/AnxietyImpactArticlePage";
 import SelfAwarenessArticlePage from "./components/articles/SelfAwarenessArticlePage";
@@ -268,10 +270,14 @@ function App() {
                                 </h3>
                             </div>
                             <div className="test-item">
-                                <h3 className="test-title"><FaUser className="bottom-nav-icon" /> تست آمادگی رابطه عاطفی</h3>
+                                <h3 onClick={() => goToView("RelationshipReadinessTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                    <FaSadTear className="bottom-nav-icon" /> تست آمادگی رابطه
+                                </h3>
                             </div>
                             <div className="test-item">
-                                <h3 className="test-title"><span className="bottom-nav-icon">📊</span> تست شخصیت</h3>
+                                <h3 onClick={() => goToView("bigFiveTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                    <FaSadTear className="bottom-nav-icon" /> تست شخصیت
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -309,12 +315,16 @@ function App() {
           //  }
             case "anxietyImpactArticle":
                 return <AnxietyImpactArticlePage />;
+            case "bigFiveTestActive":
+                return <TestPage />;    
             case "OCDTestActive":
                 return <OCDTestContainer />;
             case "BipolarTestActive":
                 return <TestContainerBipolar />;
             case "AddictionTestActive":
                 return <TestContainerAddiction />;
+            case "RelationshipReadinessTestActive":
+                return <RelationshipReadinessTest />;    
             case "selfAwarenessArticle":
                 return <SelfAwarenessArticlePage />;
             case "depressionVsSadnessArticle":

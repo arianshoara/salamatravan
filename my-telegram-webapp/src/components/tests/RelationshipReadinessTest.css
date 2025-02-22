@@ -1,0 +1,109 @@
+/* RelationshipReadinessTest.css */
+
+.test-container {
+    font-family: Arial, sans-serif; /* فونت اصلی */
+    max-width: 600px; /* حداکثر عرض контейнер تست */
+    margin: 20px auto; /* مارجین بالا و پایین و مرکز افقی */
+    padding: 20px; /* پدینگ داخلی контейнер */
+    border: 1px solid #ddd; /* حاشیه نازک خاکستری */
+    border-radius: 5px; /* گرد کردن گوشه‌های контейнер */
+    background-color: #f9f9f9; /* رنگ پس‌زمینه خیلی ملایم خاکستری */
+}
+
+.test-container h2 {
+    text-align: center; /* مرکزچین کردن عنوان تست */
+    color: #333; /* رنگ عنوان */
+}
+
+.test-container .description {
+    text-align: center; /* مرکزچین کردن توضیحات */
+    color: #777; /* رنگ توضیحات */
+    margin-bottom: 20px; /* مارجین پایین توضیحات */
+}
+
+.question-box {
+    margin-bottom: 20px; /* مارجین پایین جعبه سوالات برای فاصله بین سوالات */
+    padding: 15px; /* پدینگ داخلی جعبه سوالات */
+    border: 1px solid #eee; /* حاشیه نازک‌تر و روشن‌تر برای جعبه سوالات */
+    border-radius: 5px; /* گرد کردن گوشه‌های جعبه سوالات */
+    background-color: white; /* پس‌زمینه سفید برای جعبه سوالات */
+    box-shadow: 2px 2px 5px #eee; /* سایه ملایم برای جعبه سوالات */
+}
+
+.question-text {
+    font-weight: bold; /* متن سوالات bold */
+    color: #555; /* رنگ متن سوالات */
+    margin-bottom: 10px; /* مارجین پایین متن سوالات */
+    white-space: pre-line; /* برای پشتیبانی از line breaks در متن سوال */
+}
+
+
+.options-container {
+    display: flex;
+    flex-direction: column; /* گزینه‌ها زیر هم */
+}
+
+.option-label {
+    margin-bottom: 8px; /* مارجین پایین label گزینه‌ها برای فاصله بین گزینه‌ها */
+    display: flex;
+    align-items: center; /* تراز عمودی آیکون رادیویی و متن گزینه */
+    color: #666; /* رنگ متن گزینه‌ها */
+    white-space: pre-line; /* برای پشتیبانی از line breaks در متن گزینه */
+}
+
+.option-input {
+    margin-right: 10px; /* مارجین راست دکمه رادیویی برای فاصله از متن */
+}
+
+.submit-button {
+    padding: 10px 20px; /* پدینگ دکمه */
+    background-color: #007bff; /* رنگ پس‌زمینه دکمه آبی */
+    color: white; /* رنگ متن دکمه سفید */
+    border: none; /* حذف حاشیه دکمه */
+    border-radius: 5px; /* گرد کردن گوشه‌های دکمه */
+    cursor: pointer; /* تغییر نشانگر موس به حالت pointer */
+    font-size: 16px; /* اندازه فونت دکمه */
+    transition: background-color 0.3s ease; /* انیمیشن تغییر رنگ پس‌زمینه */
+    margin-top: 20px; /* فاصله از سوالات */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* رنگ پس‌زمینه دکمه در حالت hover تیره‌تر */
+}
+
+.submit-button:disabled {
+    background-color: #ccc; /* رنگ پس‌زمینه دکمه در حالت غیرفعال خاکستری */
+    cursor: not-allowed; /* تغییر نشانگر موس به حالت not-allowed */
+}
+
+.result-analysis {
+    margin-top: 30px; /* مارجین بالای بخش تحلیل نتایج برای فاصله از دکمه */
+    padding: 20px; /* پدینگ داخلی بخش تحلیل نتایج */
+    border: 1px solid #ddd; /* حاشیه بخش تحلیل نتایج */
+    border-radius: 5px; /* گرد کردن گوشه‌های بخش تحلیل نتایج */
+    background-color: #f0f8ff; /* رنگ پس زمینه ملایم برای بخش نتایج */
+}
+
+.result-analysis h3, .result-analysis h4 {
+    color: #333; /* رنگ عنوان‌های بخش تحلیل نتایج */
+    text-align: center; /* مرکزچین کردن عنوان‌های بخش تحلیل نتایج */
+    margin-bottom: 15px; /* مارجین پایین عنوان‌های بخش تحلیل نتایج */
+}
+
+.result-analysis p {
+    color: #555; /* رنگ متن پاراگراف‌های بخش تحلیل نتایج */
+    margin-bottom: 10px; /* مارجین پایین پاراگراف‌های بخش تحلیل نتایج */
+}
+
+.response-item {
+    margin-bottom: 20px; /* مارجین پایین هر بخش تحلیل سوال */
+    padding: 15px; /* پدینگ داخلی هر بخش تحلیل سوال */
+    border: 1px dashed #ddd; /* خط пункچین برای جدا کردن تحلیل هر سوال */
+    border-radius: 5px; /* گرد کردن گوشه‌های هر بخش تحلیل سوال */
+    background-color: #ffffff; /* پس زمینه سفید برای هر بخش تحلیل سوال */
+}
+
+.response-item .message {
+    color: #777; /* رنگ پیام تحلیل */
+    font-style: italic; /* ایتالیک کردن پیام تحلیل */
+}

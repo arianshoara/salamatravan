@@ -12,7 +12,7 @@ const TestContainerAnxiety = () => {
         <div className="test-container">
             <h1>Test Container - اضطراب</h1>
             <AnxietyTestPage onTestComplete={handleTestComplete} />
-            
+
             {testResult ? (
                 <div className="test-result">
                     <h2>نتیجه تست اضطراب:</h2>

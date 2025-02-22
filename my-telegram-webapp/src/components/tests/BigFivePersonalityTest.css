@@ -1,0 +1,162 @@
+.big-five-test-container {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.big-five-test-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.questions-list {
+    list-style: none;
+    padding: 0;
+}
+
+.question-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 5px #eee;
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column; /* گزینه‌ها زیر هم */
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.option-radio {
+    margin-right: 10px;
+}
+
+.option-analysis {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.option-analysis p {
+    margin: 5px 0;
+}
+
+
+.submit-button, .back-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /*فاصله از سوالات یا نتیجه*/
+    margin-inline-start: 10px; /*فاصله بین دکمه ها */
+}
+
+
+.submit-button:hover, .back-button:hover {
+    background-color: #0056b3;
+}
+
+.result-analysis {
+    text-align: center;
+}
+
+.result-analysis h2 {
+    margin-top: 0;
+}
+
+.result-analysis p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.factor-analysis-text {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #eee;
+    text-align: justify; /* متن تحلیل justify شود */
+    line-height: 1.6; /* بهبود خوانایی متن تحلیل */
+}
+
+.factor-analysis-text strong {
+    font-weight: bold; /* تاکید بر کلمات کلیدی در تحلیل */
+    color: #007bff; /* رنگ متمایز برای کلمات کلیدی */
+}
+
+.result-analysis {
+    text-align: center;
+}
+
+.result-analysis__title { /* استایل برای عنوان بخش نتیجه */
+    margin-top: 0;
+    color: #333; /* رنگ عنوان */
+}
+
+.result-analysis__content { /* استایل برای محتوای اصلی نتیجه */
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #eee;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.result-analysis__score { /* استایل برای نمایش امتیاز */
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #555; /* رنگ امتیاز */
+    font-weight: bold; /* پررنگ کردن امتیاز */
+}
+
+
+.result-analysis__text strong { /* استایل برای کلمات کلیدی در متن تحلیل */
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+.result-analysis__back-button { /* استایل برای دکمه بازگشت (اگر نیاز به استایل متفاوت داره) */
+    background-color: #6c757d; /* رنگ دکمه بازگشت */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-inline-start: 10px;
+}
+
+.result-analysis__back-button:hover {
+    background-color: #5a6268; /* رنگ هاور دکمه بازگشت */
+}
