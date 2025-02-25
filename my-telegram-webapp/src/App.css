@@ -64,6 +64,7 @@ html, body {
   align-items: center;
   text-align: center;
   margin-bottom: 20px; /* فاصله از لیست تست‌ها */
+  color: #20c997;
 }
 
 .tests-list {
@@ -716,4 +717,40 @@ input:checked + .slider:before {
 
 .font-size-setting input[type="range"] {
   width: 200px;
+}
+
+/* استایل برای آیتم‌های خواندنی */
+.reading-item {
+  background-color: #f8f9fa; /* ⬅️ رنگ جدید برای حالت روشن */
+  border-radius: 8px;
+  border: 1px solid #ddd; /* ⬅️ رنگ جدید برای حالت روشن */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.reading-item:hover {
+  background-color: #e9ecef; /* ⬅️ رنگ جدید برای حالت روشن */
+  border-color: #ccc; /* ⬅️ رنگ جدید برای حالت روشن */
+}
+
+.dark-mode .reading-item {
+  background-color: #2a2a2a; /* ⬅️ رنگ جدید برای حالت تاریک */
+  border-color: #444; /* ⬅️ رنگ جدید برای حالت تاریک */
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .reading-item:hover {
+  background-color: #3a3a3a; /* ⬅️ رنگ جدید برای حالت تاریک */
+  border-color: #555; /* ⬅️ رنگ جدید برای حالت تاریک */
+}
+
+.reading-section h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px; /* فاصله از لیست تست‌ها */
+  color: #20c997; /* رنگ سبز */
 }

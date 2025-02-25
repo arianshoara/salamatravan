@@ -146,7 +146,7 @@ function App() {
                 return <GuideContent goToView={goToView} />;
             case "reading":
                 return (
-                    <div className="reading-content">
+                    <div className="reading-section">
                         <h2>📖 خواندنی‌های روانشناسی و فلسفه</h2>
                         <div className="reading-list">
                             {/* مقالات قبلی */}

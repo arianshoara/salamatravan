@@ -151,7 +151,7 @@
     .books-detail-page .detail-header h2 {
         font-size: 2.5rem; /* اندازه فونت بزرگتر برای عنوان */
         margin-bottom: 10px;
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 2px solid #89cff0;
         padding-bottom: 10px;
     }
     
@@ -193,7 +193,7 @@
     
     .movies-detail-page .detail-text,
     .books-detail-page .detail-text {
-        width: 80%; /* عرض محدودتر برای متن */
+       /* width: 100%; /* عرض محدودتر برای متن */
         text-align: center; /* مرکزچین کردن متن */
     }
     
@@ -290,6 +290,17 @@
 .dark-mode .detail-section h3{
     border-bottom-color: #444;
     color: #eee;
+}
+
+.dark-mode .movies-detail-page .detail-text .description,
+.dark-mode.books-detail-page .detail-text .description{
+    border-bottom-color: #444;
+    color: #eee;
+}
+
+.dark-mode .detail-section ul,
+.dark-mode .detail-section ul li { /* اگر میخواهید li ها هم استایل جدا داشته باشند */
+    color: #eee; /* رنگ دلخواه برای متن ul در دارک مود */
 }
 
 .dark-mode .movies-detail-page button,
