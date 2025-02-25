@@ -51,6 +51,36 @@ html, body {
   margin-top: 60px;
 }
 
+/* استایل‌های بخش تست‌ها */
+.tests-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* وسط‌چین کردن عمودی */
+}
+
+.tests-content h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px; /* فاصله از لیست تست‌ها */
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* وسط‌چین کردن عمودی */
+  width: 100%; /* یا مقدار دلخواه */
+  max-width: 600px; /* حداکثر عرض برای جلوگیری از کشیدگی بیش از حد */
+  margin: 0 auto; /* وسط‌چین کردن افقی */
+}
+
+.test-item {
+  width: 100%; /* یا مقدار دلخواه */
+  text-align: center;
+  margin-bottom: 10px; /* فاصله بین آیتم‌های تست */
+}
+
 /* نوار بالایی */
 .top-bar {
   position: fixed;
@@ -75,7 +105,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 2rem;
+  margin-left: 1rem; /* اضافه کردن margin-left */
 }
 
 .top-bar button:hover {
@@ -101,19 +132,26 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 50px; /* کاهش ارتفاع */
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #e9ecef;
+  background-color: #f8f9fa; /* تغییر پس‌زمینه */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* اضافه کردن سایه */
+}
+
+/* حالت تاریک نوار منوی پایین */
+.dark-mode .bottom-nav {
+  background-color: #2a2a2a; /* تغییر پس‌زمینه در حالت تاریک */
+  box-shadow: 0 -2px 4px rgba(255, 255, 255, 0.1); /* تغییر سایه در حالت تاریک */
 }
 
 /* دکمه‌های منوی پایین */
 .bottom-nav button {
   background: none;
   border: none;
-  width: 60px;
-  height: 60px;
+  width: 50px; /* همسان سازی با ارتفاع */
+  height: 50px; /* همسان سازی با ارتفاع */
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -127,6 +165,73 @@ html, body {
   border-radius: 4px;
 }
 
+/* حالت تاریک هاور دکمه‌های منوی پایین */
+.dark-mode .bottom-nav button:hover {
+  background-color: #3a3a3a;
+}
+
+/* آیکون‌های نوار پایین */
+.bottom-nav-icon {
+  font-size: 20px; /* کاهش اندازه آیکون */
+  color: #20c997;
+  line-height: 1;
+}
+
+/* حالت فعال آیکون‌های نوار پایین */
+.bottom-nav-button.active .bottom-nav-icon {
+  color: #18a67d;
+}
+
+/* حالت تاریک آیکون‌های نوار پایین */
+.dark-mode .bottom-nav-icon {
+  color: #33e2b5;
+}
+
+/* حالت تاریک فعال آیکون‌های نوار پایین */
+.dark-mode .bottom-nav-button.active .bottom-nav-icon {
+  color: #22c296;
+}
+
+/* ... بقیه کدها ... */
+
+/* حالت تاریک بخش دسته‌بندی‌ها */
+.dark-mode .categories-content {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+/* حالت تاریک آیتم‌های خواندنی */
+.dark-mode .reading-item {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+/* حالت تاریک صفحات جزئیات */
+.dark-mode .movies-detail-page,
+.dark-mode .books-detail-page {
+  background-color: #2a2a2a;
+  color: #eee;
+}
+
+.dark-mode .movies-detail-page .detail-header h2,
+.dark-mode .books-detail-page .detail-header h2,
+.dark-mode .movies-detail-page .detail-text .additional-info h3,
+.dark-mode .books-detail-page .detail-text .additional-info h3,
+.dark-mode .detail-section h3{
+  border-bottom-color: #444;
+  color: #eee;
+}
+
+.dark-mode .movies-detail-page button,
+.dark-mode .books-detail-page button{
+  background-color: #383838;
+  border-color: #555;
+  color: #eee;
+}
+.dark-mode .movies-detail-page button:hover,
+.dark-mode .books-detail-page button:hover {
+  background-color: #454545;
+}
 
 /* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید */
 .top-bar .menu-btn,
@@ -305,11 +410,13 @@ input:checked + .slider:before {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
+  color:#18a67d
 }
 
 .hero-text .subtitle {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  color:#20c997
 }
 
 .hero-button {
@@ -451,8 +558,8 @@ input:checked + .slider:before {
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  direction: rtl; /* اطمینان از راست به چپ بودن */
-  text-align: right; /* راست‌چین کردن متن */
+  direction: ltr; /* تغییر جهت متن به چپ به راست */
+  text-align: center; /* تراز متن به وسط */
 }
 
 .dark-mode .contact-section {
@@ -463,23 +570,23 @@ input:checked + .slider:before {
 
 .contact-section h3 {
   font-size: 1.8rem;
-  color: #343a40;
+  color:#18a67d;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  justify-content: flex-end; /* تراز عنوان به راست */
+  justify-content: center; /* تراز عنوان به وسط */
 }
 
 .contact-section .contact-list {
   list-style: none;
   padding: 0;
+  text-align: center; /* تراز متن به وسط */
 }
 
 .contact-section .contact-list li {
   margin-bottom: 0.8rem;
-  direction: rtl; /* راست به چپ برای li */
-  text-align: right; /* راست‌چین برای li */
+  display: flex; /* نمایش عناصر لیست به صورت flex */
+  justify-content: center; /* تراز عناصر لیست به وسط */
 }
 
 .contact-section .contact-list li a {
@@ -489,9 +596,6 @@ input:checked + .slider:before {
   color: #495057;
   text-decoration: none;
   transition: color 0.3s ease;
-  justify-content: flex-end; /* تراز لینک‌ها به راست */
-  direction: rtl; /* راست به چپ برای a */
-  text-align: right; /* راست‌چین برای a */
 }
 
 .contact-section .contact-list li a:hover {
@@ -499,16 +603,15 @@ input:checked + .slider:before {
 }
 
 .contact-section .contact-icon {
-  display: inline-block; /* اطمینان از اینکه transform به درستی اعمال می‌شود */
+  display: inline-block;
   transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg); /* پشتیبانی برای مرورگرهای قدیمی‌تر */
+  -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   -ms-transform: rotateY(180deg);
-  margin-left: 0.8rem; /* فاصله مناسب در سمت چپ */
+  margin-left: 0.8rem;
   margin-right: 0;
 }
-
 
 
 
@@ -589,4 +692,28 @@ input:checked + .slider:before {
 
 .dark-mode .categories-content p {
   color: #d3d3d3;
+}
+
+/* حالت تاریک نوار بالا */
+.dark-mode .top-bar {
+  background-color: #333; /* تغییر پس‌زمینه در حالت تاریک */
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* تغییر سایه در حالت تاریک */
+}
+
+.dark-mode .top-bar button {
+  color: #f2f2f2;
+}
+
+.font-size-setting {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.font-size-setting label {
+  margin-right: 10px;
+}
+
+.font-size-setting input[type="range"] {
+  width: 200px;
 }

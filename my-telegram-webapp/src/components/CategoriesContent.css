@@ -275,3 +275,59 @@
     .books-detail-page button:hover {
         background-color: #e9ecef;
     }
+
+    /* حالت تاریک صفحات جزئیات */
+.dark-mode .movies-detail-page,
+.dark-mode .books-detail-page {
+    background-color: #2a2a2a;
+    color: #eee;
+}
+
+.dark-mode .movies-detail-page .detail-header h2,
+.dark-mode .books-detail-page .detail-header h2,
+.dark-mode .movies-detail-page .detail-text .additional-info h3,
+.dark-mode .books-detail-page .detail-text .additional-info h3,
+.dark-mode .detail-section h3{
+    border-bottom-color: #444;
+    color: #eee;
+}
+
+.dark-mode .movies-detail-page button,
+.dark-mode .books-detail-page button{
+    background-color: #383838;
+    border-color: #555;
+    color: #eee;
+}
+.dark-mode .movies-detail-page button:hover,
+.dark-mode .books-detail-page button:hover {
+    background-color: #454545;
+}
+
+/* حالت تاریک بخش‌های مقاله و نقد و بررسی */
+.dark-mode .article-section,
+.dark-mode .review-section,
+.dark-mode .detail-section {
+    background-color: #333; /* تغییر پس‌زمینه */
+    color: #ccc; /* تغییر رنگ متن */
+}
+
+.dark-mode .article-section h3,
+.dark-mode .review-section h3,
+.dark-mode .detail-section h3 {
+    color: #eee; /* تغییر رنگ عناوین */
+}
+
+.dark-mode .article-section a,
+.dark-mode .review-section a,
+.dark-mode .detail-section a {
+    color: #89cff0; /* تغییر رنگ لینک‌ها */
+}
+
+.dark-mode .detail-section {
+    box-shadow: 0 3px 6px rgba(255, 255, 255, 0.06); /* تغییر رنگ سایه */
+    border: 1px solid #555; /* تغییر رنگ حاشیه */
+}
+
+.dark-mode .detail-section h3 {
+    border-bottom-color: #555; /* تغییر رنگ خط زیر عناوین */
+}

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList } from "react-icons/fa";
+import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList, FaCheckCircle } from "react-icons/fa";
 import PropTypes from 'prop-types';
 
 import TestContainer from './components/tests/TestContainer';
@@ -102,6 +102,12 @@ function App() {
     // State جدید برای نگهداری history
     const [viewHistoryState, setViewHistoryState] = useState(["guide"]);
 
+    const [fontSize, setFontSize] = useState(parseInt(localStorage.getItem("fontSize")) || 16); // مقدار پیش‌فرض 16px
+
+    useEffect(() => {
+        localStorage.setItem("fontSize", fontSize); // ذخیره سایز فونت در localStorage
+        document.documentElement.style.fontSize = `${fontSize}px`; // اعمال سایز فونت به کل صفحه
+    }, [fontSize]);
 
     // تابع برای رفتن به یک view مشخص
     const goToView = (viewName) => {
@@ -301,6 +307,18 @@ function App() {
                             <span className="slider"></span>
                         </label>
                         <p>حالت تیره: {darkMode ? "روشن" : "خاموش"}</p>
+                        <div className="font-size-setting">
+                            <label htmlFor="font-size-slider">سایز فونت:</label>
+                            <input
+                                type="range"
+                                min="12"
+                                max="24"
+                                value={fontSize}
+                                onChange={(e) => setFontSize(e.target.value)}
+                                id="font-size-slider"
+                            />
+                            <span>{fontSize}px</span>
+                        </div>
                     </div>
                 );
             // موارد زیر برای نمایش مقالات هستند
@@ -391,8 +409,8 @@ function App() {
                             <FaBook className="menu-icon" /> خواندنی‌ها
                         </div>
                         <div className="menu-item" onClick={() => goToView("tests")}>
-                            <span className="menu-icon">📊</span> تست‌ها
-                        </div>
+                            <FaCheckCircle className="menu-icon" /> تست‌ها
+                        </div> 
                         {/* ⬅️ مورد جدید منو - دسته‌بندی‌ها */}
                         <div className="menu-item" onClick={() => goToView("categories")}>
                             <FaThList className="menu-icon" /> دسته‌بندی‌ها
@@ -416,7 +434,7 @@ function App() {
                     <FaBook className="bottom-nav-icon" /> {/* آیکون خواندنی‌ها و دکمه خواندنی‌ها */}
                 </button>
                 <button className={`bottom-nav-button ${currentView === "tests" ? "active" : ""}`} onClick={() => goToView("tests")}> {/* Template literals بجای + برای className */}
-                    <span className="bottom-nav-icon">📊</span> {/* آیکون تست‌ها و دکمه تست‌ها */}
+                    <FaCheckCircle className="bottom-nav-icon" /> {/* آیکون تست‌ها و دکمه تست‌ها */}
                 </button>
                 {/* ⬅️ دکمه جدید نویگیشن - دسته‌بندی‌ها */}
                 <button className={`bottom-nav-button ${currentView === "categories" ? "active" : ""}`} onClick={() => goToView("categories")}>
