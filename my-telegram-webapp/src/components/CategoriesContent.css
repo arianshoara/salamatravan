@@ -4,7 +4,7 @@
     1. استایل کلی ظرف کامپوننت (.categories-container)
     ========================================================= */
     .categories-container {
-        padding: 25px; /* افزایش padding برای فضای بیشتر */
+        padding: 40px; /* افزایش padding برای فضای بیشتر */
         background-color: #f9f9f9;
         border-radius: 12px; /* گردی بیشتر گوشه‌ها */
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* سایه بیشتر و ملایم‌تر */
@@ -26,7 +26,7 @@
     .categories-tabs {
         display: flex;
         justify-content: center;
-        margin-bottom: 30px; /* افزایش margin برای فاصله بیشتر از لیست */
+        margin-bottom: 40px; /* افزایش margin برای فاصله بیشتر از لیست */
         border-bottom: 2px solid #ddd; /* خط جداکننده ملایم‌تر */
     }
     
@@ -90,8 +90,8 @@
     .category-item {
         background-color: white;
         border-radius: 10px; /* گردی بیشتر گوشه‌های آیتم‌ها */
-        padding: 20px; /* پدینگ بیشتر داخل آیتم‌ها */
-        margin-bottom: 20px; /* مارجین بیشتر بین آیتم‌ها */
+        padding: 35px; /* پدینگ بیشتر داخل آیتم‌ها */
+        margin-bottom: 35px; /* مارجین بیشتر بین آیتم‌ها */
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* سایه ملایم‌تر و ظریف‌تر */
         border: 1px solid #e8e8e8; /* بوردر بسیار ملایم‌تر */
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* ترنزیشن نرم‌تر و کمی کندتر */
@@ -167,8 +167,8 @@
         display: flex;
         flex-direction: column; /* چیدمان عمودی */
         align-items: center; /* مرکزچین کردن آیتم‌ها در detail-body */
-        gap: 25px; /* کاهش فاصله بین تصویر و متن */
-        margin-bottom: 35px; /* افزایش فاصله از بخش اطلاعات تکمیلی */
+        gap: 40px; /* کاهش فاصله بین تصویر و متن */
+        margin-bottom: 50px; /* افزایش فاصله از بخش اطلاعات تکمیلی */
     }
     
     .movies-detail-page .detail-image,
