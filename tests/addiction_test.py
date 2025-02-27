@@ -593,7 +593,7 @@ async def show_specialized_tests_menu(update: Update, context: ContextTypes.DEFA
         [InlineKeyboardButton("تست اعتیاد به برنامه‌ریزی افراطی", callback_data="start_excessive_planning_addiction")],
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.callback_query.message.reply_text("لطفاً تست اختصاصی مورد نظر خود را انتخاب کنید:", reply_markup=reply_markup)
+    await update.callback_query.message.reply_text(" لطفاً تست اختصاصی مورد نظر خود را انتخاب کنید:(یا میتوانید در وب اپ تست ها را بدهید)", reply_markup=reply_markup)
 
 # --- ارسال نتیجه نهایی به همراه درصد و تحلیل پاسخ‌ها و لینک به تست‌های خاص ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
