@@ -563,39 +563,58 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 # --- ارسال نتیجه نهایی به همراه درصد و تحلیل پاسخ‌ها ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
-    max_score = len(questions) * 5  # هر سوال حداکثر 5 امتیاز دارد (بالاترین امتیاز گزینه 'ب' یا 'ج')
+    max_score = len(questions) * 5  # به‌روزرسانی امتیاز حداکثر به ۵ برای هر سوال (مطابق تست آمادگی رابطه)
     percentage = (total_score / max_score) * 100
 
-    analysis = f"نتیجه تست آمادگی رابطه:\n\n"
+    analysis = f"نتیجه تست آمادگی رابطه:\n\n" # عنوان تست به تست آمادگی رابطه تغییر کرد
     analysis += f"نام: {context.user_data.get('Name', 'نامشخص')}\n"
     analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
     analysis += f"امتیاز کل: {total_score} از {max_score}\n"
-    analysis += f"درصد آمادگی رابطه: {percentage:.2f}%\n\n"
+    analysis += f"درصد آمادگی رابطه: {percentage:.2f}%\n\n" # عنوان درصد به درصد آمادگی رابطه تغییر کرد
     analysis += "تحلیل پاسخ‌های شما:\n"
     for idx, resp in context.user_data["responses"].items():
         analysis += f"\nسوال {idx + 1}: {resp['question']}\n"
         analysis += f"گزینه انتخاب شده: {resp['selected_option']}) {resp['option_text']}\n"
         analysis += f"پیام: {resp['message']}\n"
 
-    # تفسیر کلی بر اساس درصد (با توجه به سیستم ۵ گزینه‌ای)
+    # تفسیر کلی (مطابق تفسیرهای تست آمادگی رابطه)
     if percentage >= 80:
-        interpretation = "شما آمادگی بسیار بالایی برای ورود به رابطه دارید. نقاط قوت زیادی در سواد رابطه و مهارت‌های ارتباطی خود نشان داده‌اید."
+        interpretation = "شما آمادگی بسیار بالایی برای ورود به رابطه دارید. نقاط قوت زیادی در سواد رابطه و مهارت‌های ارتباطی خود نشان داده‌اید." # تفسیرهای تست آمادگی رابطه
     elif percentage >= 60:
-        interpretation = "شما آمادگی خوبی برای رابطه دارید. با کمی تمرکز بر بهبود مهارت‌ها، می‌توانید روابط موفق‌تری داشته باشید."
+        interpretation = "شما آمادگی خوبی برای رابطه دارید. با کمی تمرکز بر بهبود مهارت‌ها، می‌توانید روابط موفق‌تری داشته باشید." # تفسیرهای تست آمادگی رابطه
     elif percentage >= 40:
-        interpretation = "آمادگی شما برای رابطه متوسط است. توصیه می‌شود برای بهبود کیفیت روابط خود، بیشتر بر روی سواد رابطه و مهارت‌های فردی کار کنید."
+        interpretation = "آمادگی شما برای رابطه متوسط است. توصیه می‌شود برای بهبود کیفیت روابط خود، بیشتر بر روی سواد رابطه و مهارت‌های فردی کار کنید." # تفسیرهای تست آمادگی رابطه
     else:
-        interpretation = "به نظر می‌رسد آمادگی شما برای رابطه هنوز پایین است. پیشنهاد می‌شود قبل از ورود به رابطه، با مطالعه و مشاوره، سطح آگاهی و آمادگی خود را افزایش دهید."
+        interpretation = "به نظر می‌رسد آمادگی شما برای رابطه هنوز پایین است. پیشنهاد می‌شود قبل از ورود به رابطه، با مطالعه و مشاوره، سطح آگاهی و آمادگی خود را افزایش دهید." # تفسیرهای تست آمادگی رابطه
 
-    analysis += f"\n\nتفسیر نهایی: {interpretation}"
+    analysis += f"\n\nتفسیر نهایی: {interpretation}\n\n"
+    analysis += "توصیه کلی:\n" # توصیه‌های کلی برای آمادگی رابطه
+    analysis += "1.  تقویت مهارت‌های ارتباطی و شنیدن فعال.\n" # توصیه‌های کلی برای آمادگی رابطه
+    analysis += "2.  تمرکز بر همدلی و درک متقابل در روابط.\n" # توصیه‌های کلی برای آمادگی رابطه
+    analysis += "3.  توجه به تعادل بین صمیمیت و حریم شخصی در رابطه.\n" # توصیه‌های کلی برای آمادگی رابطه
 
-    chat_id = update.effective_chat.id  # گرفتن شناسه چت به صورت مطمئن تر
+    # محدودیت طول پیام (مثال: 4096 کاراکتر - محدودیت تقریبی تلگرام)
+    max_telegram_message_length = 4096
+    if len(analysis) > max_telegram_message_length:
+        shortened_analysis = f"نتیجه تست آمادگی رابطه:\n\n" # عنوان تست به تست آمادگی رابطه تغییر کرد
+        shortened_analysis += f"نام: {context.user_data.get('Name', 'نامشخص')}\n"
+        shortened_analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
+        shortened_analysis += f"امتیاز کل: {total_score} از {max_score}\n"
+        shortened_analysis += f"درصد آمادگی رابطه: {percentage:.2f}%\n\n" # عنوان درصد به درصد آمادگی رابطه تغییر کرد
+        shortened_analysis += f"\n\nتفسیر نهایی: {interpretation}\n\n" # تفسیر نهایی به متن خلاصه اضافه شد
+        shortened_analysis += "توصیه کلی:\n" # توصیه‌های کلی به متن خلاصه اضافه شد
+        shortened_analysis += "1. تقویت مهارت‌های ارتباطی و شنیدن فعال.\n" # توصیه‌های کلی به متن خلاصه اضافه شد
+        shortened_analysis += "2. تمرکز بر همدلی و درک متقابل در روابط.\n" # توصیه‌های کلی به متن خلاصه اضافه شد
+        shortened_analysis += "3. توجه به تعادل بین صمیمیت و حریم شخصی در رابطه.\n" # توصیه‌های کلی به متن خلاصه اضافه شد
+        shortened_analysis += "برای اطلاعات و تحلیل های دقیق تر به وب اپ مراجعه کنید و نتیجه تست ها را با تحلیل دقیق تر ببینید." # ارجاع به وب اپ برای تحلیل دقیق تر
+        final_message = shortened_analysis
+    else:
+        final_message = analysis
 
-    try: # اضافه کردن try-except برای مدیریت خطا
-        await context.bot.send_message(chat_id=chat_id, text=analysis, parse_mode="Markdown")
-    except Exception as e:
-        print(f"Error sending final result message: {e}") # چاپ خطای کامل برای بررسی بیشتر
-
+    if update.callback_query:
+        await update.callback_query.message.reply_text(final_message, parse_mode="Markdown")
+    else:
+        await update.message.reply_text(final_message, parse_mode="Markdown")
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')

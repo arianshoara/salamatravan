@@ -565,7 +565,7 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 # --- ارسال نتیجه نهایی به همراه تحلیل پاسخ‌ها ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
-    max_score = len(questions) * 4  # هر سوال حداکثر 4 امتیاز دارد (20 * 4 = 80)
+    max_score = len(questions) * 4  # هر سوال حداکثر 4 امتیاز دارد
     percentage = (total_score / max_score) * 100
 
     analysis = f"نتیجه تست اختلال دوقطبی (MDQ):\n\n"
@@ -579,7 +579,7 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         analysis += f"گزینه انتخاب شده: {resp['selected_option']}) {resp['option_text']}\n"
         analysis += f"{resp['message']}\n"
 
-    # تفسیر کلی (این تفسیر می‌تواند بر اساس سیاست‌های مختلف تنظیم شود)
+    # تفسیر کلی
     if total_score < 25:
         interpretation = "شما نشانه‌های کمی از اختلال دوقطبی دارید."
     elif total_score < 50:
@@ -595,11 +595,38 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مدیریت هیجانات.\n"
     analysis += "3. در صورت بروز نوسانات شدید یا اختلال در عملکرد روزانه، مشاوره تخصصی ضروری است."
 
-    if update.callback_query:
-        await update.callback_query.message.reply_text(analysis, parse_mode="Markdown")
-    else:
-        await update.message.reply_text(analysis, parse_mode="Markdown")
+    # محدودیت طول پیام (مثال: 4096 کاراکتر - محدودیت تقریبی تلگرام)
+    max_telegram_message_length = 4096
+    if len(analysis) > max_telegram_message_length:
+        shortened_analysis = f"نتیجه تست اختلال دوقطبی (MDQ):\n\n"
+        shortened_analysis += f"نام: {context.user_data.get('Name', 'نامشخص')}\n"
+        shortened_analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
+        shortened_analysis += f"امتیاز کل: {total_score} از {max_score}\n"
+        shortened_analysis += f"درصد MDQ: {percentage:.2f}%\n\n"
+        shortened_analysis += f"\n\nتفسیر نهایی: {interpretation}\n\n"
+        shortened_analysis += "توصیه کلی:\n"
+        if total_score < 25:
+            interpretation = "شما نشانه‌های کمی از اختلال دوقطبی دارید."
+        elif total_score < 50:
+            interpretation = "ممکن است دارای اختلال دوقطبی با شدت خفیف تا متوسط باشید. مشاوره با متخصص توصیه می‌شود."
+        elif total_score < 75:
+            interpretation = "نشانه‌های قابل توجه اختلال دوقطبی وجود دارد. توصیه می‌شود با یک روانپزشک مشورت کنید."
+        else:
+            interpretation = "علائم شدید اختلال دوقطبی وجود دارد؛ نیاز به ارزیابی و درمان تخصصی فوری است."
 
+        shortened_analysis += "1. توجه به الگوهای خلقی و مدیریت استرس و هیجانات.\n"
+        shortened_analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مدیریت هیجانات.\n"
+        shortened_analysis += "3. در صورت بروز نوسانات شدید یا اختلال در عملکرد روزانه، مشاوره تخصصی ضروری است."
+        shortened_analysis += "برای اطلاعات و تحلیل های دقیق تر به وب اپ مراجعه کنید و نتیجه تست ها را با تحلیل دقیق تر ببینید."
+        final_message = shortened_analysis
+    else:
+        final_message = analysis
+
+    if update.callback_query:
+        await update.callback_query.message.reply_text(final_message, parse_mode="Markdown")
+    else:
+        await update.message.reply_text(final_message, parse_mode="Markdown")
+        
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')

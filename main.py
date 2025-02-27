@@ -102,6 +102,12 @@ def setup_handlers(app: Application):
 # تابع کمکی برای ساخت کیبورد تست ها (اصلاح شده برای اضافه کردن دکمه وب‌اپ)
 def build_test_menu_keyboard():
     keyboard = [
+        [
+            InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
+                text="🚀 باز کردن وب‌اپ",
+                web_app=WebAppInfo(url="https://salamatravan.netlify.app/") # <-- آدرس سایت شما
+            )
+        ]
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
@@ -109,18 +115,15 @@ def build_test_menu_keyboard():
         [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
         [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
         [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
-        [
-            InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
-                text="🚀 باز کردن وب‌اپ",
-                web_app=WebAppInfo(url="https://salamatravan.netlify.app/") # <-- آدرس سایت شما
-            )
-        ]
     ]
     return InlineKeyboardMarkup(keyboard)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    reply_markup = build_test_menu_keyboard() # استفاده از تابع کمکی برای ساخت کیبورد اصلی
+    start_keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("📢 دعوت به کانال", url="https://t.me/rozgarmanarian")],  # دکمه دعوت به کانال
+        [InlineKeyboardButton("🚀 شروع تست ها و راهنما", callback_data="show_tests_and_help")]  # دکمه برای نمایش منوی تست ها و راهنما
+    ])
     await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
 
 # تابع راهنما
