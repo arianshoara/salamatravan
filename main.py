@@ -102,13 +102,18 @@ def setup_handlers(app: Application):
 # تابع کمکی برای ساخت کیبورد تست ها (اصلاح شده برای اضافه کردن دکمه وب‌اپ)
 def build_test_menu_keyboard():
     keyboard = [
-        [InlineKeyboardButton("📢 دعوت به کانال", url="https://t.me/rozgarmanarian")],  # دکمه دعوت به کانال
+        [
+            InlineKeyboardButton(
+                text="📢 دعوت به کانال",
+                url="https://t.me/rozgarmanarian"
+            )
+        ],  # دکمه دعوت به کانال
         [
             InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
                 text="🚀 باز کردن وب‌اپ",
                 web_app=WebAppInfo(url="https://salamatravan.netlify.app/") # <-- آدرس سایت شما
             )
-        ]
+        ],
         [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
         [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
         [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
