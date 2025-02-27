@@ -580,11 +580,6 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
     analysis += f"امتیاز کل: {total_score} از {max_score}\n"
     analysis += f"درصد وسواس: {percentage:.2f}%\n\n"
-    analysis += "تحلیل پاسخ‌های شما:\n"
-    for idx, resp in context.user_data["responses"].items():
-        analysis += f"\nسوال {idx + 1}: {resp['question']}\n"
-        analysis += f"گزینه انتخاب شده: {resp['selected_option']}) {resp['option_text']}\n"
-        analysis += f"{resp['message']}\n"
 
     # تفسیر کلی بر اساس امتیازدهی
     if total_score <= 15:
