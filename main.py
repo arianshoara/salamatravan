@@ -103,7 +103,7 @@ def setup_handlers(app: Application):
 def build_test_menu_keyboard():
     keyboard = [
         [
-            InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
+            InlineKeyboardButton(  # دکمه وب‌اپ به منوی اصلی اضافه شد
                 text="🚀 باز کردن وب‌اپ",
                 web_app=WebAppInfo(url="https://salamatravan.netlify.app/") # <-- آدرس سایت شما
             )
@@ -124,7 +124,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("📢 دعوت به کانال", url="https://t.me/rozgarmanarian")],  # دکمه دعوت به کانال
         [InlineKeyboardButton("🚀 شروع تست ها و راهنما", callback_data="show_tests_and_help")]  # دکمه برای نمایش منوی تست ها و راهنما
     ])
-    await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=reply_markup)
+    await update.message.reply_text("سلام! 🌿 خودشناسی اولین قدم برای داشتن ذهنی آرام و زندگی متعادل‌تره. 🤍✨ با انتخاب یکی از تست‌های زیر، سفری به درون خودت رو شروع کن. 🚀", reply_markup=start_keyboard) # از start_keyboard به جای reply_markup استفاده کنید
 
 # تابع راهنما
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -224,4 +224,3 @@ if __name__ == "__main__":
     loop.close = lambda: None
     loop.create_task(main())
     loop.run_forever()
-
