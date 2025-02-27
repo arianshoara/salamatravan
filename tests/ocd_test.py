@@ -602,6 +602,8 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مواجهه و جلوگیری از پاسخ (ERP).\n"
     analysis += "3. در صورت افزایش علائم، مشاوره با روانشناس یا متخصص سلامت روان توصیه می‌شود."
 
+    logger.info(f"send_final_result: Length of analysis message: {len(analysis)}") # لاگ طول پیام
+    
     max_telegram_message_length = 4096
     if len(analysis) > max_telegram_message_length:
         shortened_analysis = f"نتیجه تست وسواس فکری-عملی (OCD):\n\n"
