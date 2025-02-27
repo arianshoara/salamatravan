@@ -675,6 +675,7 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.callback_query.message.reply_text(final_message, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
     else:
         await update.message.reply_text(final_message, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
+        
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')

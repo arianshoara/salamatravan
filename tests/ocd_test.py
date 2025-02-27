@@ -537,7 +537,9 @@ async def send_question(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text(text, reply_markup=reply_markup)
         elif update.callback_query:  # برای ادامه تست
             await update.callback_query.message.reply_text(text, reply_markup=reply_markup)
+        logger.info("send_question: Sending question to user") # لاگ اضافه شد
     else:
+        logger.info("send_question: Calling send_final_result from send_question - q_index >= len(questions)") # لاگ اضافه شد
         await send_final_result(update, context)
 
 # --- دریافت پاسخ سوال (از طریق CallbackQuery) ---
@@ -557,6 +559,9 @@ async def question_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         "score": score
     }
     context.user_data["current_question"] += 1
+    
+    logger.info(f"question_callback: current_question after increment: {context.user_data['current_question']}, len(questions): {len(questions)}") # لاگ اضافه شد
+    
     if context.user_data["current_question"] < len(questions):
         await send_question(update, context)
         return QUESTION
