@@ -73,7 +73,7 @@ def setup_handlers(app: Application):
     app.add_handler(CallbackQueryHandler(button_handler))
     
     # هندلر مربوط به دکمه‌ی وب‌اپ
-  
+   # app.add_handler(CommandHandler("webapp", send_webapp_button))
 
     
     #هندلر برای تمام اعتیادهای اختصاصی
@@ -102,17 +102,21 @@ def setup_handlers(app: Application):
 # تابع کمکی برای ساخت کیبورد تست ها (اصلاح شده برای اضافه کردن دکمه وب‌اپ)
 def build_test_menu_keyboard():
     keyboard = [
-    [InlineKeyboardButton("📢 دعوت به کانال", url="https://t.me/rozgarmanarian")],  # دکمه دعوت به کانال
-    [InlineKeyboardButton("🚀 باز کردن وب‌اپ", web_app=WebAppInfo(url="https://salamatravan.netlify.app/"))],
-    [InlineKeyboardButton("راهنما", callback_data="help")],
-    [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
-    [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
-    [InlineKeyboardButton("(OCD) تست وسواس فکری-عملی", callback_data="start_ocd")],
-    [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
-    [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
-    [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
-]
-
+        [InlineKeyboardButton("📢 دعوت به کانال", url="https://t.me/rozgarmanarian")],  # دکمه دعوت به کانال
+        [
+            InlineKeyboardButton(             # دکمه وب‌اپ به منوی اصلی اضافه شد
+                text="🚀 باز کردن وب‌اپ",
+                web_app=WebAppInfo(url="https://salamatravan.netlify.app/") # <-- آدرس سایت شما
+            )
+        ]
+        [InlineKeyboardButton("راهنما", callback_data="help")],  # دکمه راهنما در بالای منو
+        [InlineKeyboardButton("تست اضطراب", callback_data="start_anxiety")],
+        [InlineKeyboardButton("تست افسردگی", callback_data="start_depression")],
+        [InlineKeyboardButton("(OCD)تست وسواس فکری-عملی", callback_data="start_ocd")],
+        [InlineKeyboardButton("تست اختلال دوقطبی - MDQ", callback_data="start_mdq")],
+        [InlineKeyboardButton("تست اعتیاد", callback_data="start_addiction")],
+        [InlineKeyboardButton("تست آمادگی رابطه عاطفی", callback_data="start_relationship_readiness")],
+    ]
     return InlineKeyboardMarkup(keyboard)
 
 
@@ -218,3 +222,4 @@ if __name__ == "__main__":
     loop.close = lambda: None
     loop.create_task(main())
     loop.run_forever()
+
