@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList, FaCheckCircle } from "react-icons/fa";
+import { FaBars, FaQuestionCircle, FaBook, FaCog, FaBrain, FaSadTear, FaTelegram, FaInstagram, FaYoutube, FaGlobe, FaUserTie, FaThList, FaCheckCircle, FaStar } from "react-icons/fa";
 import PropTypes from 'prop-types';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 import TestContainer from './components/tests/TestContainer';
 import TestContainerAnxiety from "./components/tests/TestContainerAnxiety";
@@ -10,6 +11,7 @@ import TestContainerBipolar from "./components/tests/TestContainerBipolar";
 import TestContainerAddiction from "./components/tests/TestContainerAddiction";
 import RelationshipReadinessTest from "./components/tests/RelationshipReadinessTest";
 import TestPage from "./components/tests/TestPage";
+import SpecializedTests from "./components/tests/SpecializedTests";
 // ایمپورت مقالات
 import AnxietyImpactArticlePage from "./components/articles/AnxietyImpactArticlePage";
 import SelfAwarenessArticlePage from "./components/articles/SelfAwarenessArticlePage";
@@ -137,7 +139,58 @@ function App() {
         }
     };
 
+    const responseGoogle = async (response) => {
+        console.log("Google Login Success Response:", response);
 
+        if (response.credential) {
+            // توکن احراز هویت گوگل (credential) را به بک‌اند ارسال کنید
+            try {
+                const serverResponse = await fetch('/api/google-login', { // 👈 آدرس endpoint بک‌اند برای ورود با گوگل
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token: response.credential }), // ✅ ارسال credential بجای tokenId
+                });
+
+                const data = await serverResponse.json();
+
+                if (serverResponse.ok) {
+                    // ورود به سیستم موفقیت‌آمیز بود
+                    console.log("Login successful:", data);
+                    // 💡 اینجا می‌توانید state برنامه را برای ورود کاربر به‌روزرسانی کنید
+                    // مثلاً state 'isLoggedIn' را true کنید و اطلاعات کاربر را ذخیره کنید
+                    // ... به‌روزرسانی state برنامه برای حالت ورود کاربر ...
+                    // مثال:
+                    // setIsLoggedIn(true);
+                    // setUserInfo(data.user);
+                    alert("ورود با گوگل موفقیت‌آمیز بود!"); // نمایش پیام موفقیت (قابل تغییر)
+
+                } else {
+                    // ورود به سیستم در بک‌اند با خطا مواجه شد
+                    console.error("Login failed on server:", data);
+                    alert("خطا در ورود به سیستم. لطفاً دوباره تلاش کنید."); // نمایش پیام خطا (قابل تغییر)
+                }
+
+            } catch (error) {
+                // خطای شبکه یا خطای غیرمنتظره در فرانت‌اند
+                console.error("Error during Google login request:", error);
+                alert("خطا در برقراری ارتباط با سرور. لطفاً بعداً تلاش کنید."); // نمایش پیام خطا (قابل تغییر)
+            }
+        } else {
+            // اگر credential وجود نداشت (خطا در دریافت توکن از گوگل)
+            console.error("Credential is missing in Google response:", response);
+            alert("مشکلی در دریافت اطلاعات از گوگل پیش آمد. لطفاً دوباره تلاش کنید."); // نمایش پیام خطا (قابل تغییر)
+        }
+    };
+
+    const onFailureGoogle = (error) => {
+        console.error("Google Login Failed Response:", error);
+        alert("ورود با گوگل ناموفق بود. لطفاً دوباره تلاش کنید."); // پیام خطا به کاربر
+        // 📊 اینجا می‌توانید رویداد failure ورود را آنالیز کنید (اختیاری)
+        // مثلاً برای اهداف debug یا بررسی نرخ تبدیل ورود
+        // ... ارسال اطلاعات خطا به سرویس آنالیز ...
+    };
     // تابع برای رندر کردن محتوای صفحه بر اساس state فعلی
     const renderContent = () => {
 
@@ -286,6 +339,24 @@ function App() {
                                 </h3>
                             </div>
                         </div>
+
+                        {/* خط افقی */}
+                        <hr />
+
+                        {/* آیتم تست‌های تخصصی */}
+                        <div className="specialized-tests-section">
+                            <h3
+                                onClick={() => goToView("specializedTestsActive")}
+                                style={{ cursor: 'pointer' }}
+                                className="test-title"
+                            >
+                                <FaStar className="bottom-nav-icon" /> تست‌های تخصصی
+                            </h3>
+                        </div>
+
+                        {/* نمایش کامپوننت تست‌های تخصصی */}
+                        <SpecializedTests />
+
                     </div>
                 );
             case "categories": // ⬅️ View جدید دسته‌بندی‌ها
@@ -323,18 +394,18 @@ function App() {
                 );
             // موارد زیر برای نمایش مقالات هستند
             // ✅ اصلاح case های movieDetail و bookDetail برای هندل کردن viewName های داینامیک
-           // case currentView.startsWith("movieDetail-"): {
-               // const movieId = currentView.split('-')[1];
-               // return <MovieDetailPage movieId={movieId} movies={movies} />; // ✅ پاس دادن movies به عنوان prop
-           // }
+            // case currentView.startsWith("movieDetail-"): {
+            //  const movieId = currentView.split('-')[1];
+            // return <MovieDetailPage movieId={movieId} movies={movies} />; // ✅ پاس دادن movies به عنوان prop
+            // }
             //case currentView.startsWith("bookDetail-"): {
-             //   const bookId = currentView.split('-')[1];
-              //  return <BookDetailPage bookId={bookId} books={books} />; // ✅ پاس دادن books به عنوان prop
-          //  }
+            //  const bookId = currentView.split('-')[1];
+            // return <BookDetailPage bookId={bookId} books={books} />; // ✅ پاس دادن books به عنوان prop
+            // }
             case "anxietyImpactArticle":
                 return <AnxietyImpactArticlePage />;
             case "bigFiveTestActive":
-                return <TestPage />;    
+                return <TestPage />;
             case "OCDTestActive":
                 return <OCDTestContainer />;
             case "BipolarTestActive":
@@ -342,7 +413,7 @@ function App() {
             case "AddictionTestActive":
                 return <TestContainerAddiction />;
             case "RelationshipReadinessTestActive":
-                return <RelationshipReadinessTest />;    
+                return <RelationshipReadinessTest />;
             case "selfAwarenessArticle":
                 return <SelfAwarenessArticlePage />;
             case "depressionVsSadnessArticle":
@@ -375,6 +446,35 @@ function App() {
                 return <HealthyCommunicationSkillsArticlePage />;
             case "overcomingProcrastinationArticle":
                 return <OvercomingProcrastinationArticlePage />;
+            case "login": // ✅ ویو جدید برای صفحه ورود گوگل
+                return (
+                    <div className="login-page">
+                        <h2>ورود به حساب گوگل</h2>
+                        <p>برای ورود به سایت با حساب گوگل خود، روی دکمه زیر کلیک کنید:</p>
+                        <GoogleOAuthProvider clientId="212369861199-eduokb22pmiv5m156j6i2j5dga999stp.apps.googleusercontent.com"> {/* 👈 جایگزین کنید با Client ID پروژه گوگل خود */}
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    responseGoogle(credentialResponse);
+                                }}
+                                onError={() => {
+                                    onFailureGoogle();
+                                }}
+                                // buttonText="ورود با گوگل" // حذف buttonText برای استفاده از render
+                                // cookiePolicy={'single_host_origin'} // نیازی به تکرار cookiePolicy نیست اگر قبلاً تنظیم شده
+                                render={renderProps => (
+                                    <button
+                                        onClick={renderProps.onClick}
+                                        disabled={renderProps.disabled}
+                                        className="login-gmail-button- مرحله-دوم" // کلاس CSS برای دکمه صفحه ورود
+                                    >
+                                        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Icon" style={{ width: '24px', height: '24px' }} className="google-icon" />
+                                        <span>ورود با گوگل</span> {/* متن "ورود با گوگل" به دکمه اضافه شد */}
+                                    </button>
+                                )}
+                            />
+                        </GoogleOAuthProvider>
+                    </div>
+                );
 
             default:
                 return <h2>صفحه نامعتبر</h2>; // هندل کردن view های نامعتبر
@@ -389,13 +489,29 @@ function App() {
                 <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
                     <FaBars className="bottom-nav-icon" /> {/* آیکون منو */}
                 </button>
+
+                {/* عکس دایره ای پروفایل - اضافه شده */}
+                <div className="top-bar-circle-image"></div>
+
                 {
-                    !["guide", "tests", "reading", "settings", "categories"].includes(currentView) && ( // اضافه شدن categories به لیست исключений
+                    !["guide", "tests", "reading", "settings", "categories" , "login"].includes(currentView) && ( // اضافه شدن categories و login به لیست исключений
                         <button className="back-btn" onClick={goBackView}>
                             <span className="bottom-nav-icon">بازگشت</span>
                         </button>
                     )
                 }
+
+                
+                {/* بخش ورود به سایت (اضافه شده) - تغییر به دکمه برای رفتن به صفحه ورود */}
+                <div className="login-section">
+                    {/* حذف GoogleOAuthProvider و GoogleLogin از اینجا */}
+                    <button
+                        onClick={() => goToView('login')} // رفتن به صفحه login با کلیک
+                        className="login-gmail-button" // استفاده از استایل دایره ای
+                    >
+                        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Icon" style={{ width: '24px', height: '24px' }} className="google-icon" /> {/* آیکون گوگل */}
+                    </button>
+                </div>
             </header>
 
             {/* منوی کشویی (سایدبار) - نمایش فقط وقتی menuOpen === true */}
@@ -410,7 +526,7 @@ function App() {
                         </div>
                         <div className="menu-item" onClick={() => goToView("tests")}>
                             <FaCheckCircle className="menu-icon" /> تست‌ها
-                        </div> 
+                        </div>
                         {/* ⬅️ مورد جدید منو - دسته‌بندی‌ها */}
                         <div className="menu-item" onClick={() => goToView("categories")}>
                             <FaThList className="menu-icon" /> دسته‌بندی‌ها
@@ -418,6 +534,10 @@ function App() {
                         <div className="menu-item" onClick={() => goToView("settings")}>
                             <FaCog className="menu-icon" /> تنظیمات
                         </div>
+                        {/* ✅ مورد جدید منو - ورود - شاید لازم نباشد */}
+                        {/* <div className="menu-item" onClick={() => goToView("login")}>
+                            <FaUserTie className="menu-icon" /> ورود
+                        </div> */}
                     </div>
                 </div>
             )}
