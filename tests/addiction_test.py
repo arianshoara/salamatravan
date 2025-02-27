@@ -598,7 +598,7 @@ async def show_specialized_tests_menu(update: Update, context: ContextTypes.DEFA
 # --- ارسال نتیجه نهایی به همراه درصد و تحلیل پاسخ‌ها و لینک به تست‌های خاص ---
 async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     total_score = context.user_data["total_score"]
-    max_score = len(questions) * 4  # هر سوال حداکثر 4 امتیاز دارد
+    max_score = len(questions) * 4  # هر سوال حداکثر ۴ امتیاز دارد
     percentage = (total_score / max_score) * 100
 
     analysis = f"**نتیجه تست سنجش میزان اعتیاد کلی:**\n\n"
@@ -658,11 +658,23 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup_specific_addictions = InlineKeyboardMarkup(specific_addiction_keyboard)
     logger.info(f"reply_markup_specific_addictions content: {reply_markup_specific_addictions}")
 
-    if update.callback_query:
-        await update.callback_query.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
+    max_telegram_message_length = 4096
+    if len(analysis) > max_telegram_message_length:
+        shortened_analysis = f"**نتیجه تست سنجش میزان اعتیاد کلی (خلاصه):**\n\n"
+        shortened_analysis += f"نام: {context.user_data.get('Name', 'نامشخص')}\n"
+        shortened_analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
+        shortened_analysis += f"امتیاز کل: {total_score} از {max_score}\n"
+        shortened_analysis += f"درصد اعتیاد کلی: {percentage:.2f}%\n\n"
+        shortened_analysis += f"**تفسیر نهایی:** {interpretation}\n\n"
+        shortened_analysis += "**برای تحلیل کامل‌تر پاسخ‌ها و دسترسی به تست‌های اختصاصی،** به وب اپلیکیشن مراجعه کنید." # پیام جدید برای ارجاع به وب اپ
+        final_message = shortened_analysis
     else:
-        await update.message.reply_text(analysis, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
+        final_message = analysis
 
+    if update.callback_query:
+        await update.callback_query.message.reply_text(final_message, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
+    else:
+        await update.message.reply_text(final_message, parse_mode="Markdown", reply_markup=reply_markup_specific_addictions)
 # --- تابع لغو مکالمه ---
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text('مکالمه لغو شد.')

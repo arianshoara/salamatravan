@@ -597,6 +597,23 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مواجهه و جلوگیری از پاسخ (ERP).\n"
     analysis += "3. در صورت افزایش علائم، مشاوره با روانشناس یا متخصص سلامت روان توصیه می‌شود."
 
+    max_telegram_message_length = 4096
+    if len(analysis) > max_telegram_message_length:
+        shortened_analysis = f"نتیجه تست وسواس فکری-عملی (OCD):\n\n"
+        shortened_analysis += f"نام: {context.user_data.get('Name', 'نامشخص')}\n"
+        shortened_analysis += f"سن: {context.user_data.get('Age', 'نامشخص')}\n\n"
+        shortened_analysis += f"امتیاز کل: {total_score} از {max_score}\n"
+        shortened_analysis += f"درصد وسواس: {percentage:.2f}%\n\n"
+        shortened_analysis += f"\n\nتفسیر نهایی: {interpretation}\n\n"
+        shortened_analysis += "توصیه کلی:\n"
+        shortened_analysis += "1. تمرین تنفس عمیق و آرام‌سازی.\n"
+        shortened_analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مواجهه و جلوگیری از پاسخ (ERP).\n"
+        shortened_analysis += "3. در صورت افزایش علائم، مشاوره با روانشناس یا متخصص سلامت روان توصیه می‌شود."
+        shortened_analysis += "برای اطلاعات و تحلیل های دقیق تر به وب اپ مراجعه کنید و نتیجه تست ها را با تحلیل دقیق تر ببینید."
+        final_message = shortened_analysis
+    else:
+        final_message = analysis
+    
     if update.callback_query:
         await update.callback_query.message.reply_text(analysis, parse_mode="Markdown")
     else:
