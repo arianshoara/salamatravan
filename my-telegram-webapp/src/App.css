@@ -98,6 +98,12 @@ html, body {
   z-index: 100;
 }
 
+/* حالت تاریک نوار بالا */
+.dark-mode .top-bar {
+  background-color: #333;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
 /* دکمه‌های نوار بالایی */
 .top-bar button {
   background: none;
@@ -106,13 +112,18 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  margin-left: 1rem; /* اضافه کردن margin-left */
+  padding: 0;
+  margin: 0;
 }
 
 .top-bar button:hover {
   background-color: #f2f3f5;
   border-radius: 4px;
+}
+
+/* حالت تاریک دکمه‌های نوار بالا */
+.dark-mode .top-bar button {
+  color: #f2f2f2;
 }
 
 /* آیکون‌های نوار بالایی و پایین */
@@ -124,6 +135,106 @@ html, body {
   color: #20c997;
   font-size: 24px;
   line-height: 1;
+}
+
+/* بخش ورود */
+.login-section {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 0;
+}
+
+/* عکس پروفایل دایره ای */
+.top-bar-circle-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ddd;
+  display: block;
+  background-image: url('./assets/salamat-image.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
+
+.app-container.dark-mode .top-bar-circle-image {
+  border-color: #333;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+/* دکمه ورود گوگل در نوار بالا (مخفی شده) */
+.login-gmail-button {
+  display: none;
+}
+
+/* صفحه ورود */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-page h2 {
+  margin-bottom: 20px;
+}
+
+login-page p {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* دکمه گوگل در صفحه ورود */
+.login-gmail-button-مرحله-دوم {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-container.dark-mode .login-gmail-button-مرحله-دوم {
+  background-color: #222;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.login-gmail-button-مرحله-دوم:hover {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.app-container.dark-mode .login-gmail-button-مرحله-دوم:hover {
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.4);
+}
+
+/* آیکون‌های نوار بالایی و پایین */
+.top-bar .menu-btn .bottom-nav-icon,
+.top-bar .back-btn .bottom-nav-icon,
+.bottom-nav-icon,
+.top-bar .menu-btn,
+.top-bar .back-btn {
+  color: #20c997;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید */
+.top-bar .menu-btn,
+.top-bar .back-btn {
+  background-color: transparent;
+}
+
+/* تنظیمات مجزا برای آیکون منو */
+.top-bar .menu-btn {
+  margin-right: 2rem; /* جابجایی آیکون منو به راست */
 }
 
 
@@ -234,11 +345,7 @@ html, body {
   background-color: #454545;
 }
 
-/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید */
-.top-bar .menu-btn,
-.top-bar .back-btn {
-  background-color: transparent;
-}
+
 
 /* منوی کشویی (سایدبار) */
 .menu-overlay {
@@ -695,16 +802,6 @@ input:checked + .slider:before {
   color: #d3d3d3;
 }
 
-/* حالت تاریک نوار بالا */
-.dark-mode .top-bar {
-  background-color: #333; /* تغییر پس‌زمینه در حالت تاریک */
-  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* تغییر سایه در حالت تاریک */
-}
-
-.dark-mode .top-bar button {
-  color: #f2f2f2;
-}
-
 .font-size-setting {
   display: flex;
   align-items: center;
@@ -757,103 +854,3 @@ input:checked + .slider:before {
 
 
 
-.login-section {
-  display: flex;
-  align-items: center;
-  padding-inline-start: 20px;
-}
-
-/* استایل برای دکمه گرد ورود گوگل - حذف شد از نوار بالا */
-.login-gmail-button {
-  /* استایل های قبلی دکمه گرد ... */
-  display: none; /* مخفی کردن دکمه گوگل از نوار بالا */
-}
-
-.app-container.dark-mode .login-gmail-button {
-  /* استایل های قبلی دکمه گرد در دارک مود ... */
-}
-
-.login-gmail-button:hover {
-  /* استایل هاور دکمه گرد ... */
-}
-
-.app-container.dark-mode .login-gmail-button:hover {
-  /* استایل هاور دکمه گرد در دارک مود ... */
-}
-
-
-/* استایل برای عکس دایره ای پروفایل - تغییر یافته برای مرکز */
-.top-bar-circle-image {
-  width: 40px; /* اندازه دایره - کمی کوچکتر */
-  height: 40px; /* باید برابر با width باشد */
-  border-radius: 50%;
-  background-color: #ddd; /* رنگ پس زمینه موقت - با عکس جایگزین میشود */
-  margin: 0 auto; /* ⬅️ تغییر به margin: 0 auto برای مرکز */
-  display: block; /* برای اعمال margin */
-  background-image: url('./assets/salamat-image.jpg'); /* مسیر عکس پروفایل */
-  background-size: cover; /* پوشش کامل دایره با عکس */
-  background-position: center; /* مرکز قرارگیری عکس */
-  border: 2px solid #fff; /* حاشیه سفید - اختیاری */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* سایه - اختیاری */
-}
-
-.app-container.dark-mode .top-bar-circle-image {
-  border-color: #333; /* حاشیه تیره در حالت دارک مود - اختیاری */
-  box-shadow: 0 1px 3px rgba(255,255,255,0.2); /* سایه روشن‌تر در دارک مود - اختیاری */
-}
-
-
-/* استایل برای گرد کردن آیکون گوگل */
-.google-icon {
-  border-radius: 50%; /* گرد کردن تصویر آیکون گوگل */
-  overflow: hidden; /* اطمینان از گرد شدن گوشه‌های تصویر */
-  display: block; /* برای اعمال border-radius */
-  width: 24px; /* اندازه آیکون - مطابق با JSX */
-  height: 24px; /* اندازه آیکون - مطابق با JSX */
-}
-
-/* استایل برای صفحه ورود */
-.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.login-page h2 {
-  margin-bottom: 20px;
-}
-
-.login-page p {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-/* استایل برای دکمه گوگل در صفحه ورود - کمی بزرگتر و با متن */
-.login-gmail-button-مرحله-دوم {
-  padding: 10px 20px; /* پدینگ بیشتر برای دکمه بزرگتر */
-  border-radius: 5px; /* گوشه‌های گرد نرمال */
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  display: flex; /* برای کنار هم قرار دادن آیکون و متن */
-  align-items: center;
-  gap: 10px; /* فاصله بین آیکون و متن */
-}
-
-.app-container.dark-mode .login-gmail-button-مرحله-دوم {
-  background-color: #222;
-  color: #fff;
-  box-shadow: 0 2px 10px rgba(255,255,255,0.3);
-}
-
-.login-gmail-button-مرحله-دوم:hover {
-  box-shadow: 0 3px 7px rgba(0,0,0,0.3);
-}
-
-.app-container.dark-mode .login-gmail-button-مرحله-دوم:hover {
-  box-shadow: 0 3px 10px rgba(255,255,255,0.4);
-}
