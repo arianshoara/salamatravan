@@ -1,0 +1,67 @@
+.specialized-tests-container {
+    font-family: Arial, sans-serif;
+    direction: rtl; /* راست به چپ برای فارسی */
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .category-container {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden; /* برای جلوگیری از بیرون رفتن محتوای داخلی از border-radius */
+  }
+  
+  .category-title {
+    padding: 15px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    position: relative; /* برای قرار دادن فلش */
+    margin: 0; /* حذف margin پیش فرض h2 */
+  }
+  
+  .category-title:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .tests-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .test-item {
+    padding: 15px;
+    border-top: 1px solid #eee; /* خط جداکننده بین تست‌ها */
+  }
+  
+  .test-item:last-child {
+    border-bottom: none; /* حذف خط پایین برای آخرین تست */
+  }
+  
+  .filename {
+    font-size: 0.9em;
+    color: #777;
+  }
+  
+  /* استایل فلش */
+  .arrow {
+    display: inline-block;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    padding: 3px;
+    position: absolute;
+    left: 15px; /* موقعیت فلش در سمت چپ */
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  
+  .arrow.up {
+    transform: translateY(-50%) rotate(-135deg); /* فلش بالا */
+  }
+  
+  .arrow.down {
+    transform: translateY(-50%) rotate(45deg); /* فلش پایین */
+  }

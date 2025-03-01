@@ -298,67 +298,63 @@ function App() {
                         </div>
                     </div>
                 );
-            case "tests":
-                return (
-                    <div className="tests-content">
-                        <h2>📝 تست‌های روانشناسی</h2>
-                        <div className="tests-list">
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("anxietyTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaBrain className="bottom-nav-icon" /> تست اضطراب
-                                </h3>
+                case "tests":
+                    return (
+                        <div className="tests-content">
+                            <h2> تست‌های روانشناسی</h2>
+                            <div className="tests-list">
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("anxietyTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaBrain className="bottom-nav-icon" /> تست اضطراب
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("depressionTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست افسردگی
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("OCDTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست وسواس فکری-عملی
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("BipolarTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست اختلال دو قطبی MDQ
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("AddictionTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست اعتیاد
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("RelationshipReadinessTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست آمادگی رابطه
+                                    </h3>
+                                </div>
+                                <div className="test-item">
+                                    <h3 onClick={() => goToView("bigFiveTestActive")} style={{ cursor: 'pointer' }} className="test-title">
+                                        <FaSadTear className="bottom-nav-icon" /> تست شخصیت
+                                    </h3>
+                                </div>
                             </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("depressionTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست افسردگی
-                                </h3>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("OCDTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست وسواس فکری-عملی
-                                </h3>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("BipolarTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست اختلال دو قطبی MDQ
-                                </h3>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("AddictionTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست اعتیاد
-                                </h3>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("RelationshipReadinessTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست آمادگی رابطه
-                                </h3>
-                            </div>
-                            <div className="test-item">
-                                <h3 onClick={() => goToView("bigFiveTestActive")} style={{ cursor: 'pointer' }} className="test-title">
-                                    <FaSadTear className="bottom-nav-icon" /> تست شخصیت
+                
+                            {/* خط جداکننده */}
+                            <div className="separator"></div>
+
+                            {/* آیتم تست‌های تخصصی - با کلیک، view به specializedTestsActive تغییر می‌کند */}
+                            <div className="specialized-tests-section">
+                                <h3
+                                    onClick={() => goToView("specializedTestsActive")}
+                                    style={{ cursor: 'pointer' }}
+                                    className="test-title"
+                                >
+                                    <FaStar className="bottom-nav-icon" /> تست‌های تخصصی
                                 </h3>
                             </div>
                         </div>
-
-                        {/* خط افقی */}
-                        <hr />
-
-                        {/* آیتم تست‌های تخصصی */}
-                        <div className="specialized-tests-section">
-                            <h3
-                                onClick={() => goToView("specializedTestsActive")}
-                                style={{ cursor: 'pointer' }}
-                                className="test-title"
-                            >
-                                <FaStar className="bottom-nav-icon" /> تست‌های تخصصی
-                            </h3>
-                        </div>
-
-                        {/* نمایش کامپوننت تست‌های تخصصی */}
-                        <SpecializedTests />
-
-                    </div>
-                );
+                    );
             case "categories": // ⬅️ View جدید دسته‌بندی‌ها
                 return (
                     <div className="categories-content">
@@ -402,6 +398,8 @@ function App() {
             //  const bookId = currentView.split('-')[1];
             // return <BookDetailPage bookId={bookId} books={books} />; // ✅ پاس دادن books به عنوان prop
             // }
+            case "specializedTestsActive":
+                return <SpecializedTests />;
             case "anxietyImpactArticle":
                 return <AnxietyImpactArticlePage />;
             case "bigFiveTestActive":

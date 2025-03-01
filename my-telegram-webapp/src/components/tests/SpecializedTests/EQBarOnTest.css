@@ -1,0 +1,63 @@
+.eq-test-container {
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .question-block {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .options {
+    margin-top: 10px;
+  }
+  
+  .option-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .option-analysis {
+    display: inline-block;
+    margin-left: 10px;
+    color: #555;
+    font-size: 0.9em;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .result {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .result-bar {
+    width: 100%;
+    background-color: #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 0;
+    height: 30px;
+  }
+  
+  .bar-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    transition: width 0.5s;
+  }
+  

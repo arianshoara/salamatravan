@@ -27,12 +27,17 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--light-bg-color);
+  color: var(--text-color);
   justify-content: space-between;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-size: 16px;
   position: relative;
+}
+
+.dark-mode .app-container {
+  background-color: var(--dark-bg-color);
+  color: #f2f2f2;
 }
 
 /* حالت تیره */
@@ -237,6 +242,17 @@ login-page p {
   margin-right: 2rem; /* جابجایی آیکون منو به راست */
 }
 
+.app-icon {
+  color: var(--primary-color);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.top-bar .menu-btn .app-icon,
+.top-bar .back-btn .app-icon,
+.bottom-nav-icon {
+  @extend .app-icon;
+}
 
 /* نوار منوی پایین */
 .bottom-nav {
@@ -854,3 +870,12 @@ input:checked + .slider:before {
 
 
 
+.separator {
+  position: relative;
+  margin: 20px 0;
+  width: 80%;
+  height: 1px; /* اضافه کردن ارتفاع به خود المان */
+  background-color: #ddd; /* رنگ خط */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  display: block;
+}
