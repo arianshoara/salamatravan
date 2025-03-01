@@ -8,7 +8,7 @@ async function connectToDatabase() {
     return cachedDb;
   }
 
-  const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  const client = await MongoClient.connect(uri); // حذف useNewUrlParser و useUnifiedTopology
   const db = client.db('sample_mflix');
   cachedDb = db;
   return db;
@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
   try {
     const db = await connectToDatabase();
     const collection = db.collection('comments');
-    const data = await collection.find({}).limit(10).toArray(); // محدود کردن به 10 سند
+    const data = await collection.find({}).limit(5).toArray(); // محدود کردن به 10 سند
 
     return {
       statusCode: 200,
