@@ -9,7 +9,7 @@ async function connectToDatabase() {
   }
 
   const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  const db = client.db('sample_mflix'); // نام دیتابیس خود را وارد کنید
+  const db = client.db('sample_mflix');
   cachedDb = db;
   return db;
 }
@@ -17,10 +17,8 @@ async function connectToDatabase() {
 exports.handler = async (event, context) => {
   try {
     const db = await connectToDatabase();
-    const collection = db.collection('comments'); // نام کالکشن خود را وارد کنید
-
-    // نمونه عملیات: دریافت تمام اسناد از کالکشن
-    const data = await collection.find({}).toArray();
+    const collection = db.collection('comments');
+    const data = await collection.find({}).limit(10).toArray(); // محدود کردن به 10 سند
 
     return {
       statusCode: 200,
