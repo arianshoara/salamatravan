@@ -111,6 +111,13 @@ function App() {
         document.documentElement.style.fontSize = `${fontSize}px`; // اعمال سایز فونت به کل صفحه
     }, [fontSize]);
 
+    useEffect(() => {
+        fetch('/.netlify/functions/mongo')
+          .then(response => response.json())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error fetching data:', error));
+      }, []); // آرایه وابستگی خالی یعنی فقط یک بار هنگام mount اجرا شود
+      
     // تابع برای رفتن به یک view مشخص
     const goToView = (viewName) => {
         console.log("goToView فراخوانی شد با viewName:", viewName);
