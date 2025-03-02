@@ -1,55 +1,50 @@
 :root {
-  /* تنظیمات تایپوگرافی */
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /* تنظیم رنگ‌ها بر اساس طرح رنگ سیستم */
   color-scheme: light dark;
-  color: var(--text-dark);         /* پیش‌فرض حالت تیره */
-  background-color: var(--dark-bg-color); /* پیش‌فرض حالت تیره */
+  color: var(--text-dark); /* پیش‌فرض تیره */
+  background-color: var(--dark-bg-color); /* پیش‌فرض تیره */
 
-  /* بهبود نمایش متن */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* متغیرهای رنگی */
-  /* حالت تیره */
+  /* متغیرهای فعلی */
   --primary-color: #20c997;
-  --dark-bg-color: #b8b5b5;
-  --text-dark: #7b6a6a;
-
-  /* حالت روشن */
-  --light-bg-color: #a49898;       /* پس‌زمینه روشن به رنگ سفید */
+  --dark-bg-color: #1e1e1e;
+  --light-bg-color: #f8f9fa;
   --text-color: #333;
 
-  /* متغیرهای تکمیلی */
+  /* متغیرهای جدید */
   --primary-hover: #18a67d;
-  --light-gray: #2a3a59;
+  --text-dark: #f2f2f2;
+  --light-bg: #ffffff;
+  --light-gray: #f2f3f5;
   --dark-gray: #3a3a3a;
-  --shadow-light: rgba(205, 199, 199, 0.1);
+  --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-dark: rgba(255, 255, 255, 0.1);
-  --border-light: #605858;
+  --border-light: #e0e0e0;
   --border-dark: #555;
 }
 
-/* استایل‌های مربوط به حالت روشن (با استفاده از prefers-color-scheme) */
+/* بقیه کد مثل a, button و ... بدون تغییر */
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: var(--text-color);         /* متن روشن */
-    background-color: var(--light-bg-color); /* پس‌زمینه روشن */
+    color: var(--text-color); /* #333 برای روشن */
+    background-color: var(--light-bg); /* #ffffff برای روشن */
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #a29a9a;
+    background-color: #f9f9f9;
   }
 }
 
-/* حالت تیره برای المنت‌های خاص */
 .app-container.dark-mode {
   background: var(--dark-bg-color);
   color: var(--text-dark);

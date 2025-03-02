@@ -1,25 +1,3 @@
-/* تعریف متغیرهای رنگ برای لایت و دارک مود */
-:root {
-  --bg-light: #f9f9f9;
-  --text-light: #333;
-  --border-light: #ccc;
-  --option-bg-light: white;
-  --option-text-light: #555;
-  --button-bg-light: #4CAF50;
-  --button-hover-bg-light: #45a049;
-  --bar-bg-light: #eee;
-  --bar-fill-light: #4CAF50;
-
-  --bg-dark: #222;
-  --text-dark: #eee;
-  --border-dark: #555;
-  --option-bg-dark: #333;
-  --option-text-dark: #aaa;
-  --button-bg-dark: #388E3C;
-  --button-hover-bg-dark: #2E7D32;
-  --bar-bg-dark: #444;
-  --bar-fill-dark: #388E3C;
-}
 
 /* استایل‌های اصلی */
 .eq-test-container {
