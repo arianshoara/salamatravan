@@ -1,0 +1,48 @@
+.reading-section {
+    padding: 20px;
+    direction: rtl; /* برای راست‌چین بودن متن */
+    text-align: right;
+  }
+  
+  .reading-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* فاصله بین آیتم‌ها */
+  }
+  
+  .reading-item {
+    background: #f9f9f9; /* یه پس‌زمینه روشن */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reading-title {
+    cursor: pointer; /* منتقل شده از استایل درون‌خطی */
+    margin-bottom: 10px;
+    font-size: 1.2rem; /* با توجه به fontSize داینامیکت تنظیم کن */
+  }
+  
+  .reading-item p {
+    margin: 0;
+    color: #555;
+  }
+  
+  /* افکت هاور */
+  .reading-title:hover {
+    color: #007bff; /* یه رنگ آبی برای هاور */
+  }
+  
+  /* برای حالت دارک مود */
+  .app-container.dark-mode .reading-item {
+    background: #444;
+    color: #fff;
+  }
+  
+  .app-container.dark-mode .reading-item p {
+    color: #ccc;
+  }
+  
+  .app-container.dark-mode .reading-title:hover {
+    color: #66b3ff; /* رنگ روشن‌تر برای هاور در دارک مود */
+  }

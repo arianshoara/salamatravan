@@ -1,0 +1,82 @@
+/* تعریف متغیرهای رنگ برای لایت و دارک مود */
+:root {
+    --bg-light: #f9f9f9;
+    --text-light: #333;
+    --border-light: #555;
+    --item-bg-light: white;
+    --item-text-light: #444;
+    --item-desc-light: #666;
+  
+    --bg-dark: #222;
+    --text-dark: #eee;
+    --border-dark: #888;
+    --item-bg-dark: #333;
+    --item-text-dark: #ddd;
+    --item-desc-dark: #aaa;
+  }
+  
+  /* استایل‌های اصلی */
+  .books-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--bg-light); /* استفاده از متغیر */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease; /* برای انیمیشن تغییر مود */
+  }
+  
+  .books-title {
+    font-size: 24px;
+    color: var(--text-light); /* استفاده از متغیر */
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--border-light); /* استفاده از متغیر */
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: color 0.3s ease, border-color 0.3s ease; /* برای انیمیشن تغییر مود */
+  }
+  
+  .book-item {
+    background: var(--item-bg-light); /* استفاده از متغیر */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: background 0.3s ease, color 0.3s ease; /* برای انیمیشن تغییر مود */
+  }
+  
+  .book-item h3 {
+    font-size: 20px;
+    color: var(--item-text-light); /* استفاده از متغیر */
+    margin-bottom: 5px;
+    transition: color 0.3s ease; /* برای انیمیشن تغییر مود */
+  }
+  
+  .book-item p {
+    font-size: 16px;
+    color: var(--item-desc-light); /* استفاده از متغیر */
+    transition: color 0.3s ease; /* برای انیمیشن تغییر مود */
+  }
+  
+  /* استایل‌های دارک مود */
+  .dark-mode .books-container {
+    background: var(--bg-dark);
+  }
+  
+  .dark-mode .books-title {
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+  }
+  
+  .dark-mode .book-item {
+    background: var(--item-bg-dark);
+  }
+  
+  .dark-mode .book-item h3 {
+    color: var(--item-text-dark);
+  }
+  
+  .dark-mode .book-item p {
+    color: var(--item-desc-dark);
+  }

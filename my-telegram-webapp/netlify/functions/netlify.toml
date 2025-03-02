@@ -1,0 +1,2 @@
+[functions]
+  timeout = 20 # تنظیم timeout به 20 ثانیه

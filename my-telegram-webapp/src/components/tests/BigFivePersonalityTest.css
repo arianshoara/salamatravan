@@ -1,3 +1,4 @@
+/* استایل کلی کانتینر تست */
 .big-five-test-container {
     font-family: Arial, sans-serif;
     max-width: 700px;
@@ -8,17 +9,29 @@
     background-color: #f9f9f9;
 }
 
+.app-container.dark-mode .big-five-test-container {
+    background-color: #2a2a2a; /* مشابه App.css */
+    border-color: var(--border-dark); /* #555 */
+}
+
+/* استایل عنوان */
 .big-five-test-container h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
+.app-container.dark-mode .big-five-test-container h2 {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+/* لیست سوالات */
 .questions-list {
     list-style: none;
     padding: 0;
 }
 
+/* هر سوال */
 .question-item {
     margin-bottom: 20px;
     padding: 15px;
@@ -28,15 +41,26 @@
     box-shadow: 2px 2px 5px #eee;
 }
 
+.app-container.dark-mode .question-item {
+    background-color: #333; /* مشابه App.css */
+    border-color: var(--border-dark); /* #555 */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
 .question-text {
     font-weight: bold;
     margin-bottom: 10px;
     color: #555;
 }
 
+.app-container.dark-mode .question-text {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+/* کانتینر گزینه‌ها */
 .options-container {
     display: flex;
-    flex-direction: column; /* گزینه‌ها زیر هم */
+    flex-direction: column;
 }
 
 .option-label {
@@ -45,10 +69,19 @@
     margin-bottom: 8px;
 }
 
+.app-container.dark-mode .option-label {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
 .option-radio {
     margin-right: 10px;
 }
 
+.app-container.dark-mode .option-radio {
+    accent-color: var(--primary-color); /* #20c997 */
+}
+
+/* تحلیل گزینه */
 .option-analysis {
     margin-top: 10px;
     padding: 10px;
@@ -57,95 +90,21 @@
     font-size: 0.9em;
 }
 
+.app-container.dark-mode .option-analysis {
+    background-color: #444; /* تیره‌تر برای دارک مود */
+}
+
 .option-analysis p {
     margin: 5px 0;
 }
 
+.app-container.dark-mode .option-analysis p {
+    color: var(--text-dark); /* #f2f2f2 */
+}
 
+/* دکمه‌ها */
 .submit-button, .back-button {
     background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-top: 20px; /*فاصله از سوالات یا نتیجه*/
-    margin-inline-start: 10px; /*فاصله بین دکمه ها */
-}
-
-
-.submit-button:hover, .back-button:hover {
-    background-color: #0056b3;
-}
-
-.result-analysis {
-    text-align: center;
-}
-
-.result-analysis h2 {
-    margin-top: 0;
-}
-
-.result-analysis p {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    color: #333;
-}
-
-.factor-analysis-text {
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 2px 2px 5px #eee;
-    text-align: justify; /* متن تحلیل justify شود */
-    line-height: 1.6; /* بهبود خوانایی متن تحلیل */
-}
-
-.factor-analysis-text strong {
-    font-weight: bold; /* تاکید بر کلمات کلیدی در تحلیل */
-    color: #007bff; /* رنگ متمایز برای کلمات کلیدی */
-}
-
-.result-analysis {
-    text-align: center;
-}
-
-.result-analysis__title { /* استایل برای عنوان بخش نتیجه */
-    margin-top: 0;
-    color: #333; /* رنگ عنوان */
-}
-
-.result-analysis__content { /* استایل برای محتوای اصلی نتیجه */
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 2px 2px 5px #eee;
-    text-align: justify;
-    line-height: 1.6;
-}
-
-.result-analysis__score { /* استایل برای نمایش امتیاز */
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    color: #555; /* رنگ امتیاز */
-    font-weight: bold; /* پررنگ کردن امتیاز */
-}
-
-
-.result-analysis__text strong { /* استایل برای کلمات کلیدی در متن تحلیل */
-    font-weight: bold;
-    color: #007bff;
-}
-
-
-.result-analysis__back-button { /* استایل برای دکمه بازگشت (اگر نیاز به استایل متفاوت داره) */
-    background-color: #6c757d; /* رنگ دکمه بازگشت */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -157,6 +116,144 @@
     margin-inline-start: 10px;
 }
 
+@media (prefers-color-scheme: light) {
+    .submit-button, .back-button {
+      color: #333; /* تو مود روشن متن تیره باشه */
+    }
+  }
+
+.app-container.dark-mode .submit-button,
+.app-container.dark-mode .back-button {
+    background-color: #0056b3; /* تیره‌تر برای دارک مود */
+}
+
+.submit-button:hover, .back-button:hover {
+    background-color: #0056b3;
+}
+
+.app-container.dark-mode .submit-button:hover,
+.app-container.dark-mode .back-button:hover {
+    background-color: #007bff; /* روشن‌تر برای کنتراست */
+}
+
+/* تحلیل نتایج */
+.result-analysis {
+    text-align: center;
+}
+
+.result-analysis h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.app-container.dark-mode .result-analysis h2 {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+.result-analysis p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.app-container.dark-mode .result-analysis p {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+.factor-analysis-text {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #eee;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.app-container.dark-mode .factor-analysis-text {
+    background-color: #333; /* مشابه App.css */
+    border-color: var(--border-dark); /* #555 */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.factor-analysis-text strong {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.app-container.dark-mode .factor-analysis-text strong {
+    color: var(--primary-color); /* #20c997 برای هماهنگی */
+}
+
+/* استایل‌های جدید نتیجه */
+.result-analysis__title {
+    margin-top: 0;
+    color: #333;
+}
+
+.app-container.dark-mode .result-analysis__title {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+.result-analysis__content {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px #eee;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.app-container.dark-mode .result-analysis__content {
+    background-color: #333; /* مشابه App.css */
+    border-color: var(--border-dark); /* #555 */
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+.result-analysis__score {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #555;
+    font-weight: bold;
+}
+
+.app-container.dark-mode .result-analysis__score {
+    color: var(--text-dark); /* #f2f2f2 */
+}
+
+.result-analysis__text strong {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.app-container.dark-mode .result-analysis__text strong {
+    color: var(--primary-color); /* #20c997 */
+}
+
+.result-analysis__back-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-inline-start: 10px;
+}
+
+.app-container.dark-mode .result-analysis__back-button {
+    background-color: #5a6268; /* تیره‌تر برای دارک مود */
+}
+
 .result-analysis__back-button:hover {
-    background-color: #5a6268; /* رنگ هاور دکمه بازگشت */
+    background-color: #5a6268;
+}
+
+.app-container.dark-mode .result-analysis__back-button:hover {
+    background-color: #6c757d; /* روشن‌تر برای کنتراست */
 }

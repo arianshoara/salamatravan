@@ -1,0 +1,71 @@
+.tests-content {
+    padding: 20px;
+    direction: rtl; /* برای راست‌چین بودن متن */
+    text-align: right;
+  }
+  
+  .tests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* فاصله بین آیتم‌ها */
+  }
+  
+  .test-item {
+    background: #f9f9f9; /* پس‌زمینه روشن */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .test-title {
+    cursor: pointer; /* منتقل شده از استایل درون‌خطی */
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 1.2rem; /* با توجه به fontSize داینامیکت تنظیم کن */
+  }
+  
+  .bottom-nav-icon {
+    margin-left: 10px; /* فاصله آیکون از متن */
+  }
+  
+  .separator {
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+  }
+  
+  .specialized-tests-section {
+    margin-top: 20px;
+  }
+  
+  .specialized-tests-section .test-title {
+    color: #007bff; /* رنگ متمایز برای تست‌های تخصصی */
+  }
+  
+  /* افکت هاور */
+  .test-title:hover {
+    color: #0056b3; /* رنگ تیره‌تر برای هاور */
+  }
+  
+  /* برای حالت دارک مود */
+  .app-container.dark-mode .test-item {
+    background: #444;
+    color: #fff;
+  }
+  
+  .app-container.dark-mode .separator {
+    background: #666;
+  }
+  
+  .app-container.dark-mode .test-title {
+    color: #fff;
+  }
+  
+  .app-container.dark-mode .test-title:hover {
+    color: #66b3ff; /* رنگ روشن‌تر برای هاور در دارک مود */
+  }
+  
+  .app-container.dark-mode .specialized-tests-section .test-title {
+    color: #66b3ff; /* رنگ متمایز در دارک مود */
+  }

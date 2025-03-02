@@ -1,71 +1,56 @@
 :root {
+  /* تنظیمات تایپوگرافی */
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* تنظیم رنگ‌ها بر اساس طرح رنگ سیستم */
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-dark);         /* پیش‌فرض حالت تیره */
+  background-color: var(--dark-bg-color); /* پیش‌فرض حالت تیره */
 
+  /* بهبود نمایش متن */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  /* متغیرهای رنگی */
+  /* حالت تیره */
   --primary-color: #20c997;
-  --dark-bg-color: #1e1e1e;
-  --light-bg-color: #f8f9fa;
+  --dark-bg-color: #b8b5b5;
+  --text-dark: #7b6a6a;
+
+  /* حالت روشن */
+  --light-bg-color: #ffffff;       /* پس‌زمینه روشن به رنگ سفید */
   --text-color: #333;
+
+  /* متغیرهای تکمیلی */
+  --primary-hover: #18a67d;
+  --light-gray: #2a3a59;
+  --dark-gray: #3a3a3a;
+  --shadow-light: rgba(205, 199, 199, 0.1);
+  --shadow-dark: rgba(255, 255, 255, 0.1);
+  --border-light: #605858;
+  --border-dark: #555;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
+/* استایل‌های مربوط به حالت روشن (با استفاده از prefers-color-scheme) */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--text-color);         /* متن روشن */
+    background-color: var(--light-bg-color); /* پس‌زمینه روشن */
   }
   a:hover {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #a29a9a;
   }
+}
+
+/* حالت تیره برای المنت‌های خاص */
+.app-container.dark-mode {
+  background: var(--dark-bg-color);
+  color: var(--text-dark);
 }

@@ -1,109 +1,187 @@
 /* RelationshipReadinessTest.css */
 
+/* استایل کلی صفحه تست */
 .test-container {
-    font-family: Arial, sans-serif; /* فونت اصلی */
-    max-width: 600px; /* حداکثر عرض контейнер تست */
-    margin: 20px auto; /* مارجین بالا و پایین و مرکز افقی */
-    padding: 20px; /* پدینگ داخلی контейнер */
-    border: 1px solid #ddd; /* حاشیه نازک خاکستری */
-    border-radius: 5px; /* گرد کردن گوشه‌های контейнер */
-    background-color: #f9f9f9; /* رنگ پس‌زمینه خیلی ملایم خاکستری */
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
+.dark-mode .test-container {
+    background-color: #2c2f33; /* پس‌زمینه تیره */
+    border-color: #444; /* حاشیه تیره‌تر */
+}
+
+/* استایل عنوان و توضیحات */
 .test-container h2 {
-    text-align: center; /* مرکزچین کردن عنوان تست */
-    color: #333; /* رنگ عنوان */
+    text-align: center;
+    color: #333;
+}
+
+.dark-mode .test-container h2 {
+    color: #dfe6e9; /* رنگ روشن برای متن در دارک مود */
 }
 
 .test-container .description {
-    text-align: center; /* مرکزچین کردن توضیحات */
-    color: #777; /* رنگ توضیحات */
-    margin-bottom: 20px; /* مارجین پایین توضیحات */
+    text-align: center;
+    color: #777;
+    margin-bottom: 20px;
 }
 
+.dark-mode .test-container .description {
+    color: #b2bec3;
+}
+
+/* استایل هر سوال */
 .question-box {
-    margin-bottom: 20px; /* مارجین پایین جعبه سوالات برای فاصله بین سوالات */
-    padding: 15px; /* پدینگ داخلی جعبه سوالات */
-    border: 1px solid #eee; /* حاشیه نازک‌تر و روشن‌تر برای جعبه سوالات */
-    border-radius: 5px; /* گرد کردن گوشه‌های جعبه سوالات */
-    background-color: white; /* پس‌زمینه سفید برای جعبه سوالات */
-    box-shadow: 2px 2px 5px #eee; /* سایه ملایم برای جعبه سوالات */
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 5px #eee;
+}
+
+.dark-mode .question-box {
+    background-color: #3a3f44;
+    border-color: #555;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .question-text {
-    font-weight: bold; /* متن سوالات bold */
-    color: #555; /* رنگ متن سوالات */
-    margin-bottom: 10px; /* مارجین پایین متن سوالات */
-    white-space: pre-line; /* برای پشتیبانی از line breaks در متن سوال */
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    white-space: pre-line;
 }
 
+.dark-mode .question-text {
+    color: #dcdcdc;
+}
 
+/* استایل گزینه‌های پاسخ */
 .options-container {
     display: flex;
-    flex-direction: column; /* گزینه‌ها زیر هم */
+    flex-direction: column;
 }
 
 .option-label {
-    margin-bottom: 8px; /* مارجین پایین label گزینه‌ها برای فاصله بین گزینه‌ها */
+    margin-bottom: 8px;
     display: flex;
-    align-items: center; /* تراز عمودی آیکون رادیویی و متن گزینه */
-    color: #666; /* رنگ متن گزینه‌ها */
-    white-space: pre-line; /* برای پشتیبانی از line breaks در متن گزینه */
+    align-items: center;
+    color: #666;
+    white-space: pre-line;
+}
+
+.dark-mode .option-label {
+    color: #dcdcdc;
 }
 
 .option-input {
-    margin-right: 10px; /* مارجین راست دکمه رادیویی برای فاصله از متن */
+    margin-right: 10px;
+    accent-color: #007bff; /* رنگ پیش‌فرض برای رادیو یا چک‌باکس */
 }
 
+.dark-mode .option-input {
+    accent-color: #55aaff; /* رنگ روشن‌تر برای دارک مود */
+}
+
+/* استایل دکمه ارسال */
 .submit-button {
-    padding: 10px 20px; /* پدینگ دکمه */
-    background-color: #007bff; /* رنگ پس‌زمینه دکمه آبی */
-    color: white; /* رنگ متن دکمه سفید */
-    border: none; /* حذف حاشیه دکمه */
-    border-radius: 5px; /* گرد کردن گوشه‌های دکمه */
-    cursor: pointer; /* تغییر نشانگر موس به حالت pointer */
-    font-size: 16px; /* اندازه فونت دکمه */
-    transition: background-color 0.3s ease; /* انیمیشن تغییر رنگ پس‌زمینه */
-    margin-top: 20px; /* فاصله از سوالات */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+@media (prefers-color-scheme: light) {
+    .submit-button, .back-button {
+      color: #333; /* تو مود روشن متن تیره باشه */
+    }
+  }
+
+.dark-mode .submit-button {
+    background-color: #3399ff; /* کمی روشن‌تر برای دارک مود */
 }
 
 .submit-button:hover {
-    background-color: #0056b3; /* رنگ پس‌زمینه دکمه در حالت hover تیره‌تر */
+    background-color: #0056b3;
+}
+
+.dark-mode .submit-button:hover {
+    background-color: #007bff;
 }
 
 .submit-button:disabled {
-    background-color: #ccc; /* رنگ پس‌زمینه دکمه در حالت غیرفعال خاکستری */
-    cursor: not-allowed; /* تغییر نشانگر موس به حالت not-allowed */
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
+.dark-mode .submit-button:disabled {
+    background-color: #4b5e67;
+}
+
+/* استایل بخش تحلیل نتایج */
 .result-analysis {
-    margin-top: 30px; /* مارجین بالای بخش تحلیل نتایج برای فاصله از دکمه */
-    padding: 20px; /* پدینگ داخلی بخش تحلیل نتایج */
-    border: 1px solid #ddd; /* حاشیه بخش تحلیل نتایج */
-    border-radius: 5px; /* گرد کردن گوشه‌های بخش تحلیل نتایج */
-    background-color: #f0f8ff; /* رنگ پس زمینه ملایم برای بخش نتایج */
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f0f8ff;
+}
+
+.dark-mode .result-analysis {
+    background-color: #353b40;
+    border-color: #555;
 }
 
 .result-analysis h3, .result-analysis h4 {
-    color: #333; /* رنگ عنوان‌های بخش تحلیل نتایج */
-    text-align: center; /* مرکزچین کردن عنوان‌های بخش تحلیل نتایج */
-    margin-bottom: 15px; /* مارجین پایین عنوان‌های بخش تحلیل نتایج */
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.dark-mode .result-analysis h3, .dark-mode .result-analysis h4 {
+    color: #dfe6e9;
 }
 
 .result-analysis p {
-    color: #555; /* رنگ متن پاراگراف‌های بخش تحلیل نتایج */
-    margin-bottom: 10px; /* مارجین پایین پاراگراف‌های بخش تحلیل نتایج */
+    color: #555;
+    margin-bottom: 10px;
 }
 
+.dark-mode .result-analysis p {
+    color: #dcdcdc;
+}
+
+/* استایل هر بخش تحلیل سوال */
 .response-item {
-    margin-bottom: 20px; /* مارجین پایین هر بخش تحلیل سوال */
-    padding: 15px; /* پدینگ داخلی هر بخش تحلیل سوال */
-    border: 1px dashed #ddd; /* خط пункچین برای جدا کردن تحلیل هر سوال */
-    border-radius: 5px; /* گرد کردن گوشه‌های هر بخش تحلیل سوال */
-    background-color: #ffffff; /* پس زمینه سفید برای هر بخش تحلیل سوال */
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px dashed #ddd;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.dark-mode .response-item {
+    background-color: #3a3f44;
+    border-color: #666;
 }
 
 .response-item .message {
-    color: #777; /* رنگ پیام تحلیل */
-    font-style: italic; /* ایتالیک کردن پیام تحلیل */
+    color: #777;
+    font-style: italic;
+}
+
+.dark-mode .response-item .message {
+    color: #b2bec3;
 }

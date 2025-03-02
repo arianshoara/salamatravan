@@ -1,63 +1,135 @@
+/* تعریف متغیرهای رنگ برای لایت و دارک مود */
+:root {
+  --bg-light: #f9f9f9;
+  --text-light: #333;
+  --border-light: #ccc;
+  --option-bg-light: white;
+  --option-text-light: #555;
+  --button-bg-light: #4CAF50;
+  --button-hover-bg-light: #45a049;
+  --bar-bg-light: #eee;
+  --bar-fill-light: #4CAF50;
+
+  --bg-dark: #222;
+  --text-dark: #eee;
+  --border-dark: #555;
+  --option-bg-dark: #333;
+  --option-text-dark: #aaa;
+  --button-bg-dark: #388E3C;
+  --button-hover-bg-dark: #2E7D32;
+  --bar-bg-dark: #444;
+  --bar-fill-dark: #388E3C;
+}
+
+/* استایل‌های اصلی */
 .eq-test-container {
-    font-family: 'Arial', sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .question-block {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .options {
-    margin-top: 10px;
-  }
-  
-  .option-label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .option-analysis {
-    display: inline-block;
-    margin-left: 10px;
-    color: #555;
-    font-size: 0.9em;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .result {
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .result-bar {
-    width: 100%;
-    background-color: #eee;
-    border-radius: 5px;
-    overflow: hidden;
-    margin: 20px 0;
-    height: 30px;
-  }
-  
-  .bar-fill {
-    height: 100%;
-    background-color: #4CAF50;
-    transition: width 0.5s;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.question-block {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+  background-color: var(--option-bg-light);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.options {
+  margin-top: 10px;
+}
+
+.option-label {
+  display: block;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option-label input[type="radio"] {
+  margin-right: 5px;
+}
+
+.option-label.selected {
+  background-color: #add8e6; /* آبی روشن برای انتخاب */
+}
+
+.option-analysis {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--option-text-light);
+  font-size: 0.9em;
+  transition: color 0.3s ease;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: var(--button-bg-light);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-light);
+}
+
+.result {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.result-bar {
+  width: 100%;
+  background-color: var(--bar-bg-light);
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 20px 0;
+  height: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: var(--bar-fill-light);
+  transition: width 0.5s, background-color 0.3s ease;
+}
+
+/* استایل‌های دارک مود */
+.dark-mode .eq-test-container {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.dark-mode .question-block {
+  border-color: var(--border-dark);
+  background-color: var(--option-bg-dark);
+}
+
+.dark-mode .option-analysis {
+  color: var(--option-text-dark);
+}
+
+.dark-mode button {
+  background-color: var(--button-bg-dark);
+}
+
+.dark-mode button:hover {
+  background-color: var(--button-hover-bg-dark);
+}
+
+.dark-mode .result-bar {
+  background-color: var(--bar-bg-dark);
+}
+
+.dark-mode .bar-fill {
+  background-color: var(--bar-fill-dark);
+}

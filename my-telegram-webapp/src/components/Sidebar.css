@@ -1,0 +1,47 @@
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .menu-drawer {
+    position: fixed;
+    top: 0;
+    right: 0; /* یا left اگه بخوای از چپ باز شه */
+    width: 250px;
+    height: 100%;
+    background: #fff; /* یا هر رنگی که برای حالت روشن می‌خوای */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    z-index: 1001;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 1.1rem; /* با توجه به fontSize داینامیکت تنظیم کن */
+  }
+  
+  .menu-item:hover {
+    background-color: #f0f0f0; /* افکت هاور */
+  }
+  
+  .menu-icon {
+    margin-right: 10px;
+  }
+  
+  /* برای حالت دارک مود */
+  .app-container.dark-mode .menu-drawer {
+    background: #333; /* رنگ تیره برای منو */
+    color: #fff;
+  }
+  
+  .app-container.dark-mode .menu-item:hover {
+    background-color: #444;
+  }

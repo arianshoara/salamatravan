@@ -9,15 +9,28 @@
     text-align: center;
 }
 
+.dark-mode .test-container {
+    background: #2c2f33; /* رنگ تیره برای پس‌زمینه */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 /* استایل عنوان و توضیحات */
 h2 {
     color: #333;
+}
+
+.dark-mode h2 {
+    color: #dfe6e9; /* رنگ روشن برای متن در دارک مود */
 }
 
 .description {
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
+}
+
+.dark-mode .description {
+    color: #b2bec3;
 }
 
 /* استایل هر سوال */
@@ -29,10 +42,19 @@ h2 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.dark-mode .question-box {
+    background: #3a3f44;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .question-text {
     font-weight: bold;
     color: #444;
     margin-bottom: 10px;
+}
+
+.dark-mode .question-text {
+    color: #dcdcdc;
 }
 
 /* استایل گزینه‌های پاسخ */
@@ -52,8 +74,17 @@ h2 {
     cursor: pointer;
 }
 
+.dark-mode .option-label {
+    color: #dcdcdc;
+}
+
 .option-input {
     transform: scale(1.2);
+    accent-color: #007bff; /* رنگ پیش‌فرض برای چک‌باکس یا رادیو */
+}
+
+.dark-mode .option-input {
+    accent-color: #55aaff; /* رنگ روشن‌تر برای دارک مود */
 }
 
 /* استایل دکمه ارسال */
@@ -70,11 +101,29 @@ h2 {
     transition: background 0.3s;
 }
 
+@media (prefers-color-scheme: light) {
+    .submit-button, .back-button {
+      color: #333; /* تو مود روشن متن تیره باشه */
+    }
+  }
+
+.dark-mode .submit-button {
+    background: #3399ff; /* کمی روشن‌تر برای دارک مود */
+}
+
 .submit-button:hover {
     background: #0056b3;
+}
+
+.dark-mode .submit-button:hover {
+    background: #007bff;
 }
 
 .submit-button:disabled {
     background: #ccc;
     cursor: not-allowed;
+}
+
+.dark-mode .submit-button:disabled {
+    background: #4b5e67;
 }

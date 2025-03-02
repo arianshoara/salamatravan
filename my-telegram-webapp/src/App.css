@@ -1,4 +1,6 @@
-/* تنظیمات پایه برای تمام صفحه */
+/* ----------------------------------- */
+/* تنظیمات پایه صفحه */
+/* ----------------------------------- */
 html, body {
   width: 100%;
   min-height: 100vh;
@@ -7,22 +9,23 @@ html, body {
   margin: 0;
   padding: 0;
   direction: rtl;
-  font-family: 'Vazir', 'Tahoma', sans-serif;
+  font-family: "Vazir", "Tahoma", sans-serif;
   scroll-behavior: smooth;
 }
 
 /* تعریف فونت وزیر */
 @font-face {
-  font-family: 'Vazir';
-  src: url('./assets/fonts/Vazirmatn-Regular.woff2') format('woff2'),
-       url('./assets/fonts/Vazirmatn-Regular.woff') format('woff');
+  font-family: "Vazir";
+  src: url("./assets/fonts/Vazirmatn-Regular.woff2") format("woff2"),
+       url("./assets/fonts/Vazirmatn-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-
-/* استایل کلی اپلیکیشن (موبایل-اول) */
+/* ----------------------------------- */
+/* استایل کلی اپلیکیشن */
+/* ----------------------------------- */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -40,7 +43,6 @@ html, body {
   color: #f2f2f2;
 }
 
-/* حالت تیره */
 .app-container.dark-mode {
   background-color: #1e1e1e;
   color: #f2f2f2;
@@ -56,38 +58,9 @@ html, body {
   margin-top: 60px;
 }
 
-/* استایل‌های بخش تست‌ها */
-.tests-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* وسط‌چین کردن عمودی */
-}
-
-.tests-content h2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 20px; /* فاصله از لیست تست‌ها */
-  color: #20c997;
-}
-
-.tests-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* وسط‌چین کردن عمودی */
-  width: 100%; /* یا مقدار دلخواه */
-  max-width: 600px; /* حداکثر عرض برای جلوگیری از کشیدگی بیش از حد */
-  margin: 0 auto; /* وسط‌چین کردن افقی */
-}
-
-.test-item {
-  width: 100%; /* یا مقدار دلخواه */
-  text-align: center;
-  margin-bottom: 10px; /* فاصله بین آیتم‌های تست */
-}
-
-/* نوار بالایی */
+/* ----------------------------------- */
+/* نوار بالایی (Header) */
+/* ----------------------------------- */
 .top-bar {
   position: fixed;
   top: 0;
@@ -103,13 +76,11 @@ html, body {
   z-index: 100;
 }
 
-/* حالت تاریک نوار بالا */
 .dark-mode .top-bar {
   background-color: #333;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
-/* دکمه‌های نوار بالایی */
 .top-bar button {
   background: none;
   border: none;
@@ -126,12 +97,10 @@ html, body {
   border-radius: 4px;
 }
 
-/* حالت تاریک دکمه‌های نوار بالا */
 .dark-mode .top-bar button {
   color: #f2f2f2;
 }
 
-/* آیکون‌های نوار بالایی و پایین */
 .top-bar .menu-btn .bottom-nav-icon,
 .top-bar .back-btn .bottom-nav-icon,
 .bottom-nav-icon,
@@ -142,21 +111,22 @@ html, body {
   line-height: 1;
 }
 
-/* بخش ورود */
-.login-section {
-  display: flex;
-  align-items: center;
-  padding-inline-start: 0;
+.top-bar .menu-btn,
+.top-bar .back-btn {
+  background-color: transparent;
 }
 
-/* عکس پروفایل دایره ای */
+.top-bar .menu-btn {
+  margin-right: 2rem;
+}
+
 .top-bar-circle-image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background-color: #ddd;
   display: block;
-  background-image: url('./assets/salamat-image.jpg');
+  background-image: url("./assets/salamat-image.jpg");
   background-size: cover;
   background-position: center;
   border: 2px solid #fff;
@@ -169,117 +139,42 @@ html, body {
   box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
 }
 
-/* دکمه ورود گوگل در نوار بالا (مخفی شده) */
+.login-section {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 0;
+}
+
 .login-gmail-button {
   display: none;
 }
 
-/* صفحه ورود */
-.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
-
-.login-page h2 {
-  margin-bottom: 20px;
-}
-
-login-page p {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-/* دکمه گوگل در صفحه ورود */
-.login-gmail-button-مرحله-دوم {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.app-container.dark-mode .login-gmail-button-مرحله-دوم {
-  background-color: #222;
-  color: #fff;
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
-}
-
-.login-gmail-button-مرحله-دوم:hover {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-}
-
-.app-container.dark-mode .login-gmail-button-مرحله-دوم:hover {
-  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.4);
-}
-
-/* آیکون‌های نوار بالایی و پایین */
-.top-bar .menu-btn .bottom-nav-icon,
-.top-bar .back-btn .bottom-nav-icon,
-.bottom-nav-icon,
-.top-bar .menu-btn,
-.top-bar .back-btn {
-  color: #20c997;
-  font-size: 24px;
-  line-height: 1;
-}
-
-/* اگر برای دکمه‌های بالا پس‌زمینه می‌خواهید */
-.top-bar .menu-btn,
-.top-bar .back-btn {
-  background-color: transparent;
-}
-
-/* تنظیمات مجزا برای آیکون منو */
-.top-bar .menu-btn {
-  margin-right: 2rem; /* جابجایی آیکون منو به راست */
-}
-
-.app-icon {
-  color: var(--primary-color);
-  font-size: 24px;
-  line-height: 1;
-}
-
-.top-bar .menu-btn .app-icon,
-.top-bar .back-btn .app-icon,
-.bottom-nav-icon {
-  @extend .app-icon;
-}
-
-/* نوار منوی پایین */
+/* ----------------------------------- */
+/* نوار پایینی (Bottom Navigation) */
+/* ----------------------------------- */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50px; /* کاهش ارتفاع */
+  height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #f8f9fa; /* تغییر پس‌زمینه */
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* اضافه کردن سایه */
+  background-color: #f8f9fa;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* حالت تاریک نوار منوی پایین */
 .dark-mode .bottom-nav {
-  background-color: #2a2a2a; /* تغییر پس‌زمینه در حالت تاریک */
-  box-shadow: 0 -2px 4px rgba(255, 255, 255, 0.1); /* تغییر سایه در حالت تاریک */
+  background-color: #2a2a2a;
+  box-shadow: 0 -2px 4px rgba(255, 255, 255, 0.1);
 }
 
-/* دکمه‌های منوی پایین */
 .bottom-nav button {
   background: none;
   border: none;
-  width: 50px; /* همسان سازی با ارتفاع */
-  height: 50px; /* همسان سازی با ارتفاع */
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -287,83 +182,36 @@ login-page p {
   justify-content: center;
 }
 
-/* هاور دکمه‌های منوی پایین */
 .bottom-nav button:hover {
   background-color: #f2f3f5;
   border-radius: 4px;
 }
 
-/* حالت تاریک هاور دکمه‌های منوی پایین */
 .dark-mode .bottom-nav button:hover {
   background-color: #3a3a3a;
 }
 
-/* آیکون‌های نوار پایین */
 .bottom-nav-icon {
-  font-size: 20px; /* کاهش اندازه آیکون */
+  font-size: 20px;
   color: #20c997;
   line-height: 1;
 }
 
-/* حالت فعال آیکون‌های نوار پایین */
 .bottom-nav-button.active .bottom-nav-icon {
   color: #18a67d;
 }
 
-/* حالت تاریک آیکون‌های نوار پایین */
 .dark-mode .bottom-nav-icon {
   color: #33e2b5;
 }
 
-/* حالت تاریک فعال آیکون‌های نوار پایین */
 .dark-mode .bottom-nav-button.active .bottom-nav-icon {
   color: #22c296;
 }
 
-/* ... بقیه کدها ... */
-
-/* حالت تاریک بخش دسته‌بندی‌ها */
-.dark-mode .categories-content {
-  background-color: #2a2a2a;
-  border-color: #444;
-}
-
-/* حالت تاریک آیتم‌های خواندنی */
-.dark-mode .reading-item {
-  background-color: #2a2a2a;
-  border-color: #444;
-}
-
-/* حالت تاریک صفحات جزئیات */
-.dark-mode .movies-detail-page,
-.dark-mode .books-detail-page {
-  background-color: #2a2a2a;
-  color: #eee;
-}
-
-.dark-mode .movies-detail-page .detail-header h2,
-.dark-mode .books-detail-page .detail-header h2,
-.dark-mode .movies-detail-page .detail-text .additional-info h3,
-.dark-mode .books-detail-page .detail-text .additional-info h3,
-.dark-mode .detail-section h3{
-  border-bottom-color: #444;
-  color: #eee;
-}
-
-.dark-mode .movies-detail-page button,
-.dark-mode .books-detail-page button{
-  background-color: #383838;
-  border-color: #555;
-  color: #eee;
-}
-.dark-mode .movies-detail-page button:hover,
-.dark-mode .books-detail-page button:hover {
-  background-color: #454545;
-}
-
-
-
-/* منوی کشویی (سایدبار) */
+/* ----------------------------------- */
+/* سایدبار (Menu Drawer) */
+/* ----------------------------------- */
 .menu-overlay {
   position: fixed;
   top: 0;
@@ -392,7 +240,6 @@ login-page p {
   color: #f2f2f2;
 }
 
-
 .menu-item {
   display: flex;
   align-items: center;
@@ -411,114 +258,150 @@ login-page p {
   background-color: #555;
 }
 
-
 .menu-icon {
   font-size: 1.5rem;
   color: #20c997;
 }
 
-
-/* تنظیمات مربوط به بخش تنظیمات */
-.settings-container {
+/* ----------------------------------- */
+/* صفحه ورود (Login Page) */
+/* ----------------------------------- */
+.login-page {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  padding: 20px;
 }
 
-/* سوئیچ ساده برای تغییر حالت تیره */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+.login-page h2 {
+  margin-bottom: 20px;
 }
 
-/* مخفی کردن چک‌باکس پیش‌فرض */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.login-page p {
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-/* ظاهر اسلایدر */
-.slider {
-  position: absolute;
+.login-gmail-button-مرحله-دوم {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  top: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-/* حالت چک شده سوئیچ */
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-/* استایل فعال برای دکمه‌های نوار پایین */
-.bottom-nav-button.active {
-  color: #18a67d;
-}
-
-/* استایل برای آیتم‌های خواندنی */
-.reading-item {
+  font-size: 1rem;
   background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-container.dark-mode .login-gmail-button-مرحله-دوم {
+  background-color: #222;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.login-gmail-button-مرحله-دوم:hover {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.app-container.dark-mode .login-gmail-button-مرحله-دوم:hover {
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ----------------------------------- */
+/* بخش‌های محتوا (Content Sections) */
+/* ----------------------------------- */
+
+/* تست‌ها */
+.tests-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tests-content h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #20c997;
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.test-item {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.separator {
+  position: relative;
+  margin: 20px 0;
+  width: 80%;
+  height: 1px;
+  background-color: #ddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  display: block;
+}
+
+/* خواندنی‌ها */
+.reading-item {
+  background-color: #f8f9fa;
   border-radius: 8px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ddd;
   padding: 1rem;
   margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.reading-item:hover {
+  background-color: #e9ecef;
+  border-color: #ccc;
+}
+
 .dark-mode .reading-item {
-  background-color: #333;
-  border-color: #555;
+  background-color: #2a2a2a;
+  border-color: #444;
   box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
 }
 
-.reading-item:hover {
-  background-color: #f9f9f9;
-  border-color: #d0d0d0;
-}
-
 .dark-mode .reading-item:hover {
-  background-color: #444;
-  border-color: #777;
+  background-color: #3a3a3a;
+  border-color: #555;
 }
 
+.reading-section h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #20c997;
+}
 
-/* استایل‌های بخش Hero */
+/* Hero Section */
 .hero-section {
-  background-image: url('/images/bg.jpg') !important;;
+  background-image: url("/images/bg.jpg") !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 3rem 1rem;
-  background-color: #f0f8ff; /* آبی خیلی روشن برای پس‌زمینه Hero */
+  background-color: #f0f8ff;
   border-radius: 12px;
   margin-bottom: 2rem;
-  /* تصویر پس‌زمینه با CSS - حذف شد (میتونید دوباره اضافه کنید اگر میخواهید) */
   background-size: cover;
   background-position: center;
   color: #343a40;
@@ -529,18 +412,17 @@ input:checked + .slider:before {
   color: #f8f9fa;
 }
 
-
 .hero-text h2 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
-  color:#18a67d
+  color: #18a67d;
 }
 
 .hero-text .subtitle {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
-  color:#20c997
+  color: #20c997;
 }
 
 .hero-button {
@@ -558,8 +440,23 @@ input:checked + .slider:before {
   background-color: #18a67d;
 }
 
+.hero-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 1rem;
+}
 
-/* استایل‌های بخش "درباره من" */
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+/* About Me Section */
 .about-me-section {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -567,11 +464,9 @@ input:checked + .slider:before {
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  display: flex; /* فعال بودن flexbox همچنان لازم است */
-  flex-direction: column; /* ⬅️ تغییر به چیدمان ستونی */
-  /* align-items: center;  حذف شد ⬅️ تراز عمودی در چیدمان سطری بود */
-  /* gap: 1.5rem;  حذف شد ⬅️ فاصله افقی در چیدمان سطری بود */
-  text-align: center; /* ⬅️ تغییر به وسط‌چین (اختیاری - اگر راست‌چین میخواهید حذف نکنید) */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .dark-mode .about-me-section {
@@ -586,7 +481,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  justify-content: center; /* ⬅️ تغییر به وسط‌چین کردن عنوان */
+  justify-content: center;
 }
 
 .dark-mode .about-me-section h3,
@@ -594,25 +489,22 @@ input:checked + .slider:before {
   color: #f2f2f2;
 }
 
-
 .about-me-section .section-icon {
   font-size: 1.8rem;
   color: #20c997;
 }
 
-
 .about-me-section p {
   line-height: 1.7;
   color: #495057;
   margin-bottom: 1rem;
-  text-align: right; /* ⬅️ بازگشت متن پاراگراف به راست‌چین (اختیاری - حذف کنید اگر وسط‌چین میخواهید) */
+  text-align: right;
 }
 
 .dark-mode .about-me-section p,
 .dark-mode .contact-section ul li a {
   color: #d3d3d3;
 }
-
 
 .about-me-list {
   list-style: none;
@@ -623,7 +515,7 @@ input:checked + .slider:before {
   margin-bottom: 0.5rem;
   padding-right: 1.2em;
   position: relative;
-  text-align: right; /* ⬅️ راست‌چین کردن آیتم‌های لیست */
+  text-align: right;
 }
 
 .about-me-list li::before {
@@ -639,12 +531,11 @@ input:checked + .slider:before {
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
-  margin-bottom: 1.5rem; /* ⬅️ اضافه شدن margin-bottom (اختیاری) */
-  margin-left: auto; /* ⬅️ برای وسط‌چین شدن افقی */
-  margin-right: auto; /* ⬅️ برای وسط‌چین شدن افقی */
-  display: block; /* ⬅️ برای اعمال margin auto */
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
-
 
 .profile-image {
   width: 100%;
@@ -654,63 +545,41 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-
-/* استایل‌های بخش Hero Image Container */
-.hero-image {
-  width: 150px; /* عرض دلخواه برای Container عکس Hero (مثلا 150px) - مربع باشد */
-  height: 150px; /* ارتفاع هم برابر عرض باشد */
-  border-radius: 50%; /* گرد کردن Container (اختیاری) */
-  overflow: hidden; /* برای جلوگیری از بیرون زدن تصویر */
-  margin-top: 1rem; /* فاصله بالا از متن Hero */
-}
-
-
-/* استایل خود تصویر Hero */
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 50%; /* گرد کردن تصویر Hero */
-}
-
-
-/* استایل‌های بخش "راه‌های ارتباطی" */
+/* Contact Section */
 .contact-section {
   padding: 1.5rem;
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  direction: ltr; /* تغییر جهت متن به چپ به راست */
-  text-align: center; /* تراز متن به وسط */
+  direction: ltr;
+  text-align: center;
 }
 
 .dark-mode .contact-section {
   background-color: #333;
   border-color: #555;
-  /* در صورت نیاز می‌توانید رنگ متن را نیز برای حالت تاریک تنظیم کنید */
 }
 
 .contact-section h3 {
   font-size: 1.8rem;
-  color:#18a67d;
+  color: #18a67d;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: center; /* تراز عنوان به وسط */
+  justify-content: center;
 }
 
 .contact-section .contact-list {
   list-style: none;
   padding: 0;
-  text-align: center; /* تراز متن به وسط */
+  text-align: center;
 }
 
 .contact-section .contact-list li {
   margin-bottom: 0.8rem;
-  display: flex; /* نمایش عناصر لیست به صورت flex */
-  justify-content: center; /* تراز عناصر لیست به وسط */
+  display: flex;
+  justify-content: center;
 }
 
 .contact-section .contact-list li a {
@@ -737,85 +606,56 @@ input:checked + .slider:before {
   margin-right: 0;
 }
 
-
-
-
-/* استایل دارک مود برای بخش‌های جدید */
-.dark-mode .hero-section {
-  background-color: #2c2c2c;
-  color: #f8f9fa;
-}
-
-.dark-mode .hero-text h2,
-.dark-mode .hero-text .subtitle {
-  color: #f8f9fa;
-}
-
-
-/*  استایل‌های Responsive */
-@media (min-width: 768px) {
-  .hero-section {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: right;
-      padding: 4rem;
-  }
-
-  .hero-text {
-      text-align: right;
-      max-width: 60%;
-  }
-
-  .about-me-section {
-      flex-direction: row; /* ردیفی شدن درباره من در دسکتاپ */
-      text-align: right; /* راست‌چین کردن متن در دسکتاپ */
-  }
-
-  .about-me-section p, .about-me-section ul {
-      margin-right: 0; /* تنظیم حاشیه راست برای متن و لیست */
-  }
-
-
-}
-
-/* استایل‌های بخش "دسته‌بندی‌ها" */
-.categories-content {
-  padding: 1.5rem;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  text-align: right; /* راست‌چین کردن متن */
-}
-
-.dark-mode .categories-content {
-  background-color: #333;
-  border-color: #555;
-}
-
-.categories-content h2 {
-  font-size: 1.8rem;
-  color: #343a40;
-  margin-bottom: 1.5rem;
+/* Settings Section */
+.settings-container {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center; /* وسط‌چین کردن عنوان */
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.dark-mode .categories-content h2 {
-  color: #f2f2f2;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-
-.categories-content p {
-  line-height: 1.7;
-  color: #495057;
-  margin-bottom: 1rem;
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.dark-mode .categories-content p {
-  color: #d3d3d3;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  top: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
 .font-size-setting {
@@ -832,50 +672,107 @@ input:checked + .slider:before {
   width: 200px;
 }
 
-/* استایل برای آیتم‌های خواندنی */
-.reading-item {
-  background-color: #f8f9fa; /* ⬅️ رنگ جدید برای حالت روشن */
+/* Categories Section */
+.categories-content {
+  padding: 1.5rem;
+  background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #ddd; /* ⬅️ رنگ جدید برای حالت روشن */
-  padding: 1rem;
-  margin-bottom: 1rem;
+  border: 1px solid #e0e0e0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  text-align: right;
 }
 
-.reading-item:hover {
-  background-color: #e9ecef; /* ⬅️ رنگ جدید برای حالت روشن */
-  border-color: #ccc; /* ⬅️ رنگ جدید برای حالت روشن */
+.dark-mode .categories-content {
+  background-color: #333;
+  border-color: #555;
 }
 
-.dark-mode .reading-item {
-  background-color: #2a2a2a; /* ⬅️ رنگ جدید برای حالت تاریک */
-  border-color: #444; /* ⬅️ رنگ جدید برای حالت تاریک */
-  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.05);
-}
-
-.dark-mode .reading-item:hover {
-  background-color: #3a3a3a; /* ⬅️ رنگ جدید برای حالت تاریک */
-  border-color: #555; /* ⬅️ رنگ جدید برای حالت تاریک */
-}
-
-.reading-section h2 {
+.categories-content h2 {
+  font-size: 1.8rem;
+  color: #343a40;
+  margin-bottom: 1.5rem;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  margin-bottom: 20px; /* فاصله از لیست تست‌ها */
-  color: #20c997; /* رنگ سبز */
+  gap: 0.5rem;
+  justify-content: center;
 }
 
+.dark-mode .categories-content h2 {
+  color: #f2f2f2;
+}
 
+.categories-content p {
+  line-height: 1.7;
+  color: #495057;
+  margin-bottom: 1rem;
+}
 
-.separator {
-  position: relative;
-  margin: 20px 0;
-  width: 80%;
-  height: 1px; /* اضافه کردن ارتفاع به خود المان */
-  background-color: #ddd; /* رنگ خط */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  display: block;
+.dark-mode .categories-content p {
+  color: #d3d3d3;
+}
+
+/* Movie and Book Details (ممکنه استفاده نشه ولی نگهش داشتم) */
+.dark-mode .movies-detail-page,
+.dark-mode .books-detail-page {
+  background-color: #2a2a2a;
+  color: #eee;
+}
+
+.dark-mode .movies-detail-page .detail-header h2,
+.dark-mode .books-detail-page .detail-header h2,
+.dark-mode .movies-detail-page .detail-text .additional-info h3,
+.dark-mode .books-detail-page .detail-text .additional-info h3,
+.dark-mode .detail-section h3 {
+  border-bottom-color: #444;
+  color: #eee;
+}
+
+.dark-mode .movies-detail-page button,
+.dark-mode .books-detail-page button {
+  background-color: #383838;
+  border-color: #555;
+  color: #eee;
+}
+
+.dark-mode .movies-detail-page button:hover,
+.dark-mode .books-detail-page button:hover {
+  background-color: #454545;
+}
+
+/* Dark Mode برای Hero */
+.dark-mode .hero-section {
+  background-color: #2c2c2c;
+  color: #f8f9fa;
+}
+
+.dark-mode .hero-text h2,
+.dark-mode .hero-text .subtitle {
+  color: #f8f9fa;
+}
+
+/* ----------------------------------- */
+/* استایل‌های ریسپانسیو */
+/* ----------------------------------- */
+@media (min-width: 768px) {
+  .hero-section {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: right;
+    padding: 4rem;
+  }
+
+  .hero-text {
+    text-align: right;
+    max-width: 60%;
+  }
+
+  .about-me-section {
+    flex-direction: row;
+    text-align: right;
+  }
+
+  .about-me-section p,
+  .about-me-section ul {
+    margin-right: 0;
+  }
 }
