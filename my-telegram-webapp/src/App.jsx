@@ -20,6 +20,7 @@ import TestContainerAddiction from "./components/tests/TestContainerAddiction";
 import RelationshipReadinessTest from "./components/tests/RelationshipReadinessTest";
 import TestPage from "./components/tests/TestPage";
 import SpecializedTests from "./components/tests/SpecializedTests";
+import MentalHealthTestPage from "./components/tests/MentalHealthTestPage"
 
 import AuthoredBooks from "./components/Sidebar/AuthoredBooks";
 import Profile from "./components/Sidebar/Profile";
@@ -194,6 +195,8 @@ function App() {
         return <TestContainerBipolar />;
       case "AddictionTestActive":
         return <TestContainerAddiction />;
+      case "MentalHealthTestActive":
+        return <MentalHealthTestPage />;
       case "RelationshipReadinessTestActive":
         return <RelationshipReadinessTest />;
       case "selfAwarenessArticle":

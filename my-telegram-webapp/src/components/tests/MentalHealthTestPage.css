@@ -1,0 +1,183 @@
+/* استایل کلی کانتینر آزمون */
+.test-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* استایل عنوان آزمون */
+  .test-container h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* استایل توضیحات آزمون */
+  .description {
+    font-size: 16px;
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* استایل باکس هر سوال */
+  .question-box {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* استایل متن سوال */
+  .question-text {
+    font-size: 18px;
+    color: #34495e;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  /* استایل کانتینر گزینه‌ها */
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* استایل هر گزینه */
+  .option-label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #2c3e50;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* تغییر رنگ هنگام هاور روی گزینه */
+  .option-label:hover {
+    background-color: #ecf0f1;
+  }
+  
+  /* استایل دکمه رادیویی */
+  .option-input {
+    margin-right: 10px;
+    accent-color: #3498db; /* رنگ دکمه رادیویی */
+  }
+  
+  /* استایل دکمه ارسال */
+  .submit-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* غیرفعال کردن دکمه هنگام عدم تکمیل */
+  .submit-button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  /* هاور روی دکمه */
+  .submit-button:hover:not(:disabled) {
+    background-color: #2980b9;
+  }
+  
+  /* استایل بخش تحلیل نتایج */
+  .result-analysis {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* استایل عنوان تحلیل */
+  .result-analysis h3 {
+    font-size: 24px;
+    color: #27ae60;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* استایل متن‌های تحلیل */
+  .result-analysis p {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  /* استایل عنوان تحلیل سوالات */
+  .result-analysis h4 {
+    font-size: 20px;
+    color: #e67e22;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+  
+  /* استایل هر آیتم تحلیل */
+  .response-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f5f6fa;
+    border-radius: 5px;
+  }
+  
+  /* استایل متن سوالات و پاسخ‌ها در تحلیل */
+  .response-item p {
+    margin: 5px 0;
+  }
+  
+  /* استایل پیام تحلیل */
+  .message {
+    color: #8e44ad;
+    font-style: italic;
+  }
+  
+  /* استایل پاسخ‌گویی برای موبایل */
+  @media (max-width: 600px) {
+    .test-container {
+      padding: 10px;
+    }
+  
+    .question-box {
+      padding: 10px;
+    }
+  
+    .question-text {
+      font-size: 16px;
+    }
+  
+    .option-label {
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    .submit-button {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .result-analysis h3 {
+      font-size: 20px;
+    }
+  
+    .result-analysis h4 {
+      font-size: 18px;
+    }
+  }

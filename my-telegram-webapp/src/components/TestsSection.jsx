@@ -9,10 +9,19 @@ function TestsSection({ goToView }) {
       <div className="tests-list">
         <div className="test-item">
           <h3
+            onClick={() => goToView("MentalHealthTestActive")}
+            style={{ cursor: "pointer" }}
+            className="test-title"
+          > 
+            <FaBrain className="bottom-nav-icon" /> تست اندازه گیری سلامت روان
+          </h3>
+        </div>
+        <div className="test-item">
+          <h3
             onClick={() => goToView("anxietyTestActive")}
             style={{ cursor: "pointer" }}
             className="test-title"
-          >
+          > 
             <FaBrain className="bottom-nav-icon" /> تست اضطراب
           </h3>
         </div>
@@ -20,7 +29,7 @@ function TestsSection({ goToView }) {
           <h3
             onClick={() => goToView("depressionTestActive")}
             style={{ cursor: "pointer" }}
-            className="test-title"
+            className="test-title"  
           >
             <FaSadTear className="bottom-nav-icon" /> تست افسردگی
           </h3>
