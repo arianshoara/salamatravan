@@ -1,41 +1,92 @@
-import { FaQuestionCircle, FaBook, FaCog, FaThList, FaCheckCircle, FaUser, FaShoppingCart, FaBookOpen } from "react-icons/fa";
+import { FaQuestionCircle, FaBook, FaCog, FaThList, FaCheckCircle, FaUser, FaShoppingCart, FaBookOpen, FaHeart, FaTimes, FaHome, FaClipboardCheck, FaBell } from "react-icons/fa";
 import './Sidebar.css';
+import { useLanguage } from "../i18n/LanguageContext";
 
+function Sidebar({ isOpen, goToView, setMenuOpen }) {
+  const { translations } = useLanguage();
+  
+  // Handle close sidebar
+  const handleClose = () => {
+    if (setMenuOpen) {
+      setMenuOpen(false);
+    }
+  };
+  
+  // Get current view options
+  const views = {
+    main: 'guide',
+    reading: 'reading',
+    tests: 'tests',
+    categories: 'categories',
+    settings: 'settings',
+    messages: 'messages',
+    profile: 'profile',
+    thankyou: 'thankYouPage'
+  };
 
+  const handleItemClick = (view) => {
+    goToView(view);
+    handleClose();
+  };
 
-function Sidebar({ goToView, setMenuOpen }) {
   return (
-    <div className="menu-overlay" onClick={() => setMenuOpen(false)}>
-      <div className="menu-drawer" onClick={(e) => e.stopPropagation()}>
-        <div className="menu-item" onClick={() => goToView("guide")}> 
-          <FaQuestionCircle className="menu-icon" /> راهنما
-        </div>
-        <div className="menu-item" onClick={() => goToView("reading")}> 
-          <FaBook className="menu-icon" /> خواندنی‌ها
-        </div>
-        <div className="menu-item" onClick={() => goToView("tests")}> 
-          <FaCheckCircle className="menu-icon" /> تست‌ها
-        </div>
-        <div className="menu-item" onClick={() => goToView("categories")}> 
-          <FaThList className="menu-icon" /> دسته‌بندی‌ها
-        </div>
-        <div className="menu-item" onClick={() => goToView("settings")}> 
-          <FaCog className="menu-icon" /> تنظیمات
-        </div>
-        <div className="menu-item" onClick={() => goToView("authoredBooks")}> 
-          <FaBookOpen className="menu-icon" /> کتاب‌های تألیف شده
-        </div>
-        <div className="menu-item" onClick={() => goToView("profile")}> 
-          <FaUser className="menu-icon" /> پروفایل
-        </div>
-        <div className="menu-item" onClick={() => goToView("cart")}> 
-          <FaShoppingCart className="menu-icon" /> سبد خرید
-        </div>
+    <div className={`sidebar ${isOpen ? 'open' : ''}`} style={{ direction: 'rtl' }}>
+      <div className="sidebar-header">
+        <button className="close-button" onClick={handleClose}>
+          <FaTimes />
+        </button>
       </div>
+      
+      <nav className="sidebar-nav">
+        <ul>
+          <li onClick={() => handleItemClick(views.main)}>
+            <FaHome className="menu-icon" />
+            <span>{translations.guide}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.reading)}>
+            <FaBook className="menu-icon" />
+            <span>{translations.reading}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.tests)}>
+            <FaClipboardCheck className="menu-icon" />
+            <span>{translations.tests}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.categories)}>
+            <FaThList className="menu-icon" />
+            <span>{translations.categories}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.settings)}>
+            <FaCog className="menu-icon" />
+            <span>{translations.settings}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.profile)}>
+            <FaUser className="menu-icon" />
+            <span>{translations.profile}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.messages)}>
+            <FaBell className="menu-icon" />
+            <span>{translations.messages}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick('authoredBooks')}>
+            <FaBookOpen className="menu-icon" />
+            <span>{translations.authoredBooks}</span>
+          </li>
+          
+          <li onClick={() => handleItemClick(views.thankyou)}>
+            <FaHeart className="menu-icon" />
+            <span>{translations.thankyou || "تشکر ویژه"}</span>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }
 
-      
-      
 export default Sidebar;

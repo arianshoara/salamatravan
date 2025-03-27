@@ -1,84 +1,102 @@
 import React from "react";
 import { FaBrain, FaSadTear, FaStar } from "react-icons/fa";
 import "./TestsSection.css"; // استایل‌ها رو جداگانه ایمپورت می‌کنیم
+import { useLanguage } from "../i18n/LanguageContext";
 
 function TestsSection({ goToView }) {
+  const { translations, language } = useLanguage();
+  
+  // Define tests data structure with multi-language support
+  const testsData = [
+    {
+      id: "MentalHealthTestActive",
+      icon: <FaBrain className="bottom-nav-icon" />,
+      title: {
+        fa: "تست اندازه گیری سلامت روان",
+        en: "Mental Health Assessment Test",
+        de: "Psychische Gesundheit Bewertungstest"
+      }
+    },
+    {
+      id: "anxietyTestActive",
+      icon: <FaBrain className="bottom-nav-icon" />,
+      title: {
+        fa: "تست اضطراب",
+        en: "Anxiety Test",
+        de: "Angsttest"
+      }
+    },
+    {
+      id: "depressionTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست افسردگی",
+        en: "Depression Test",
+        de: "Depressionstest"
+      }
+    },
+    {
+      id: "OCDTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست وسواس فکری-عملی",
+        en: "OCD Test",
+        de: "Zwangsstörungstest"
+      }
+    },
+    {
+      id: "BipolarTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست اختلال دو قطبی MDQ",
+        en: "Bipolar Disorder Test (MDQ)",
+        de: "Bipolare Störungstest (MDQ)"
+      }
+    },
+    {
+      id: "AddictionTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست اعتیاد",
+        en: "Addiction Test",
+        de: "Suchttest"
+      }
+    },
+    {
+      id: "RelationshipReadinessTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست آمادگی رابطه",
+        en: "Relationship Readiness Test",
+        de: "Beziehungsbereitschaftstest"
+      }
+    },
+    {
+      id: "bigFiveTestActive",
+      icon: <FaSadTear className="bottom-nav-icon" />,
+      title: {
+        fa: "تست شخصیت",
+        en: "Personality Test",
+        de: "Persönlichkeitstest"
+      }
+    }
+  ];
+
   return (
     <div className="tests-content">
-      <h2>تست‌های روانشناسی</h2>
+      <h2>{translations.tests}</h2>
       <div className="tests-list">
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("MentalHealthTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          > 
-            <FaBrain className="bottom-nav-icon" /> تست اندازه گیری سلامت روان
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("anxietyTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          > 
-            <FaBrain className="bottom-nav-icon" /> تست اضطراب
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("depressionTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"  
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست افسردگی
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("OCDTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست وسواس فکری-عملی
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("BipolarTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست اختلال دو قطبی MDQ
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("AddictionTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست اعتیاد
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("RelationshipReadinessTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست آمادگی رابطه
-          </h3>
-        </div>
-        <div className="test-item">
-          <h3
-            onClick={() => goToView("bigFiveTestActive")}
-            style={{ cursor: "pointer" }}
-            className="test-title"
-          >
-            <FaSadTear className="bottom-nav-icon" /> تست شخصیت
-          </h3>
-        </div>
+        {testsData.map((test) => (
+          <div className="test-item" key={test.id}>
+            <h3
+              onClick={() => goToView(test.id)}
+              style={{ cursor: "pointer" }}
+              className="test-title"
+            > 
+              {test.icon} {test.title[language]}
+            </h3>
+          </div>
+        ))}
       </div>
 
       {/* خط جداکننده */}
@@ -91,7 +109,10 @@ function TestsSection({ goToView }) {
           style={{ cursor: "pointer" }}
           className="test-title"
         >
-          <FaStar className="bottom-nav-icon" /> تست‌های تخصصی
+          <FaStar className="bottom-nav-icon" /> 
+          {language === 'fa' ? 'تست‌های تخصصی' : 
+           language === 'en' ? 'Specialized Tests' : 
+           'Spezialisierte Tests'}
         </h3>
       </div>
     </div>

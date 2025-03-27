@@ -1,39 +1,326 @@
 .profile-container {
-    padding: 20px;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.profile-header h2 {
+  color: var(--text-color);
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+.avatar-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+}
+
+.avatar-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-secondary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+}
+
+.avatar-upload-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.avatar-upload-label:hover {
+  transform: scale(1.1);
+  background-color: var(--primary-color-dark);
+}
+
+.edit-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.edit-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.edit-button.active {
+  background-color: var(--danger-color);
+}
+
+.profile-form {
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 2.8rem 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  padding: 1rem;
+}
+
+.form-group input:disabled,
+.form-group textarea:disabled {
+  background-color: var(--bg-secondary);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-light);
+}
+
+.save-button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.save-button:hover {
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+}
+
+.save-status {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.save-status.success {
+  background-color: var(--success-bg);
+  color: var(--success-color);
+}
+
+.google-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.google-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.google-info h4 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.google-info p {
+  margin: 0.5rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.test-results-section {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.test-results-section h3 {
+  color: var(--text-color);
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-item {
+  background-color: var(--bg-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.result-item h4 {
+  margin: 0 0 0.5rem;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.score-bar {
+  height: 8px;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.score-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.score-value {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
   }
-  
-  .profile-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin-bottom: 20px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .profile-form label {
-    margin-bottom: 5px;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .profile-container {
+  background-color: var(--dark-bg-color);
+}
+
+[data-theme="dark"] .avatar-placeholder {
+  background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .form-group input:disabled,
+[data-theme="dark"] .form-group textarea:disabled {
+  background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .google-profile {
+  background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .test-results-section {
+  background-color: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] .result-item {
+  background-color: var(--dark-bg-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 1rem;
   }
-  
-  .profile-form input {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+
+  .avatar-container {
+    width: 100px;
+    height: 100px;
   }
-  
-  .profile-form button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+
+  .edit-button {
+    position: relative;
+    margin-top: 1rem;
+    width: 100%;
   }
-  
-  .google-profile {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .test-results {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
+}

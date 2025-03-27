@@ -1,0 +1,229 @@
+.thank-you-container {
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff5f5;
+}
+
+.dark-mode .thank-you-container {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.thank-you-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1s ease-in;
+}
+
+.dark-mode .thank-you-content {
+  background: rgba(50, 50, 50, 0.9);
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.2);
+}
+
+.thank-you-title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #ff4081;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .thank-you-title {
+  color: #ff80ab;
+}
+
+.image-container {
+  margin: 20px 0;
+  position: relative;
+  display: inline-block;
+}
+
+/* Style for the placeholder or image */
+.image-container .placeholder-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-color: rgba(255, 105, 180, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border: 5px solid #ff80ab;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.image-container .placeholder-image:hover {
+  transform: scale(1.05);
+}
+
+.image-container .placeholder-image span {
+  font-size: 100px;
+}
+
+.thank-you-message {
+  font-size: 1.5rem;
+  margin: 15px 0;
+  color: #333;
+}
+
+.dark-mode .thank-you-message {
+  color: #f5f5f5;
+}
+
+.special-name {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #e91e63;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .special-name {
+  color: #ff4081;
+}
+
+.love-message {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 15px 0;
+  color: #555;
+}
+
+.dark-mode .love-message {
+  color: #ddd;
+}
+
+.hearts-container {
+  margin: 20px 0 10px;
+}
+
+.big-heart {
+  font-size: 2.5rem;
+  margin: 0 10px;
+  display: inline-block;
+  animation: bounce 1s infinite alternate;
+}
+
+.big-heart:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.big-heart:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Heart animation */
+.heart {
+  position: fixed;
+  font-size: 2rem;
+  z-index: 1;
+  pointer-events: none;
+  animation: float 5s linear forwards;
+  opacity: 0;
+  bottom: -10%;
+}
+
+/* Flower animation */
+.flower {
+  position: fixed;
+  font-size: 2rem;
+  z-index: 1;
+  pointer-events: none;
+  animation: float 6s linear forwards;
+  opacity: 0;
+  bottom: -10%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: scale(1) translateY(0);
+  }
+  to {
+    transform: scale(1.2) translateY(-10px);
+  }
+}
+
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .thank-you-title {
+    font-size: 1.8rem;
+  }
+  
+  .image-container .placeholder-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .image-container .placeholder-image span {
+    font-size: 80px;
+  }
+  
+  .thank-you-message {
+    font-size: 1.3rem;
+  }
+  
+  .special-name {
+    font-size: 1.5rem;
+  }
+  
+  .love-message {
+    font-size: 1.1rem;
+  }
+  
+  .big-heart {
+    font-size: 2rem;
+  }
+} 

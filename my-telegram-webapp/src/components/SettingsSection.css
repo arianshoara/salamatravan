@@ -77,15 +77,6 @@ input:checked + .slider:before {
     margin-right: 10px;
 }
 
-/* انتخاب تم */
-#theme-select {
-    padding: 8px;
-    font-size: 1rem;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-}
-
 /* دکمه ریست */
 .reset-button {
     padding: 10px 20px;
@@ -94,6 +85,7 @@ input:checked + .slider:before {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .reset-button:hover {
@@ -103,24 +95,18 @@ input:checked + .slider:before {
 /* تنظیمات مود روشن */
 @media (prefers-color-scheme: light) {
     .settings-container {
-        color: var(--text-color); /* #333 برای خوانایی تو مود روشن */
+        color: var(--text-color);
     }
     .setting-item label,
     .setting-item p,
     .setting-item span {
-        color: var(--text-color); /* #333 */
-    }
-    #theme-select {
-        color: var(--text-color); /* #333 */
-    }
-    .reset-button {
-        color: white; /* دکمه ریست باید سفید بمونه */
+        color: var(--text-color);
     }
 }
 
 /* حالت دارک مود */
 .app-container.dark-mode .settings-container {
-    color: var(--text-dark); /* #f2f2f2 */
+    color: var(--text-dark);
 }
 
 .app-container.dark-mode .slider {
@@ -131,16 +117,51 @@ input:checked + .slider:before {
     background-color: #66b3ff;
 }
 
-.app-container.dark-mode #theme-select {
-    background-color: #555;
-    color: var(--text-dark); /* #f2f2f2 */
+/* Language selector styles */
+.language-setting {
+    margin: 15px 0;
 }
 
-.app-container.dark-mode .reset-button {
-    background-color: #ff6666;
-    color: white; /* سفید تو دارک مود */
+.language-select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    min-width: 120px;
+    text-align: center;
+    color: #333;
+    transition: all 0.3s ease;
 }
 
-.app-container.dark-mode .reset-button:hover {
-    background-color: #ff3333;
+.dark-mode .language-select {
+    background-color: #343a40;
+    border-color: #495057;
+    color: #f8f9fa;
+}
+
+.language-select option {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 8px;
+}
+
+.dark-mode .language-select option {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.language-select:focus {
+    outline: none;
+    border-color: #20c997;
+    box-shadow: 0 0 0 2px rgba(32, 201, 151, 0.2);
+}
+
+/* Fix input range slider in RTL */
+[dir="rtl"] input[type="range"] {
+    direction: ltr;
+    margin-left: 10px;
+    margin-right: 0;
 }

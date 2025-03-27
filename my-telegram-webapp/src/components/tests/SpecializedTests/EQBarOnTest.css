@@ -1,113 +1,687 @@
+/* رمزینه پایه */
+:root {
+  --primary-color: #20c997;
+  --primary-hover: #0ca678;
+  --accent-color: #007bff;
+  --bg-light: #ffffff;
+  --bg-dark: #212529;
+  --text-light: #212529;
+  --text-dark: #f8f9fa;
+  --border-light: #e9ecef;
+  --border-dark: #404040;
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.15);
+  --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+}
 
 /* استایل‌های اصلی */
 .eq-test-container {
-  font-family: 'Arial', sans-serif;
-  max-width: 800px;
+  font-family: 'Vazir', sans-serif;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
   background-color: var(--bg-light);
   color: var(--text-light);
   transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.eq-test-container h1 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .question-block {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid var(--border-light);
-  border-radius: 5px;
-  background-color: var(--option-bg-light);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-light);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.options {
-  margin-top: 10px;
+.question-text {
+  text-align: right;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--text-light);
+}
+
+/* استایل‌های گزینه‌ها */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  direction: rtl;
 }
 
 .option-label {
-  display: block;
-  margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  grid-template-areas: "radio text analysis";
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 2px solid var(--border-light);
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+  background: white;
+  position: relative;
+  direction: rtl;
 }
 
+/* استایل دکمه رادیویی */
 .option-label input[type="radio"] {
-  margin-right: 5px;
-}
-
-.option-label.selected {
-  background-color: #add8e6; /* آبی روشن برای انتخاب */
-}
-
-.option-analysis {
-  display: inline-block;
-  margin-left: 10px;
-  color: var(--option-text-light);
-  font-size: 0.9em;
-  transition: color 0.3s ease;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: var(--button-bg-light);
-  color: white;
-  border: none;
-  border-radius: 5px;
+  grid-area: radio;
+  justify-self: right;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--border-light);
+  border-radius: 50%;
+  margin: 0;
+  transition: all 0.3s ease;
+  position: relative;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: var(--button-hover-bg-light);
+.option-label input[type="radio"]:checked {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
 }
 
-.result {
-  text-align: center;
-  margin-top: 30px;
+.option-label input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: white;
 }
 
-.result-bar {
+/* استایل متن گزینه */
+.option-text {
+  grid-area: text;
+  text-align: right;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+/* استایل تحلیل */
+.option-analysis {
+  grid-area: analysis;
+  font-size: 0.9em;
+  color: #666;
+  text-align: left;
+  justify-self: left;
+}
+
+/* حالت هاور */
+.option-label:hover {
+  border-color: var(--primary-color);
+  background: linear-gradient(145deg, #f8f9fa, #ffffff);
+  transform: translateX(-5px);
+}
+
+/* حالت انتخاب شده */
+.option-label.selected {
+  border-color: var(--primary-color);
+  background: linear-gradient(145deg, #e6f8f3, #ffffff);
+}
+
+/* دکمه‌های ارسال و شروع مجدد */
+.submit-button,
+.restart-button {
+  display: block;
   width: 100%;
-  background-color: var(--bar-bg-light);
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 20px 0;
-  height: 30px;
-  transition: background-color 0.3s ease;
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.bar-fill {
+.submit-button:hover,
+.restart-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* نتایج آزمون */
+.result-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  background-color: var(--bar-fill-light);
-  transition: width 0.5s, background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 2rem;
+  animation: slideIn 0.5s ease-out;
+  max-width: 100%;
+  box-sizing: border-box;
+  direction: rtl;
 }
 
-/* استایل‌های دارک مود */
+.result-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.score-number {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.comparison-icon {
+  font-size: 2rem;
+}
+
+.comparison-icon.high { color: var(--success); }
+.comparison-icon.average { color: var(--warning); }
+.comparison-icon.low { color: var(--danger); }
+
+.comparison-text {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.social-comparison {
+  margin-bottom: 2rem;
+}
+
+/* استایل‌های ویژوالایزر */
+.visualization-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+/* درخت هیجانی */
+.emotional-tree-container {
+  background: linear-gradient(to bottom, #E3F2FD, #BBDEFB);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.emotional-tree-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, rgba(187, 222, 251, 0.8), rgba(187, 222, 251, 0));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.emotional-tree-container h3 {
+  margin-bottom: 0.8rem;
+  color: var(--text-light);
+  font-size: 1.3rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tree-message {
+  font-size: 0.95rem;
+  color: #455A64;
+  margin-bottom: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .tree-message {
+  color: #E0E0E0;
+  background-color: rgba(38, 50, 56, 0.6);
+}
+
+.tree {
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 30px;
+}
+
+.tree-branch {
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.branch-label {
+  opacity: 1;
+  position: absolute;
+  right: 100%;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  color: #455A64;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+  text-shadow: none;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-trunk {
+  background: linear-gradient(to right, #5D4037, #795548, #5D4037);
+  border-radius: 4px;
+  position: relative;
+  transform-origin: bottom;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.tree-crown {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+  z-index: 3;
+}
+
+.crown-leaf {
+  transition: transform 0.2s ease;
+}
+
+.crown-leaf:hover {
+  transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+.tree-leaf {
+  transition: transform 0.3s ease;
+}
+
+.tree-leaf:hover {
+  transform: scale(1.5);
+  z-index: 10;
+}
+
+.tree-base {
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(to bottom, #5D4037, #4E342E);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* انیمیشن برگ‌ها */
+@keyframes leafSway {
+  0% {
+    transform: rotate(-5deg) scale(1);
+  }
+  100% {
+    transform: rotate(5deg) scale(1.1);
+  }
+}
+
+@keyframes leafPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* ابرها در پس‌زمینه */
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(5px);
+  animation: cloudFloat linear infinite;
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(calc(100% + 100vw));
+  }
+}
+
+/* حالت دارک مود برای درخت */
+.dark-mode .emotional-tree-container {
+  background: linear-gradient(to bottom, #263238, #37474F);
+}
+
+.dark-mode .emotional-tree-container::after {
+  background: linear-gradient(to top, rgba(55, 71, 79, 0.8), rgba(55, 71, 79, 0));
+}
+
+.dark-mode .emotional-tree-container h3 {
+  color: #E0E0E0;
+}
+
+.dark-mode .branch-label {
+  background: rgba(66, 66, 66, 0.9);
+  color: #E0E0E0;
+}
+
+.dark-mode .ground {
+  background: linear-gradient(to bottom, #4E342E, #3E2723) !important;
+}
+
+/* آسمان احساسی */
+.emotional-sky-container {
+  background: linear-gradient(to bottom, #1a237e, #311b92);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  min-height: 400px;
+  text-align: center;
+}
+
+.emotional-sky-container h3 {
+  margin-bottom: 1.5rem;
+}
+
+.sky {
+  position: relative;
+  min-height: 400px;
+}
+
+.stars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.star-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translate(-50%, -50%);
+}
+
+.star {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.star-label {
+  font-size: 0.8rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+.star-score {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* تحلیل تفصیلی */
+.detailed-analysis {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.detailed-analysis h3 {
+  margin-bottom: 1.5rem;
+}
+
+/* کارت‌های دسته‌بندی */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.category-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: right;
+}
+
+.category-card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 1s ease-in-out;
+}
+
+.category-score {
+  display: block;
+  text-align: left;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* دکمه بستن نتایج */
+.close-results {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.close-results:hover {
+  transform: scale(1.1);
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .eq-test-container {
+    padding: 1rem;
+  }
+  
+  .question-block {
+    padding: 1.5rem;
+  }
+  
+  .option-label {
+    grid-template-columns: 30px 1fr;
+    grid-template-areas: 
+      "radio text"
+      "analysis analysis";
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .option-analysis {
+    grid-area: analysis;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+  
+  .visualization-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .score-number {
+    font-size: 2.5rem;
+  }
+
+  .emotional-tree-container {
+    min-height: 400px;
+    padding: 1rem;
+  }
+  
+  .tree {
+    min-height: 350px;
+  }
+  
+  .tree-branch .branch-label {
+    font-size: 0.65rem;
+    padding: 3px 5px;
+    position: relative;
+    right: 0;
+    margin: 2px 0;
+    display: inline-block;
+  }
+  
+  /* For mobile screens, position labels differently */
+  .branch-categories-legend {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+    width: 100%;
+    padding: 5px;
+    z-index: 10;
+  }
+  
+  .category-tag {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    color: #455A64;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .category-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 3px;
+    display: inline-block;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* حالت دارک مود */
 .dark-mode .eq-test-container {
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
 
 .dark-mode .question-block {
+  background: rgba(42, 42, 42, 0.95);
+  color: var(--text-dark);
+}
+
+.dark-mode .option-label {
+  background: rgba(48, 48, 48, 0.95);
   border-color: var(--border-dark);
-  background-color: var(--option-bg-dark);
 }
 
-.dark-mode .option-analysis {
-  color: var(--option-text-dark);
+.dark-mode .option-text {
+  color: var(--text-dark);
 }
 
-.dark-mode button {
-  background-color: var(--button-bg-dark);
+.dark-mode .close-results {
+  color: var(--text-dark);
 }
 
-.dark-mode button:hover {
-  background-color: var(--button-hover-bg-dark);
+.dark-mode .category-card {
+  background: #2a2a2a;
+  color: var(--text-dark);
 }
 
-.dark-mode .result-bar {
-  background-color: var(--bar-bg-dark);
+.dark-mode .result-container {
+  background-color: rgba(33, 37, 41, 0.95);
+  color: var(--text-dark);
 }
 
-.dark-mode .bar-fill {
-  background-color: var(--bar-fill-dark);
+.dark-mode .emotional-puzzle {
+  background: #2a2a2a;
+  color: var(--text-dark);
 }

@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Vazirmatn", "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -48,4 +48,14 @@
 .app-container.dark-mode {
   background: var(--dark-bg-color);
   color: var(--text-dark);
+}
+
+/* Add emoji specific styles */
+.emoji {
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol";
+  font-style: normal;
+  -webkit-font-variant-ligatures: normal;
+  font-variant-ligatures: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
 }

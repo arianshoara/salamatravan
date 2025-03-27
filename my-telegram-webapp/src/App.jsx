@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { FaBars, FaQuestionCircle, FaBook, FaCog, FaThList, FaCheckCircle } from "react-icons/fa";
+import { FaBars, FaQuestionCircle, FaBook, FaCog, FaThList, FaCheckCircle, FaClipboardList, FaArrowRight } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useLanguage } from "./i18n/LanguageContext";
 
 import Sidebar from "./components/Sidebar";
+import SearchBar from "./components/SearchBar";
 import ReadingSection from "./components/ReadingSection";
 import TestsSection from "./components/TestsSection";
 import GuideContent from "./GuideContent";
 import SettingsSection from "./components/SettingsSection";
+import ThankYouPage from "./components/ThankYouPage";
 
 import EQBarOnTest from './components/tests/SpecializedTests/EQBarOnTest';
 
@@ -69,12 +72,47 @@ const navItems = [
   { view: "settings", icon: <FaCog className="bottom-nav-icon" /> },
 ];
 
+// Organize reading materials into a structured array for searching
+const readingMaterials = [
+  { viewName: "anxietyImpactArticle", title: "تأثیر اضطراب بر زندگی روزمره", description: "بررسی تأثیرات اضطراب بر جنبه‌های مختلف زندگی", type: 'article' },
+  { viewName: "selfAwarenessArticle", title: "خودآگاهی و رشد شخصی", description: "چگونه خودآگاهی می‌تواند به رشد شخصی کمک کند", type: 'article' },
+  { viewName: "depressionVsSadnessArticle", title: "تفاوت افسردگی و غم", description: "چگونه افسردگی را از غم معمولی تشخیص دهیم", type: 'article' },
+  { viewName: "positivePsychologyArticle", title: "روانشناسی مثبت‌گرا", description: "اصول و کاربردهای روانشناسی مثبت‌گرا", type: 'article' },
+  { viewName: "betterDecisionMakingArticle", title: "تصمیم‌گیری بهتر", description: "روش‌های بهبود تصمیم‌گیری در زندگی", type: 'article' },
+  { viewName: "stressAnxietyManagementArticle", title: "مدیریت استرس و اضطراب", description: "تکنیک‌های مؤثر برای مدیریت استرس و اضطراب روزانه", type: 'article' },
+  { viewName: "mindfulnessImportanceArticle", title: "اهمیت ذهن‌آگاهی", description: "چرا ذهن‌آگاهی برای سلامت روان مهم است", type: 'article' },
+  { viewName: "cognitiveBiasesArticle", title: "سوگیری‌های شناختی", description: "آشنایی با سوگیری‌های شناختی رایج و تأثیر آنها بر تفکر", type: 'article' },
+  { viewName: "emotionalResilienceArticle", title: "تاب‌آوری عاطفی", description: "چگونه تاب‌آوری عاطفی خود را تقویت کنیم", type: 'article' },
+  { viewName: "philosophyOfHappinessArticle", title: "فلسفه شادی", description: "بررسی مفهوم شادی از دیدگاه فلسفی", type: 'article' },
+  { viewName: "socialMediaMentalHealthArticle", title: "شبکه‌های اجتماعی و سلامت روان", description: "تأثیر شبکه‌های اجتماعی بر سلامت روان", type: 'article' },
+  { viewName: "ethicalDecisionMakingArticle", title: "تصمیم‌گیری اخلاقی", description: "اصول تصمیم‌گیری اخلاقی در زندگی روزمره", type: 'article' },
+  { viewName: "meaningOfLifeArticle", title: "معنای زندگی", description: "جستجوی معنا در زندگی مدرن", type: 'article' },
+  { viewName: "healthyCommunicationSkillsArticle", title: "مهارت‌های ارتباطی سالم", description: "تکنیک‌های برقراری ارتباط مؤثر و سالم", type: 'article' },
+  { viewName: "overcomingProcrastinationArticle", title: "غلبه بر تعلل", description: "روش‌های عملی برای غلبه بر تعلل و اهمال‌کاری", type: 'article' }
+];
+
+// Organize tests into a structured array for searching
+const tests = [
+  { viewName: "depressionTestActive", title: "تست افسردگی", description: "سنجش علائم افسردگی بر اساس معیارهای استاندارد", type: 'test' },
+  { viewName: "anxietyTestActive", title: "تست اضطراب", description: "ارزیابی سطح اضطراب و علائم مرتبط", type: 'test' },
+  { viewName: "bigFiveTestActive", title: "تست شخصیت", description: "ارزیابی پنج عامل بزرگ شخصیت", type: 'test' },
+  { viewName: "OCDTestActive", title: "تست OCD", description: "بررسی علائم اختلال وسواس فکری-عملی", type: 'test' },
+  { viewName: "BipolarTestActive", title: "تست دوقطبی", description: "ارزیابی علائم اختلال دوقطبی", type: 'test' },
+  { viewName: "eqBarOnTestActive", title: "تست هوش هیجانی بار-آن", description: "سنجش هوش هیجانی با مدل بار-آن", type: 'test' },
+  { viewName: "AddictionTestActive", title: "تست اعتیاد", description: "ارزیابی میزان وابستگی به مواد مختلف", type: 'test' },
+  { viewName: "MentalHealthTestActive", title: "تست سلامت روان", description: "ارزیابی کلی وضعیت سلامت روان", type: 'test' },
+  { viewName: "RelationshipReadinessTestActive", title: "تست آمادگی برای رابطه", description: "ارزیابی آمادگی روانی برای ورود به رابطه", type: 'test' }
+];
+
 function App() {
   const [currentView, setCurrentView] = useState("guide");
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [viewHistoryState, setViewHistoryState] = useState(["guide"]);
   const [fontSize, setFontSize] = useState(parseInt(localStorage.getItem("fontSize")) || 16);
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const { translations } = useLanguage();
 
   // ذخیره سایز فونت تو localStorage
   useEffect(() => {
@@ -151,6 +189,56 @@ function App() {
     alert("ورود با گوگل ناموفق بود. لطفاً دوباره تلاش کنید.");
   };
 
+  // Handle search functionality
+  const handleSearch = (searchTerm, isLiveSearch = false) => {
+    if (!searchTerm.trim()) {
+      setSearchResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    const searchTermLower = searchTerm.toLowerCase();
+    
+    // Search in reading materials (articles)
+    const articleResults = readingMaterials.filter(article => 
+      article.title.toLowerCase().includes(searchTermLower) ||
+      article.description.toLowerCase().includes(searchTermLower)
+    );
+
+    // Search in tests
+    const testResults = tests.filter(test =>
+      test.title.toLowerCase().includes(searchTermLower) ||
+      test.description.toLowerCase().includes(searchTermLower)
+    );
+
+    // Combine and sort results
+    const combinedResults = [...articleResults, ...testResults].sort((a, b) => {
+      // Exact matches first
+      const aExact = a.title.toLowerCase() === searchTermLower;
+      const bExact = b.title.toLowerCase() === searchTermLower;
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+      
+      // Then starts with matches
+      const aStarts = a.title.toLowerCase().startsWith(searchTermLower);
+      const bStarts = b.title.toLowerCase().startsWith(searchTermLower);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      
+      // Then alphabetically
+      return a.title.localeCompare(b.title);
+    });
+
+    setSearchResults(combinedResults);
+
+    // Only navigate to search view for full searches, not live searches
+    if (!isLiveSearch && currentView !== "search") {
+      setViewHistoryState((prevHistory) => [...prevHistory, currentView]);
+      setCurrentView("search");
+    }
+  };
+
   // رندر محتوای ویوها
   const renderContent = () => {
     switch (currentView) {
@@ -175,6 +263,8 @@ function App() {
             setFontSize={setFontSize}
           />
         );
+      case "thankYouPage":
+        return <ThankYouPage />;
       case "specializedTestsActive":
         return <SpecializedTests />;
       case "eqBarOnTestActive": // یا هر نام دیگری که می‌خواهید برای view استفاده کنید
@@ -263,6 +353,44 @@ function App() {
             </GoogleOAuthProvider>
           </div>
         );
+      case "search":
+        return (
+          <div className="search-results-container">
+            <h2>{isSearching ? "نتایج جستجو" : "جستجو"}</h2>
+            {searchResults.length > 0 ? (
+              <div className="search-results-list">
+                {searchResults.map((result, index) => (
+                  <div 
+                    key={index} 
+                    className="search-result-item"
+                    onClick={() => goToView(result.viewName)}
+                  >
+                    <div className="search-result-icon">
+                      {result.type === 'article' ? <FaBook /> : <FaClipboardList />}
+                    </div>
+                    <div className="search-result-content">
+                      <h3>{result.title}</h3>
+                      <p>{result.description}</p>
+                      <span className="search-result-type">
+                        {result.type === 'article' ? 'مقاله' : 'آزمون'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : isSearching ? (
+              <div className="no-results">
+                <p className="search-tip">نتیجه‌ای یافت نشد</p>
+                <p className="search-tip">لطفاً با کلمات کلیدی دیگری جستجو کنید.</p>
+              </div>
+            ) : (
+              <div className="search-instructions">
+                <p className="search-tip">برای جستجو، عبارت مورد نظر خود را وارد کنید.</p>
+                <p className="search-tip">می‌توانید در مقالات، آزمون‌ها و دسته‌بندی‌ها جستجو کنید.</p>
+              </div>
+            )}
+          </div>
+        );
       default:
         return <h2>صفحه نامعتبر</h2>;
     }
@@ -272,32 +400,40 @@ function App() {
     <div className={`app-container ${darkMode ? "dark-mode" : ""}`}>
       {/* هدر برنامه */}
       <header className="top-bar">
-        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           <FaBars className="bottom-nav-icon" />
         </button>
 
-        <div className="top-bar-circle-image"></div>
+        <div className="search-container">
+          <SearchBar onSearch={handleSearch} searchResults={searchResults} />
+        </div>
 
-        {!["guide", "tests", "reading", "settings", "categories", "login"].includes(currentView) && (
-          <button className="back-btn" onClick={goBackView}>
-            <span className="bottom-nav-icon">بازگشت</span>
-          </button>
-        )}
+        <div 
+          className="top-bar-circle-image" 
+          title={translations.mentalHealth || "سلامت روان"} 
+          onClick={() => goToView("MentalHealthTestActive")}
+        ></div>
 
         <div className="login-section">
-          <button onClick={() => goToView("login")} className="login-gmail-button">
-            <img
-              src="https://img.icons8.com/color/48/000000/google-logo.png"
-              alt="Google Icon"
-              style={{ width: "24px", height: "24px" }}
-              className="google-icon"
-            />
-          </button>
+          {!["guide", "tests", "reading", "settings", "categories", "login"].includes(currentView) ? (
+            <button className="back-btn" onClick={goBackView} aria-label="Back">
+              <FaArrowRight className="bottom-nav-icon" />
+            </button>
+          ) : (
+            <button onClick={() => goToView("login")} className="login-gmail-button" aria-label="Login">
+              <img
+                src="https://img.icons8.com/color/48/000000/google-logo.png"
+                alt="Google Icon"
+                style={{ width: "24px", height: "24px" }}
+                className="google-icon"
+              />
+            </button>
+          )}
         </div>
       </header>
 
-      {/* منوی کناری */}
-      {menuOpen && <Sidebar goToView={goToView} setMenuOpen={setMenuOpen} />}
+      {/* منوی کناری - always on right side regardless of language */}
+      <Sidebar isOpen={menuOpen} goToView={goToView} setMenuOpen={setMenuOpen} />
 
       {/* محتوای اصلی */}
       <main className="content">{renderContent()}</main>

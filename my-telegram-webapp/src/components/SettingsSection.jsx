@@ -1,17 +1,22 @@
 import React from "react";
 import "./SettingsSection.css"; // استایل‌ها رو جدا می‌کنیم
+import { useLanguage } from "../i18n/LanguageContext";
 
 function SettingsSection({ darkMode, setDarkMode, fontSize, setFontSize }) {
+  // Get language context
+  const { translations, language, changeLanguage } = useLanguage();
+  
   // تابع برای ریست کردن تنظیمات به حالت پیش‌فرض
   const resetSettings = () => {
     setDarkMode(false);
     setFontSize(16);
-    alert("تنظیمات به حالت پیش‌فرض برگشت! 😊");
+    changeLanguage("fa"); // Reset to Persian
+    alert(translations.settingsReset);
   };
 
   return (
     <div className="settings-container">
-      <h2>⚙️ تنظیمات گوگولی</h2>
+      <h2>⚙️ {translations.settings}</h2>
 
       {/* سوئیچ حالت تیره */}
       <div className="setting-item">
@@ -23,12 +28,12 @@ function SettingsSection({ darkMode, setDarkMode, fontSize, setFontSize }) {
           />
           <span className="slider"></span>
         </label>
-        <p>🌙 حالت تیره: {darkMode ? "روشن" : "خاموش"}</p>
+        <p>🌙 {translations.darkMode}: {darkMode ? translations.on : translations.off}</p>
       </div>
 
       {/* تنظیم سایز فونت */}
       <div className="setting-item font-size-setting">
-        <label htmlFor="font-size-slider">✍️ سایز فونت:</label>
+        <label htmlFor="font-size-slider">✍️ {translations.fontSize}:</label>
         <input
           type="range"
           min="12"
@@ -41,29 +46,24 @@ function SettingsSection({ darkMode, setDarkMode, fontSize, setFontSize }) {
       </div>
 
       {/* آیتم جدید: انتخاب تم رنگی */}
-      <div className="setting-item">
-        <label htmlFor="theme-select">🎨 تم رنگی:</label>
-        <select id="theme-select" onChange={(e) => alert("این فقط نمایشه! 😜")}>
-          <option value="default">پیش‌فرض</option>
-          <option value="blue">آبی آرامش‌بخش</option>
-          <option value="pink">صورتی گوگولی</option>
-          <option value="green">سبز طبیعت</option>
+      <div className="setting-item language-setting">
+        <label htmlFor="language-select">🌐 {translations.language}:</label>
+        <select 
+          id="language-select"
+          value={language}
+          onChange={(e) => changeLanguage(e.target.value)}
+          className="language-select"
+        >
+          <option value="fa">{translations.persian}</option>
+          <option value="en">{translations.english}</option>
+          <option value="de">{translations.german}</option>
         </select>
-      </div>
-
-      {/* آیتم جدید: حالت سرگرمی */}
-      <div className="setting-item">
-        <label className="switch">
-          <input type="checkbox" onChange={() => alert("حالت سرگرمی فعال شد! 😂")} />
-          <span className="slider"></span>
-        </label>
-        <p>🎉 حالت سرگرمی (انیمیشن و جوک)</p>
       </div>
 
       {/* دکمه ریست تنظیمات */}
       <div className="setting-item">
         <button className="reset-button" onClick={resetSettings}>
-          🔄 ریست تنظیمات
+          🔄 {translations.resetSettings}
         </button>
       </div>
     </div>

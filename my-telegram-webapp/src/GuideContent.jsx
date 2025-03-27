@@ -1,43 +1,45 @@
 import React from "react";
 import { FaUserTie, FaGlobe, FaTelegram, FaInstagram, FaYoutube } from "react-icons/fa";
-import profileImage from "/assets/profile-image.jpg"; // مسیر عکس پروفایل
-import pathHeroImage from "/assets/path-to-your-hero-image.jpg"; // مسیر عکس هیرو
+import { useLanguage } from "./i18n/LanguageContext";
 import "./GuideContent.css"; // استایل‌ها رو جداگانه ایمپورت می‌کنیم
 
 function GuideContent({ goToView }) {
+  // Get translations
+  const { translations, language } = useLanguage();
+  
   // دیتای بخش "درباره من"
   const aboutMeItems = [
-    { text: "👨🏻‍🏫 مدرس زبان آلمانی" },
-    { text: "🎓 دانش‌آموخته کارشناسی روانشناسی" },
-    { text: "💻 در حال پیشرفت در زمینه برنامه‌نویسی" },
+    { text: translations.germanTeacher },
+    { text: translations.psychologyGraduate },
+    { text: translations.programming },
   ];
 
-  // دیتای بخش "راه‌های ارتباط"
+  // دیتای بخش "راه‌های ارتباط" با پشتیبانی چندزبانه
   const contactLinks = [
     {
       href: "https://arianshoara.github.io/arian/",
       icon: <FaGlobe className="contact-icon" />,
-      text: "سایتم",
+      text: translations.myWebsite,
     },
     {
       href: "https://t.me/ariansho",
       icon: <FaTelegram className="contact-icon" />,
-      text: "تلگرام: @ariansho",
+      text: `${translations.telegram}: @ariansho`,
     },
     {
       href: "https://t.me/rozgarmanarian",
       icon: <FaTelegram className="contact-icon" />,
-      text: "کانال تلگرام: @rozgarmanarian",
+      text: `${translations.telegramChannel}: @rozgarmanarian`,
     },
     {
       href: "https://www.instagram.com/arian__sho2",
       icon: <FaInstagram className="contact-icon" />,
-      text: "اینستاگرام: arian__sho2",
+      text: `${translations.instagram}: arian__sho2`,
     },
     {
       href: "https://www.youtube.com/@unipsydeu",
       icon: <FaYoutube className="contact-icon" />,
-      text: "یوتیوب: unipsydeu",
+      text: `${translations.youtube}: unipsydeu`,
     },
   ];
 
@@ -45,38 +47,42 @@ function GuideContent({ goToView }) {
     <div className="guide-content">
       <section className="hero-section">
         <div className="hero-text">
-          <h2>همراه شما در مسیر خودشناسی و بهبود فردی</h2>
+          <h2>{translations.heroTitle}</h2>
           <p className="subtitle">
-            مطالب و ابزارهای روانشناسی کاربردی برای زندگی روزمره شما.
+            {translations.heroSubtitle}
           </p>
           <button
             className="hero-button"
             onClick={() => goToView("reading")}
           >
-            شروع یادگیری
+            {translations.startLearning}
           </button>
         </div>
         <div className="hero-image">
-          <img src={pathHeroImage} alt="تصویر بخش قهرمان" />
+          <img 
+            src="/images/path-to-your-hero-image.jpg" 
+            alt="Health" 
+            className="hero-img" 
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '50%',
+              border: 'none'
+            }}
+          />
         </div>
       </section>
 
       <section className="about-me-section">
         <div className="profile-image-container">
-          <img
-            src={profileImage}
-            alt="عکس پروفایل آرین شعرا"
-            className="profile-image"
-          />
+          <img src="/images/profile-image.jpg" alt="Profile" className="profile-image" />
         </div>
         <h3>
-          <FaUserTie className="section-icon" /> درباره آرین شعرا
+          <FaUserTie className="section-icon" /> {translations.aboutMe}
         </h3>
         <p>
-          سلام! من آرین شعرا هستم، مدرس زبان آلمانی، دانش‌آموخته روانشناسی و
-          علاقه‌مند به برنامه‌نویسی. هدفم از ایجاد این وبسایت، ارائه مطالب و
-          ابزارهای کاربردی در زمینه روانشناسی و خودشناسی به زبان فارسیه.
-          امیدوارم این مجموعه بتونه گامی مثبت در جهت بهبود کیفیت زندگی شما باشه.
+          {translations.aboutMeDesc}
         </p>
         <ul className="about-me-list">
           {aboutMeItems.map((item, index) => (
@@ -86,7 +92,7 @@ function GuideContent({ goToView }) {
       </section>
 
       <section className="contact-section">
-        <h3>🔗 راه‌های ارتباط با من</h3>
+        <h3>🔗 {translations.contactWays}</h3>
         <ul className="contact-list">
           {contactLinks.map((link, index) => (
             <li key={index}>

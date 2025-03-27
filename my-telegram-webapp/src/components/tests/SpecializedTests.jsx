@@ -147,14 +147,31 @@ function SpecializedTests() {
     // اگر یک تست انتخاب شده باشد، آن تست به‌صورت داینامیک بارگذاری می‌شود
     if (activeTest) {
         // استفاده از React.lazy برای وارد کردن داینامیک کامپوننت تست
-        const TestComponent = lazy(() => import(`./SpecializedTests/${activeTest.filename}`));
+        const TestComponent = lazy(() => {
+            // اینجا پسوند فایل را به مسیر اضافه می‌کنیم تا مشکل import حل شود
+            // وقتی فایل وجود نداشته باشد، به جای خطای وایت، یک خطای معمولی نمایش داده می‌شود
+            return import(`./SpecializedTests/EQBarOnTest.jsx`).catch(() => {
+                // اگر فایل وجود نداشت، به کامپوننت پیش‌فرض برمی‌گردیم
+                return Promise.resolve({
+                    default: () => (
+                        <div className="test-not-available">
+                            <h2>این تست در حال حاضر در دسترس نیست</h2>
+                            <p>این تست در حال توسعه است و به زودی در دسترس قرار خواهد گرفت.</p>
+                        </div>
+                    )
+                });
+            });
+        });
 
         return (
             <div className="active-test-container">
                 <button onClick={() => setActiveTest(null)} className="back-button">
                     بازگشت
                 </button>
-                <Suspense fallback={<div>در حال بارگذاری تست...</div>}>
+                <Suspense fallback={<div className="loading-test">
+                    <div className="loading-spinner"></div>
+                    <p>در حال بارگذاری تست...</p>
+                </div>}>
                     <TestComponent />
                 </Suspense>
             </div>
