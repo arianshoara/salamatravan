@@ -596,7 +596,7 @@ async def send_final_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
     analysis += "1. تمرین تنفس عمیق و آرام‌سازی.\n"
     analysis += "2. استفاده از تکنیک‌های شناختی-رفتاری (CBT) و مواجهه و جلوگیری از پاسخ (ERP).\n"
     analysis += "3. در صورت افزایش علائم، مشاوره با روانشناس یا متخصص سلامت روان توصیه می‌شود."
-
+    analysis += "برای اطلاعات و تحلیل های دقیق تر به وب اپ مراجعه کنید و نتیجه تست ها را با تحلیل دقیق تر ببینید."
     logger.info(f"send_final_result: Length of analysis message: {len(analysis)}") # لاگ طول پیام
     
     max_telegram_message_length = 4096
