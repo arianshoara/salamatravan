@@ -1,0 +1,30 @@
+import sqlite3
+
+# اتصال به دیتابیس (اگر فایل وجود نداشته باشد، خودش ایجاد می‌شود)
+conn = sqlite3.connect("bot_data.db")
+cursor = conn.cursor()
+
+# ایجاد جدول کاربران (در صورتی که وجود نداشته باشد)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER UNIQUE,
+    username TEXT,
+    message TEXT
+)
+""")
+conn.commit()
+
+# تابع برای اضافه کردن پیام کاربر
+def save_message(user_id, username, message):
+    cursor.execute("INSERT OR IGNORE INTO users (user_id, username, message) VALUES (?, ?, ?)", 
+                   (user_id, username, message))
+    conn.commit()
+
+# تابع برای دریافت تمام کاربران
+def get_users():
+    cursor.execute("SELECT * FROM users")
+    return cursor.fetchall()
+
+# بستن اتصال در انتها
+conn.close()
