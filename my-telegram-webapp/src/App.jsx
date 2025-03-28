@@ -13,7 +13,8 @@ import GuideContent from "./GuideContent";
 import SettingsSection from "./components/SettingsSection";
 import ThankYouPage from "./components/ThankYouPage";
 
-import EQBarOnTest from './components/tests/SpecializedTests/EQBarOnTest';
+import React, { lazy, Suspense } from 'react';
+const EQBarOnTest = lazy(() => import('./components/tests/SpecializedTests/EQBarOnTest'));
 
 import TestContainer from "./components/tests/TestContainer";
 import TestContainerAnxiety from "./components/tests/TestContainerAnxiety";
@@ -267,8 +268,12 @@ function App() {
         return <ThankYouPage />;
       case "specializedTestsActive":
         return <SpecializedTests />;
-      case "eqBarOnTestActive": // یا هر نام دیگری که می‌خواهید برای view استفاده کنید
-        return <EQBarOnTest />;  
+      case "eqBarOnTestActive":
+        return (
+          <Suspense fallback={<div>در حال بارگذاری...</div>}>
+            <EQBarOnTest />
+          </Suspense>
+        ); 
       case "authoredBooks":
         return <AuthoredBooks />;
       case "profile":

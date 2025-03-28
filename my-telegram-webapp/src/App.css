@@ -61,11 +61,10 @@ body {
   direction: rtl;
 }
 
-/* Font Face */
 @font-face {
   font-family: "Vazir";
-  src: url("./assets/fonts/Vazirmatn-Regular.woff2") format("woff2"),
-       url("./assets/fonts/Vazirmatn-Regular.woff") format("woff");
+  src: url("/assets/fonts/Vazirmatn-Regular.woff2") format("woff2"),
+       url("/assets/fonts/Vazirmatn-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
