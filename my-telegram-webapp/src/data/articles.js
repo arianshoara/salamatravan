@@ -183,10 +183,14 @@ export const articles = [
     "id": "socialMediaMentalHealthArticle",
     "slug": "social-media-mental-health",
     "title": {
-      "fa": "شبکه‌های اجتماعی و سلامت روان"
+      "fa": "شبکه‌های اجتماعی و سلامت روان",
+      "en": "Social Media and Mental Health",
+      "de": "Soziale Medien und psychische Gesundheit"
     },
     "description": {
-      "fa": "تأثیر شبکه‌های اجتماعی بر سلامت روان"
+      "fa": "تأثیر شبکه‌های اجتماعی بر سلامت روان",
+      "en": "How social media can affect mental health",
+      "de": "Wie soziale Medien die psychische Gesundheit beeinflussen können"
     },
     "minutes": 3,
     "language": "fa",
@@ -197,10 +201,14 @@ export const articles = [
     "id": "ethicalDecisionMakingArticle",
     "slug": "ethical-decision-making",
     "title": {
-      "fa": "تصمیم‌گیری اخلاقی"
+      "fa": "تصمیم‌گیری اخلاقی",
+      "en": "Ethical Decision-Making",
+      "de": "Ethische Entscheidungsfindung"
     },
     "description": {
-      "fa": "اصول تصمیم‌گیری اخلاقی در زندگی روزمره"
+      "fa": "اصول تصمیم‌گیری اخلاقی در زندگی روزمره",
+      "en": "Principles of ethical decision-making in everyday life",
+      "de": "Grundsätze ethischer Entscheidungen im Alltag"
     },
     "minutes": 3,
     "language": "fa",
@@ -211,10 +219,14 @@ export const articles = [
     "id": "meaningOfLifeArticle",
     "slug": "meaning-of-life",
     "title": {
-      "fa": "معنای زندگی"
+      "fa": "معنای زندگی",
+      "en": "The Meaning of Life",
+      "de": "Der Sinn des Lebens"
     },
     "description": {
-      "fa": "جستجوی معنا در زندگی مدرن"
+      "fa": "جستجوی معنا در زندگی مدرن",
+      "en": "Searching for meaning in modern life",
+      "de": "Die Suche nach Sinn im modernen Leben"
     },
     "minutes": 2,
     "language": "fa",
@@ -225,10 +237,14 @@ export const articles = [
     "id": "healthyCommunicationSkillsArticle",
     "slug": "healthy-communication-skills",
     "title": {
-      "fa": "مهارت‌های ارتباطی سالم"
+      "fa": "مهارت‌های ارتباطی سالم",
+      "en": "Healthy Communication Skills",
+      "de": "Gesunde Kommunikationsfähigkeiten"
     },
     "description": {
-      "fa": "تکنیک‌های برقراری ارتباط مؤثر و سالم"
+      "fa": "تکنیک‌های برقراری ارتباط مؤثر و سالم",
+      "en": "Techniques for effective and healthy communication",
+      "de": "Techniken für eine wirksame und gesunde Kommunikation"
     },
     "minutes": 3,
     "language": "fa",
@@ -239,10 +255,14 @@ export const articles = [
     "id": "overcomingProcrastinationArticle",
     "slug": "overcoming-procrastination",
     "title": {
-      "fa": "غلبه بر تعلل"
+      "fa": "غلبه بر تعلل",
+      "en": "Overcoming Procrastination",
+      "de": "Prokrastination überwinden"
     },
     "description": {
-      "fa": "روش‌های عملی برای غلبه بر تعلل و اهمال‌کاری"
+      "fa": "روش‌های عملی برای غلبه بر تعلل و اهمال‌کاری",
+      "en": "Practical ways to overcome procrastination",
+      "de": "Praktische Wege, um Prokrastination zu überwinden"
     },
     "minutes": 3,
     "language": "fa",

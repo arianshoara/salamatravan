@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { LanguageProvider } from '../src/i18n/LanguageContext';
@@ -7,6 +8,8 @@ import { articles } from '../src/data/articles';
 import { tests } from '../src/data/tests';
 import { normalizeSearch, readStored, writeStored } from '../src/lib/storage';
 import { sanitizeAnswers, useAnswers } from '../src/components/tests/TestUI';
+import translations from '../src/i18n/translations';
+import { ui } from '../src/i18n/ui';
 
 function open(path) { return render(<MemoryRouter initialEntries={[path]}><LanguageProvider><App /></LanguageProvider></MemoryRouter>); }
 async function ready() { await waitFor(() => expect(screen.queryByText('در حال بارگذاری…')).toBeNull()); }
@@ -25,6 +28,22 @@ describe('routing and accessible content', () => {
   it('supports a visible language change and language notice', async () => {
     open('/settings'); fireEvent.change(screen.getByRole('combobox'), { target: { value: 'de' } }); expect(document.documentElement.lang).toBe('de'); expect(document.documentElement.dir).toBe('ltr');
     fireEvent.click(screen.getByRole('link', { name: 'Lesen' })); expect(screen.getByText('Dieser Inhalt ist derzeit nur auf Persisch verfügbar.')).toBeTruthy();
+  });
+  it('translates the active home, profile and cart surfaces into German', async () => {
+    open('/settings'); fireEvent.change(screen.getByRole('combobox'), { target: { value: 'de' } });
+    fireEvent.click(screen.getByRole('link', { name: 'Start' }));
+    expect(screen.getByText('Absolvent eines Psychologiestudiums')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Menü' }));
+    fireEvent.click(screen.getByRole('link', { name: 'Profil' })); await ready();
+    expect(screen.getByRole('heading', { name: 'Benutzerprofil' })).toBeTruthy();
+    expect(screen.queryByText(/اطلاعات این صفحه/)).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Menü' }));
+    fireEvent.click(screen.getByRole('link', { name: 'Warenkorb' })); await ready();
+    expect(screen.getByText('Ihr Warenkorb ist leer.')).toBeTruthy();
+  });
+  it('uses language-aware drawer placement', () => {
+    const css = readFileSync(`${process.cwd()}/src/App.css`, 'utf8');
+    expect(css).toMatch(/\.app-menu\s*\{[^}]*inset-inline-start:\s*0;[^}]*inset-inline-end:\s*auto;/s);
   });
   it('persists explicit theme and limits reading size without resizing root', () => {
     open('/settings'); fireEvent.click(screen.getByRole('checkbox')); expect(document.documentElement.dataset.theme).toBe('dark'); expect(JSON.parse(localStorage.getItem('darkMode'))).toBe(true);
@@ -98,5 +117,20 @@ describe('storage resilience', () => {
     localStorage.setItem('userMessages', '{"wrong":"shape"}');
     localStorage.setItem('testResults', '[null]');
     open('/messages'); await ready(); expect(screen.queryByText('این بخش بارگذاری نشد')).toBeNull();
+  });
+});
+
+describe('translation completeness', () => {
+  it.each(['en', 'de'])('has every Persian UI key in %s without Persian leakage', language => {
+    expect(Object.keys(translations[language]).sort()).toEqual(Object.keys(translations.fa).sort());
+    expect(Object.keys(ui[language]).sort()).toEqual(Object.keys(ui.fa).sort());
+    expect(Object.values(translations[language]).some(value => /[\u0600-\u06ff]/.test(value))).toBe(false);
+    expect(Object.values(ui[language]).some(value => /[\u0600-\u06ff]/.test(value))).toBe(false);
+  });
+  it('provides translated titles and descriptions for every content card', () => {
+    for (const item of [...articles, ...tests]) for (const language of ['fa', 'en', 'de']) {
+      expect(item.title[language]).toBeTruthy();
+      expect(item.description[language]).toBeTruthy();
+    }
   });
 });

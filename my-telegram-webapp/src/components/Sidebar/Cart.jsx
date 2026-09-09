@@ -1,8 +1,10 @@
 import { readStored, writeStored } from '../../lib/storage';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Cart.css';
 
 const Cart = () => {
+  const { translations: t } = useLanguage();
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -37,14 +39,14 @@ const Cart = () => {
   const handleCheckout = () => {
     // در اینجا می‌توانید اطلاعات سبد خرید را به درگاه پرداخت آنلاین ارسال کنید
 
-    alert('درگاه پرداخت هنوز متصل نشده است؛ پرداختی انجام نمی‌شود.');
+    alert(t.checkoutUnavailable);
   };
 
   return (
     <div className="cart-container">
-      <h2>سبد خرید</h2>
+      <h1>{t.cart}</h1>
       {cartItems.length === 0 ? (
-        <p>سبد خرید شما خالی است.</p>
+        <p>{t.emptyCart}</p>
       ) : (
         <>
           <ul className="cart-items">
@@ -53,24 +55,25 @@ const Cart = () => {
                 <img src={item.image} alt={item.name} className="cart-item-image" width="80" height="80" />
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
-                  <p>قیمت: {item.price} تومان</p>
+                  <p>{t.price}: {item.price} {t.currency}</p>
                   <div className="cart-item-quantity">
-                    <label>تعداد:</label>
+                    <label htmlFor={`quantity-${item.id}`}>{t.quantity}:</label>
                     <input
-                      type="number" aria-label={"تعداد " + item.name}
+                      id={`quantity-${item.id}`}
+                      type="number" aria-label={`${t.quantityFor} ${item.name}`}
                       value={item.quantity}
                       min="1"
                       onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
                     />
                   </div>
                 </div>
-                <button className="remove-item" onClick={() => handleRemoveItem(item.id)}>حذف</button>
+                <button className="remove-item" onClick={() => handleRemoveItem(item.id)}>{t.remove}</button>
               </li>
             ))}
           </ul>
           <div className="cart-summary">
-            <p>مجموع: {totalPrice} تومان</p>
-            <button className="checkout-button" onClick={handleCheckout}>پرداخت آنلاین</button>
+            <p>{t.total}: {totalPrice} {t.currency}</p>
+            <button className="checkout-button" onClick={handleCheckout}>{t.checkout}</button>
           </div>
         </>
       )}

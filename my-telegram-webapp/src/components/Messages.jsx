@@ -102,7 +102,7 @@ const Messages = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
             />
-            <button className="search-clear-button" aria-label={translations.close || "بستن جست‌وجو"} onClick={() => setIsSearchExpanded(false)}>
+            <button className="search-clear-button" aria-label={translations.closeSearch} onClick={() => setIsSearchExpanded(false)}>
               <FaTimes />
             </button>
           </div>
@@ -148,6 +148,7 @@ const Messages = () => {
                   <button 
                     className="action-button archive"
                     onClick={() => toggleArchiveMessage(msg.id)}
+                    aria-label={msg.archived ? translations.unarchiveMessage : translations.archiveMessage}
                     title={msg.archived ? translations.unarchiveMessage : translations.archiveMessage}
                   >
                     {msg.archived ? <FaUndo /> : <FaArchive />}
@@ -155,6 +156,7 @@ const Messages = () => {
                   <button 
                     className="action-button delete"
                     onClick={() => deleteMessage(msg.id)}
+                    aria-label={translations.deleteMessage}
                     title={translations.deleteMessage}
                   >
                     <FaTrash />
@@ -185,6 +187,7 @@ const Messages = () => {
                   <button 
                     className="action-button delete"
                     onClick={() => deleteTestResult(result.id)}
+                    aria-label={translations.deleteMessage}
                     title={translations.deleteMessage}
                   >
                     <FaTrash />

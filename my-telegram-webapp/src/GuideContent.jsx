@@ -66,7 +66,7 @@ function GuideContent() {
 
       <section className="about-me-section">
         <div className="profile-image-container">
-          <img src="/images/profile-image.jpg" alt="آرین شعرا" width="80" height="80" loading="lazy" className="profile-image" />
+          <img src="/images/profile-image.jpg" alt="Arian Shoara" width="80" height="80" loading="lazy" className="profile-image" />
         </div>
         <h3>
           <FaUserTie className="section-icon" /> {translations.aboutMe}

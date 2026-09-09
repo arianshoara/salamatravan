@@ -44,7 +44,7 @@ export default function AppShell({ children }) {
       <div className="app-menu__heading"><strong>{t.brand}</strong><button className="icon-button" onClick={closeMenu} aria-label={t.close} title={t.close}><FaTimes /></button></div>
       <nav aria-label={t.menu} onClick={e => { if (e.target.closest('a')) closeMenu(); }}>
         {navigation.map(([path, label, Icon]) => <NavLink key={path} to={path} end={path === '/'}><Icon aria-hidden="true" />{t[label]}</NavLink>)}
-        <Link to="/profile">{translations.profile}</Link><Link to="/messages">{translations.messages}</Link><Link to="/authored-books">{translations.authoredBooks}</Link><Link to="/cart">{translations.cart || 'سبد خرید'}</Link><Link to="/thanks">{translations.thankyou || 'تشکر ویژه'}</Link>
+        <Link to="/profile">{translations.profile}</Link><Link to="/messages">{translations.messages}</Link><Link to="/authored-books">{translations.authoredBooks}</Link><Link to="/cart">{translations.cart}</Link><Link to="/thanks">{translations.thankyou}</Link>
       </nav>
     </dialog>
     <main id="main-content" className="content" tabIndex="-1">{children}</main>

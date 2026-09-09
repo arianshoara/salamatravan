@@ -50,10 +50,10 @@ export default function App() {
     <Route path="/tests/:slug" element={<TestLayout />} />
     <Route path="/categories" element={localContent(<Categories goToView={goToView} />)} />
     <Route path="/settings" element={<SettingsSection darkMode={darkMode} setDarkMode={setDarkMode} fontSize={fontSize} setFontSize={setFontSize} />} />
-    <Route path="/profile" element={localContent(<Profile />)} />
+    <Route path="/profile" element={<Profile />} />
     <Route path="/messages" element={<Messages />} />
     <Route path="/authored-books" element={localContent(<AuthoredBooks />)} />
-    <Route path="/cart" element={localContent(<Cart />)} />
+    <Route path="/cart" element={<Cart />} />
     <Route path="/thanks" element={localContent(<Thanks />)} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/search" element={<SearchPage />} />

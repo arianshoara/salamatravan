@@ -1,6 +1,6 @@
 # Salamat Ravan — سلامت روان
 
-A Persian-first educational mental-health web app built with React 19 and Vite. The interface supports Persian, English and German; article and questionnaire bodies currently remain Persian and are labelled accordingly.
+A Persian-first educational mental-health web app built with React 19 and Vite. The interface and catalog metadata support Persian, English and German with automated translation-parity checks; article and questionnaire bodies currently remain Persian and are labelled accordingly.
 
 ## Development
 
