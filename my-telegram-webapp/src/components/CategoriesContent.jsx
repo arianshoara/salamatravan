@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./CategoriesContent.css";
-import PropTypes from "prop-types";
 
 // ایمپورت داده‌های کتاب‌ها
 import book1 from "./data/books/book1";
@@ -29,7 +28,7 @@ import taxiDriver from "./data/movies/taxi-driver";
 const books = [book1, book2, book3, book4, book5, book6, book7, book8, book9, book10];
 const movies = [fightClub, insideOut, se7en, theSilenceOfTheLambs, shutterIsland, oneFlewOverTheCuckoosNest, aBeautifulMind, memento, theDeparted, taxiDriver];
 
-const CategoriesContent = ({ goToView }) => {
+const CategoriesContent = () => {
     const [activeTab, setActiveTab] = useState("movies");
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -46,15 +45,16 @@ const CategoriesContent = ({ goToView }) => {
         <div className={`${type}-list`}>
             {items.map((item) => (
                 <div key={item.id} className="category-item">
-                    <h3
+                    <button
+                        type="button"
                         onClick={() => handleItemClick(item, type)} // کل item رو پاس می‌دیم
                         className="clickable-title"
-                        role="button"
-                        tabIndex={0}
+
+
                         aria-label={`مشاهده جزئیات ${type === "movies" ? item.title : item.titleFa}`}
                     >
                         {type === "movies" ? item.title : item.titleFa}
-                    </h3>
+                    </button>
                     {type === "books" && <p>نویسنده: {item.author}</p>}
                     <p>{item.description}</p>
                 </div>
@@ -70,22 +70,22 @@ const CategoriesContent = ({ goToView }) => {
                 {type === "books" && <p className="author">نویسنده: {item.author}</p>}
             </div>
 
-            <div className="detail-body" style={{ flexDirection: "column", alignItems: "center" }}>
+            <div className="detail-body">
                 {/* نمایش تصویر */}
                 <div className="detail-image circular-image">
                     {type === "books" && item.cover ? (
-                        <img src={item.cover} alt={`جلد کتاب ${item.titleFa}`} />
+                        <img loading="lazy" width="200" height="300" src={item.cover} alt={`جلد کتاب ${item.titleFa}`} />
                     ) : (
                         type === "books" && <p>عکس کتاب پیدا نشد</p>
                     )}
                     {type === "movies" && item.imageUrl ? (
-                        <img src={item.imageUrl} alt={`پوستر فیلم ${item.title}`} />
+                        <img loading="lazy" width="200" height="300" src={item.imageUrl} alt={`پوستر فیلم ${item.title}`} />
                     ) : (
                         type === "movies" && <p>عکس فیلم پیدا نشد</p>
                     )}
                 </div>
 
-                <div className="detail-text" style={{ width: "80%", textAlign: "center" }}>
+                <div className="detail-text">
                     <p className="description">{item.fullDescription || item.description}</p>
 
                     <div className="additional-info">
@@ -137,8 +137,6 @@ const CategoriesContent = ({ goToView }) => {
     );
 };
 
-CategoriesContent.propTypes = {
-    goToView: PropTypes.func.isRequired,
-};
+
 
 export default CategoriesContent;

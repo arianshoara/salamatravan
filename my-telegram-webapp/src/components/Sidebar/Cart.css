@@ -9,6 +9,8 @@
   
   .cart-item {
     display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     align-items: center;
     border: 1px solid #ddd;
     padding: 10px;
@@ -24,10 +26,13 @@
   
   .cart-item-details {
     flex-grow: 1;
+    min-width: 0;
+    flex-basis: 140px;
   }
   
   .cart-item-quantity {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
   }
   

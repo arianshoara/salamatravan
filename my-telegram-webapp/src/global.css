@@ -1,2 +1,1 @@
-/* global.css */
-@import "./index.css"; /* متغیرها رو از index.css می‌گیره */
+/* Global styles are imported once from main.jsx. */

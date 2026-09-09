@@ -1,73 +1,13 @@
-import React from "react";
-import "./SettingsSection.css"; // استایل‌ها رو جدا می‌کنیم
-import { useLanguage } from "../i18n/LanguageContext";
-
-function SettingsSection({ darkMode, setDarkMode, fontSize, setFontSize }) {
-  // Get language context
-  const { translations, language, changeLanguage } = useLanguage();
-  
-  // تابع برای ریست کردن تنظیمات به حالت پیش‌فرض
-  const resetSettings = () => {
-    setDarkMode(false);
-    setFontSize(16);
-    changeLanguage("fa"); // Reset to Persian
-    alert(translations.settingsReset);
-  };
-
-  return (
-    <div className="settings-container">
-      <h2>⚙️ {translations.settings}</h2>
-
-      {/* سوئیچ حالت تیره */}
-      <div className="setting-item">
-        <label className="switch">
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
-          />
-          <span className="slider"></span>
-        </label>
-        <p>🌙 {translations.darkMode}: {darkMode ? translations.on : translations.off}</p>
-      </div>
-
-      {/* تنظیم سایز فونت */}
-      <div className="setting-item font-size-setting">
-        <label htmlFor="font-size-slider">✍️ {translations.fontSize}:</label>
-        <input
-          type="range"
-          min="12"
-          max="24"
-          value={fontSize}
-          onChange={(e) => setFontSize(e.target.value)}
-          id="font-size-slider"
-        />
-        <span>{fontSize}px 📏</span>
-      </div>
-
-      {/* آیتم جدید: انتخاب تم رنگی */}
-      <div className="setting-item language-setting">
-        <label htmlFor="language-select">🌐 {translations.language}:</label>
-        <select 
-          id="language-select"
-          value={language}
-          onChange={(e) => changeLanguage(e.target.value)}
-          className="language-select"
-        >
-          <option value="fa">{translations.persian}</option>
-          <option value="en">{translations.english}</option>
-          <option value="de">{translations.german}</option>
-        </select>
-      </div>
-
-      {/* دکمه ریست تنظیمات */}
-      <div className="setting-item">
-        <button className="reset-button" onClick={resetSettings}>
-          🔄 {translations.resetSettings}
-        </button>
-      </div>
-    </div>
-  );
+import { useLanguage } from '../i18n/LanguageContext';
+import { ui } from '../i18n/ui';
+export default function SettingsSection({ darkMode, setDarkMode, fontSize, setFontSize }) {
+  const { language, changeLanguage, translations: t } = useLanguage();
+  function reset() { setDarkMode(false); setFontSize(16); changeLanguage('fa'); }
+  return <section className="panel narrow"><h1>{t.settings}</h1>
+    <label className="setting-row"><span>{t.darkMode}</span><input type="checkbox" checked={darkMode} onChange={e => setDarkMode(e.target.checked)} /></label>
+    <label className="search-field" htmlFor="font-size">{t.fontSize}: {fontSize}px<input id="font-size" type="range" min="16" max="24" step="2" value={fontSize} onChange={e => setFontSize(Number(e.target.value))} /></label>
+    <label className="search-field" htmlFor="language">{t.language}<select id="language" value={language} onChange={e => changeLanguage(e.target.value)}><option value="fa">فارسی</option><option value="en">English</option><option value="de">Deutsch</option></select></label>
+    <p className="article__body">{language === 'fa' ? 'این متن نمونه، اندازهٔ نوشته در صفحه‌های مطالعه را نشان می‌دهد.' : language === 'de' ? 'Dieser Beispieltext zeigt die Schriftgröße beim Lesen.' : 'This sample shows the text size used when reading.'}</p>
+    <p className="muted">{ui[language].local}</p><button onClick={reset}>{t.resetSettings}</button>
+  </section>;
 }
-
-export default SettingsSection;

@@ -1,14 +1,14 @@
-import "./AnxietyImpactArticlePage.css"; // ایمپورت فایل CSS
+
 //import React from "react";
 
 const HealthyCommunicationSkillsArticlePage = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">مهارت‌های ارتباطی سالم</h1>
+    <div className="article__body">
+
       <p className="mb-4">
         ارتباط مؤثر یکی از پایه‌های اساسی در ایجاد و حفظ روابط عاطفی عمیق و معنادار است. توانایی برقراری ارتباط سالم می‌تواند به بهبود کیفیت زندگی و افزایش رضایت از روابط بینجامد. در این مقاله، به بررسی اصول ارتباط مؤثر، گوش دادن فعال، ابراز وجود، راهکارهای بهبود روابط بین‌فردی، تفاوت روابط سطحی و عمیق، مهارت‌های ارتباطی در هر نوع رابطه و تعیین حد و مرزها می‌پردازیم.
       </p>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">اصول ارتباط مؤثر</h2>
+      <h2 id="section-1" className="text-2xl font-semibold mt-6 mb-2">اصول ارتباط مؤثر</h2>
       <p className="mb-4">
         ارتباط مؤثر بر پایه چند اصل کلیدی استوار است:
       </p>
@@ -18,7 +18,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li><strong>احترام:</strong> توجه به حقوق و احساسات طرف مقابل.</li>
         <li><strong>همدلی:</strong> درک و پذیرش احساسات و دیدگاه‌های دیگران.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">گوش دادن فعال</h2>
+      <h2 id="section-2" className="text-2xl font-semibold mt-6 mb-2">گوش دادن فعال</h2>
       <p className="mb-4">
         گوش دادن فعال به معنای تمرکز کامل بر سخنان طرف مقابل و درک عمیق از پیام اوست. برای تقویت این مهارت:
       </p>
@@ -28,7 +28,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li>بازخورد دادن با استفاده از جملاتی مانند &quot;متوجه شدم که...&quot; یا &quot;اگر درست فهمیده باشم...&quot;.</li>
         <li>پرسیدن سؤالات باز برای تشویق به بیان بیشتر.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">ابراز وجود</h2>
+      <h2 id="section-3" className="text-2xl font-semibold mt-6 mb-2">ابراز وجود</h2>
       <p className="mb-4">
         ابراز وجود به معنای بیان محترمانه نیازها، خواسته‌ها و احساسات خود است. برای این منظور:
       </p>
@@ -38,7 +38,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li>حفظ آرامش و کنترل تن صدا.</li>
         <li>پذیرش پاسخ‌ها و واکنش‌های طرف مقابل بدون پیش‌داوری.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">تفاوت روابط سطحی و عمیق</h2>
+      <h2 id="section-4" className="text-2xl font-semibold mt-6 mb-2">تفاوت روابط سطحی و عمیق</h2>
       <p className="mb-4">
         روابط سطحی معمولاً بر مبنای تعاملات گذرا و موضوعات سطحی است، در حالی که روابط عمیق شامل اشتراک‌گذاری احساسات، افکار و تجربیات شخصی می‌شود. برای ایجاد روابط عمیق:
       </p>
@@ -48,7 +48,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li>اعتمادسازی از طریق صداقت و پایبندی به تعهدات.</li>
         <li>پذیرش و درک متقابل بدون قضاوت.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">مهارت‌های ارتباطی در روابط عاطفی عمیق</h2>
+      <h2 id="section-5" className="text-2xl font-semibold mt-6 mb-2">مهارت‌های ارتباطی در روابط عاطفی عمیق</h2>
       <p className="mb-4">
         در روابط عاطفی عمیق، مهارت‌های ارتباطی نقش بسزایی در تقویت پیوندها دارند:
       </p>
@@ -58,7 +58,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li>تعیین اهداف مشترک و همکاری در دستیابی به آن‌ها.</li>
         <li>حفظ حریم شخصی و احترام به استقلال فردی.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">تعیین حد و مرزها در روابط</h2>
+      <h2 id="section-6" className="text-2xl font-semibold mt-6 mb-2">تعیین حد و مرزها در روابط</h2>
       <p className="mb-4">
         تعیین حد و مرزها برای حفظ سلامت روانی و عاطفی در روابط ضروری است. برای این کار:
       </p>
@@ -68,7 +68,7 @@ const HealthyCommunicationSkillsArticlePage = () => {
         <li>پایبندی به مرزهای تعیین‌شده و اجتناب از نقض آن‌ها.</li>
         <li>پذیرش مرزهای طرف مقابل و احترام به آن‌ها.</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">نتیجه‌گیری</h2>
+      <h2 id="section-7" className="text-2xl font-semibold mt-6 mb-2">نتیجه‌گیری</h2>
       <p className="mb-4">
         مهارت‌های ارتباطی سالم، کلید ایجاد و حفظ روابط عاطفی عمیق و معنادار هستند. با تمرین و تقویت این مهارت‌ها، می‌توانیم کیفیت روابط خود را بهبود بخشیده و زندگی رضایت‌بخش‌تری را تجربه کنیم.
       </p>

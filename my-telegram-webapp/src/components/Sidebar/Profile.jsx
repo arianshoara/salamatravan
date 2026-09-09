@@ -1,3 +1,4 @@
+import { readStored, writeStored } from '../../lib/storage';
 import { useState, useEffect } from 'react';
 import { FaUser, FaEnvelope, FaCalendarAlt, FaPhone, FaSave, FaCamera, FaGoogle } from 'react-icons/fa';
 import './Profile.css';
@@ -19,7 +20,7 @@ const Profile = () => {
 
   useEffect(() => {
     // فرض می‌کنیم اطلاعات پروفایل از localStorage یا API دریافت می‌شود
-    const savedProfileData = JSON.parse(localStorage.getItem('profile')) || {
+    const savedProfileData = readStored('profile', null) || {
       name: '',
       age: '',
       email: '',
@@ -29,7 +30,7 @@ const Profile = () => {
       googleSignIn: false,
       testResults: [],
     };
-    setProfileData(savedProfileData);
+    if (savedProfileData && typeof savedProfileData === 'object' && !Array.isArray(savedProfileData)) setProfileData(prev => ({ ...prev, ...savedProfileData, testResults: Array.isArray(savedProfileData.testResults) ? savedProfileData.testResults : [] }));
   }, []);
 
   const handleInputChange = (e) => {
@@ -41,6 +42,7 @@ const Profile = () => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/') || file.size > 2 * 1024 * 1024) { setSaveStatus('یک تصویر کوچک‌تر از ۲ مگابایت انتخاب کنید.'); return; }
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileData(prev => ({ ...prev, avatar: reader.result }));
@@ -51,14 +53,14 @@ const Profile = () => {
   };
 
   const handleSaveProfile = () => {
-    localStorage.setItem('profile', JSON.stringify(profileData));
+    if (!writeStored('profile', profileData)) { setSaveStatus('ذخیره انجام نشد؛ فضای مرورگر یا مجوز ذخیره‌سازی را بررسی کنید.'); return; }
     setSaveStatus('پروفایل شما با موفقیت ذخیره شد');
     setIsEditing(false);
     setTimeout(() => setSaveStatus(''), 3000);
   };
 
   return (
-    <div className="profile-container">
+    <div className="profile-container" lang="fa" dir="rtl">
       <div className="profile-header">
         <div className="avatar-container">
           <div className="avatar-wrapper">
@@ -73,16 +75,16 @@ const Profile = () => {
               <label className="avatar-upload-label">
                 <FaCamera />
                 <input
-                  type="file"
+                  type="file" aria-label="انتخاب تصویر پروفایل"
                   accept="image/*"
                   onChange={handleAvatarChange}
-                  style={{ display: 'none' }}
+                  className="avatar-upload-input"
                 />
               </label>
             )}
           </div>
         </div>
-        <h2>پروفایل کاربری</h2>
+        <h1>پروفایل کاربری</h1><p>اطلاعات این صفحه فقط روی همین دستگاه ذخیره می‌شود.</p>
         <button 
           className={`edit-button ${isEditing ? 'active' : ''}`}
           onClick={() => setIsEditing(!isEditing)}
@@ -98,7 +100,7 @@ const Profile = () => {
           </div>
           <input
             type="text"
-            name="name"
+            name="name" aria-label="نام و نام خانوادگی"
             value={profileData.name}
             onChange={handleInputChange}
             placeholder="نام و نام خانوادگی"
@@ -112,7 +114,7 @@ const Profile = () => {
           </div>
           <input
             type="number"
-            name="age"
+            name="age" aria-label="سن"
             value={profileData.age}
             onChange={handleInputChange}
             placeholder="سن"
@@ -126,7 +128,7 @@ const Profile = () => {
           </div>
           <input
             type="email"
-            name="email"
+            name="email" aria-label="ایمیل"
             value={profileData.email}
             onChange={handleInputChange}
             placeholder="ایمیل"
@@ -140,7 +142,7 @@ const Profile = () => {
           </div>
           <input
             type="tel"
-            name="phone"
+            name="phone" aria-label="تلفن"
             value={profileData.phone}
             onChange={handleInputChange}
             placeholder="شماره تماس"
@@ -150,7 +152,7 @@ const Profile = () => {
 
         <div className="form-group">
           <textarea
-            name="bio"
+            name="bio" aria-label="دربارهٔ من"
             value={profileData.bio}
             onChange={handleInputChange}
             placeholder="درباره من..."

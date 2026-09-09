@@ -19,8 +19,9 @@ const availableLanguages = {
 export const LanguageProvider = ({ children }) => {
   // Initialize language from localStorage or default to Persian
   const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'fa';
+    let savedLanguage;
+    try { savedLanguage = localStorage.getItem('language'); } catch { /* Storage disabled. */ }
+    return availableLanguages[savedLanguage] ? savedLanguage : 'fa';
   });
 
   // Get current translations based on selected language
@@ -33,7 +34,7 @@ export const LanguageProvider = ({ children }) => {
   const changeLanguage = (newLanguage) => {
     if (availableLanguages[newLanguage]) {
       setLanguage(newLanguage);
-      localStorage.setItem('language', newLanguage);
+      try { localStorage.setItem('language', newLanguage); } catch { /* In-memory language still works. */ }
     }
   };
 

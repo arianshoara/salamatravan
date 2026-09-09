@@ -41,7 +41,8 @@ const AddictionTestContainer = () => {
                 {addictions.map((addiction) => (
                     <button 
                         key={addiction.type} 
-                        onClick={() => setSelectedAddiction(addiction.type)}
+                        aria-pressed={selectedAddiction === addiction.type}
+                        onClick={() => { setTestResult(null); setSelectedAddiction(addiction.type); }}
                         className={`addiction-button ${selectedAddiction === addiction.type ? "selected" : ""}`}
                     >
                         {addiction.label}
@@ -49,14 +50,14 @@ const AddictionTestContainer = () => {
                 ))}
             </div>
 
-            {selectedAddiction && <AddictionTestPage addictionType={selectedAddiction} onTestComplete={handleTestComplete} />}
+            {selectedAddiction && <AddictionTestPage key={selectedAddiction} addictionType={selectedAddiction} onTestComplete={handleTestComplete} />}
 
             {testResult && (
                 <div className="test-result">
                     <h2>نتیجه تست:</h2>
                     <p>نمره کل: {testResult.totalScore}</p>
                     <p>درصد: {testResult.percentage}%</p>
-                    <p>تفسیر: {testResult.interpretation}</p>
+                    <p>این نمره تشخیص یا احتمال بیماری نیست. برای تفسیر معتبر به ارزیابی تخصصی نیاز است.</p>
                 </div>
             )}
         </div>

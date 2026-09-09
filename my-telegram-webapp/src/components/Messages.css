@@ -256,4 +256,7 @@
     justify-content: flex-end;
     margin-top: 1rem;
   }
-} 
+}
+.messages-container button { min-width: 44px; min-height: 44px; }
+.messages-tabs { overflow-x: auto; }
+.messages-container input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }

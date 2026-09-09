@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaCalendarAlt, FaEnvelope, FaSave, FaGoogle } from 'react-icons/fa';
 import { useLanguage } from '../i18n/LanguageContext';
 import './Profile.css';
@@ -24,10 +24,10 @@ const Profile = ({ user }) => {
     }
     
     // اگر کاربر با گوگل لاگین کرده باشد، اطلاعات ایمیل را تنظیم کنیم
-    if (user && user.email && !profile.email) {
+    if (user && user.email) {
       setProfile(prev => ({
         ...prev,
-        email: user.email,
+        email: prev.email || user.email,
         name: user.displayName || prev.name
       }));
     }
@@ -134,4 +134,4 @@ const Profile = ({ user }) => {
   );
 };
 
-export default Profile; 
+export default Profile;

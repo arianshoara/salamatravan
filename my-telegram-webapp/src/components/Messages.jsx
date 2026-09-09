@@ -1,10 +1,11 @@
+import { readStored, writeStored } from '../lib/storage';
 import React, { useState, useEffect, useRef } from 'react';
 import { FaInfoCircle, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaTrash, FaArchive, FaSearch, FaUndo, FaTimes } from 'react-icons/fa';
 import './Messages.css';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const Messages = () => {
-  const { translations, language } = useLanguage();
+  const { translations } = useLanguage();
   const [messages, setMessages] = useState([]);
   const [testResults, setTestResults] = useState([]);
   const [activeTab, setActiveTab] = useState('messages');
@@ -14,37 +15,22 @@ const Messages = () => {
 
   // بارگیری پیام‌ها و نتایج آزمون‌ها از localStorage
   useEffect(() => {
-    const storedMessages = localStorage.getItem('userMessages');
-    const storedTestResults = localStorage.getItem('testResults');
-    
-    if (storedMessages) {
-      try {
-        setMessages(JSON.parse(storedMessages));
-      } catch (e) {
-        console.error('Error parsing messages:', e);
-        setMessages([]);
-      }
-    }
-    
-    if (storedTestResults) {
-      try {
-        setTestResults(JSON.parse(storedTestResults));
-      } catch (e) {
-        console.error('Error parsing test results:', e);
-        setTestResults([]);
-      }
-    }
+    const storedMessages = readStored('userMessages', []);
+    const storedTestResults = readStored('testResults', []);
+    const validRecords = value => Array.isArray(value) ? value.filter(item => item && typeof item.title === 'string') : [];
+    setMessages(validRecords(storedMessages));
+    setTestResults(validRecords(storedTestResults));
   }, []);
 
   // ذخیره تغییرات در localStorage
   const saveMessages = (updatedMessages) => {
     setMessages(updatedMessages);
-    localStorage.setItem('userMessages', JSON.stringify(updatedMessages));
+    writeStored('userMessages', updatedMessages);
   };
 
   const saveTestResults = (updatedResults) => {
     setTestResults(updatedResults);
-    localStorage.setItem('testResults', JSON.stringify(updatedResults));
+    writeStored('testResults', updatedResults);
   };
 
   // حذف پیام یا نتیجه آزمون
@@ -79,16 +65,16 @@ const Messages = () => {
   // فیلتر کردن پیام‌ها و نتایج آزمون بر اساس جستجو
   const filteredMessages = messages.filter(msg => 
     (msg.title && msg.title.toLowerCase().includes(searchQuery.toLowerCase())) || 
-    (msg.content && msg.content.toLowerCase().includes(searchQuery.toLowerCase()))
+    (typeof msg.content === 'string' && msg.content.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const filteredTestResults = testResults.filter(result => 
     (result.title && result.title.toLowerCase().includes(searchQuery.toLowerCase())) || 
-    (result.description && result.description.toLowerCase().includes(searchQuery.toLowerCase()))
+    (typeof result.description === 'string' && result.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   // دریافت آیکون بر اساس نوع پیام
-  const getIcon = (type) => {
+  const _getIcon = (type) => {
     switch (type) {
       case 'success':
         return <FaCheckCircle className="message-icon success" />;
@@ -111,19 +97,19 @@ const Messages = () => {
           <div className="messages-search-expanded">
             <input
               type="text"
-              placeholder={translations.searchPlaceholder}
+              aria-label={translations.searchPlaceholder} placeholder={translations.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
             />
-            <button className="search-clear-button" onClick={() => setIsSearchExpanded(false)}>
+            <button className="search-clear-button" aria-label={translations.close || "بستن جست‌وجو"} onClick={() => setIsSearchExpanded(false)}>
               <FaTimes />
             </button>
           </div>
         ) : (
-          <button className="messages-search-icon" onClick={() => {
+          <button className="messages-search-icon" aria-label={translations.searchPlaceholder} onClick={() => {
             setIsSearchExpanded(true);
-            setTimeout(() => searchInputRef.current.focus(), 100);
+            setTimeout(() => searchInputRef.current?.focus(), 100);
           }}>
             <FaSearch />
           </button>
@@ -215,4 +201,4 @@ const Messages = () => {
   );
 };
 
-export default Messages; 
+export default Messages;

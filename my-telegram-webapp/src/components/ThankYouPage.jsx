@@ -3,7 +3,7 @@ import "./ThankYouPage.css";
 import { useLanguage } from "../i18n/LanguageContext";
 
 function ThankYouPage() {
-  const { translations, language } = useLanguage();
+  const { language } = useLanguage();
   
   // متن‌های چندزبانه
   const texts = {
@@ -137,4 +137,4 @@ function ThankYouPage() {
   );
 }
 
-export default ThankYouPage; 
+export default ThankYouPage;
