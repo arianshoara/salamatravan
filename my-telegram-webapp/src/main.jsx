@@ -6,5 +6,5 @@ import './index.css';
 import { LanguageProvider } from './i18n/LanguageContext.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode><ErrorBoundary><BrowserRouter><LanguageProvider><App /></LanguageProvider></BrowserRouter></ErrorBoundary></React.StrictMode>
+  <React.StrictMode><ErrorBoundary><BrowserRouter basename={import.meta.env.BASE_URL}><LanguageProvider><App /></LanguageProvider></BrowserRouter></ErrorBoundary></React.StrictMode>
 );

@@ -34,6 +34,8 @@ Routes include `/`, `/reading`, `/articles/:slug`, `/tests`, `/tests/:slug`, `/t
 
 For Netlify, set base directory to `my-telegram-webapp`, build command to `npm run build`, and publish directory to `dist`. `public/_redirects` provides the SPA fallback needed for refresh and direct article links. On another host, configure its equivalent fallback. Configure API routes before the fallback.
 
+GitHub Pages is deployed automatically from `main` by `.github/workflows/deploy-pages.yml`. That build uses `/salamatravan/` as its base path and publishes an `index.html` fallback as `404.html`, so direct client-side routes work under the repository URL without changing the root-hosted Netlify/Vercel builds.
+
 This refactor does not deploy or change the separate Python Telegram bot.
 
 ## Configuration and accounts
