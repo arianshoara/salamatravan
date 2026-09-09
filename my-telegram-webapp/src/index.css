@@ -1,61 +1,85 @@
-:root {
-  font-family: "Vazirmatn", "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("./assets/fonts/Vazirmatn-Regular.woff2") format("woff2");
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: var(--text-dark); /* پیش‌فرض تیره */
-  background-color: var(--dark-bg-color); /* پیش‌فرض تیره */
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  /* متغیرهای فعلی */
-  --primary-color: #20c997;
-  --dark-bg-color: #1e1e1e;
-  --light-bg-color: #f8f9fa;
-  --text-color: #333;
-
-  /* متغیرهای جدید */
-  --primary-hover: #18a67d;
-  --text-dark: #f2f2f2;
-  --light-bg: #ffffff;
-  --light-gray: #f2f3f5;
-  --dark-gray: #3a3a3a;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-dark: rgba(255, 255, 255, 0.1);
-  --border-light: #e0e0e0;
-  --border-dark: #555;
+  font-display: swap;
 }
-
-/* بقیه کد مثل a, button و ... بدون تغییر */
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--text-color); /* #333 برای روشن */
-    background-color: var(--light-bg); /* #ffffff برای روشن */
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+:root {
+  color-scheme: light;
+  --color-primary: #08785d;
+  --color-primary-hover: #065c48;
+  --color-bg: #f5f7f8;
+  --color-surface: #ffffff;
+  --color-text: #192f35;
+  --color-text-muted: #51636b;
+  --color-border: #d9e3e6;
+  --color-soft: #e7f4ee;
+  --color-focus: #1270b0;
+  --color-danger: #b42318;
+  --content-max-width: 1120px;
+  --article-max-width: 720px;
+  --header-height: 64px;
+  --bottom-nav-height: 76px;
+  --radius: 16px;
+  --shadow: 0 8px 32px #152c3510;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --motion: 160ms ease;
+  --z-header: 20;
+  --z-nav: 30;
+  --reading-font-size: 1rem;
 }
-
-.app-container.dark-mode {
-  background: var(--dark-bg-color);
-  color: var(--text-dark);
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #62ddbc;
+  --color-primary-hover: #a6f4de;
+  --color-bg: #111a20;
+  --color-surface: #1c2830;
+  --color-text: #eef4f5;
+  --color-text-muted: #b3c4cd;
+  --color-border: #364952;
+  --color-soft: #193f36;
+  --color-focus: #8ecbff;
+  --color-danger: #ff9b92;
 }
-
-/* Add emoji specific styles */
-.emoji {
-  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Symbol";
-  font-style: normal;
-  -webkit-font-variant-ligatures: normal;
-  font-variant-ligatures: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
+/* Compatibility aliases for retained, component-owned styles. */
+:root {
+  --primary: var(--color-primary); --primary-color: var(--color-primary); --primary-hover: var(--color-primary-hover);
+  --primary-dark: var(--color-primary-hover); --primary-light: var(--color-soft);
+  --text-color: var(--color-text); --text-primary: var(--color-text); --text-secondary: var(--color-text-muted);
+  --text-dark: var(--color-text); --bg-primary: var(--color-surface); --bg-color: var(--color-bg);
+  --bg-secondary: var(--color-bg); --light-bg: var(--color-surface); --light-bg-color: var(--color-bg);
+  --dark-bg-color: var(--color-bg); --dark-bg-primary: var(--color-bg); --dark-bg-secondary: var(--color-surface);
+  --dark-text-color: var(--color-text); --dark-text-primary: var(--color-text); --dark-text-secondary: var(--color-text-muted);
+  --border-color: var(--color-border); --border: var(--color-border); --dark-border: var(--color-border); --dark-border-color: var(--color-border);
+  --shadow-color: #152c3510; --dark-shadow: #0003; --hover-bg: var(--color-soft); --dark-hover-bg: var(--color-soft);
+  --secondary-color: var(--color-text-muted); --input-bg: var(--color-surface); --card-bg: var(--color-surface);
+  --primary-color-light: var(--color-soft); --primary-color-dark: var(--color-primary-hover);
+  --text-color-secondary: var(--color-text-muted); --text-color-tertiary: var(--color-text-muted);
+  --error-color: var(--color-danger); --danger-color: var(--color-danger);
+  --success-bg: var(--color-soft); --success-color: var(--color-primary);
 }
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 100%; scroll-padding-top: calc(var(--shell-header-height, calc(var(--header-height) + env(safe-area-inset-top))) + 16px); }
+body { margin: 0; min-width: 0; background: var(--color-bg); color: var(--color-text); font-family: "Vazirmatn", Tahoma, sans-serif; line-height: 1.75; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button, select, input:not([type="radio"]):not([type="checkbox"]):not([type="range"]) { min-height: 44px; }
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); padding: .6rem 1rem; }
+button:disabled { cursor: not-allowed; opacity: .55; }
+a { color: var(--color-primary); text-underline-offset: .22em; }
+a, p, h1, h2, h3, li { overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+h1, h2, h3 { line-height: 1.5; margin: 0 0 .75em; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+h2 { font-size: clamp(1.3rem, 3vw, 1.75rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0 0 1rem; }
+img, video, svg { max-width: 100%; }
+img { display: block; height: auto; }
+input[type="radio"], input[type="checkbox"], input[type="range"] { accent-color: var(--color-primary); }
+input[type="search"], input[type="text"], input[type="email"], input[type="number"], select, textarea { max-width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: .6rem .8rem; }
+ul, ol { padding-inline-start: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

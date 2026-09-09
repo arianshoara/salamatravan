@@ -1,9 +1,8 @@
-import { useState } from "react";
+import TestQuestions, { useAnswers } from './TestUI';
 import PropTypes from "prop-types";
-import "./DepressionTestPage.css"; // استایل مخصوص این تست
+
 
 const BipolarTestPage = ({ onTestComplete }) => {
-    const [answers, setAnswers] = useState(Array(10).fill(null));
 
     const questions = [
         "آیا در دوره‌هایی احساس شادی و انرژی بیش از حد داشته‌اید که غیرعادی به نظر برسد؟",
@@ -20,13 +19,16 @@ const BipolarTestPage = ({ onTestComplete }) => {
 
     const options = ["اصلاً نه", "گاهی اوقات", "بیشتر اوقات", "تقریباً همیشه"];
 
+    const [answers, setAnswers] = useAnswers("BipolarTestPage", questions.length, options.length);
     const handleAnswerChange = (questionIndex, answerIndex) => {
+        onTestComplete?.(null);
         const newAnswers = [...answers];
         newAnswers[questionIndex] = answerIndex;
         setAnswers(newAnswers);
     };
 
     const calculateResult = () => {
+      if (questions.some((_, i) => !Number.isInteger(answers[i]))) return;
         const totalScore = answers.reduce((sum, ans) => sum + (ans !== null ? ans : 0), 0);
         const percentage = ((totalScore / 30) * 100).toFixed(2);
 
@@ -45,30 +47,11 @@ const BipolarTestPage = ({ onTestComplete }) => {
             <h2>📋 تست اختلال دوقطبی</h2>
             <p className="description">لطفاً به سوالات زیر با دقت پاسخ دهید. پاسخ‌ها مربوط به <b>۲ هفته گذشته</b> باشد.</p>
 
-            {questions.map((question, questionIndex) => (
-                <div key={questionIndex} className="question-box">
-                    <p className="question-text">{question}</p>
-                    <div className="options-container">
-                        {options.map((option, optionIndex) => (
-                            <label key={optionIndex} className="option-label">
-                                <input
-                                    type="radio"
-                                    name={`question-${questionIndex}`}
-                                    value={optionIndex}
-                                    checked={answers[questionIndex] === optionIndex}
-                                    onChange={() => handleAnswerChange(questionIndex, optionIndex)}
-                                    className="option-input"
-                                />
-                                {option}
-                            </label>
-                        ))}
-                    </div>
-                </div>
-            ))}
+            <TestQuestions questions={questions} options={options} answers={answers} onChange={handleAnswerChange} draftId={"BipolarTestPage"} />
 
             <button 
                 onClick={calculateResult} 
-                disabled={answers.includes(null)}
+                disabled={questions.some((_, i) => !Number.isInteger(answers[i]))}
                 className="submit-button"
             >
                 نمایش نتیجه تست
@@ -78,7 +61,7 @@ const BipolarTestPage = ({ onTestComplete }) => {
 };
 
 BipolarTestPage.propTypes = {
-    onTestComplete: PropTypes.func.isRequired,
+    onTestComplete: PropTypes.func,
 };
 
 export default BipolarTestPage;

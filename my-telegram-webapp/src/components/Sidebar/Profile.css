@@ -324,3 +324,7 @@
     width: 100%;
   }
 }
+.avatar-upload-label { min-width: 44px; min-height: 44px; position: relative; }
+.avatar-upload-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.avatar-upload-label:focus-within { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.profile-container input:focus-visible, .profile-container textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }

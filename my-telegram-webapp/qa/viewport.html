@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Local responsive QA</title>
+<style>body{font:16px sans-serif;margin:12px;background:#dce4eb}label{margin-right:12px}select,button{font:inherit;padding:8px}iframe{display:block;border:0;margin-top:12px;background:white;height:800px}</style>
+<label>Width <select id="width"><option>320</option><option>360</option><option selected>390</option><option>430</option><option>768</option><option>1024</option><option>1440</option></select></label>
+<label>Route <select id="route"><option value="/">Home</option><option value="/reading">Reading</option><option value="/articles/anxiety-impact" selected>Article</option><option value="/tests">Tests</option><option value="/tests/depression">Depression</option><option value="/tests/anxiety">Anxiety</option><option value="/tests/o-c-d">OCD</option><option value="/tests/bipolar">Bipolar</option><option value="/tests/addiction">Addiction</option><option value="/tests/mental-health">Mental health</option><option value="/tests/relationship-readiness">Relationships</option><option value="/tests/big-five">Personality</option><option value="/tests/eq-bar-on">EQ</option><option value="/categories">Categories</option><option value="/settings">Settings</option><option value="/profile">Profile</option><option value="/messages">Messages</option><option value="/cart">Cart</option><option value="/login">Login</option><option value="/search">Search</option></select></label>
+<p>Local development only. Frame widths test CSS viewport behavior, not iOS/Android or Telegram device emulation. Use synthetic answers only.</p>
+<iframe id="app" title="App preview" width="390" src="/articles/anxiety-impact"></iframe>
+<script type="module">
+const frame=document.querySelector('#app');
+document.querySelector('#width').addEventListener('change',e=>frame.width=e.target.value);
+document.querySelector('#route').addEventListener('change',e=>frame.src=e.target.value);
+</script></html>

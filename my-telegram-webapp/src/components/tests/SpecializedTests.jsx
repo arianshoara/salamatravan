@@ -1,6 +1,4 @@
-import React, { useState, lazy, Suspense, useRef, useEffect } from 'react';
-import './SpecializedTests.css'; // فایل CSS را اینجا import کنید
-
+import { Link } from 'react-router-dom';
 const testCategories = [
     {
         category: "تست‌های هوش و حافظه",
@@ -121,94 +119,7 @@ const testCategories = [
     },
 ];
 
-function SpecializedTests() {
-    const [expandedCategory, setExpandedCategory] = useState(null); // دسته‌بندی باز شده
-    const [activeTest, setActiveTest] = useState(null); // تست انتخاب‌شده
-    const categoryRefs = useRef({}); // ref برای دسته‌بندی‌ها برای اسکرول نرم
 
-    const handleCategoryClick = (categoryName) => {
-        if (expandedCategory === categoryName) {
-            setExpandedCategory(null);
-        } else {
-            setExpandedCategory(categoryName);
-        }
-    };
-
-    useEffect(() => {
-        // اسکرول نرم به دسته‌بندی باز شده
-        if (expandedCategory && categoryRefs.current[expandedCategory]) {
-            categoryRefs.current[expandedCategory].scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [expandedCategory]);
-
-
-    console.log("activeTest:", activeTest);
-
-    // اگر یک تست انتخاب شده باشد، آن تست به‌صورت داینامیک بارگذاری می‌شود
-    if (activeTest) {
-        const TestComponent = lazy(() => {
-          const filePath = `./SpecializedTests/${activeTest.filename}`;
-          return import(`${filePath}`).catch(() => {
-            return Promise.resolve({
-              default: () => (
-                <div className="test-not-available">
-                  <h2>این تست در حال حاضر در دسترس نیست</h2>
-                  <p>این تست در حال توسعه است و به زودی در دسترس قرار خواهد گرفت.</p>
-                </div>
-              ),
-            });
-          });
-        });
-      
-        return (
-          <div className="active-test-container">
-            <button onClick={() => setActiveTest(null)} className="back-button">
-              بازگشت
-            </button>
-            <Suspense
-              fallback={
-                <div className="loading-test">
-                  <div className="loading-spinner"></div>
-                  <p>در حال بارگذاری تست...</p>
-                </div>
-              }
-            >
-              <TestComponent />
-            </Suspense>
-          </div>
-        );
-      }
-
-    return (
-        <div className="specialized-tests-container">
-            <h1>تست‌های تخصصی</h1>
-            {testCategories.map((categoryItem, index) => (
-                <div key={index} className="category-container" ref={(el) => (categoryRefs.current[categoryItem.category] = el)}>
-                    <h2
-                        className="category-title"
-                        onClick={() => handleCategoryClick(categoryItem.category)}
-                    >
-                        {categoryItem.category}
-                        <span className={`arrow ${expandedCategory === categoryItem.category ? 'up' : 'down'}`}></span>
-                    </h2>
-                    {expandedCategory === categoryItem.category && (
-                        <ul className="tests-list">
-                            {categoryItem.tests.map((test, testIndex) => (
-                                <li
-                                    key={testIndex}
-                                    className="test-item"
-                                    onClick={() => setActiveTest(test)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <span className="test-icon">📝</span> <strong>{test.name}</strong>: {test.description}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
-            ))}
-        </div>
-    );
+export default function SpecializedTests() {
+ return <section className="narrow"><h1>آزمون‌های تخصصی</h1><p className="content-notice">بیشتر موارد این فهرست هنوز پیاده‌سازی نشده‌اند. نام آزمون به معنی وجود نسخهٔ معتبر یا آمادهٔ استفاده نیست.</p>{testCategories.map(category => <details className="article__toc" key={category.category}><summary>{category.category}</summary><ul>{category.tests.map(test => <li key={test.filename}>{test.filename === 'EQBarOnTest.jsx' ? <Link to="/tests/eq-bar-on">{test.name}</Link> : <span>{test.name} — <small>هنوز در دسترس نیست</small></span>}</li>)}</ul></details>)}</section>;
 }
-
-export default SpecializedTests;

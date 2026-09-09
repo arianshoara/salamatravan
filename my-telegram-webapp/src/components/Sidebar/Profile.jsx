@@ -1,8 +1,11 @@
+import { readStored, writeStored } from '../../lib/storage';
 import { useState, useEffect } from 'react';
 import { FaUser, FaEnvelope, FaCalendarAlt, FaPhone, FaSave, FaCamera, FaGoogle } from 'react-icons/fa';
+import { useLanguage } from '../../i18n/LanguageContext';
 import './Profile.css';
 
 const Profile = () => {
+  const { translations: t } = useLanguage();
   const [profileData, setProfileData] = useState({
     name: '',
     age: '',
@@ -19,7 +22,7 @@ const Profile = () => {
 
   useEffect(() => {
     // فرض می‌کنیم اطلاعات پروفایل از localStorage یا API دریافت می‌شود
-    const savedProfileData = JSON.parse(localStorage.getItem('profile')) || {
+    const savedProfileData = readStored('profile', null) || {
       name: '',
       age: '',
       email: '',
@@ -29,7 +32,7 @@ const Profile = () => {
       googleSignIn: false,
       testResults: [],
     };
-    setProfileData(savedProfileData);
+    if (savedProfileData && typeof savedProfileData === 'object' && !Array.isArray(savedProfileData)) setProfileData(prev => ({ ...prev, ...savedProfileData, testResults: Array.isArray(savedProfileData.testResults) ? savedProfileData.testResults : [] }));
   }, []);
 
   const handleInputChange = (e) => {
@@ -41,6 +44,7 @@ const Profile = () => {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/') || file.size > 2 * 1024 * 1024) { setSaveStatus(t.invalidAvatar); return; }
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileData(prev => ({ ...prev, avatar: reader.result }));
@@ -51,8 +55,8 @@ const Profile = () => {
   };
 
   const handleSaveProfile = () => {
-    localStorage.setItem('profile', JSON.stringify(profileData));
-    setSaveStatus('پروفایل شما با موفقیت ذخیره شد');
+    if (!writeStored('profile', profileData)) { setSaveStatus(t.profileSaveFailed); return; }
+    setSaveStatus(t.profileSaved);
     setIsEditing(false);
     setTimeout(() => setSaveStatus(''), 3000);
   };
@@ -63,7 +67,7 @@ const Profile = () => {
         <div className="avatar-container">
           <div className="avatar-wrapper">
             {profileData.avatar ? (
-              <img src={profileData.avatar} alt="avatar" className="avatar-image" />
+              <img src={profileData.avatar} alt={t.avatarAlt} className="avatar-image" />
             ) : (
               <div className="avatar-placeholder">
                 <FaUser />
@@ -73,21 +77,21 @@ const Profile = () => {
               <label className="avatar-upload-label">
                 <FaCamera />
                 <input
-                  type="file"
+                  type="file" aria-label={t.avatarLabel}
                   accept="image/*"
                   onChange={handleAvatarChange}
-                  style={{ display: 'none' }}
+                  className="avatar-upload-input"
                 />
               </label>
             )}
           </div>
         </div>
-        <h2>پروفایل کاربری</h2>
+        <h1>{t.userProfile}</h1><p>{t.profileStorage}</p>
         <button 
           className={`edit-button ${isEditing ? 'active' : ''}`}
           onClick={() => setIsEditing(!isEditing)}
         >
-          {isEditing ? 'لغو ویرایش' : 'ویرایش پروفایل'}
+          {isEditing ? t.cancelEdit : t.editProfile}
         </button>
       </div>
 
@@ -98,10 +102,10 @@ const Profile = () => {
           </div>
           <input
             type="text"
-            name="name"
+            name="name" aria-label={t.name}
             value={profileData.name}
             onChange={handleInputChange}
-            placeholder="نام و نام خانوادگی"
+            placeholder={t.enterName}
             disabled={!isEditing}
           />
         </div>
@@ -112,10 +116,10 @@ const Profile = () => {
           </div>
           <input
             type="number"
-            name="age"
+            name="age" aria-label={t.age}
             value={profileData.age}
             onChange={handleInputChange}
-            placeholder="سن"
+            placeholder={t.enterAge}
             disabled={!isEditing}
           />
         </div>
@@ -126,10 +130,10 @@ const Profile = () => {
           </div>
           <input
             type="email"
-            name="email"
+            name="email" aria-label={t.email}
             value={profileData.email}
             onChange={handleInputChange}
-            placeholder="ایمیل"
+            placeholder={t.enterEmail}
             disabled={!isEditing}
           />
         </div>
@@ -140,20 +144,20 @@ const Profile = () => {
           </div>
           <input
             type="tel"
-            name="phone"
+            name="phone" aria-label={t.phone}
             value={profileData.phone}
             onChange={handleInputChange}
-            placeholder="شماره تماس"
+            placeholder={t.enterPhone}
             disabled={!isEditing}
           />
         </div>
 
         <div className="form-group">
           <textarea
-            name="bio"
+            name="bio" aria-label={t.bio}
             value={profileData.bio}
             onChange={handleInputChange}
-            placeholder="درباره من..."
+            placeholder={t.enterBio}
             disabled={!isEditing}
             rows="4"
           />
@@ -161,7 +165,7 @@ const Profile = () => {
 
         {isEditing && (
           <button className="save-button" onClick={handleSaveProfile}>
-            <FaSave /> ذخیره تغییرات
+            <FaSave /> {t.saveProfile}
           </button>
         )}
 
@@ -178,16 +182,16 @@ const Profile = () => {
             <FaGoogle />
           </div>
           <div className="google-info">
-            <h4>حساب گوگل</h4>
-            <p>شما با حساب گوگل خود وارد شده‌اید</p>
+            <h4>{t.googleAccount}</h4>
+            <p>{t.signedInWithGoogle}</p>
           </div>
         </div>
       )}
 
       <div className="test-results-section">
-        <h3>نتایج تست‌ها</h3>
+        <h3>{t.testResults}</h3>
         {profileData.testResults.length === 0 ? (
-          <p className="no-results">هنوز در هیچ تستی شرکت نکرده‌اید</p>
+          <p className="no-results">{t.noTestsTaken}</p>
         ) : (
           <div className="results-list">
             {profileData.testResults.map((result, index) => (

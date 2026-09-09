@@ -1,18 +1,18 @@
-import "./AnxietyImpactArticlePage.css"; // ایمپورت فایل CSS
+
 //import React from "react";
 
 const EmotionalResilienceArticlePage = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">تقویت تاب‌آوری هیجانی</h1>
+    <div className="article__body">
+
       <p className="mb-4">
         تاب‌آوری هیجانی به معنای توانایی سازگاری و بازیابی سریع از تجربیات منفی، استرس‌ها و چالش‌های زندگی است. این توانایی کلیدی به ما کمک می‌کند تا در مواجهه با فشارهای روزمره، تعادل روانی خود را حفظ کرده و به رشد فردی دست یابیم.
       </p>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">تعریف تاب‌آوری هیجانی</h2>
+      <h2 id="section-1" className="text-2xl font-semibold mt-6 mb-2">تعریف تاب‌آوری هیجانی</h2>
       <p className="mb-4">
         تاب‌آوری هیجانی، توانایی فرد برای مدیریت استرس و واکنش‌های عاطفی به شرایط دشوار است. این فرایند، شامل شناسایی احساسات، پذیرش آن‌ها بدون قضاوت و استفاده از راهکارهای سازنده برای عبور از بحران‌های روحی می‌باشد.
       </p>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">عوامل موثر بر تاب‌آوری هیجانی</h2>
+      <h2 id="section-2" className="text-2xl font-semibold mt-6 mb-2">عوامل موثر بر تاب‌آوری هیجانی</h2>
       <p className="mb-4">
         چندین عامل کلیدی در تقویت تاب‌آوری هیجانی نقش دارند که عبارتند از:
       </p>
@@ -23,7 +23,7 @@ const EmotionalResilienceArticlePage = () => {
         <li>توسعه نگرش مثبت و تفکر سازنده</li>
         <li>تمرینات منظم روانشناختی و فیزیکی</li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">روش‌های تقویت تاب‌آوری هیجانی</h2>
+      <h2 id="section-3" className="text-2xl font-semibold mt-6 mb-2">روش‌های تقویت تاب‌آوری هیجانی</h2>
       <p className="mb-4">
         برای افزایش تاب‌آوری هیجانی می‌توان از روش‌های علمی و عملی زیر استفاده کرد:
       </p>
@@ -44,7 +44,7 @@ const EmotionalResilienceArticlePage = () => {
           <strong>فعالیت‌های ورزشی و تفریحی:</strong> ورزش و فعالیت‌های جسمانی به بهبود سلامت روان و کاهش استرس کمک می‌کنند.
         </li>
       </ul>
-      <h2 className="text-2xl font-semibold mt-6 mb-2">نتیجه‌گیری</h2>
+      <h2 id="section-4" className="text-2xl font-semibold mt-6 mb-2">نتیجه‌گیری</h2>
       <p className="mb-4">
         تقویت تاب‌آوری هیجانی یک فرایند چندوجهی است که با بکارگیری روش‌های علمی و کاربردی می‌توان به بهبود کیفیت زندگی و مقابله مؤثر با چالش‌های روزمره دست یافت. افزایش آگاهی از خود، مدیریت استرس و ایجاد شبکه‌های حمایتی، از کلیدی‌ترین راهکارها برای تقویت این توانایی محسوب می‌شوند.
       </p>

@@ -1,4 +1,4 @@
-import { FaQuestionCircle, FaBook, FaCog, FaThList, FaCheckCircle, FaUser, FaShoppingCart, FaBookOpen, FaHeart, FaTimes, FaHome, FaClipboardCheck, FaBell } from "react-icons/fa";
+import { FaBook, FaCog, FaThList, FaUser, FaBookOpen, FaHeart, FaTimes, FaHome, FaClipboardCheck, FaBell } from "react-icons/fa";
 import './Sidebar.css';
 import { useLanguage } from "../i18n/LanguageContext";
 

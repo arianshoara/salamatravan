@@ -1,8 +1,8 @@
+import TestQuestions, { useAnswers } from '../TestUI';
 import React, { useState, useRef } from 'react';
 import './EQBarOnTest.css';
-import { useSpring, animated } from 'react-spring';
-import { Radar } from '@nivo/radar';
-import { FaStar, FaTree, FaArrowUp, FaArrowDown, FaMinus } from 'react-icons/fa';
+import { useSpring, animated } from '@react-spring/web';
+import { FaStar } from 'react-icons/fa';
 
 const questions = [
   {
@@ -408,11 +408,11 @@ const questions = [
 ];
 
 const ResultDisplay = React.forwardRef(({ score, categories, onRestart }, ref) => {
-  const socialStatus = getSocialComparison(score);
+
 
   return (
     <div className="result-container" ref={ref}>
-      <button className="close-results" onClick={onRestart}>×</button>
+      <button aria-label="بازگشت به پرسش‌ها" title="بازگشت به پرسش‌ها" className="close-results" onClick={onRestart}>×</button>
       <div className="result-header">
         <h2>نتیجه آزمون هوش هیجانی شما</h2>
         <div className="social-comparison">
@@ -420,9 +420,9 @@ const ResultDisplay = React.forwardRef(({ score, categories, onRestart }, ref) =
             <animated.span className="score-number">
               {score}%
             </animated.span>
-            {socialStatus.icon}
+
           </div>
-          <p className="comparison-text">{socialStatus.message}</p>
+          <p className="comparison-text">این درصد از حداکثر نمرهٔ همین پرسش‌نامه است؛ مقایسه با جمعیت یا تشخیص پزشکی نیست.</p>
         </div>
       </div>
 
@@ -462,28 +462,6 @@ const CategoryCard = ({ category, score }) => (
     <span className="category-score">{score}%</span>
   </div>
 );
-
-const getSocialComparison = (score) => {
-  if (score >= 75) {
-    return {
-      status: 'بالاتر از میانگین جامعه',
-      icon: <FaArrowUp className="comparison-icon high" />,
-      message: 'شما در گروه 25% برتر جامعه از نظر هوش هیجانی قرار دارید.'
-    };
-  } else if (score >= 45) {
-    return {
-      status: 'در حد میانگین جامعه',
-      icon: <FaMinus className="comparison-icon average" />,
-      message: 'شما در محدوده میانگین جامعه از نظر هوش هیجانی قرار دارید.'
-    };
-  } else {
-    return {
-      status: 'پایین‌تر از میانگین جامعه',
-      icon: <FaArrowDown className="comparison-icon low" />,
-      message: 'با تمرین و تلاش می‌توانید هوش هیجانی خود را بهبود دهید.'
-    };
-  }
-};
 
 const EmotionalTree = ({ score, categories }) => {
   // استفاده از react-spring برای انیمیشن رشد درخت
@@ -729,7 +707,7 @@ const EmotionalTree = ({ score, categories }) => {
   );
 };
 
-const EmotionalSky = ({ score, categories }) => {
+const EmotionalSky = ({ categories }) => {
   return (
     <div className="emotional-sky-container">
       <h3>آسمان احساسی شما</h3>
@@ -769,18 +747,14 @@ const EmotionalSky = ({ score, categories }) => {
 };
 
 const EQBarOnTest = () => {
-  const [answers, setAnswers] = useState({});
+  const [rawAnswers, setRawAnswers] = useAnswers('EQBarOnTest', questions.length, 4);
+  const answers = Object.fromEntries(questions.flatMap((q, i) => rawAnswers[i] === null ? [] : [[q.id, rawAnswers[i] + 1]]));
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [categories, setCategories] = useState({});
   const resultRef = useRef(null);
 
-  const handleOptionChange = (questionId, value) => {
-    setAnswers(prev => ({
-      ...prev,
-      [questionId]: value
-    }));
-  };
+
 
   const calculateResults = () => {
     if (Object.keys(answers).length === 0) {
@@ -818,6 +792,7 @@ const EQBarOnTest = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!allQuestionsAnswered) return;
     calculateResults();
     setShowResult(true);
     // اسکرول به بالای صفحه برای دیدن نتایج
@@ -825,7 +800,7 @@ const EQBarOnTest = () => {
   };
 
   const handleRestartTest = () => {
-    setAnswers({});
+    setRawAnswers(Array(questions.length).fill(null));
     setShowResult(false);
     setScore(0);
     setCategories({});
@@ -839,35 +814,9 @@ const EQBarOnTest = () => {
   const renderQuestions = () => (
     <div className="test-questions">
       <h2>تست هوش هیجانی (EQ) بار-آن</h2>
-      <p>ارزیابی جامع هوش هیجانی با تفسیر کامل</p>
+      <p>پرسش‌نامهٔ آموزشی؛ متن و امتیازدهی این نسخه هنوز بازبینی تخصصی نشده است.</p>
       <form onSubmit={handleSubmit}>
-        {questions.map((q, index) => (
-          <div key={q.id} className="question-block">
-            <p className="question-text">
-              <span className="question-number">{index + 1}.</span> {q.question}
-            </p>
-            <div className="options-grid">
-              {q.options.map((option, idx) => (
-                <label 
-                  key={idx} 
-                  className={`option-label ${answers[q.id] === option.value ? 'selected' : ''}`}
-                >
-                  <input
-                    type="radio"
-                    name={`question-${q.id}`}
-                    value={option.value}
-                    checked={answers[q.id] === option.value}
-                    onChange={() => handleOptionChange(q.id, option.value)}
-                  />
-                  <span className="option-text">{option.text}</span>
-                  {answers[q.id] === option.value && (
-                    <span className="option-analysis">{option.analysis}</span>
-                  )}
-                </label>
-              ))}
-            </div>
-          </div>
-        ))}
+        <TestQuestions questions={questions.map(q => ({ text: q.question, options: q.options.map(o => o.text) }))} answers={rawAnswers} onChange={(i, value) => setRawAnswers(prev => prev.map((v, index) => i === index ? value : v))} draftId="EQBarOnTest" renderFeedback={(i, value) => questions[i].options[value].analysis} />
         <button 
           type="submit" 
           className="submit-button"

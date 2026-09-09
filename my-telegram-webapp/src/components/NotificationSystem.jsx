@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { FaInfoCircle, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaTimes } from "react-icons/fa";
 
@@ -6,7 +6,7 @@ const NotificationSystem = ({ notifications, removeNotification }) => {
   const [exitingNotifications, setExitingNotifications] = useState([]);
 
   // Handle notification removal with animation
-  const handleRemove = (id) => {
+  const handleRemove = useCallback((id) => {
     setExitingNotifications((prev) => [...prev, id]);
     
     // Start exit animation, remove after animation completes
@@ -14,7 +14,7 @@ const NotificationSystem = ({ notifications, removeNotification }) => {
       removeNotification(id);
       setExitingNotifications((prev) => prev.filter((notifId) => notifId !== id));
     }, 400); // Animation duration is 400ms
-  };
+  }, [removeNotification]);
 
   // Auto-remove notifications that were just added to the exiting state
   useEffect(() => {
@@ -37,7 +37,7 @@ const NotificationSystem = ({ notifications, removeNotification }) => {
     return () => {
       timers.forEach((timer) => clearTimeout(timer));
     };
-  }, [notifications, exitingNotifications]);
+  }, [notifications, exitingNotifications, handleRemove]);
 
   // Get icon based on notification type
   const getIcon = (type) => {
@@ -90,4 +90,4 @@ NotificationSystem.propTypes = {
   removeNotification: PropTypes.func.isRequired
 };
 
-export default NotificationSystem; 
+export default NotificationSystem;

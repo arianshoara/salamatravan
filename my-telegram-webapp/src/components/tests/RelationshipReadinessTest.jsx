@@ -1,9 +1,9 @@
+import TestQuestions, { useAnswers } from './TestUI';
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./RelationshipReadinessTest.css"; // استایل مخصوص این تست
+
 
 const RelationshipReadinessTest = ({ onTestComplete }) => {
-    const [answers, setAnswers] = useState(Array(20).fill(null)); // 20 سوال داریم
     const [showResultAnalysis, setShowResultAnalysis] = useState(false); // state برای نمایش تحلیل پاسخ‌ها
     const [testResult, setTestResult] = useState(null); // state برای ذخیره نتیجه تست
 
@@ -493,13 +493,18 @@ const RelationshipReadinessTest = ({ onTestComplete }) => {
     const optionsKeys = Object.keys(questions[0].options); // کلید های گزینه ها: الف، ب، ج، د، ه
 
 
+    const [answers, setAnswers] = useAnswers("RelationshipReadinessTest", questions.length);
     const handleAnswerChange = (questionIndex, answerIndex) => {
+        onTestComplete?.(null);
+        setShowResultAnalysis(false);
+        setTestResult(null);
         const newAnswers = [...answers];
         newAnswers[questionIndex] = answerIndex;
         setAnswers(newAnswers);
     };
 
     const calculateResult = () => {
+      if (questions.some((_, i) => !Number.isInteger(answers[i]))) return;
         let totalScore = 0;
         const responseAnalysis = []; // آرایه برای ذخیره تحلیل پاسخ‌ها
 
@@ -547,30 +552,11 @@ const RelationshipReadinessTest = ({ onTestComplete }) => {
             <h2>📝 تست آمادگی رابطه</h2>
             <p className="description">لطفاً به سوالات زیر با دقت پاسخ دهید. </p>
 
-            {questions.map((question, questionIndex) => (
-                <div key={questionIndex} className="question-box">
-                    <p className="question-text">{question.text}</p>
-                    <div className="options-container">
-                        {optionsKeys.map((optionKey, optionIndex) => ( // استفاده از keys بجای options
-                            <label key={optionIndex} className="option-label">
-                                <input
-                                    type="radio"
-                                    name={`question-${questionIndex}`}
-                                    value={optionIndex}
-                                    checked={answers[questionIndex] === optionIndex}
-                                    onChange={() => handleAnswerChange(questionIndex, optionIndex)}
-                                    className="option-input"
-                                />
-                                {optionKey}) {question.options[optionKey]} {/* نمایش کلید و متن گزینه */}
-                            </label>
-                        ))}
-                    </div>
-                </div>
-            ))}
+            <TestQuestions questions={questions} answers={answers} onChange={handleAnswerChange} draftId={"RelationshipReadinessTest"} />
 
             <button
                 onClick={calculateResult}
-                disabled={answers.includes(null)}
+                disabled={questions.some((_, i) => !Number.isInteger(answers[i]))}
                 className="submit-button"
             >
                 محاسبه نتیجه تست
@@ -598,7 +584,7 @@ const RelationshipReadinessTest = ({ onTestComplete }) => {
 };
 
 RelationshipReadinessTest.propTypes = {
-    onTestComplete: PropTypes.func.isRequired,
+    onTestComplete: PropTypes.func,
 };
 
 export default RelationshipReadinessTest;

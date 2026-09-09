@@ -1,13 +1,8 @@
-import { useState, useEffect } from "react";
+import TestQuestions, { useAnswers } from './TestUI';
+import { useState } from "react";
 import PropTypes from "prop-types";
-import "./BigFivePersonalityTest.css"; // فایل استایل
+import "./TestUI.css";
 
-
-const BigFivePersonalityTest = ({ selectedFactor, onTestComplete }) => {
-    const [answers, setAnswers] = useState(Array(10).fill(null)); // تعداد سوالات برای هر فاکتور 10 تا در نظر گرفته شده
-    const [showResultAnalysis, setShowResultAnalysis] = useState(false);
-    const [testResult, setTestResult] = useState(null);
-    const [currentFactorQuestions, setCurrentFactorQuestions] = useState([]); // سوالات فاکتور فعلی
 
     const factorQuestions = {
         "Openness": [
@@ -853,22 +848,18 @@ const BigFivePersonalityTest = ({ selectedFactor, onTestComplete }) => {
     };
 
 
-    useEffect(() => {
-        // به‌روزرسانی سوالات بر اساس فاکتور انتخاب شده
-        if (selectedFactor) {
-            setCurrentFactorQuestions(factorQuestions[selectedFactor] || []);
-            setAnswers(Array(factorQuestions[selectedFactor]?.length || 0).fill(null)); // ریست پاسخ‌ها
-            setShowResultAnalysis(false); // مخفی کردن نتایج قبلی
-            setTestResult(null); // ریست نتیجه تست
-        }
-    }, [selectedFactor]);
+const BigFivePersonalityTest = ({ selectedFactor, onTestComplete }) => {
+    const [showResultAnalysis, setShowResultAnalysis] = useState(false);
+    const [testResult, setTestResult] = useState(null);
 
 
-    const handleAnswerSelect = (questionIndex, answerValue) => {
-        const newAnswers = [...answers];
-        newAnswers[questionIndex] = answerValue;
-        setAnswers(newAnswers);
-    };
+
+    const currentFactorQuestions = factorQuestions[selectedFactor] || [];
+    const [rawAnswers, setRawAnswers] = useAnswers('BigFive:' + selectedFactor, currentFactorQuestions.length);
+    const answers = rawAnswers.map(value => value === null ? null : String(value + 1));
+
+
+
 
     const calculateFactorScore = () => {
         let totalScore = 0;
@@ -887,7 +878,7 @@ const BigFivePersonalityTest = ({ selectedFactor, onTestComplete }) => {
 
 
     const handleSubmitTest = () => {
-        if (answers.includes(null)) {
+        if (!currentFactorQuestions.length || answers.includes(null)) {
             alert("لطفاً به همه سوالات پاسخ دهید.");
             return;
         }
@@ -964,34 +955,7 @@ const BigFivePersonalityTest = ({ selectedFactor, onTestComplete }) => {
             {!showResultAnalysis ? (
                 <>
                     <h2>تست شخصیت پنج عاملی - {selectedFactor}</h2>
-                    <ul className="questions-list">
-                        {currentFactorQuestions.map((question, index) => (
-                            <li key={index} className="question-item">
-                                <p className="question-text">{question.text}</p>
-                                <div className="options-container">
-                                    {Object.entries(question.options).map(([optionText, optionValue]) => (
-                                        <label key={optionValue} className="option-label">
-                                            <input
-                                                type="radio"
-                                                name={`question-${index}`}
-                                                value={optionValue}
-                                                checked={answers[index] === String(optionValue)}
-                                                onChange={() => handleAnswerSelect(index, String(optionValue))}
-                                                className="option-radio"
-                                            />
-                                            {optionText}
-                                        </label>
-                                    ))}
-                                </div>
-                                {answers[index] !== null && (
-                                    <div className="option-analysis">
-                                        <p>تحلیل گزینه انتخاب شده:</p>
-                                        <p>{question.optionAnalysis[Object.keys(question.options).find(key => question.options[key] === parseInt(answers[index]))]}</p>
-                                    </div>
-                                )}
-                            </li>
-                        ))}
-                    </ul>
+                    <TestQuestions questions={currentFactorQuestions.map(q => ({ text: q.text, options: Object.keys(q.options) }))} answers={rawAnswers} onChange={(i, value) => setRawAnswers(prev => prev.map((v, index) => i === index ? value : v))} draftId={'BigFive:' + selectedFactor} renderFeedback={(i, value) => currentFactorQuestions[i].optionAnalysis[Object.keys(currentFactorQuestions[i].options)[value]]} />
                     <button onClick={handleSubmitTest} className="submit-button">تکمیل تست و نمایش نتیجه</button>
                 </>
             ) : (

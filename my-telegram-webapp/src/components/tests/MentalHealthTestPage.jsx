@@ -1,9 +1,9 @@
+import TestQuestions, { useAnswers } from './TestUI';
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./MentalHealthTestPage.css"; // فرض بر این است که فایل CSS مشابه است
+
 
 const MentalHealthTestPage = ({ onTestComplete }) => {
-  const [answers, setAnswers] = useState(Array(10).fill(null));
   const [showResultAnalysis, setShowResultAnalysis] = useState(false);
   const [testResult, setTestResult] = useState(null);
 
@@ -1355,13 +1355,18 @@ const MentalHealthTestPage = ({ onTestComplete }) => {
 
   const optionsKeys = Array.from({ length: 5 }, (_, i) => i); // 0, 1, 2, 3, 4
 
-  const handleAnswerChange = (questionIndex, answerIndex) => {
+  const [answers, setAnswers] = useAnswers("MentalHealthTestPage", questions.length);
+    const handleAnswerChange = (questionIndex, answerIndex) => {
+        onTestComplete?.(null);
+        setShowResultAnalysis(false);
+        setTestResult(null);
     const newAnswers = [...answers];
     newAnswers[questionIndex] = answerIndex;
     setAnswers(newAnswers);
   };
 
   const calculateResult = () => {
+      if (questions.some((_, i) => !Number.isInteger(answers[i]))) return;
     let totalScore = 0;
     const responseAnalysis = [];
 
@@ -1405,30 +1410,11 @@ const MentalHealthTestPage = ({ onTestComplete }) => {
       <h2>📋 تست سلامت روان - مدیریت احساسات</h2>
       <p className="description">لطفاً به سوالات زیر با دقت پاسخ دهید.</p>
 
-      {questions.map((question, questionIndex) => (
-        <div key={questionIndex} className="question-box">
-          <p className="question-text">{question.text}</p>
-          <div className="options-container">
-            {question.options.map((option, optionIndex) => (
-              <label key={optionIndex} className="option-label">
-                <input
-                  type="radio"
-                  name={`question-${questionIndex}`}
-                  value={optionIndex}
-                  checked={answers[questionIndex] === optionIndex}
-                  onChange={() => handleAnswerChange(questionIndex, optionIndex)}
-                  className="option-input"
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-        </div>
-      ))}
+      <TestQuestions questions={questions} answers={answers} onChange={handleAnswerChange} draftId={"MentalHealthTestPage"} />
 
       <button
         onClick={calculateResult}
-        disabled={answers.includes(null)}
+        disabled={questions.some((_, i) => !Number.isInteger(answers[i]))}
         className="submit-button"
       >
         نمایش نتیجه تست
@@ -1441,7 +1427,7 @@ const MentalHealthTestPage = ({ onTestComplete }) => {
             <b>امتیاز کلی شما: {testResult.totalScore} از {4 * questions.length}</b>
           </p>
           <p>
-            <b>درصد سلامت عاطفی: {testResult.percentage}%</b>
+            <b>درصد از حداکثر نمره: {testResult.percentage}%</b>
           </p>
           <p>
             <b>سطح سلامت عاطفی:</b> {testResult.interpretation}
@@ -1468,7 +1454,7 @@ const MentalHealthTestPage = ({ onTestComplete }) => {
 };
 
 MentalHealthTestPage.propTypes = {
-  onTestComplete: PropTypes.func.isRequired,
+  onTestComplete: PropTypes.func,
 };
 
 export default MentalHealthTestPage;

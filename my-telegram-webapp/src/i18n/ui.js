@@ -1,0 +1,50 @@
+export const ui = {
+  fa: {
+    brand: 'سلامت روان', home: 'خانه', reading: 'مطالعه', tests: 'آزمون‌ها', categories: 'کتاب و فیلم', settings: 'تنظیمات',
+    menu: 'فهرست', close: 'بستن فهرست', back: 'بازگشت', login: 'ورود', search: 'جست‌وجو',
+    searchHint: 'جست‌وجوی مقاله یا آزمون…', empty: 'نتیجه‌ای پیدا نشد؛ عبارت دیگری امتحان کنید.', loading: 'در حال بارگذاری…',
+    skip: 'رفتن به محتوا', onlyFa: 'این محتوا فعلاً فقط به زبان فارسی موجود است.', minutes: 'دقیقه مطالعه',
+    share: 'اشتراک‌گذاری', copied: 'پیوند کپی شد.', copyFailed: 'امکان اشتراک‌گذاری نیست؛ نشانی صفحه را کپی کنید.',
+    contents: 'در این مقاله', next: 'مطالعهٔ بعدی', sources: 'منابع',
+    unreviewed: 'منابع و تاریخ بازبینی تخصصی این مقاله هنوز ثبت نشده‌اند.', larger: 'افزایش اندازهٔ متن', smaller: 'کاهش اندازهٔ متن',
+    save: 'ذخیرهٔ مقاله', saved: 'ذخیره‌شده', all: 'همه', recommended: 'پیشنهاد برای شروع', unavailable: 'این صفحه پیدا نشد',
+    local: 'تنظیمات و ذخیره‌ها فقط در همین مرورگر نگهداری می‌شوند.', readingProgress: 'پیشرفت مطالعه',
+    storageUnavailable: 'مرورگر اجازهٔ ذخیره‌سازی نمی‌دهد.', articleDisclaimer: 'این مطلب آموزشی است و جایگزین ارزیابی یا درمان تخصصی نیست.',
+    testNotice: 'ابزارهای آموزشی خودشناسی؛ نتیجهٔ این پرسش‌نامه‌ها تشخیص بیماری نیست.', specializedTests: 'فهرست آزمون‌های تخصصی و وضعیت دسترسی',
+    authUnavailable: 'ورود هنوز روی این نسخه پیکربندی نشده است. مطالعه و آزمون‌ها بدون ورود در دسترس‌اند.',
+    authLoading: 'در حال بررسی ورود…', authError: 'ورود انجام نشد. اتصال یا تنظیمات سرویس را بررسی کنید.',
+    authOk: 'پاسخ موفق از سرویس ورود دریافت شد؛ دسترسی به حساب به پیاده‌سازی سرویس بستگی دارد.'
+  },
+  en: {
+    brand: 'Salamat Ravan', home: 'Home', reading: 'Read', tests: 'Tests', categories: 'Books & film', settings: 'Settings',
+    menu: 'Menu', close: 'Close menu', back: 'Back', login: 'Sign in', search: 'Search',
+    searchHint: 'Search articles or tests…', empty: 'No results. Try another phrase.', loading: 'Loading…',
+    skip: 'Skip to content', onlyFa: 'This content is currently available in Persian only.', minutes: 'min read',
+    share: 'Share', copied: 'Link copied.', copyFailed: 'Sharing unavailable. Copy the page address.',
+    contents: 'In this article', next: 'Read next', sources: 'Sources',
+    unreviewed: 'Sources and professional review date have not yet been recorded.', larger: 'Increase text size', smaller: 'Decrease text size',
+    save: 'Save article', saved: 'Saved', all: 'All', recommended: 'A place to start', unavailable: 'Page not found',
+    local: 'Preferences and saved items are stored only in this browser.', readingProgress: 'Reading progress',
+    storageUnavailable: 'Browser storage is unavailable.', articleDisclaimer: 'This article is educational and does not replace professional assessment or treatment.',
+    testNotice: 'Educational self-reflection tools; questionnaire results are not a medical diagnosis.', specializedTests: 'Specialized tests and availability',
+    authUnavailable: 'Sign-in has not been configured. Reading and tests remain available without an account.',
+    authLoading: 'Checking sign-in…', authError: 'Sign-in failed. Check the connection or service configuration.',
+    authOk: 'The sign-in service responded successfully; account access depends on the backend implementation.'
+  },
+  de: {
+    brand: 'Salamat Ravan', home: 'Start', reading: 'Lesen', tests: 'Tests', categories: 'Buch & Film', settings: 'Einstellungen',
+    menu: 'Menü', close: 'Menü schließen', back: 'Zurück', login: 'Anmelden', search: 'Suche',
+    searchHint: 'Artikel oder Tests suchen…', empty: 'Keine Ergebnisse. Versuchen Sie einen anderen Suchbegriff.', loading: 'Wird geladen…',
+    skip: 'Zum Inhalt', onlyFa: 'Dieser Inhalt ist derzeit nur auf Persisch verfügbar.', minutes: 'Min. Lesezeit',
+    share: 'Teilen', copied: 'Link kopiert.', copyFailed: 'Teilen nicht verfügbar. Kopieren Sie die Seitenadresse.',
+    contents: 'In diesem Artikel', next: 'Weiterlesen', sources: 'Quellen',
+    unreviewed: 'Quellen und Datum einer fachlichen Prüfung wurden noch nicht erfasst.', larger: 'Text vergrößern', smaller: 'Text verkleinern',
+    save: 'Artikel speichern', saved: 'Gespeichert', all: 'Alle', recommended: 'Ein guter Anfang', unavailable: 'Seite nicht gefunden',
+    local: 'Einstellungen und gespeicherte Artikel bleiben in diesem Browser.', readingProgress: 'Lesefortschritt',
+    storageUnavailable: 'Der Browserspeicher ist nicht verfügbar.', articleDisclaimer: 'Dieser Artikel dient der Information und ersetzt keine fachliche Untersuchung oder Behandlung.',
+    testNotice: 'Edukative Werkzeuge zur Selbstreflexion; die Ergebnisse sind keine medizinische Diagnose.', specializedTests: 'Spezialisierte Tests und Verfügbarkeit',
+    authUnavailable: 'Die Anmeldung ist noch nicht eingerichtet. Artikel und Tests sind ohne Konto verfügbar.',
+    authLoading: 'Anmeldung wird geprüft…', authError: 'Anmeldung fehlgeschlagen. Verbindung oder Konfiguration prüfen.',
+    authOk: 'Der Anmeldedienst hat erfolgreich geantwortet; der Kontozugriff hängt vom Backend ab.'
+  }
+};

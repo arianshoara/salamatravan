@@ -1,9 +1,9 @@
+import TestQuestions, { useAnswers } from './TestUI';
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./DepressionTestPage.css"; // استفاده از همان استایل تست افسردگی
+
 
 const AnxietyTestPage = ({ onTestComplete }) => {
-    const [answers, setAnswers] = useState(Array(7).fill(null));
     const [showResultAnalysis, setShowResultAnalysis] = useState(false);
     const [testResult, setTestResult] = useState(null);
 
@@ -84,13 +84,18 @@ const AnxietyTestPage = ({ onTestComplete }) => {
     const optionsKeys = Array.from({ length: options.length }, (_, i) => i); // کلید های گزینه ها: 0, 1, 2, 3
 
 
+    const [answers, setAnswers] = useAnswers("AnxietyTestPage", questions.length, options.length);
     const handleAnswerChange = (questionIndex, answerIndex) => {
+        onTestComplete?.(null);
+        setShowResultAnalysis(false);
+        setTestResult(null);
         const newAnswers = [...answers];
         newAnswers[questionIndex] = answerIndex;
         setAnswers(newAnswers);
     };
 
     const calculateResult = () => {
+      if (questions.some((_, i) => !Number.isInteger(answers[i]))) return;
         let totalScore = 0;
         const responseAnalysis = [];
 
@@ -139,30 +144,11 @@ const AnxietyTestPage = ({ onTestComplete }) => {
             <h2>📋 تست اضطراب GAD-7</h2>
             <p className="description">لطفاً به سوالات زیر با دقت پاسخ دهید. پاسخ‌ها مربوط به <b>۲ هفته گذشته</b> باشد.</p>
 
-            {questions.map((question, questionIndex) => (
-                <div key={questionIndex} className="question-box">
-                    <p className="question-text">{question.text}</p>
-                    <div className="options-container">
-                        {options.map((option, optionIndex) => (
-                            <label key={optionIndex} className="option-label">
-                                <input
-                                    type="radio"
-                                    name={`question-${questionIndex}`}
-                                    value={optionIndex}
-                                    checked={answers[questionIndex] === optionIndex}
-                                    onChange={() => handleAnswerChange(questionIndex, optionIndex)}
-                                    className="option-input"
-                                />
-                                {option}
-                            </label>
-                        ))}
-                    </div>
-                </div>
-            ))}
+            <TestQuestions questions={questions} options={options} answers={answers} onChange={handleAnswerChange} draftId={"AnxietyTestPage"} />
 
             <button
                 onClick={calculateResult}
-                disabled={answers.includes(null)}
+                disabled={questions.some((_, i) => !Number.isInteger(answers[i]))}
                 className="submit-button"
             >
                 نمایش نتیجه تست
@@ -172,7 +158,7 @@ const AnxietyTestPage = ({ onTestComplete }) => {
                 <div className="result-analysis">
                     <h3>📊 تحلیل نتایج تست</h3>
                     <p><b>امتیاز کلی شما: {testResult.totalScore} از 21</b></p>
-                    <p><b>درصد اضطراب: {testResult.percentage}%</b></p>
+                    <p><b>درصد از حداکثر نمره (نه احتمال بیماری): {testResult.percentage}%</b></p>
                     <p><b>سطح اضطراب:</b> {testResult.interpretation}</p>
 
                     <h4>🔍 تحلیل سوالات:</h4>
@@ -190,7 +176,7 @@ const AnxietyTestPage = ({ onTestComplete }) => {
 };
 
 AnxietyTestPage.propTypes = {
-    onTestComplete: PropTypes.func.isRequired,
+    onTestComplete: PropTypes.func,
 };
 
 export default AnxietyTestPage;

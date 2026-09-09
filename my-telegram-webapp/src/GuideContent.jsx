@@ -1,9 +1,10 @@
-import React from "react";
+import { Link } from 'react-router-dom';
+import { ui } from './i18n/ui';
 import { FaUserTie, FaGlobe, FaTelegram, FaInstagram, FaYoutube } from "react-icons/fa";
 import { useLanguage } from "./i18n/LanguageContext";
 import "./GuideContent.css"; // استایل‌ها رو جداگانه ایمپورت می‌کنیم
 
-function GuideContent({ goToView }) {
+function GuideContent() {
   // Get translations
   const { translations, language } = useLanguage();
   
@@ -47,36 +48,25 @@ function GuideContent({ goToView }) {
     <div className="guide-content">
       <section className="hero-section">
         <div className="hero-text">
-          <h2>{translations.heroTitle}</h2>
+          <small>{ui[language].brand}</small>
+          <h1>{translations.heroTitle}</h1>
           <p className="subtitle">
             {translations.heroSubtitle}
           </p>
-          <button
-            className="hero-button"
-            onClick={() => goToView("reading")}
-          >
-            {translations.startLearning}
-          </button>
+          <div className="home-actions"><Link to="/reading">{ui[language].reading}</Link><Link to="/tests">{ui[language].tests}</Link><Link to="/articles/self-awareness">{ui[language].recommended}</Link></div>
         </div>
         <div className="hero-image">
           <img 
             src="/images/path-to-your-hero-image.jpg" 
-            alt="Health" 
+            alt="" width="240" height="240"
             className="hero-img" 
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '50%',
-              border: 'none'
-            }}
           />
         </div>
       </section>
 
       <section className="about-me-section">
         <div className="profile-image-container">
-          <img src="/images/profile-image.jpg" alt="Profile" className="profile-image" />
+          <img src="/images/profile-image.jpg" alt="Arian Shoara" width="80" height="80" loading="lazy" className="profile-image" />
         </div>
         <h3>
           <FaUserTie className="section-icon" /> {translations.aboutMe}
